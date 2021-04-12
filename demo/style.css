@@ -1,0 +1,133 @@
+*{
+    box-sizing: border-box;
+    touch-action: manipulation;
+}
+body{
+    position: absolute;
+    inset: 0;
+    margin: 50px 0 0 0;
+    padding: 0;
+    border: 0;
+    font-family: Aral, Helvetica, sans-serif;
+    text-align: center;
+    background-color: #0d1117;
+    color: #fff;
+    overflow-x: hidden;
+
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+pre{
+    -webkit-touch-callout: default !important;
+    -webkit-user-select: text !important;
+    -khtml-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+a{
+    display: inline-block;
+    color: #3374ff;
+    text-decoration: none;
+}
+b{
+    display: block;
+    padding: 10px;
+}
+button{
+    padding: 5px 10px;
+}
+h1 img{
+    width: 100%;
+}
+hr{
+    border: 0;
+    border-bottom: 1px solid #1c2431;
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
+.button {
+    display: inline-block;
+    background-color: #0050ff;
+    color: #fff;
+    width: auto;
+    border-radius: 10px;
+    padding: 15px 25px;
+    cursor: pointer;
+}
+pre{
+    display: inline-block;
+    margin: auto;
+    text-align: left;
+    width: 100%;
+    max-width: calc(100vw - 1.7em);
+    overflow-x: hidden;
+}
+pre code.hljs{
+    background: #181f2a;
+    padding: 1em 1.5em;
+    border-radius: 10px;
+    width: 100%;
+    max-width: calc(100vw - 1.7em);
+    overflow-x: auto;
+}
+.break{
+    height: 20px;
+}
+.wrapper{
+    display: inline-block;
+    text-align: left;
+    margin: 1.2em;
+    max-width: calc(100vw - 1.7em);
+    overflow-x: hidden;
+}
+
+@media (max-width: 550px) {
+    .wrapper,
+    pre{
+        display: block;
+    }
+}
+
+.winbox-body{
+    color: #000;
+    text-align: left;
+    padding: 1.2em;
+}
+
+.hljs{
+    color: #fff4ec;
+}
+.hljs-attr {
+    color:#79c0ff
+}
+.hljs-built_in {
+    color: #ffa657;
+}
+.hljs-attribute{
+    color: #e0e7ff
+}
+.hljs-selector-class {
+    color: #79c0ff
+}
+
+.hljs-keyword,
+.hljs-name,
+.hljs-selector-tag {
+    color: #f92672
+}
+
+.hljs-bullet,
+.hljs-link,
+.hljs-literal,
+.hljs-number,
+.hljs-quote,
+.hljs-regexp {
+    color: #d2a8ff
+}

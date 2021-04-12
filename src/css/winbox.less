@@ -1,0 +1,199 @@
+@import "images.less";
+
+.winbox {
+  background: #0050ff;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  /*transition: box-shadow 0.2s ease-out;*/
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  /*
+  width: 50%;
+  height: 50%;
+  */
+  /*border: 1px solid #455fc0;*/
+  /*box-sizing: border-box;*/
+  /*border-radius: 12px;*/
+  overflow: hidden;
+  transition: width 0.2s ease-out, height 0.2s ease-out, transform 0.2s ease-out;
+  will-change: transform, left, top, width, height;
+  contain: strict;
+}
+.winbox:fullscreen{
+  transition: none !important;
+}
+
+.bar-n {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  cursor: n-resize;
+  z-index: 11;
+}
+
+.bar-e {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: w-resize;
+  z-index: 11;
+}
+
+.bar-s {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  cursor: n-resize;
+  z-index: 11;
+}
+
+.bar-w {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: w-resize;
+  z-index: 11;
+}
+
+.bar-nw {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  cursor: nw-resize;
+  z-index: 11;
+}
+
+.bar-ne {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 5px;
+  cursor: ne-resize;
+  z-index: 11;
+}
+
+.bar-sw {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  cursor: ne-resize;
+  z-index: 11;
+}
+
+.bar-se {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 5px;
+  height: 5px;
+  cursor: nw-resize;
+  z-index: 11;
+}
+
+.winbox-title{
+  display: table-cell;
+  font-size: 14px;
+  text-align: left;
+  padding-left: 10px;
+  cursor: move;
+  width: 100%;
+  height: 35px;
+  vertical-align: middle;
+}
+
+.winbox-title span{
+  display: block;
+  width: calc(100% - 130px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.winbox-icon{
+  position: absolute;
+  top:0;
+  bottom: 0;
+  right: 0;
+}
+
+.winbox-icon span{
+  display: inline-block;
+  width: 30px;
+  height: 100%;
+  text-align: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.icon-min {
+  background-image: url(@minus);
+  background-position: center bottom 5px;
+  background-size: 14px 14px;
+}
+
+.icon-max {
+  background-image: url(@autofit);
+  background-size: 17px 17px;
+}
+
+.icon-close {
+  background-image: url(@close);
+  background-size: 14px 14px;
+  margin-right: 2px;
+}
+
+.icon-fullscreen {
+  background-image: url(@maximize);
+  background-size: 18px 18px;
+}
+
+.winbox:fullscreen .icon-fullscreen{
+  background-image: url(@minimize);
+}
+
+.winbox-header {
+  display: table;
+  table-layout: fixed;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 35px;
+  color: #fff;
+  vertical-align: middle;
+  z-index: 10;
+}
+
+.winbox-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 35px;
+  bottom: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  will-change: scroll-position;
+  background-color: #fff;
+  margin-top: 0 !important;
+}
+
+.winbox .winbox-hide{
+  display: none
+}
