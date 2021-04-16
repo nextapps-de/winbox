@@ -48,6 +48,7 @@
             margin: 4px; /* => width of window border */
             color: #fff;
             background: #131820;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -345,7 +346,7 @@
         <pre><code class="language-js">new WinBox({
 
     title: "Custom CSS",
-    mount: document.getElementById("content")
+    html: '<iframe src="https://wikipedia.com"></iframe>'
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['show-custom-css']()">Run Code</div>
@@ -381,7 +382,7 @@
 
     title: "Custom CSS",
     class: "custom",
-    mount: document.getElementById("content")
+    html: '<iframe src="https://wikipedia.com"></iframe>'
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['show-custom-css']()">Run Code</div>
@@ -487,19 +488,19 @@
                         mount: document.getElementById("content")
                     });
                 },
-                "show-mount-singleton-explicit": function(){
-
-                    new WinBox({
-
-                        title: "Mount DOM",
-                        mount: document.getElementById("content"),
-                        onclose: function(win){
-                            win.unmount(
-                                document.getElementById("backstore")
-                            );
-                        }
-                    });
-                },
+                // "show-mount-singleton-explicit": function(){
+                //
+                //     new WinBox({
+                //
+                //         title: "Mount DOM",
+                //         mount: document.getElementById("content"),
+                //         onclose: function(win){
+                //             win.unmount(
+                //                 document.getElementById("backstore")
+                //             );
+                //         }
+                //     });
+                // },
                 "show-all-options": function(){
 
                     new WinBox(document.body, {
@@ -547,7 +548,7 @@
 
                         title: "Custom CSS",
                         class: "custom",
-                        mount: document.getElementById("content")
+                        html: '<iframe src="https://wikipedia.com"></iframe>'
                     });
                 },
                 "show-custom-class": function(){
@@ -556,7 +557,7 @@
 
                         title: "Custom Class",
                         class: "custom",
-                        mount: document.getElementById("content")
+                        html: '<iframe src="https://wikipedia.com"></iframe>'
                     });
                 },
                 "show-controls": function(){

@@ -100,6 +100,14 @@ pre code.hljs{
     text-align: left;
     padding: 1.2em;
 }
+.winbox iframe{
+    width: 100%;
+    height: 100%;
+    border:  0;
+}
+.winbox.custom .winbox-body{
+    padding: 0;
+}
 
 .hljs{
     color: #fff4ec;

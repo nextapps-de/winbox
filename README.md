@@ -30,6 +30,7 @@ __Version Explanation__
     </tr>
 </table>
 
+
 __Get Latest Build (Stable):__
 
 <table>
@@ -84,14 +85,16 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>src.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.3/src" target="_blank">Download</a></td>
-        <td>The <i>"src"</i>-folder of this Github repository</td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.3/src/js" target="_blank">Download</a></td>
+        <td>The <i>"/src/js"</i>-folder of this Github repository</td>
     </tr>
 </table>
+
 
 __Get Latest Build (Nightly):__
 
 Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.0.3__/dist/" into "/winbox/__master__/dist".
+
 
 __Get Latest (NPM):__
 
@@ -99,9 +102,10 @@ __Get Latest (NPM):__
 npm install winbox
 ```
 
+
 __Get Latest (ES6 Modules):__
 
-https://github.com/nextapps-de/winbox/tree/master/src
+https://github.com/nextapps-de/winbox/tree/master/src/js
 
 ### Basic Setup
 
@@ -287,6 +291,7 @@ Instance properties:
         <td>Add one or more classnames to the window (multiple classnames needs separated with whitespaces, e.g. "class-a class-b"). Used to define custom styles in css, query elements by context or just to tag the corresponding window instance.</td>
     </tr>
 </table>
+
 
 ## Examples
 
