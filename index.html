@@ -45,10 +45,7 @@
         }
 
         .winbox.custom .winbox-body {
-            margin: 4px; /* => width of window border */
-            color: #fff;
-            background: #131820;
-            overflow: hidden;
+            margin: 4px; /* the width of window border */
         }
     </style>
 </head>
@@ -179,6 +176,19 @@
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['show-mount-singleton-lazy']()">Run Code</div>
+        <br><br>
+
+        <hr>
+        <br>
+        Open Url (iFrame)
+        <br><br>
+        <pre><code class="language-js">new WinBox(document.body, {
+
+    title: "Open Url",
+    url: "https://wikipedia.com"
+});</code></pre>
+        <div class="break"></div>
+        <div class="button" onclick="window.examples['show-iframe']()">Run Code</div>
         <br><br>
 
         <!--
@@ -338,15 +348,13 @@
 }
 
 .winbox-body {
-    margin: 4px; /* => width of window border */
-    color: #fff;
-    background: #131820;
+    margin: 4px; /* the width of window border */
 }</code></pre>
         <div class="break"></div>
         <pre><code class="language-js">new WinBox({
 
     title: "Custom CSS",
-    html: '<iframe src="https://wikipedia.com"></iframe>'
+    url: 'https://wikipedia.com'
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['show-custom-css']()">Run Code</div>
@@ -373,16 +381,14 @@
 }
 
 .winbox.custom .winbox-body {
-    margin: 4px; /* => width of window border */
-    color: #fff;
-    background: #131820;
+    margin: 4px; /* the width of window border */
 }</code></pre>
         <div class="break"></div>
         <pre><code class="language-js">new WinBox({
 
     title: "Custom CSS",
     class: "custom",
-    html: '<iframe src="https://wikipedia.com"></iframe>'
+    url: 'https://wikipedia.com'
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['show-custom-css']()">Run Code</div>
@@ -488,6 +494,16 @@
                         mount: document.getElementById("content")
                     });
                 },
+                "show-iframe": function(){
+
+                    new WinBox({
+
+                        title: "Open Url",
+                        url: "https://wikipedia.com",
+                        class: "iframe"
+                    });
+                },
+
                 // "show-mount-singleton-explicit": function(){
                 //
                 //     new WinBox({
@@ -548,7 +564,7 @@
 
                         title: "Custom CSS",
                         class: "custom",
-                        html: '<iframe src="https://wikipedia.com"></iframe>'
+                        url: "https://wikipedia.com"
                     });
                 },
                 "show-custom-class": function(){
@@ -557,7 +573,7 @@
 
                         title: "Custom Class",
                         class: "custom",
-                        html: '<iframe src="https://wikipedia.com"></iframe>'
+                        url: "https://wikipedia.com"
                     });
                 },
                 "show-controls": function(){

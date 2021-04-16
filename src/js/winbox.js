@@ -49,6 +49,7 @@ function WinBox(root, params){
         title,
         mount,
         html,
+        url,
         width,
         height,
         x,
@@ -78,6 +79,7 @@ function WinBox(root, params){
             title = params["title"];
             mount = params["mount"];
             html = params["html"];
+            url = params["url"];
             width = params["width"];
             height = params["height"];
             x = params["x"];
@@ -167,6 +169,10 @@ function WinBox(root, params){
     else if(html){
 
         this.body.innerHTML = html;
+    }
+    else if(url){
+
+        this.setUrl(url);
     }
 
     register(this);
@@ -525,6 +531,18 @@ WinBox.prototype.setTitle = function(title){
 WinBox.prototype.setColor = function(color){
 
     setStyle(this.dom, "background", color);
+
+    return this;
+};
+
+/**
+ * @this WinBox
+ */
+
+WinBox.prototype.setUrl = function(url){
+
+    setStyle(this.body, "overflow", "hidden");
+    this.body.innerHTML = '<iframe src="' + url + '"></iframe>';
 
     return this;
 };

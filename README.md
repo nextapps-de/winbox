@@ -186,6 +186,7 @@ Instance methods:
 - <a href="#winbox.fullscreen">winbox.**fullscreen**(state)</a>
 - <a href="#winbox.setColor">winbox.**setColor**(string)</a>
 - <a href="#winbox.setTitle">winbox.**setTitle**(string)</a>
+- <a href="#winbox.setTitle">winbox.**setUrl**(string)</a>
 
 Instance properties:
 
@@ -235,6 +236,12 @@ Instance properties:
         <td>html</td>
         <td>string</td>
         <td>Set <code>innerHTML</code> of the window body.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>url</td>
+        <td>string</td>
+        <td>Open URL inside the window (iframe).</td>
     </tr>
     <tr></tr>
     <tr>
@@ -461,6 +468,25 @@ var node = document.getElementById("content");
 var winbox = new WinBox("Mount DOM");
 
 winbox.mount(node);
+```
+
+#### Open Url (iFrame)
+
+```js
+var node = document.getElementById("content");
+
+new WinBox(document.body, {
+
+    title: "Open Url",
+    url: "https://wikipedia.com"
+});
+```
+
+Alternatively:
+```js
+var winbox = new WinBox("Open Url");
+
+winbox.setUrl("https://wikipedia.com");
 ```
 
 ---

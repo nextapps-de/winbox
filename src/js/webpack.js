@@ -13,6 +13,7 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.prototype.fullscreen;
 /** @export */ WinBox.prototype.setColor;
 /** @export */ WinBox.prototype.setTitle;
+/** @export */ WinBox.prototype.setUrl;
 
 /** @export */ WinBox.id;
 /** @export */ WinBox.body;
