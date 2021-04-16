@@ -54,6 +54,7 @@ function WinBox(root, params){
         height,
         x,
         y,
+        max,
         top,
         left,
         bottom,
@@ -63,7 +64,7 @@ function WinBox(root, params){
         onblur,
         onmove,
         onresize,
-        color,
+        background,
         border,
         classname;
 
@@ -84,6 +85,7 @@ function WinBox(root, params){
             height = params["height"];
             x = params["x"];
             y = params["y"];
+            max = params["max"];
             top = params["top"];
             left = params["left"];
             bottom = params["bottom"];
@@ -93,12 +95,12 @@ function WinBox(root, params){
             onblur = params["onblur"];
             onmove = params["onmove"];
             onresize = params["onresize"];
-            color = params["color"];
+            background = params["background"];
             border = params["border"];
 
-            if(color){
+            if(background){
 
-                this.setColor(color);
+                this.setBackground(background);
             }
 
             if(border){
@@ -160,7 +162,14 @@ function WinBox(root, params){
     this.onmove = onmove;
     this.onresize = onresize;
 
-    this.move().resize().focus();
+    if(max){
+
+        this.maximize().focus();
+    }
+    else{
+
+        this.move().resize().focus();
+    }
 
     if(mount){
 
@@ -528,9 +537,9 @@ WinBox.prototype.setTitle = function(title){
  * @this WinBox
  */
 
-WinBox.prototype.setColor = function(color){
+WinBox.prototype.setBackground = function(background){
 
-    setStyle(this.dom, "background", color);
+    setStyle(this.dom, "background", background);
 
     return this;
 };
@@ -572,6 +581,7 @@ WinBox.prototype.focus = function(){
 
 /**
  * @this WinBox
+ * @param {boolean=} state
  */
 
 WinBox.prototype.minimize = function(state){
@@ -619,13 +629,12 @@ WinBox.prototype.minimize = function(state){
 
 /**
  * @this WinBox
+ * @param {boolean=} state
  */
 
 WinBox.prototype.maximize = function(state){
 
-    const full = this.full;
-
-    if(full){
+    if(this.full){
 
         cancel_fullscreen(this);
 
@@ -660,6 +669,7 @@ WinBox.prototype.maximize = function(state){
 
 /**
  * @this WinBox
+ * @param {boolean=} state
  */
 
 WinBox.prototype.fullscreen = function(state){

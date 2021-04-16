@@ -6,7 +6,6 @@
     <title>WinBox.js Demo</title>
     <script src="dist/winbox.bundle.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/railscasts.min.css">
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/monokai-sublime.min.css">-->
     <link rel="stylesheet" href="demo/style.css">
     <style>
         .winbox.custom {
@@ -45,9 +44,9 @@
         }
 
         .winbox.custom .winbox-body {
-            margin: 4px; /* the width of window border */
+            margin: 4px; /* width of window border */
             color: #fff;
-            background: #0d1117;
+            background: #131820;
         }
 
         .winbox.my-theme .winbox-body {
@@ -57,13 +56,14 @@
     </style>
 </head>
 <body>
-    <div style="position: fixed; top:0; width: 100%; height: 50px; background-color: #0d1117; padding: 15px 0; border-bottom: 1px solid #1c2431;">
-        <a style="font-weight: 600" href="https://github.com/nextapps-de/winbox">Goto Github</a>
-    </div>
+    <header>
+        <a href="https://github.com/nextapps-de/winbox">Goto Github</a>
+    </header>
     <div class="wrapper">
-        <h1 style="margin-bottom: 0"><img src="winbox.svg" alt="WinBox.js"></h1>
+        <h1 style="margin-bottom: 0"><img src="winbox.svg" alt="WinBox.js: HTML5 Window Manager for the Web."></h1>
+        <h2>WinBox is a professional html5 window manager for the web: lightweight, outstanding performance, no dependencies, fully customizable, open source!</h2>
         <br>
-        <div class="button" onclick="window.examples['show-custom-css']()" style="background-color: #ca00b4">Show Example</div>
+        <div class="button" onclick="window.examples['custom-css']()" style="background-color: #ca00b4">Show Example</div>
         <br><br>
 
         <hr>
@@ -78,7 +78,7 @@
         <br><br>
         <pre><code class="language-js">new WinBox("Basic Window");</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-basic']()">Run Code</div>
+        <div class="button" onclick="window.examples['basic']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -87,7 +87,7 @@
         <br><br>
         <pre><code class="language-js">new WinBox(document.body, "Custom Root");</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-root']()">Run Code</div>
+        <div class="button" onclick="window.examples['root']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -97,10 +97,10 @@
         <pre><code class="language-js">new WinBox(document.body, {
 
     title: "Custom Color",
-    color: "#ff005d"
+    background: "#ff005d"
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-color']()">Run Code</div>
+        <div class="button" onclick="window.examples['color']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -113,7 +113,7 @@
     border: 4
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-border']()">Run Code</div>
+        <div class="button" onclick="window.examples['border']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -128,7 +128,7 @@
     left: 50
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-viewport']()">Run Code</div>
+        <div class="button" onclick="window.examples['viewport']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -143,7 +143,7 @@
     height: "50%"
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-position']()">Run Code</div>
+        <div class="button" onclick="window.examples['position']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -156,7 +156,7 @@
     html: "&lt;h1>Lorem Ipsum&lt;/h1>"
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-innerhtml']()">Run Code</div>
+        <div class="button" onclick="window.examples['innerhtml']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -169,7 +169,7 @@
                    .cloneNode(true)
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-mount-clone']()">Run Code</div>
+        <div class="button" onclick="window.examples['mount-clone']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -182,7 +182,7 @@
     mount: document.getElementById("content")
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-mount-singleton-lazy']()">Run Code</div>
+        <div class="button" onclick="window.examples['mount-auto']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -195,27 +195,8 @@
     url: "https://wikipedia.com"
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-iframe']()">Run Code</div>
+        <div class="button" onclick="window.examples['iframe']()">Run Code</div>
         <br><br>
-
-        <!--
-        <hr>
-        <br>
-        Mount DOM (Singleton) + Explicit-Unmount
-        <br><br>
-        <pre><code class="language-js">new WinBox({
-    title: "Mount DOM",
-    mount: document.getElementById("content"),
-    onclose: function(winbox){
-        winbox.unmount(
-            document.getElementById("backstore")
-        );
-    }
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['show-mount-singleton-explicit']()">Run Code</div>
-        <br><br>
-        --->
 
         <hr>
         <br>
@@ -226,22 +207,23 @@
     title: "All Options",
     id: "my-window",
     class: "my-theme",
-    color: "#ff005d",
+    background: "#ff005d",
     border: 4,
     width: 200,
     height: 200,
-    x: 100,
-    y: 100,
+    x: "center",
+    y: "center",
+    max: true,
     top: 50,
     right: 50,
     bottom: 50,
     left: 50,
     html: "width: 200, height: 200",
     onfocus: function(){
-        this.setColor("#ff005d"); // this => WinBox
+        this.setBackground("#ff005d"); // this => WinBox
     },
     onblur: function(){
-        this.setColor("#999");
+        this.setBackground("#999");
     },
     onresize: function(width, height){
         this.body.textContent = (
@@ -260,7 +242,7 @@
     }
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-all-options']()">Run Code</div>
+        <div class="button" onclick="window.examples['all-options']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -300,7 +282,7 @@
     },
     "color": function(){
 
-        winbox.setColor(
+        winbox.setBackground(
             "rgb(" +(Math.random() * 255 | 0) + "," +
                     (Math.random() * 255 | 0) + "," +
                     (Math.random() * 255 | 0) + ")"
@@ -312,7 +294,7 @@
     }
 };</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-controls']()">Run Code</div>
+        <div class="button" onclick="window.examples['controls']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -363,10 +345,10 @@
         <pre><code class="language-js">new WinBox({
 
     title: "Custom CSS",
-    url: 'https://nextapps-de.github.io/winbox/'
+    mount: document.getElementById("content")
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-custom-css']()">Run Code</div>
+        <div class="button" onclick="window.examples['custom-css']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -399,32 +381,31 @@
 
     title: "Custom CSS",
     class: "custom",
-    url: 'https://nextapps-de.github.io/winbox/'
+    mount: document.getElementById("content")
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['show-custom-css']()">Run Code</div>
+        <div class="button" onclick="window.examples['custom-css']()">Run Code</div>
         <br><br>
-
-        <div id="backstore" style="display: none">
-            <div id="content">
-                <h1>Lorem Ipsum</h1>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-            </div>
-            <div id="controls">
-                <button onclick="window.buttons['minimize']()">Minimize (Toggle)</button>
-                <button onclick="window.buttons['maximize']()">Maximize (Toggle)</button>
-                <button onclick="window.buttons['fullscreen']()">Fullscreen (Toggle)</button>
-                <button onclick="window.buttons['move']()">Move (Center, Center)</button>
-                <button onclick="window.buttons['resize']()">Resize (50%, 50%)</button>
-                <button onclick="window.buttons['title']()">Set Title</button>
-                <button onclick="window.buttons['color']()">Set Color</button>
-                <button onclick="window.buttons['close']()">Close</button>
-            </div>
+        <br><br>
+    </div>
+    <div id="backstore" style="display: none">
+        <div id="content">
+            <h1>Lorem Ipsum</h1>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+            <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+        </div>
+        <div id="controls">
+            <button onclick="window.buttons['minimize']()">Minimize (Toggle)</button>
+            <button onclick="window.buttons['maximize']()">Maximize (Toggle)</button>
+            <button onclick="window.buttons['fullscreen']()">Fullscreen (Toggle)</button>
+            <button onclick="window.buttons['move']()">Move (Center, Center)</button>
+            <button onclick="window.buttons['resize']()">Resize (50%, 50%)</button>
+            <button onclick="window.buttons['title']()">Set Title</button>
+            <button onclick="window.buttons['color']()">Set Color</button>
+            <button onclick="window.buttons['close']()">Close</button>
         </div>
     </div>
-    <br><br>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
     <script>
 
@@ -434,23 +415,23 @@
 
             window.examples = {
 
-                "show-basic": function(){
+                "basic": function(){
 
                     new WinBox("Basic Window");
                 },
-                "show-root": function(){
+                "root": function(){
 
                     new WinBox(document.body, "Custom Root");
                 },
-                "show-color": function(){
+                "color": function(){
 
                     new WinBox({
 
                         title: "Custom Color",
-                        color: "#ff005d"
+                        background: "#ff005d"
                     });
                 },
-                "show-border": function(){
+                "border": function(){
 
                     new WinBox({
 
@@ -458,7 +439,7 @@
                         border: 4
                     });
                 },
-                "show-viewport": function(){
+                "viewport": function(){
 
                     new WinBox({
 
@@ -469,7 +450,7 @@
                         left: 50
                     });
                 },
-                "show-position": function(){
+                "position": function(){
 
                     new WinBox({
 
@@ -480,7 +461,7 @@
                         height: "50%"
                     });
                 },
-                "show-innerhtml": function(){
+                "innerhtml": function(){
 
                     new WinBox({
 
@@ -488,7 +469,7 @@
                         html: "<h1>Lorem Ipsum</h1>"
                     });
                 },
-                "show-mount-clone": function(){
+                "mount-clone": function(){
 
                     new WinBox({
 
@@ -497,7 +478,7 @@
                                        .cloneNode(true)
                     });
                 },
-                "show-mount-singleton-lazy": function(){
+                "mount-auto": function(){
 
                     new WinBox({
 
@@ -505,7 +486,7 @@
                         mount: document.getElementById("content")
                     });
                 },
-                "show-iframe": function(){
+                "iframe": function(){
 
                     new WinBox({
 
@@ -514,43 +495,30 @@
                         class: "iframe"
                     });
                 },
-
-                // "show-mount-singleton-explicit": function(){
-                //
-                //     new WinBox({
-                //
-                //         title: "Mount DOM",
-                //         mount: document.getElementById("content"),
-                //         onclose: function(win){
-                //             win.unmount(
-                //                 document.getElementById("backstore")
-                //             );
-                //         }
-                //     });
-                // },
-                "show-all-options": function(){
+                "all-options": function(){
 
                     new WinBox(document.body, {
 
                         title: "All Options",
                         id: "my-window",
                         class: "my-theme",
-                        color: "#ff005d",
+                        background: "#ff005d",
                         border: 4,
                         width: 200,
                         height: 200,
-                        x: 100,
-                        y: 100,
+                        x: "center",
+                        y: "center",
+                        max: true,
                         top: 50,
                         right: 50,
                         bottom: 50,
                         left: 50,
                         html: "width: 200, height: 200",
                         onfocus: function(){
-                            this.setColor("#ff005d");
+                            this.setBackground("#ff005d");
                         },
                         onblur: function(){
-                            this.setColor("#999");
+                            this.setBackground("#999");
                         },
                         onresize: function(width, height){
                             this.body.textContent = (
@@ -569,25 +537,25 @@
                         }
                     });
                 },
-                "show-custom-css": function(){
+                "custom-css": function(){
 
                     new WinBox({
 
                         title: "Custom CSS",
                         class: "custom",
-                        url: "https://nextapps-de.github.io/winbox/"
+                        mount: document.getElementById("content")
                     });
                 },
-                "show-custom-class": function(){
+                "custom-class": function(){
 
                     new WinBox({
 
                         title: "Custom Class",
                         class: "custom",
-                        url: "https://nextapps-de.github.io/winbox/"
+                        mount: document.getElementById("content")
                     });
                 },
-                "show-controls": function(){
+                "controls": function(){
 
                     winbox = new WinBox({
 
@@ -625,7 +593,7 @@
                 },
                 "color": function(){
 
-                    winbox.setColor(
+                    winbox.setBackground(
                         "rgb(" + (Math.random() * 255 | 0) + "," +
                                  (Math.random() * 255 | 0) + "," +
                                  (Math.random() * 255 | 0) + ")"

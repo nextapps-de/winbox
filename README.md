@@ -184,7 +184,7 @@ Instance methods:
 - <a href="#winbox.minimize">winbox.**minimize**(state)</a>
 - <a href="#winbox.maximize">winbox.**maximize**(state)</a>
 - <a href="#winbox.fullscreen">winbox.**fullscreen**(state)</a>
-- <a href="#winbox.setColor">winbox.**setColor**(string)</a>
+- <a href="#winbox.setBackground">winbox.**setBackground**(string)</a>
 - <a href="#winbox.setTitle">winbox.**setTitle**(string)</a>
 - <a href="#winbox.setTitle">winbox.**setUrl**(string)</a>
 
@@ -208,7 +208,7 @@ Instance properties:
 ## Options
 
 <table>
-    <tr><td></td></tr>
+    <tr></tr>
     <tr>
         <td>Option</td>
         <td>Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -257,6 +257,12 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
+        <td>max</td>
+        <td>boolean</td>
+        <td>Automatically toggles the window into maximized state when created.</td>
+    </tr>
+    <tr></tr>
+    <tr>
         <td>top<br>right<br>bottom<br>left</td>
         <td>number | string</td>
         <td>Set or limit the viewport of the window available area (supports units "px" and "%").</td>
@@ -265,25 +271,25 @@ Instance properties:
     <tr>
         <td>onmove</td>
         <td>function(x, y)</td>
-        <td>Callback triggered whe the window moves. The keyword <code>this</code> inside the callback function refers to the corresponding window element.</td>
+        <td>Callback triggered when the window moves. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
     </tr>
     <tr></tr>
     <tr>
         <td>onresize</td>
         <td>function(width, height)</td>
-        <td>Callback triggered whe the window resizes. The keyword <code>this</code> inside the callback function refers to the corresponding window element.</td>
+        <td>Callback triggered when the window resizes. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
     </tr>
     <tr></tr>
     <tr>
         <td>onclose<br>onfocus<br>onblur</td>
         <td>function()</td>
-        <td>Callbacks to several events (Note: the event 'onclose' will be triggered before close). The keyword <code>this</code> inside the callback function refers to the corresponding window element.</td>
+        <td>Callbacks to several events (Note: the event 'onclose' will be triggered right before closing). The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
     </tr>
     <tr></tr>
     <tr>
-        <td>color</td>
+        <td>background</td>
         <td>string</td>
-        <td>Set the background of the window (supports all css which is also support by the style-attribute "background", e.g. colors, transparent colors, hsl, gradients, background images)</td>
+        <td>Set the background of the window (supports all CSS styles which are also supported by the style-attribute "background", e.g. colors, transparent colors, hsl, gradients, background images)</td>
     </tr>
     <tr></tr>
     <tr>
@@ -330,19 +336,19 @@ new WinBox(document.body, "Window Title");
 
 #### Custom Color
 
-> Supports all CSS styles which is also supported by the style-attribute "background", e.g. colors, transparent colors, hsl, gradients, background images.
+> Supports all CSS styles which are also supported by the style-attribute "background", e.g. colors, transparent colors, hsl, gradients, background images.
 
 ```js
 new WinBox({
     title: "Custom Color",
-    color: "#ff005d"
+    background: "#ff005d"
 });
 ```
 
 Alternatively:
 ```js
 var winbox = new WinBox("Custom Color");
-winbox.setColor("#ff005d");
+winbox.setBackground("#ff005d");
 ```
 
 #### Custom Border
@@ -488,6 +494,19 @@ var winbox = new WinBox("Open Url");
 
 winbox.setUrl("https://wikipedia.com");
 ```
+
+
+<!--
+new WinBox({
+title: "Mount DOM",
+mount: document.getElementById("content"),
+onclose: function(winbox){
+winbox.unmount(
+document.getElementById("backstore")
+);
+}
+-->
+
 
 ---
 

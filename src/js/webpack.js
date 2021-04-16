@@ -11,7 +11,7 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.prototype.minimize;
 /** @export */ WinBox.prototype.maximize;
 /** @export */ WinBox.prototype.fullscreen;
-/** @export */ WinBox.prototype.setColor;
+/** @export */ WinBox.prototype.setBackground;
 /** @export */ WinBox.prototype.setTitle;
 /** @export */ WinBox.prototype.setUrl;
 
