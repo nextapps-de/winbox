@@ -312,14 +312,21 @@ function register(self){
 function remove_min_stack(self){
 
     stack_min.splice(stack_min.indexOf(self), 1);
+    update_min_stack(self);
+    self.min = false;
+}
+
+function update_min_stack(self){
+
+    const width = Math.min(self.root_w / stack_min.length, 250);
 
     for(let i = 0; i < stack_min.length; i++){
 
-        stack_min[i].move(self.left + i * 250, self.root_h - self.bottom - (/*self.preserve ? 0 :*/ 35), true);
+        stack_min[i].resize(width, 35, true)
+                    .move(self.left + i * width, self.root_h - self.bottom - (/*self.preserve ? 0 :*/ 35), true);
     }
-
-    self.min = false;
 }
+
 
 function disable_animation(self){
 
@@ -608,18 +615,14 @@ WinBox.prototype.minimize = function(state){
             cancel_fullscreen(this);
         }
 
-        this.resize(
+        if(this.min){
 
-            (this.min ? 250 : this.width),
-            (this.min ? 35: this.height),
-            true
+            update_min_stack(this);
+        }
+        else{
 
-        ).move(
-
-            (this.min ? this.left + (stack_min.length - 1) * 250 : this.x),
-            (this.min ? this.root_h - this.bottom - (/*this.preserve ? 0 :*/ 35) : this.y),
-            true
-        );
+            this.resize().move();
+        }
 
         this.max = false;
     }
@@ -644,18 +647,25 @@ WinBox.prototype.maximize = function(state){
         }
     }
 
-    this.resize(
+    if(this.max){
 
-        (this.max ? this.width : this.root_w - this.left - this.right),
-        (this.max ? this.height : this.root_h - this.top - this.bottom - 1),
-        true
+        this.resize().move();
+    }
+    else{
 
-    ).move(
+        this.resize(
 
-        (this.max ? this.x : this.left),
-        (this.max ? this.y : this.top),
-        true
-    );
+            this.root_w - this.left - this.right,
+            this.root_h - this.top - this.bottom - 1,
+            true
+
+        ).move(
+
+            this.left,
+            this.top,
+            true
+        );
+    }
 
     if(this.min){
 

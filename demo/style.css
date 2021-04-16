@@ -34,8 +34,8 @@ header{
     display: inline-block;
     max-width: 500px;
     text-align: left;
-    margin: 1.2em;
-    margin-top: 70px;
+    padding: 1.2em;
+    padding-top: 50px;
 }
 pre{
     -webkit-touch-callout: default !important;
