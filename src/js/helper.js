@@ -46,15 +46,36 @@ export function preventEvent(event){
     //event.returnValue = false;
 }
 
-// export function addClass(node, classname){
-//
-//     node.classList.add(classname);
-//
-//     // node._class || (node._class = {});
-//     //
-//     // if(!node._class[classname]){
-//     //
-//     //     node.classList.add(classname);
-//     //     node._class[classname] = 1;
-//     // }
-// }
+export function addClass(node, classname){
+
+    // node._class || (node._class = {});
+    //
+    // if(!node._class[classname]){
+    //
+    //     node.classList.add(classname);
+    //     node._class[classname] = 1;
+    // }
+
+    //if(!node["_c_" + classname]){
+
+        node.classList.add(classname);
+        //node["_c_" + classname] = 1;
+    //}
+}
+
+export function removeClass(node, classname){
+
+    // node._class || (node._class = {});
+    //
+    // if(!node._class[classname]){
+    //
+    //     node.classList.add(classname);
+    //     node._class[classname] = 1;
+    // }
+
+    //if(node["_c_" + classname] !== 0){
+
+        node.classList.remove(classname);
+        //node["_c_" + classname] = 0;
+    //}
+}

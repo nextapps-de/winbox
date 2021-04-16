@@ -7,7 +7,7 @@
  */
 
 import template from "./template.js";
-import { addListener, removeListener, getByClass, setStyle, setText, preventEvent } from "./helper.js";
+import { addListener, removeListener, getByClass, setStyle, setText, addClass, removeClass, preventEvent } from "./helper.js";
 
 //const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window["MSStream"];
 const stack = [];
@@ -97,6 +97,7 @@ function WinBox(root, params){
             onresize = params["onresize"];
             background = params["background"];
             border = params["border"];
+            classname = params["class"];
 
             if(background){
 
@@ -108,17 +109,15 @@ function WinBox(root, params){
                 setStyle(this.body, "margin", border + "px");
             }
 
-            if((classname = params["class"])){
+            if(classname){
 
-                this.dom.className = "winbox " + classname;
+                addClass(this.dom, classname);
+                //this.dom.className = "winbox " + classname;
             }
         }
-
-        if(title){
-
-            this.setTitle(title);
-        }
     }
+
+    this.setTitle(title || "");
 
     let max_width = this.root_w;
     let max_height = this.root_h;
@@ -133,10 +132,12 @@ function WinBox(root, params){
 
     width = width ? parse(width, max_width) : max_width / 2;
     height = height ? parse(height, max_height) : max_height / 2;
-    id || (id = ("winbox-" + ++id_counter));
 
     x = x ? parse(x, max_width, width) : left;
     y = y ? parse(y, max_height, height) : top;
+
+    this.dom.id =
+    this.id = id || ("winbox-" + (++id_counter));
 
     this.x = x;
     this.y = y;
@@ -148,8 +149,6 @@ function WinBox(root, params){
     this.bottom = bottom;
     this.left = left;
 
-    this.dom.id = id;
-    this.id = id;
     this.border = border;
     this.class = classname;
     this.min = false;
@@ -211,8 +210,8 @@ function parse(num, base, center){
     }
     else if(typeof num === "string"){
 
-        const value = "" + parseFloat(num);
-        const unit = (value !== num) && num.substring(value.length);
+        const value = parseFloat(num);
+        const unit = (("" + value) !== num) && num.substring(("" + value).length);
 
         if(unit === "%"){
 
@@ -313,7 +312,9 @@ function remove_min_stack(self){
 
     stack_min.splice(stack_min.indexOf(self), 1);
     update_min_stack(self);
+    removeClass(self.dom, "min");
     self.min = false;
+    self.dom.title = "";
 }
 
 function update_min_stack(self){
@@ -350,27 +351,35 @@ function addWindowListener(self, dir){
 
         preventEvent(event);
 
-        if(event.touches){
+        if(self.min){
 
-            event = event.touches[0] || event;
+            remove_min_stack(self);
+            self.resize().move();
         }
+        else{
 
-        if(!self.min && !self.max && !self.full){
+            if(event.touches){
 
-            disable_animation(self);
+                event = event.touches[0] || event;
+            }
 
-            addListener(window, "mousemove", handler_mousemove);
-            addListener(window, "mouseup", handler_mouseup);
-            addListener(window, "touchmove", handler_mousemove);
-            addListener(window, "touchend", handler_mouseup);
+            if(!self.min && !self.max && !self.full){
 
-            x = event.pageX;
-            y = event.pageY;
+                disable_animation(self);
 
-            // appearing scrollbars on the root element does not trigger "window.onresize",
-            // force refresh window size via init()
+                addListener(window, "mousemove", handler_mousemove);
+                addListener(window, "mouseup", handler_mouseup);
+                addListener(window, "touchmove", handler_mousemove);
+                addListener(window, "touchend", handler_mouseup);
 
-            self.init().focus();
+                x = event.pageX;
+                y = event.pageY;
+
+                // appearing scrollbars on the root element does not trigger "window.onresize",
+                // force refresh window size via init()
+
+                self.init().focus();
+            }
         }
     }
 
@@ -385,8 +394,10 @@ function addWindowListener(self, dir){
             preventEvent(event);
         }
 
-        const offsetX = event.pageX - x;
-        const offsetY = event.pageY - y;
+        const pageX = event.pageX;
+        const pageY = event.pageY;
+        const offsetX = pageX - x;
+        const offsetY = pageY - y;
 
         let resize_w, resize_h, move_x, move_y;
 
@@ -455,8 +466,8 @@ function addWindowListener(self, dir){
             self.move();
         }
 
-        x = event.pageX;
-        y = event.pageY;
+        x = pageX;
+        y = pageY;
     }
 
     function handler_mouseup(event){
@@ -535,7 +546,7 @@ WinBox.prototype.unmount = function(dest){
 
 WinBox.prototype.setTitle = function(title){
 
-    setText(getByClass(this.dom, "winbox-title").firstChild, title);
+    setText(getByClass(this.dom, "winbox-title").firstChild, this.title = title);
 
     return this;
 };
@@ -557,7 +568,6 @@ WinBox.prototype.setBackground = function(background){
 
 WinBox.prototype.setUrl = function(url){
 
-    setStyle(this.body, "overflow", "hidden");
     this.body.innerHTML = '<iframe src="' + url + '"></iframe>';
 
     return this;
@@ -573,11 +583,7 @@ WinBox.prototype.focus = function(){
 
         setStyle(this.dom, "z-index", ++index);
 
-        if(last_focus && last_focus.onblur){
-
-            last_focus.onblur();
-        }
-
+        last_focus && last_focus.onblur && last_focus.onblur();
         last_focus = this;
 
         this.onfocus && this.onfocus();
@@ -593,39 +599,26 @@ WinBox.prototype.focus = function(){
 
 WinBox.prototype.minimize = function(state){
 
-    let has_changed;
+    if(this.full){
+
+        cancel_fullscreen(this);
+    }
 
     if(!state && this.min){
 
         remove_min_stack(this);
-        has_changed = true;
+        this.resize().move();
     }
     else if((state !== false) && !this.min){
 
         stack_min.push(this);
-        this.min = has_changed = true;
+        update_min_stack(this);
+        addClass(this.dom, "min");
+        this.dom.title = this.title;
+        this.min = true;
     }
 
-    if(has_changed){
-
-        const full = this.full;
-
-        if(full){
-
-            cancel_fullscreen(this);
-        }
-
-        if(this.min){
-
-            update_min_stack(this);
-        }
-        else{
-
-            this.resize().move();
-        }
-
-        this.max = false;
-    }
+    this.max = false;
 
     return this;
 };
@@ -637,42 +630,44 @@ WinBox.prototype.minimize = function(state){
 
 WinBox.prototype.maximize = function(state){
 
-    if(this.full){
+    if(typeof state === "undefined" || (state !== this.max)){
 
-        cancel_fullscreen(this);
+        if(this.full){
+
+            cancel_fullscreen(this);
+
+            if(this.max){
+
+                return this;
+            }
+        }
+        else if(this.min){
+
+            remove_min_stack(this);
+        }
 
         if(this.max){
 
-            return this;
+            this.resize().move();
         }
+        else{
+
+            this.resize(
+
+                this.root_w - this.left - this.right,
+                this.root_h - this.top - this.bottom - 1,
+                true
+
+            ).move(
+
+                this.left,
+                this.top,
+                true
+            );
+        }
+
+        this.max = !this.max;
     }
-
-    if(this.max){
-
-        this.resize().move();
-    }
-    else{
-
-        this.resize(
-
-            this.root_w - this.left - this.right,
-            this.root_h - this.top - this.bottom - 1,
-            true
-
-        ).move(
-
-            this.left,
-            this.top,
-            true
-        );
-    }
-
-    if(this.min){
-
-        remove_min_stack(this);
-    }
-
-    this.max = !this.max;
 
     return this;
 };
@@ -684,26 +679,26 @@ WinBox.prototype.maximize = function(state){
 
 WinBox.prototype.fullscreen = function(state){
 
-    if((typeof state !== "undefined") && (state === this.full)){
+    if(typeof state === "undefined" || (state !== this.full)){
 
-        return this;
+        if(this.min){
+
+            this.resize().move();
+            remove_min_stack(this);
+        }
+
+        // fullscreen could be changed by user manually
+
+        if(!this.full || !cancel_fullscreen(this)){
+
+            this.dom[prefix_request]();
+            this.full = true;
+        }
+        // else{
+        //
+        //     this.onresize && this.onresize(this.width, this.height);
+        // }
     }
-
-    if(!this.full || !cancel_fullscreen(this)){
-
-        this.dom[prefix_request]();
-        this.full = true;
-    }
-
-    if(this.min){
-
-        this.resize().move();
-        remove_min_stack(this);
-    }
-    // else{
-    //
-    //     this.onresize && this.onresize(this.width, this.height);
-    // }
 
     return this;
 };

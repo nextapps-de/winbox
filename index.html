@@ -14,6 +14,10 @@
             border-radius: 12px 12px 0 0;
         }
 
+        .winbox.custom.min {
+            border-radius: 0;
+        }
+
         .winbox.custom .winbox-title {
             font-size: 13px;
             text-transform: uppercase;
@@ -187,11 +191,11 @@
 
         <hr>
         <br>
-        Open Url (iFrame)
+        Open URI / URL (iFrame)
         <br><br>
         <pre><code class="language-js">new WinBox(document.body, {
 
-    title: "Open Url",
+    title: "Wikipedia",
     url: "https://wikipedia.com"
 });</code></pre>
         <div class="break"></div>
@@ -213,7 +217,7 @@
     height: 200,
     x: "center",
     y: "center",
-    max: true,
+    max: false,
     top: 50,
     right: 50,
     bottom: 50,
@@ -307,6 +311,10 @@
     box-shadow: none;
 }
 
+.winbox.min {
+    border-radius: 0;
+}
+
 .winbox-title {
     font-size: 13px;
     text-transform: uppercase;
@@ -346,6 +354,7 @@
 
     title: "Custom CSS",
     mount: document.getElementById("content")
+                   .cloneNode(true)
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['custom-css']()">Run Code</div>
@@ -359,6 +368,10 @@
     background: linear-gradient(to right, #ff00f0, #0050ff);
     border-radius: 12px 12px 0 0;
     box-shadow: none;
+}
+
+.winbox.custom.min {
+    border-radius: 0;
 }
 
 .winbox.custom .winbox-title {
@@ -382,6 +395,7 @@
     title: "Custom CSS",
     class: "custom",
     mount: document.getElementById("content")
+                   .cloneNode(true)
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['custom-css']()">Run Code</div>
@@ -490,7 +504,7 @@
 
                     new WinBox({
 
-                        title: "Open Url",
+                        title: "Wikipedia",
                         url: "https://wikipedia.com",
                         class: "iframe"
                     });
@@ -508,7 +522,7 @@
                         height: 200,
                         x: "center",
                         y: "center",
-                        max: true,
+                        max: false,
                         top: 50,
                         right: 50,
                         bottom: 50,
@@ -544,6 +558,7 @@
                         title: "Custom CSS",
                         class: "custom",
                         mount: document.getElementById("content")
+                                       .cloneNode(true)
                     });
                 },
                 "custom-class": function(){
