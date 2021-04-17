@@ -7,7 +7,7 @@ html, body{
     margin: 0;
     padding: 0;
     border: 0;
-    font-family: Aral, Helvetica, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, "Open Sans", OpenSans, Roboto, Segoe UI, sans-serif;
     text-align: center;
     background: linear-gradient(135deg, #0d1117, #131820) fixed;
     color: #fff;
@@ -32,10 +32,9 @@ header{
 }
 .wrapper{
     display: inline-block;
-    max-width: 500px;
+    max-width: 600px;
     text-align: left;
-    padding: 1.2em;
-    padding-top: 50px;
+    padding: 90px 1.2em 1.2em 1.2em;
 }
 pre{
     -webkit-touch-callout: default !important;
@@ -58,6 +57,10 @@ b{
 button{
     padding: 5px 10px;
     margin-bottom: 5px;
+}
+h1{
+    margin: 0;
+    padding: 0;
 }
 h1 img{
     width: 100%;
@@ -100,8 +103,10 @@ pre code.hljs{
     height: 18px;
 }
 
-
 @media (max-width: 550px) {
+    .wrapper{
+        padding-top: 70px;
+    }
     .wrapper,
     pre{
         display: block;
