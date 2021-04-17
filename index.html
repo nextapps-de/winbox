@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-dark-theme="dark">
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
@@ -101,9 +101,27 @@
 
         <hr>
         <br>
+        Load Library (Bundle)
+        <br><br>
+        <pre><code class="language-html">&lt;head>
+    &lt;script src="dist/winbox.bundle.js">&lt;/script>
+&lt;/head></code></pre>
+        <div class="break"></div>
+        <br>
+        Load Library (Non-Bundle)
+        <br><br>
+        <pre><code class="language-html">&lt;head>
+    &lt;link rel="stylesheet" href="dist/css/winbox.css">
+    &lt;script src="dist/js/winbox.min.js">&lt;/script>
+&lt;/head></code></pre>
+        <div class="break"></div>
+
+        <hr>
+        <br>
         Class Constructor
         <br><br>
-        <pre><code class="language-js">WinBox(options&lt;key: value>)</code></pre><br>
+        <pre><code class="language-js">WinBox(options&lt;key: value>)</code></pre>
+        <br>
 
         <hr>
         <br>
@@ -196,6 +214,16 @@
         <br>
         Mount DOM (Cloned)
         <br><br>
+
+        <pre><code class="language-html">&lt;div id="backstore" style="display: none">
+    &lt;div id="content">
+        &lt;h1>Lorem Ipsum&lt;/h1>
+        &lt;p>Lorem ipsum [...]&lt;/p>
+        &lt;p>Duis autem vel [...]&lt;/p>
+        &lt;p>Ut wisi enim [...]&lt;/p>
+    &lt;/div>
+&lt;/div></code></pre>
+        <div class="break"></div>
         <pre><code class="language-js">new WinBox({
     title: "Mount DOM",
     mount: document.getElementById("content")
@@ -279,14 +307,20 @@
 
         <hr>
         <br>
-        Controls
+        Control Programmatically
         <br><br>
-        <pre><code class="language-js">var winbox = new WinBox({
-    title: "Controls",
-    mount: document.getElementById("controls")
-});</code></pre>
+        <pre><code class="language-html">&lt;div id="controls">
+    &lt;button onclick="buttons.minimize()">Minimize (Toggle)&lt;/button>
+    &lt;button onclick="buttons.maximize()">Maximize (Toggle)&lt;/button>
+    &lt;button onclick="buttons.fullscreen()">Fullscreen (Toggle)&lt;/button>
+    &lt;button onclick="buttons.move()">Move (Center, Center)&lt;/button>
+    &lt;button onclick="buttons.resize()">Resize (50%, 50%)&lt;/button>
+    &lt;button onclick="buttons.title()">Set Title&lt;/button>
+    &lt;button onclick="buttons.color()">Set Color&lt;/button>
+    &lt;button onclick="buttons.close()">Close&lt;/button>
+&lt;/div></code></pre>
         <div class="break"></div>
-        <pre><code class="language-js">const buttons = {
+        <pre><code class="language-js">window.buttons = {
 
     "minimize": function(){
 
@@ -315,9 +349,9 @@
     "color": function(){
 
         winbox.setBackground(
-            "rgb(" +(Math.random() * 255 | 0) + "," +
-                    (Math.random() * 255 | 0) + "," +
-                    (Math.random() * 255 | 0) + ")"
+            "rgb(" + (Math.random() * 255 | 0) + "," +
+                     (Math.random() * 255 | 0) + "," +
+                     (Math.random() * 255 | 0) + ")"
         );
     },
     "close": function(){
@@ -325,6 +359,11 @@
         winbox.close();
     }
 };</code></pre>
+        <div class="break"></div>
+        <pre><code class="language-js">var winbox = new WinBox({
+    title: "Controls",
+    mount: document.getElementById("controls")
+});</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['controls']()">Run Code</div>
         <br><br>
@@ -353,9 +392,12 @@
     font-size: 13px;
     text-transform: uppercase;
     font-weight: 600;
-}
+}</code></pre>
+        <div class="break"></div>
 
-.winbox-icon span{
+        Custom Icons
+        <br><br>
+        <pre><code class="language-css">.winbox-icon span{
     opacity: 0.65;
 }
 
@@ -381,18 +423,7 @@
     background-image: url(src/img/maximize.svg);
 }</code></pre>
         <div class="break"></div>
-        <pre><code class="language-js">new WinBox({
 
-    title: "Custom CSS",
-    mount: document.getElementById("content")
-                   .cloneNode(true)
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['custom-css']()">Run Code</div>
-        <br><br>
-
-        <hr>
-        <br>
         Custom Scrollbars
         <br><br>
         <pre><code class="language-css">.winbox-body::-webkit-scrollbar {
@@ -414,7 +445,7 @@
         <div class="break"></div>
         <pre><code class="language-js">new WinBox({
 
-    title: "Custom Scrollbars",
+    title: "Custom CSS",
     mount: document.getElementById("content")
                    .cloneNode(true)
 });</code></pre>
@@ -424,7 +455,7 @@
 
         <hr>
         <br>
-        Custom Styles (By Classes)
+        Custom Styles (By Classname)
         <br><br>
         <pre><code class="language-css">.winbox.custom {
     background: linear-gradient(90deg, #ff00f0, #0050ff);

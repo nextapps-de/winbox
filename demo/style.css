@@ -70,6 +70,12 @@ h2{
     font-weight: 400;
     line-height: 27px;
 }
+h3{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    margin:0;
+}
 hr{
     border: 0;
     border-bottom: 1px solid #1c2431;
@@ -103,14 +109,19 @@ pre code.hljs{
     height: 18px;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 600px) {
     .wrapper{
         padding-top: 70px;
     }
-    .wrapper,
-    pre{
+    .wrapper, pre{
         display: block;
     }
+}
+
+@media (max-height: 550px) {
+   header{
+       position: absolute;
+   }
 }
 
 .winbox-body{
