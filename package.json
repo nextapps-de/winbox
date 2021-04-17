@@ -1,6 +1,6 @@
 {
   "name": "winbox",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Lightweight window manager for the web.",
   "homepage": "https://github.com/nextapps-de/winbox/",
   "author": "Thomas Wilkerling",
