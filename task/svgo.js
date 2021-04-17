@@ -1,78 +1,44 @@
 const fs = require('fs');
 const path = require('path');
-let svgo = require('svgo');
+let { optimize } = require('svgo');
 
-svgo = new svgo({
-    plugins: [{
-        cleanupAttrs: true,
-    }, {
-        removeDoctype: true,
-    },{
-        removeXMLProcInst: true,
-    },{
-        removeComments: true,
-    },{
-        removeMetadata: true,
-    },{
-        removeTitle: true,
-    },{
-        removeDesc: true,
-    },{
-        removeUselessDefs: true,
-    },{
-        removeEditorsNSData: true,
-    },{
-        removeEmptyAttrs: true,
-    },{
-        removeHiddenElems: true,
-    },{
-        removeEmptyText: true,
-    },{
-        removeEmptyContainers: true,
-    },{
-        removeViewBox: false,
-    },{
-        cleanupEnableBackground: true,
-    },{
-        convertStyleToAttrs: true,
-    },{
-        convertColors: true,
-    },{
-        convertPathData: true,
-    },{
-        convertTransform: true,
-    },{
-        removeUnknownsAndDefaults: true,
-    },{
-        removeNonInheritableGroupAttrs: true,
-    },{
-        removeUselessStrokeAndFill: true,
-    },{
-        removeUnusedNS: true,
-    },{
-        cleanupIDs: true,
-    },{
-        cleanupNumericValues: true,
-    },{
-        moveElemsAttrsToGroup: true,
-    },{
-        moveGroupAttrsToElems: true,
-    },{
-        collapseGroups: true,
-    },{
-        removeRasterImages: false,
-    },{
-        mergePaths: true,
-    },{
-        convertShapeToPath: true,
-    },{
-        sortAttrs: true,
-    },{
-        removeDimensions: true,
-    }/*,{
-        removeAttrs: {attrs: '(stroke|fill)'},
-    }*/]
-});
+const plugins = [
+    'cleanupAttrs',
+    'removeDoctype',
+    'removeXMLProcInst',
+    'removeComments',
+    'removeMetadata',
+    'removeTitle',
+    'removeDesc',
+    'removeUselessDefs',
+    'removeEditorsNSData',
+    'removeEmptyAttrs',
+    'removeHiddenElems',
+    'removeEmptyText',
+    'removeEmptyContainers',
+    // 'removeViewBox',
+    'cleanupEnableBackground',
+    'convertStyleToAttrs',
+    'convertColors',
+    'convertPathData',
+    'convertTransform',
+    'removeUnknownsAndDefaults',
+    'removeNonInheritableGroupAttrs',
+    'removeUselessStrokeAndFill',
+    'removeUnusedNS',
+    'cleanupIDs',
+    'cleanupNumericValues',
+    'moveElemsAttrsToGroup',
+    'moveGroupAttrsToElems',
+    'collapseGroups',
+    // 'removeRasterImages',
+    'mergePaths',
+    'convertShapeToPath',
+    'sortAttrs',
+    'removeDimensions',
+    //{ name: 'removeAttrs', params: { attrs: '(stroke|fill)' } },
+];
+
 
 const directoryPath = 'dist/img';
 const files = fs.readdirSync(directoryPath);
@@ -83,13 +49,11 @@ files.forEach(function(filepath){
 
         filepath = path.resolve(__dirname, "..", directoryPath, filepath);
 
+        console.log(filepath);
+
         const data = fs.readFileSync(filepath, 'utf8');
+        const result = optimize(data, { path: filepath, plugins: plugins });
 
-        svgo.optimize(data, { path: filepath }).then(function(result){
-
-            console.log(filepath);
-            fs.writeFileSync(filepath, result.data);
-
-        }).catch(e => console.error(e));
+        fs.writeFileSync(filepath, result.data);
     }
 });

@@ -128,6 +128,7 @@ pre code.hljs{
 .hljs-attr {
     color:#79c0ff
 }
+.hljs-name,
 .hljs-built_in {
     color: #ffa657;
 }
@@ -139,7 +140,6 @@ pre code.hljs{
 }
 
 .hljs-keyword,
-.hljs-name,
 .hljs-selector-tag {
     color: #f92672
 }

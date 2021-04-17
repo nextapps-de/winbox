@@ -5,14 +5,70 @@
   left: 0;
   top: 0;
   background: #0050ff;
+  overflow: hidden;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transition: width 0.2s ease-out, height 0.2s ease-out, transform 0.2s ease-out;
+  transition: width .3s, height .3s, transform .3s;
+  transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
   will-change: transform, width, height;
   contain: strict;
   z-index: 10;
 }
+/*
 .winbox:fullscreen{
   transition: none !important;
+}
+*/
+
+.winbox-header {
+  display: table;
+  table-layout: fixed;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 35px;
+  color: #fff;
+  vertical-align: middle;
+  z-index: 10;
+}
+
+.winbox-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 35px;
+  bottom: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  will-change: scroll-position;
+  background-color: #fff;
+  margin-top: 0 !important;
+  box-sizing: border-box;
+}
+
+.winbox-title{
+  display: table-cell;
+  font-size: 14px;
+  text-align: left;
+  padding-left: 10px;
+  cursor: move;
+  width: 100%;
+  height: 35px;
+  vertical-align: middle;
+}
+
+.winbox-title span{
+  display: block;
+  width: calc(100% - 120px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.winbox.min .winbox-title span {
+  width: calc(100% - 65px);
 }
 
 .bar-n {
@@ -95,29 +151,6 @@
   z-index: 11;
 }
 
-.winbox-title{
-  display: table-cell;
-  font-size: 14px;
-  text-align: left;
-  padding-left: 10px;
-  cursor: move;
-  width: 100%;
-  height: 35px;
-  vertical-align: middle;
-}
-
-.winbox-title span{
-  display: block;
-  width: calc(100% - 120px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.winbox.min .winbox-title span {
-  width: calc(100% - 65px);
-}
-
 .winbox-icon{
   position: absolute;
   top:0;
@@ -167,34 +200,6 @@ span.icon-min {
   background-image: url(@minimize);
 }
 */
-
-.winbox-header {
-  display: table;
-  table-layout: fixed;
-  position: absolute;
-  width: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 35px;
-  color: #fff;
-  vertical-align: middle;
-  z-index: 10;
-}
-
-.winbox-body {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 35px;
-  bottom: 0;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
-  will-change: scroll-position;
-  background-color: #fff;
-  margin-top: 0 !important;
-}
 
 /*
 .winbox:fullscreen > div,

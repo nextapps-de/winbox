@@ -694,9 +694,13 @@ WinBox.prototype.fullscreen = function(state){
             // in this case it is better to set the state to "this.full" after the requestFullscreen was fired,
             // because it may break when browser does not support fullscreen properly and bypass it silently.
 
+            //this.dom[prefix_request]();
             this.body[prefix_request]();
             is_fullscreen = true;
         }
+
+        // dispatch resize callback on fullscreen?
+
         // else{
         //
         //     this.onresize && this.onresize(this.width, this.height);

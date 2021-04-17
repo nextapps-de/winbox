@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/railscasts.min.css">
     <title>WinBox.js Demo</title>
     <link rel="stylesheet" href="dist/css/winbox.css">
+    <link rel="stylesheet" href="dist/css/themes/modern.css">
     <script src="dist/js/winbox.min.js"></script>
     <!--<script src="dist/winbox.bundle.js"></script>-->
     <link rel="stylesheet" href="demo/style.css">
@@ -17,8 +18,13 @@
         }
 
         .winbox.custom.max,
-        .winbox.custom.min {
+        .winbox.custom.min{
             border-radius: 0;
+        }
+
+        .winbox.custom.max{
+            /* fix iOS bug when border-radius is changed, wtf? */
+            overflow: visible;
         }
 
         .winbox.custom .winbox-title {
@@ -456,6 +462,28 @@
         <div class="break"></div>
         <div class="button" onclick="window.examples['custom-css']()">Run Code</div>
         <br><br>
+
+        <hr>
+        <br>
+        Use Theme
+        <br><br>
+        <pre><code class="language-html">&lt;head>
+    &lt;link rel="stylesheet" href="dist/css/winbox.css">
+    &lt;link rel="stylesheet" href="dist/css/themes/modern.css">
+    &lt;script src="dist/js/winbox.min.js">&lt;/script>
+&lt;/head></code></pre>
+        <div class="break"></div>
+        <pre><code class="language-js">new WinBox({
+
+    title: "Theme",
+    class: "modern",
+    mount: document.getElementById("content")
+                   .cloneNode(true)
+});</code></pre>
+        <div class="break"></div>
+        <div class="button" onclick="window.examples['theme-modern']()">Run Code</div>
+        <br><br>
+
         <br><br>
     </div>
     <div id="backstore" style="display: none">
@@ -631,6 +659,16 @@
                         mount: document.getElementById("content")
                     });
                 },
+                "theme-modern": function(){
+
+                    new WinBox({
+
+                        title: "Theme: Modern",
+                        class: "modern",
+                        mount: document.getElementById("content")
+                                       .cloneNode(true)
+                    });
+                },
                 "controls": function(){
 
                     winbox = new WinBox({
@@ -638,7 +676,7 @@
                         title: "Controls",
                         mount: document.getElementById("controls")
                     });
-                },
+                }
             };
 
             window.buttons = {
