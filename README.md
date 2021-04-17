@@ -12,11 +12,12 @@
 <a name="started" id="started"></a>
 ## Getting Started
 
+<!--
 __Version Explanation__
 
 <table>
     <tr>
-        <td>Bundle Standalone</td>
+        <td>Bundle</td>
         <td>
             All assets bundled into one single file (js + css + html + icons).
         </td>
@@ -29,53 +30,41 @@ __Version Explanation__
         </td>
     </tr>
 </table>
-
+-->
 
 __Get Latest Build (Stable):__
 
 <table>
     <tr>
         <td colspan=3">
-            <b><u>Bundle Standalone:</u></b>
+            <b><u>Bundle:</u></b> (all assets bundled into one single file: js + css + html + icons)
         </td>
     </tr>
     <tr>
         <td>winbox.bundle.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.3/dist/winbox.bundle.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.3/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.3/dist/winbox.bundle.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.5/dist/winbox.bundle.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.5/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.5/dist/winbox.bundle.js</a></td>
     </tr>
-    <!--
     <tr>
         <td colspan=3">
-            <br><b><u>Bundle CDN:</u></b>
-        </td>
-    </tr>
-    <tr>
-        <td>winbox.cdn.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.3/dist/winbox.cdn.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.3/dist/winbox.cdn.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.3/dist/winbox.cdn.js</a></td>
-    </tr>
-    -->
-    <tr>
-        <td colspan=3">
-            <br><b><u>Non-Bundled:</u></b>
+            <br><b><u>Non-Bundled:</u></b> (js and css are separated, css includes icons as base64)
         </td>
     </tr>
     <tr>
         <td>winbox.min.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.3/dist/js/winbox.min.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.3/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.3/dist/js/winbox.min.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.5/dist/js/winbox.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.5/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.5/dist/js/winbox.min.js</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.css</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.3/dist/css/winbox.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.3/dist/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.3/dist/css/winbox.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.5/dist/css/winbox.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.5/dist/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.5/dist/css/winbox.css</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>img.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.3/dist/img" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.5/dist/img" target="_blank">Download</a></td>
         <td>Alternatively when using non-bundled version you can download icons from <i>/dist/img/</i></td>
     </tr>
     <tr>
@@ -85,7 +74,7 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>src.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.3/src/js" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.5/src/js" target="_blank">Download</a></td>
         <td>The <i>"/src/js"</i>-folder of this Github repository</td>
     </tr>
 </table>
@@ -93,7 +82,7 @@ __Get Latest Build (Stable):__
 
 __Get Latest Build (Nightly):__
 
-Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.0.3__/dist/" into "/winbox/__master__/dist".
+Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.0.5__/dist/" into "/winbox/__master__/dist".
 
 
 __Get Latest (NPM):__
@@ -107,25 +96,37 @@ __Get Latest (ES6 Modules):__
 
 https://github.com/nextapps-de/winbox/tree/master/src/js
 
-### Basic Setup
+### Use Bundled Version
 
-__Insert the script resource tag right after the documents head:__
+The bundled version includes all assets like js, css, html and icon images as base64.
 
 ```html
 <html>
 <head>
     <script src="winbox.bundle.js"></script>
-    <title></title>
 </head>
-<body>
-    <!-- CONTENT -->
-</body>
+<body></body>
 </html>
 ```
 
-### Preload Library / Async Load
+### Use Non-Bundled Version
 
-Recommended method to load the bundle:
+The non-bundled version needs to load js and css separately (css also includes icons as base64).
+
+```html
+<html>
+<head>
+    <link rel="stylesheet" href="winbox.css">
+    <script src="winbox.min.js"></script>
+</head>
+<body></body>
+</html>
+```
+
+### Preload Library / Async Load (Recommended)
+
+Just add a link tag to the header sections which indicated to preload the script. Right before the body is closing add your site scripts. Depending on your code you may need to load them in the right order.
+
 ```html
 <html>
 <head>
@@ -133,19 +134,32 @@ Recommended method to load the bundle:
     <link rel="preload" href="winbox.bundle.js" as="script">
 </head>
 <body>
-    <!-- 
-    CONTENT 
+    <!--
+    
+    HTML CONTENT
+    
     -->
-    <script src="winbox.bundle.js" async></script>
+    <!-- BOTTOM OF BODY -->
+    <script src="winbox.bundle.js" defer></script>
+    <!-- YOUR SCRIPT -->
+    <script src="my-script.js" defer></script>
 </body>
 </html>
 ```
 
-> In rare situations it might produce a short flashing/reflow after page load, depending on your stack. Moving the script tag into the head section will solve this issue.
+You can also load the non-bundled version in the same way.
+
+> In rare situations it might produce a short flashing/reflow after page load, depending on your stack. Moving the script tag into the head section will solve this issue. Also try to use the non-bundled version.
 
 ### ES6 Modules
 
-The ES6 modules are located in `src/js/`.
+The ES6 modules are located in `src/js/`. You need to load the stylesheet file explicitly (includes icons as base64).
+
+```html
+<head>
+    <link rel="stylesheet" href="winbox.css">
+</head>
+```
 
 ```html
 <script type="module">
@@ -157,12 +171,14 @@ You can also load modules via CDN, e.g.:
 
 ```html
 <script type="module">
-  import WinBox from "https://unpkg.com/winbox@0.0.3/src/js/winbox.js";
+  import WinBox from "https://unpkg.com/winbox@0.0.5/src/js/winbox.js";
 </script>
 ```
 
+The ES6 modules are not minified. Please use your own bundler for this purpose.
+
 <a name="api"></a>
-## API Overview
+## Overview
 
 Constructor:
 
@@ -194,7 +210,6 @@ Instance properties:
 - <a href="#winbox.body">winbox.**body**</a>
 - <a href="#winbox.min">winbox.**min**</a>
 - <a href="#winbox.max">winbox.**max**</a>
-- <a href="#winbox.full">winbox.**full**</a>
 - <a href="#winbox.x">winbox.**x**</a>
 - <a href="#winbox.y">winbox.**y**</a>
 - <a href="#winbox.width">winbox.**width**</a>
@@ -211,7 +226,7 @@ Instance properties:
     <tr></tr>
     <tr>
         <td>Option</td>
-        <td>Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>Values</td>
         <td>Description</td>
     </tr>
     <tr>
@@ -276,7 +291,7 @@ Instance properties:
     <tr></tr>
     <tr>
         <td>onresize</td>
-        <td>function(width, height)</td>
+        <td>function(width,&nbsp;height)</td>
         <td>Callback triggered when the window resizes. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
     </tr>
     <tr></tr>

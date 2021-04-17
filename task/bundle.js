@@ -16,7 +16,7 @@ const style = process.argv[2] === "--style";
             autofit: base64Sync('dist/img/autofit.svg'),
             close: base64Sync('dist/img/close.svg'),
             maximize: base64Sync('dist/img/maximize.svg'),
-            minimize: base64Sync('dist/img/minimize.svg'),
+            //minimize: base64Sync('dist/img/minimize.svg'),
             minus: base64Sync('dist/img/minus.svg')
         };
 

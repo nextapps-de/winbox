@@ -86,8 +86,13 @@ const parameter = (function(opt){
     //formatting: "PRETTY_PRINT"
 });
 
-//exec("\"node_modules/google-closure-compiler-windows/compiler.exe\"" + parameter + (bundle ? " --js='tmp/**.js'" : "") + " --js='src/js/**.js' --js_output_file='" + (bundle ? "dist/winbox.bundle.js" : "dist/js/winbox.min.js") + "' && exit 0", function(){
-exec("java -jar node_modules/google-closure-compiler-java/compiler.jar" + parameter + (bundle ? " --js='tmp/**.js'" : "") + " --js='src/js/**.js' --js_output_file='" + (bundle ? "dist/winbox.bundle.js" : "dist/js/winbox.min.js") + "' && exit 0", function(){
+exec((/^win/.test(process.platform) ?
+
+    "\"node_modules/google-closure-compiler-windows/compiler.exe\""
+:
+    "java -jar node_modules/google-closure-compiler-java/compiler.jar"
+
+) + parameter + (bundle ? " --js='tmp/**.js'" : "") + " --js='src/js/**.js' --js_output_file='" + (bundle ? "dist/winbox.bundle.js" : "dist/js/winbox.min.js") + "' && exit 0", function(){
 
     let build = fs.readFileSync((bundle ? "dist/winbox.bundle.js" : "dist/js/winbox.min.js"));
     let preserve = fs.readFileSync("src/js/winbox.js", "utf8");

@@ -19,7 +19,6 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.body;
 /** @export */ WinBox.min;
 /** @export */ WinBox.max;
-/** @export */ WinBox.full;
 /** @export */ WinBox.x;
 /** @export */ WinBox.y;
 /** @export */ WinBox.width;

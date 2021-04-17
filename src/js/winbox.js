@@ -10,42 +10,35 @@ import template from "./template.js";
 import { addListener, removeListener, getByClass, setStyle, setText, addClass, removeClass, preventEvent } from "./helper.js";
 
 //const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window["MSStream"];
-const stack = [];
+
 const stack_min = [];
 let index = 0;
 let id_counter = 0;
+let is_fullscreen;
 let last_focus;
 let prefix_request;
 let prefix_exit;
-let body;
 
 /**
- * @param {string|Object|Element=} root
  * @param {string|Object=} params
  * @constructor
  * @this WinBox
  */
 
-function WinBox(root, params){
+function WinBox(params){
 
     if(!(this instanceof WinBox)) {
 
-        return new WinBox(root, params);
+        return new WinBox(params);
     }
 
     index || setup();
 
-    if(!root || !root.nodeType){
-
-        params = root;
-        root = body;
-    }
-
     this.dom = template();
     this.body = getByClass(this.dom, "winbox-body");
-    this.init();
 
     let id,
+        root,
         title,
         mount,
         html,
@@ -77,6 +70,7 @@ function WinBox(root, params){
         else{
 
             id = params["id"];
+            root = params["root"];
             title = params["title"];
             mount = params["mount"];
             html = params["html"];
@@ -112,12 +106,11 @@ function WinBox(root, params){
             if(classname){
 
                 addClass(this.dom, classname);
-                //this.dom.className = "winbox " + classname;
             }
         }
     }
 
-    this.setTitle(title || "");
+    this.init().setTitle(title || "");
 
     let max_width = this.root_w;
     let max_height = this.root_h;
@@ -141,7 +134,6 @@ function WinBox(root, params){
 
     this.x = x;
     this.y = y;
-    //this.last = {};
     this.width = width;
     this.height = height;
     this.top = top;
@@ -153,7 +145,6 @@ function WinBox(root, params){
     this.class = classname;
     this.min = false;
     this.max = false;
-    this.full = false;
 
     this.onclose = onclose;
     this.onfocus = onfocus;
@@ -184,13 +175,12 @@ function WinBox(root, params){
     }
 
     register(this);
-    root.appendChild(this.dom);
-    stack.push(this);
+    (root || document.body).appendChild(this.dom);
 }
 
-WinBox["new"] = function(root, params){
+WinBox["new"] = function(params){
 
-    return new WinBox(root, params);
+    return new WinBox(params);
 };
 
 export default WinBox;
@@ -232,7 +222,7 @@ function parse(num, base, center){
 
 function setup(){
 
-    body = document.body;
+    const body = document.body;
 
     body[prefix_request = "requestFullscreen"] ||
     body[prefix_request = "msRequestFullscreen"] ||
@@ -246,16 +236,11 @@ function setup(){
                       .replace("mozRequest", "mozCancel")
                       .replace("Request", "Exit")
     );
-
-    addListener(window, "resize", function(){
-
-        for(let i = 0; i < stack.length; i++){
-
-            stack[i].init();
-        }
-    });
 }
 
+/**
+ * @param {WinBox} self
+ */
 
 function register(self){
 
@@ -271,13 +256,13 @@ function register(self){
 
     addListener(getByClass(self.dom, "icon-min"), "click", function(event){
 
-        self.minimize();
+        self.init().minimize();
         preventEvent(event);
     });
 
     addListener(getByClass(self.dom, "icon-max"), "click", function(event){
 
-        self.maximize();
+        self.init().maximize();
         preventEvent(event);
     });
 
@@ -308,6 +293,10 @@ function register(self){
     });
 }
 
+/**
+ * @param {WinBox} self
+ */
+
 function remove_min_stack(self){
 
     stack_min.splice(stack_min.indexOf(self), 1);
@@ -316,6 +305,10 @@ function remove_min_stack(self){
     self.min = false;
     self.dom.title = "";
 }
+
+/**
+ * @param {WinBox} self
+ */
 
 function update_min_stack(self){
 
@@ -328,16 +321,29 @@ function update_min_stack(self){
     }
 }
 
+/**
+ * @param {WinBox} self
+ */
+
 
 function disable_animation(self){
 
     setStyle(self.dom, "transition", "none");
 }
 
+/**
+ * @param {WinBox} self
+ */
+
 function enable_animation(self){
 
     setStyle(self.dom, "transition", "");
 }
+
+/**
+ * @param {WinBox} self
+ * @param {string} dir
+ */
 
 function addWindowListener(self, dir){
 
@@ -363,7 +369,7 @@ function addWindowListener(self, dir){
                 event = event.touches[0] || event;
             }
 
-            if(!self.min && !self.max && !self.full){
+            if(!self.min && !self.max){
 
                 disable_animation(self);
 
@@ -489,19 +495,16 @@ function addWindowListener(self, dir){
 
 WinBox.prototype.init = function(){
 
-    if(!this.full){
+    const doc = document.documentElement;
+    //const rect = doc.getBoundingClientRect();
 
-        const doc = document.documentElement || body;
-        //const rect = doc.getBoundingClientRect();
+    this.root_w = doc.clientWidth; //rect.width || (rect.right - rect.left);
+    this.root_h = doc.clientHeight; //rect.height || (rect.top - rect.bottom);
 
-        this.root_w = doc.clientWidth; //rect.width || (rect.right - rect.left);
-        this.root_h = doc.clientHeight; //rect.height || (rect.top - rect.bottom);
-
-        // if(ios){
-        //
-        //     this.root_h = window.innerHeight * (this.root_w / window.innerWidth);
-        // }
-    }
+    // if(ios){
+    //
+    //     this.root_h = window.innerHeight * (this.root_w / window.innerWidth);
+    // }
 
     return this;
 };
@@ -599,7 +602,7 @@ WinBox.prototype.focus = function(){
 
 WinBox.prototype.minimize = function(state){
 
-    if(this.full){
+    if(is_fullscreen){
 
         cancel_fullscreen(this);
     }
@@ -618,7 +621,11 @@ WinBox.prototype.minimize = function(state){
         this.min = true;
     }
 
-    this.max = false;
+    if(this.max){
+
+        removeClass(this.dom, "max");
+        this.max = false;
+    }
 
     return this;
 };
@@ -632,25 +639,12 @@ WinBox.prototype.maximize = function(state){
 
     if(typeof state === "undefined" || (state !== this.max)){
 
-        if(this.full){
-
-            cancel_fullscreen(this);
-
-            if(this.max){
-
-                return this;
-            }
-        }
-        else if(this.min){
+        if(this.min){
 
             remove_min_stack(this);
         }
 
-        if(this.max){
-
-            this.resize().move();
-        }
-        else{
+        if((this.max = !this.max)){
 
             this.resize(
 
@@ -664,9 +658,14 @@ WinBox.prototype.maximize = function(state){
                 this.top,
                 true
             );
-        }
 
-        this.max = !this.max;
+            addClass(this.dom, "max");
+        }
+        else{
+
+            this.resize().move();
+            removeClass(this.dom, "max");
+        }
     }
 
     return this;
@@ -679,7 +678,7 @@ WinBox.prototype.maximize = function(state){
 
 WinBox.prototype.fullscreen = function(state){
 
-    if(typeof state === "undefined" || (state !== this.full)){
+    if(typeof state === "undefined" || (state !== is_fullscreen)){
 
         if(this.min){
 
@@ -687,12 +686,16 @@ WinBox.prototype.fullscreen = function(state){
             remove_min_stack(this);
         }
 
-        // fullscreen could be changed by user manually
+        // fullscreen could be changed by user manually!
 
-        if(!this.full || !cancel_fullscreen(this)){
+        if(!is_fullscreen || !cancel_fullscreen(this)){
 
-            this.dom[prefix_request]();
-            this.full = true;
+            // requestFullscreen is executed as async and returns promise.
+            // in this case it is better to set the state to "this.full" after the requestFullscreen was fired,
+            // because it may break when browser does not support fullscreen properly and bypass it silently.
+
+            this.body[prefix_request]();
+            is_fullscreen = true;
         }
         // else{
         //
@@ -703,14 +706,30 @@ WinBox.prototype.fullscreen = function(state){
     return this;
 };
 
+function has_fullscreen(){
+
+    return (
+
+        document["fullscreen"] ||
+        document["fullscreenElement"] ||
+        document["webkitFullscreenElement"] ||
+        document["mozFullScreenElement"]
+    );
+}
+
+/**
+ * @param {WinBox} self
+ * @return {boolean|void}
+ */
+
 function cancel_fullscreen(self){
 
-    self.full = false;
+    is_fullscreen = false;
 
-    if(document["fullscreen"] ||
-       document["fullscreenElement"] ||
-       document["webkitFullscreenElement"] ||
-       document["mozFullScreenElement"]) {
+    if(has_fullscreen()){
+
+        // exitFullscreen is executed as async and returns promise.
+        // the important part is that the promise callback runs before the event "onresize" was fired!
 
         document[prefix_exit]();
         return true;
@@ -736,8 +755,6 @@ WinBox.prototype.close = function(){
 
         last_focus = null;
     }
-
-    stack.splice(stack.indexOf(this), 1);
 
     //return this;
 };
