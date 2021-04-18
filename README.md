@@ -103,7 +103,7 @@ The bundled version includes all assets like js, css, html and icon images as ba
 ```html
 <html>
 <head>
-    <script src="winbox.bundle.js"></script>
+    <script src="dist/winbox.bundle.js"></script>
 </head>
 <body></body>
 </html>
@@ -157,7 +157,7 @@ The ES6 modules are located in `src/js/`. You need to load the stylesheet file e
 
 ```html
 <head>
-    <link rel="stylesheet" href="winbox.css">
+    <link rel="stylesheet" href="dist/css/winbox.css">
 </head>
 ```
 
@@ -182,15 +182,14 @@ The ES6 modules are not minified. Please use your own bundler for this purpose.
 
 Constructor:
 
-- new <a href="#winbox.new">**WinBox**(root, options\<key: value\>)</a> : winbox
+- new <a href="#winbox.new">**WinBox**(title, options\<key: value\>)</a> : winbox
 
 Global methods:
 
-- <a href="#winbox.new">WinBox.**new**(root, options\<key: value\>)</a> : winbox
+- <a href="#winbox.new">WinBox.**new**(title, options\<key: value\>)</a> : winbox
 
 Instance methods:
 
-- <a href="#winbox.init">winbox.**init**()</a>
 - <a href="#winbox.mount">winbox.**mount**(src)</a>
 - <a href="#winbox.unmount">winbox.**unmount**(dest)</a>
 - <a href="#winbox.move">winbox.**move**(x, y)</a>
@@ -339,6 +338,11 @@ WinBox.new("Window Title");
 
 Alternatively:
 ```js
+new WinBox({ title: "Window Title" });
+```
+
+Alternatively:
+```js
 var winbox = WinBox();
 winbox.setTitle("Window Title");
 ```
@@ -346,7 +350,9 @@ winbox.setTitle("Window Title");
 #### Custom Root
 
 ```js
-new WinBox(document.body, "Window Title");
+new WinBox("Window Title", {
+    root: document.body
+});
 ```
 
 #### Custom Color
@@ -354,8 +360,7 @@ new WinBox(document.body, "Window Title");
 > Supports all CSS styles which are also supported by the style-attribute "background", e.g. colors, transparent colors, hsl, gradients, background images.
 
 ```js
-new WinBox({
-    title: "Custom Color",
+new WinBox("Custom Color", {
     background: "#ff005d"
 });
 ```
@@ -369,8 +374,7 @@ winbox.setBackground("#ff005d");
 #### Custom Border
 
 ```js
-new WinBox({
-    title: "Custom Border",
+new WinBox("Custom Border", {
     border: 4
 });
 ```
@@ -380,8 +384,7 @@ new WinBox({
 > Define the available area (supports units "px" and "%").
 
 ```js
-new WinBox({
-    title: "Custom Viewport",
+new WinBox("Custom Viewport", {
     top: "50px",
     right: "5%",
     bottom: 50,
@@ -404,8 +407,7 @@ winbox.left = 50;
 > Supports units "px" and "%". Also support the keyword "center" for xy-position.
 
 ```js
-new WinBox({
-    title: "Custom Viewport",
+new WinBox("Custom Viewport", {
     x: "center",
     y: "center",
     width: "50%",
@@ -437,28 +439,37 @@ winbox.move();
 #### Set innerHTML
 
 ```js
-new WinBox(document.body, {
+new WinBox("Set innerHTML", {
 
-    title: "Set innerHTML",
     html: "<h1>Lorem Ipsum</h1>"
 });
 ```
 
 Alternatively:
 ```js
-var winbox = new WinBox("Custom Viewport");
+var winbox = new WinBox("Set innerHTML");
 
 winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
 ```
 
 #### Mount DOM (Cloned)
 
+> By cloning you can easily create multiple window instances of the same content.
+
+```html
+<div id="content">
+    <h1>Lorem Ipsum</h1>
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+    <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+</div>
+```
+
 ```js
 var node = document.getElementById("content");
 
-new WinBox(document.body, {
+new WinBox("Mount DOM", {
 
-    title: "Mount DOM",
     mount: node.cloneNode(true)
 });
 ```
@@ -473,12 +484,25 @@ winbox.mount(node.cloneNode(true));
 
 #### Mount DOM (Singleton) + Auto-Unmount
 
+> A singleton is a unique fragment which can move inside the document.
+
+You can simply use a hidden backstore to hold contents, as well you can use any other strategy like a templating engine etc.
+
+```html
+<div id="backstore" style="display: none">
+    <div id="content">
+        <h1>Lorem Ipsum</h1>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+        <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+    </div>
+</div>
+```
+
 ```js
 var node = document.getElementById("content");
 
-new WinBox(document.body, {
-
-    title: "Mount DOM",
+new WinBox("Mount DOM", {
     mount: node
 });
 ```
@@ -496,9 +520,7 @@ winbox.mount(node);
 ```js
 var node = document.getElementById("content");
 
-new WinBox(document.body, {
-
-    title: "Open Url",
+new WinBox("Open Url", {
     url: "https://wikipedia.com"
 });
 ```
@@ -511,17 +533,20 @@ winbox.setUrl("https://wikipedia.com");
 ```
 
 
-<!--
-new WinBox({
-title: "Mount DOM",
-mount: document.getElementById("content"),
-onclose: function(winbox){
-winbox.unmount(
-document.getElementById("backstore")
-);
-}
--->
+#### Unmount
 
+```js
+var node = document.getElementById("content");
+
+new WinBox("Mount DOM", {
+    mount: document.getElementById("content"),
+    onclose: function(winbox){
+        winbox.unmount(
+            document.getElementById("backstore")
+        );
+    }
+});
+```
 
 ---
 

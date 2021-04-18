@@ -120,7 +120,7 @@
         <br>
         Class Constructor
         <br><br>
-        <pre><code class="language-js">WinBox(options&lt;key: value>)</code></pre>
+        <pre><code class="language-js">WinBox(title, options&lt;key: value>)</code></pre>
         <br>
 
         <hr>
@@ -134,9 +134,22 @@
 
         <hr>
         <br>
+        Custom Root
+        <br><br>
+        <pre><code class="language-js">new WinBox("Custom Root", {
+
+    root: document.body
+});</code></pre>
+        <div class="break"></div>
+        <div class="button" onclick="window.examples['root']()">Run Code</div>
+        <br><br>
+
+        <hr>
+        <br>
         Custom Color
         <br><br>
         <pre><code class="language-js">new WinBox({
+
     title: "Custom Color",
     background: "#ff005d"
 });</code></pre>
@@ -146,22 +159,10 @@
 
         <hr>
         <br>
-        Custom Root
-        <br><br>
-        <pre><code class="language-js">new WinBox({
-    title: "Custom Root",
-    root: document.body
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['root']()">Run Code</div>
-        <br><br>
-
-        <hr>
-        <br>
         Custom Border
         <br><br>
-        <pre><code class="language-js">new WinBox({
-    title: "Custom Border",
+        <pre><code class="language-js">new WinBox("Custom Border", {
+
     border: 4
 });</code></pre>
         <div class="break"></div>
@@ -172,8 +173,8 @@
         <br>
         Limit Viewport
         <br><br>
-        <pre><code class="language-js">new WinBox({
-    title: "Limit Viewport",
+        <pre><code class="language-js">new WinBox("Limit Viewport", {
+
     top: 50,
     right: 50,
     bottom: 50,
@@ -188,6 +189,7 @@
         Custom Position / Size
         <br><br>
         <pre><code class="language-js">new WinBox({
+
     title: "Custom Position / Size",
     x: "center",
     y: "center",
@@ -203,6 +205,7 @@
         Set innerHTML
         <br><br>
         <pre><code class="language-js">new WinBox({
+
     title: "Set innerHTML",
     html: "&lt;h1>Lorem Ipsum&lt;/h1>"
 });</code></pre>
@@ -224,8 +227,8 @@
     &lt;/div>
 &lt;/div></code></pre>
         <div class="break"></div>
-        <pre><code class="language-js">new WinBox({
-    title: "Mount DOM",
+        <pre><code class="language-js">new WinBox("Mount DOM", {
+
     mount: document.getElementById("content")
                    .cloneNode(true)
 });</code></pre>
@@ -237,8 +240,8 @@
         <br>
         Mount DOM (Singleton) + Auto-Unmount
         <br><br>
-        <pre><code class="language-js">new WinBox({
-    title: "Mount DOM",
+        <pre><code class="language-js">new WinBox("Mount DOM", {
+
     mount: document.getElementById("content")
 });</code></pre>
         <div class="break"></div>
@@ -247,10 +250,10 @@
 
         <hr>
         <br>
-        Open URI / URL (iFrame)
+        Open URI / URL
         <br><br>
-        <pre><code class="language-js">new WinBox({
-    title: "Wikipedia",
+        <pre><code class="language-js">new WinBox("Wikipedia", {
+
     url: "https://wikipedia.com"
 });</code></pre>
         <div class="break"></div>
@@ -360,8 +363,8 @@
     }
 };</code></pre>
         <div class="break"></div>
-        <pre><code class="language-js">var winbox = new WinBox({
-    title: "Controls",
+        <pre><code class="language-js">var winbox = new WinBox("Controls", {
+
     mount: document.getElementById("controls")
 });</code></pre>
         <div class="break"></div>
@@ -443,9 +446,8 @@
     background-color: #181f2a;
 }</code></pre>
         <div class="break"></div>
-        <pre><code class="language-js">new WinBox({
+        <pre><code class="language-js">new WinBox("Custom CSS", {
 
-    title: "Custom CSS",
     mount: document.getElementById("content")
                    .cloneNode(true)
 });</code></pre>
@@ -483,9 +485,8 @@
     background: #0d1117;
 }</code></pre>
         <div class="break"></div>
-        <pre><code class="language-js">new WinBox({
+        <pre><code class="language-js">new WinBox("Custom CSS", {
 
-    title: "Custom CSS",
     class: "custom",
     mount: document.getElementById("content")
                    .cloneNode(true)
@@ -504,9 +505,8 @@
     &lt;script src="dist/js/winbox.min.js">&lt;/script>
 &lt;/head></code></pre>
         <div class="break"></div>
-        <pre><code class="language-js">new WinBox({
+        <pre><code class="language-js">new WinBox("Theme", {
 
-    title: "Theme",
     class: "modern",
     mount: document.getElementById("content")
                    .cloneNode(true)
@@ -550,9 +550,8 @@
                 },
                 "root": function(){
 
-                    new WinBox({
+                    new WinBox("Custom Root", {
 
-                        title: "Custom Root",
                         root: document.body
                     });
                 },
@@ -566,17 +565,15 @@
                 },
                 "border": function(){
 
-                    new WinBox({
+                    new WinBox("Custom Border", {
 
-                        title: "Custom Border",
                         border: 4
                     });
                 },
                 "viewport": function(){
 
-                    new WinBox({
+                    new WinBox("Limit Viewport", {
 
-                        title: "Limit Viewport",
                         top: 50,
                         right: 50,
                         bottom: 50,
@@ -604,26 +601,23 @@
                 },
                 "mount-clone": function(){
 
-                    new WinBox({
+                    new WinBox("Mount DOM", {
 
-                        title: "Mount DOM",
                         mount: document.getElementById("content")
                                        .cloneNode(true)
                     });
                 },
                 "mount-auto": function(){
 
-                    new WinBox({
+                    new WinBox("Mount DOM", {
 
-                        title: "Mount DOM",
                         mount: document.getElementById("content")
                     });
                 },
                 "iframe": function(){
 
-                    new WinBox({
+                    new WinBox("Wikipedia", {
 
-                        title: "Wikipedia",
                         url: "https://wikipedia.com",
                         class: "iframe"
                     });
@@ -673,9 +667,8 @@
                 },
                 "custom-css": function(){
 
-                    new WinBox({
+                    new WinBox("Custom CSS", {
 
-                        title: "Custom CSS",
                         class: "custom",
                         mount: document.getElementById("content")
                                        .cloneNode(true)
@@ -683,18 +676,16 @@
                 },
                 "custom-class": function(){
 
-                    new WinBox({
+                    new WinBox("Custom Class", {
 
-                        title: "Custom Class",
                         class: "custom",
                         mount: document.getElementById("content")
                     });
                 },
                 "theme-modern": function(){
 
-                    new WinBox({
+                    new WinBox("Theme: Modern", {
 
-                        title: "Theme: Modern",
                         class: "modern",
                         mount: document.getElementById("content")
                                        .cloneNode(true)
@@ -702,9 +693,8 @@
                 },
                 "controls": function(){
 
-                    winbox = new WinBox({
+                    winbox = new WinBox("Controls", {
 
-                        title: "Controls",
                         mount: document.getElementById("controls")
                     });
                 }

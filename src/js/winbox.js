@@ -21,11 +21,12 @@ let prefix_exit;
 
 /**
  * @param {string|Object=} params
+ * @param {Object=} _title
  * @constructor
  * @this WinBox
  */
 
-function WinBox(params){
+function WinBox(params, _title){
 
     if(!(this instanceof WinBox)) {
 
@@ -63,6 +64,12 @@ function WinBox(params){
 
     if(params){
 
+        if(_title){
+
+            title = params;
+            params = _title;
+        }
+
         if(typeof params === "string"){
 
             title = params;
@@ -71,7 +78,7 @@ function WinBox(params){
 
             id = params["id"];
             root = params["root"];
-            title = params["title"];
+            title = title || params["title"];
             mount = params["mount"];
             html = params["html"];
             url = params["url"];
