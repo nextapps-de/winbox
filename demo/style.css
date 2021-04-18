@@ -124,12 +124,12 @@ pre code.hljs{
    }
 }
 
-.winbox-body{
+.wb-body{
     color: #000;
     text-align: left;
     padding: 1.2em;
 }
-.winbox.iframe .winbox-body{
+.winbox.iframe .wb-body{
     padding: 0;
 }
 

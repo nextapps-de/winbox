@@ -36,7 +36,7 @@ function WinBox(params, _title){
     index || setup();
 
     this.dom = template();
-    this.body = getByClass(this.dom, "winbox-body");
+    this.body = getByClass(this.dom, "wb-body");
 
     let id,
         root,
@@ -261,23 +261,23 @@ function register(self, modal){
 
     if(!modal){
 
-        addWindowListener(self, "winbox-title");
-        addWindowListener(self, "bar-n");
-        addWindowListener(self, "bar-s");
-        addWindowListener(self, "bar-w");
-        addWindowListener(self, "bar-e");
-        addWindowListener(self, "bar-nw");
-        addWindowListener(self, "bar-ne");
-        addWindowListener(self, "bar-se");
-        addWindowListener(self, "bar-sw");
+        addWindowListener(self, "title");
+        addWindowListener(self, "n");
+        addWindowListener(self, "s");
+        addWindowListener(self, "w");
+        addWindowListener(self, "e");
+        addWindowListener(self, "nw");
+        addWindowListener(self, "ne");
+        addWindowListener(self, "se");
+        addWindowListener(self, "sw");
 
-        addListener(getByClass(self.dom, "icon-min"), "click", function(event){
+        addListener(getByClass(self.dom, "wb-min"), "click", function(event){
 
             self.init().minimize();
             preventEvent(event);
         });
 
-        addListener(getByClass(self.dom, "icon-max"), "click", function(event){
+        addListener(getByClass(self.dom, "wb-max"), "click", function(event){
 
             self.init().maximize();
             preventEvent(event);
@@ -285,7 +285,7 @@ function register(self, modal){
 
         if(prefix_request){
 
-            addListener(getByClass(self.dom, "icon-fullscreen"), "click", function(event){
+            addListener(getByClass(self.dom, "wb-full"), "click", function(event){
 
                 self.fullscreen();
                 preventEvent(event);
@@ -293,7 +293,7 @@ function register(self, modal){
         }
         else{
 
-            setStyle(getByClass(self.dom, "icon-fullscreen"), "display", "none");
+            setStyle(getByClass(self.dom, "wb-full"), "display", "none");
         }
 
         addListener(self.dom, "mousedown", function(event){
@@ -302,7 +302,7 @@ function register(self, modal){
         });
     }
 
-    addListener(getByClass(self.dom, "icon-close"), "click", function(event){
+    addListener(getByClass(self.dom, "wb-close"), "click", function(event){
 
         self.close();
         self = null;
@@ -365,7 +365,7 @@ function enable_animation(self){
 
 function addWindowListener(self, dir){
 
-    const node = getByClass(self.dom, dir);
+    const node = getByClass(self.dom, "wb-" + dir);
     let x, y;
 
     addListener(node, "mousedown", mousedown);
@@ -425,7 +425,7 @@ function addWindowListener(self, dir){
 
         let resize_w, resize_h, move_x, move_y;
 
-        if(dir === "winbox-title"){
+        if(dir === "title"){
 
             self.x += offsetX;
             self.y += offsetY;
@@ -433,12 +433,12 @@ function addWindowListener(self, dir){
         }
         else{
 
-            if(dir === "bar-e" || dir === "bar-se" || dir === "bar-ne"){
+            if(dir === "e" || dir === "se" || dir === "ne"){
 
                 self.width += offsetX;
                 resize_w = 1;
             }
-            else if(dir === "bar-w" || dir === "bar-sw" || dir === "bar-nw"){
+            else if(dir === "w" || dir === "sw" || dir === "nw"){
 
                 self.x += offsetX;
                 self.width -= offsetX;
@@ -446,12 +446,12 @@ function addWindowListener(self, dir){
                 move_x = 1;
             }
 
-            if(dir === "bar-s" || dir === "bar-se" || dir === "bar-sw"){
+            if(dir === "s" || dir === "se" || dir === "sw"){
 
                 self.height += offsetY;
                 resize_h = 1;
             }
-            else if(dir === "bar-n" || dir === "bar-ne" || dir === "bar-nw"){
+            else if(dir === "n" || dir === "ne" || dir === "nw"){
 
                 self.y += offsetY;
                 self.height -= offsetY;
@@ -567,7 +567,7 @@ WinBox.prototype.unmount = function(dest){
 
 WinBox.prototype.setTitle = function(title){
 
-    setText(getByClass(this.dom, "winbox-title").firstChild, this.title = title);
+    setText(getByClass(this.dom, "wb-title").firstChild, this.title = title);
 
     return this;
 };

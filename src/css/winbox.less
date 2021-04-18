@@ -19,7 +19,7 @@
 }
 */
 
-.winbox-header {
+.wb-header {
   display: table;
   table-layout: fixed;
   position: absolute;
@@ -32,7 +32,7 @@
   vertical-align: middle;
 }
 
-.winbox-body {
+.wb-body {
   position: absolute;
   left: 0;
   right: 0;
@@ -47,7 +47,7 @@
   box-sizing: border-box;
 }
 
-.winbox-title{
+.wb-title{
   display: table-cell;
   font-size: 14px;
   text-align: left;
@@ -58,7 +58,7 @@
   vertical-align: middle;
 }
 
-.winbox-title span{
+.wb-title span{
   display: block;
   width: calc(100% - 120px);
   white-space: nowrap;
@@ -66,11 +66,11 @@
   text-overflow: ellipsis;
 }
 
-.winbox.min .winbox-title span {
+.winbox.min .wb-title span {
   width: calc(100% - 65px);
 }
 
-.bar-n {
+.wb-n {
   position: absolute;
   top: 0;
   left: 0;
@@ -79,7 +79,7 @@
   cursor: n-resize;
 }
 
-.bar-e {
+.wb-e {
   position: absolute;
   top: 0;
   right: 0;
@@ -88,7 +88,7 @@
   cursor: w-resize;
 }
 
-.bar-s {
+.wb-s {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -97,7 +97,7 @@
   cursor: n-resize;
 }
 
-.bar-w {
+.wb-w {
   position: absolute;
   top: 0;
   left: 0;
@@ -106,7 +106,7 @@
   cursor: w-resize;
 }
 
-.bar-nw {
+.wb-nw {
   position: absolute;
   top: 0;
   left: 0;
@@ -115,7 +115,7 @@
   cursor: nw-resize;
 }
 
-.bar-ne {
+.wb-ne {
   position: absolute;
   top: 0;
   right: 0;
@@ -124,7 +124,7 @@
   cursor: ne-resize;
 }
 
-.bar-sw {
+.wb-sw {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -133,7 +133,7 @@
   cursor: ne-resize;
 }
 
-.bar-se {
+.wb-se {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -142,7 +142,7 @@
   cursor: nw-resize;
 }
 
-.winbox-icon{
+.wb-icon{
   position: absolute;
   top:0;
   bottom: 0;
@@ -150,7 +150,7 @@
   padding-right: 2px;
 }
 
-.winbox-icon span{
+.wb-icon span{
   display: inline-block;
   width: 30px;
   height: 100%;
@@ -159,54 +159,54 @@
   cursor: pointer;
 }
 
-span.icon-min {
+span.wb-min {
   background-image: url(@minus);
   background-position: center bottom 5px;
   background-size: 14px 14px;
 }
 
-.winbox.min .icon-fullscreen,
-.winbox.min .icon-min {
+.winbox.min .wb-full,
+.winbox.min .wb-min {
   display: none;
 }
 
-.icon-max {
+.wb-max {
   background-image: url(@autofit);
   background-size: 18px 18px;
 }
 
-.icon-close {
+.wb-close {
   //float: right;
   background-image: url(@close);
   background-size: 15px 15px;
 }
 
-.icon-fullscreen {
+.wb-full {
   background-image: url(@maximize);
   background-size: 17px 17px;
 }
 
 /*
-.winbox:fullscreen .icon-fullscreen{
+.winbox:fullscreen .wb-full{
   background-image: url(@minimize);
 }
 */
 
 /*
 .winbox:fullscreen > div,
-.winbox:fullscreen .winbox-title,
+.winbox:fullscreen .wb-title,
 */
 .winbox.modal > div,
-.winbox.modal .winbox-title,
+.winbox.modal .wb-title,
 .winbox.min > div,
-.winbox.min .winbox-title,
+.winbox.min .wb-title,
 .winbox.max > div,
-.winbox.max .winbox-title{
+.winbox.max .wb-title{
   cursor: default;
 }
 
 /*
-.winbox .winbox-hide{
+.winbox .wb-hide{
   display: none
 }
 */
@@ -243,9 +243,9 @@ span.icon-min {
     animation: fade-in 0.2s ease-out forwards;
     z-index: -1;
   }
-  .icon-min,
-  .icon-max,
-  .icon-fullscreen{
+  .wb-min,
+  .wb-max,
+  .wb-full{
     display: none;
   }
 }

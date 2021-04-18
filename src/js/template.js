@@ -4,26 +4,26 @@ template.innerHTML = (
 
     //'<div class=winbox>' +
 
-        '<div class=winbox-header>' +
-            '<div class=winbox-title><span> </span></div>' +
-            '<div class=winbox-icon>' +
-                '<span class=icon-min></span>' +
-                '<span class=icon-max></span>' +
-                '<span class=icon-fullscreen></span>' +
-                '<span class=icon-close></span>' +
+        '<div class=wb-header>' +
+            '<div class=wb-title><span> </span></div>' +
+            '<div class=wb-icon>' +
+                '<span class=wb-min></span>' +
+                '<span class=wb-max></span>' +
+                '<span class=wb-full></span>' +
+                '<span class=wb-close></span>' +
             '</div>' +
         '</div>' +
 
-        '<div class=winbox-body></div>' +
+        '<div class=wb-body></div>' +
 
-        '<div class=bar-n></div>' +
-        '<div class=bar-s></div>' +
-        '<div class=bar-w></div>' +
-        '<div class=bar-e></div>' +
-        '<div class=bar-nw></div>' +
-        '<div class=bar-ne></div>' +
-        '<div class=bar-se></div>' +
-        '<div class=bar-sw></div>'
+        '<div class=wb-n></div>' +
+        '<div class=wb-s></div>' +
+        '<div class=wb-w></div>' +
+        '<div class=wb-e></div>' +
+        '<div class=wb-nw></div>' +
+        '<div class=wb-ne></div>' +
+        '<div class=wb-se></div>' +
+        '<div class=wb-sw></div>'
 
     //'</div>'
 );

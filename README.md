@@ -600,50 +600,127 @@ var winbox = new WinBox("Open URL");
 winbox.setUrl("https://wikipedia.com");
 ```
 
-## Modify Features via CSS
+## Customize Window
+
+The window boilerplate:
+
+<img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/boilerplate.svg" width="100%" alt="WinBox Boilerplate">
 
 Hide or disable specific icons:
 
 ```css
-.winbox .icon-min {
-    display: none;
-}
-.winbox .icon-fullscreen {
-    display: none;
-}
-.winbox .icon-max {
-    display: none;
-}
-.winbox .icon-close {
-    display: none;
-}
+.winbox .wb-min   { display: none }
+.winbox .wb-full  { display: none }
+.winbox .wb-max   { display: none }
+.winbox .wb-close { display: none }
 ```
 
 Hide or disable all icons:
 
 ```css
-.winbox-icon {
+.wb-icon { display: none }
+```
+
+Disable resizing areas:
+
+```css
+/* north */
+.wb-n  { display: none }
+
+/* east */
+.wb-e  { display: none }
+
+/* south */
+.wb-s  { display: none }
+
+/* west */
+.wb-w  { display: none }
+
+/* north-west */
+.wb-nw { display: none }
+
+/* north-east */
+.wb-ne { display: none }
+
+/* south-west */
+.wb-sw { display: none }
+
+/* south-east */
+.wb-se { display: none }
+```
+
+Disable or modify the window drop shadow:
+```css
+.winbox { box-shadow: none }
+```
+
+Style the window background:
+```css
+.winbox {
+    background: linear-gradient(90deg, #ff00f0, #0050ff);
+    border-radius: 12px 12px 0 0;
+}
+```
+
+Style the header title:
+```css
+.wb-title { font-size: 12px }
+```
+
+Style the body of window element including window border (like document.body):
+```css
+.wb-body{
+    /* the width of window border: */
+    margin: 4px;
+    color: #fff;
+    background: #131820;
+}
+```
+
+> The margin of `.wb-body` corresponds to the width of the window border.
+
+Apply styles when window is in "minimized" state:
+```css
+.winbox {
+    border-radius: 10px;
+}
+.winbox.min {
+    border-radius: 0;
+}
+.winbox.min .windbox-title {
+    font-size: 12px;
+}
+```
+
+Apply styles when window is in "maximized" state:
+```css
+.winbox {
+    border-radius: 10px;
+}
+.winbox.max {
+    border-radius: 0;
+}
+.winbox.max .wb-max {
+    opacity: 0.5;
+}
+```
+
+Apply styles when window is in "fullscreen" state:
+```css
+.wb-body:fullscreen {
+    /* apply styles */
+}
+```
+
+Apply styles when window is in "modal" state:
+```css
+.winbox.modal .wb-close {
     display: none;
 }
 ```
 
-## Customize Window
-
-Disable or modify the window drop shadow:
-```css
-.winbox {
-    box-shadow: none;
-}
-```
-
-Disable or modify the window drop shadow:
-```css
-.winbox {
-    box-shadow: none;
-}
-```
-
 ---
+
 
 Copyright 2021 Nextapps GmbH<br>
 Released under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0 License</a><br>
