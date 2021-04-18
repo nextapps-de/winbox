@@ -1,12 +1,12 @@
 {
   "name": "winbox",
   "version": "0.0.7",
-  "description": "Lightweight window manager for the web.",
-  "homepage": "https://github.com/nextapps-de/winbox/",
+  "description": "Professional HTML5 window manager for the web.",
+  "homepage": "https://nextapps-de.github.io/winbox/",
   "author": "Thomas Wilkerling",
   "copyright": "Nextapps GmbH",
   "license": "Apache-2.0",
-  "keywords": [],
+  "keywords": ["windowmanager", "windows", "popup", "window-manager", "dekstop", "window", "frame", "box"],
   "bugs": {
     "url": "https://github.com/nextapps-de/winbox/issues",
     "email": "info@nextapps.de"
@@ -22,13 +22,13 @@
   "scripts": {
     "copy": "cpx \"src/img/*.*\" dist/img/",
     "clean": "if exist dist rmdir dist /s /q && mkdir dist",
-    "build:css": "lessc --autoprefix=\">=1%\" --clean-css=\"--s1 --advanced --rebase\" src/css/winbox.less dist/css/winbox.css && csso dist/css/winbox.css --output dist/css/winbox.css",
-    "build:css:bundle": "cpx \"src/css/winbox.less\" tmp/ && lessc --autoprefix=\">=1%\" --clean-css=\"--s1 --advanced --rebase\" tmp/winbox.less tmp/winbox.css && csso tmp/winbox.css --output tmp/winbox.css",
-    "build:css:themes": "lessc --autoprefix=\">=1%\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/modern.less dist/css/themes/modern.css && csso dist/css/themes/modern.css --output dist/css/themes/modern.css",
+    "build:css": "lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" src/css/winbox.less dist/css/winbox.css && csso dist/css/winbox.css --output dist/css/winbox.css",
+    "build:css:bundle": "cpx \"src/css/winbox.less\" tmp/ && lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" tmp/winbox.less tmp/winbox.css && csso tmp/winbox.css --output tmp/winbox.css && cpx \"tmp/winbox.css\" dist/css/",
+    "build:css:themes": "lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/modern.less dist/css/themes/modern.css && csso dist/css/themes/modern.css --output dist/css/themes/modern.css",
     "build:js": "node task/build",
     "build:bundle": "node task/build --bundle",
     "build:svg": "node task/svgo",
-    "build": "npm run clean && npm run copy && npm run build:svg && npm run build:css && node task/bundle --image && npm run build:css:bundle && npm run build:css:themes && node task/bundle --style && npm run build:js && npm run build:bundle && echo Build Complete. && exit 0",
+    "build": "npm run clean && npm run copy && npm run build:svg && node task/bundle --image && npm run build:css:bundle && npm run build:css:themes && node task/bundle --style && npm run build:js && npm run build:bundle && echo Build Complete. && exit 0",
     "server": "node task/server.js",
     "update": "npm install svgo@latest && npm install base64-img@latest && npm install cpx@latest && npm install csso@latest && npm install csso-cli@latest && npm install google-closure-compiler@nightly && npm install less@latest && npm install less-plugin-autoprefix@latest && npm install less-plugin-clean-css@latest && npm install web-servo@latest"
   },
@@ -47,10 +47,11 @@
     "cpx": "^1.5.0",
     "csso": "^4.2.0",
     "csso-cli": "^3.0.0",
-    "google-closure-compiler": "^20210417.0.0-nightly",
+    "google-closure-compiler": "^20210406.0.0",
     "less": "^4.1.1",
     "less-plugin-autoprefix": "^2.0.0",
     "less-plugin-clean-css": "^1.5.1",
+    "less-plugin-csswring": "^0.0.1",
     "svgo": "^2.3.0",
     "web-servo": "^0.5.1"
   }

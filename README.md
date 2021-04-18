@@ -42,8 +42,8 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>winbox.bundle.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.6/dist/winbox.bundle.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.6/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.6/dist/winbox.bundle.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.7/dist/winbox.bundle.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/winbox.bundle.js</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -52,19 +52,19 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>winbox.min.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.6/dist/js/winbox.min.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.6/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.6/dist/js/winbox.min.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.7/dist/js/winbox.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/js/winbox.min.js</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.css</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.6/dist/css/winbox.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.6/dist/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.6/dist/css/winbox.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.7/dist/css/winbox.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/css/winbox.css</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>img.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.6/dist/img" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.7/dist/img" target="_blank">Download</a></td>
         <td>Alternatively when using non-bundled version you can download icons from <i>/dist/img/</i></td>
     </tr>
     <tr>
@@ -74,7 +74,7 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>src.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.6/src/js" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.7/src/js" target="_blank">Download</a></td>
         <td>The <i>"/src/js"</i>-folder of this Github repository</td>
     </tr>
 </table>
@@ -82,7 +82,7 @@ __Get Latest Build (Stable):__
 
 __Get Latest Build (Nightly):__
 
-Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.0.6__/dist/" into "/winbox/__master__/dist".
+Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.0.7__/dist/" into "/winbox/__master__/dist".
 
 
 __Get Latest (NPM):__
@@ -171,7 +171,7 @@ You can also load modules via CDN, e.g.:
 
 ```html
 <script type="module">
-  import WinBox from "https://unpkg.com/winbox@0.0.6/src/js/winbox.js";
+  import WinBox from "https://unpkg.com/winbox@0.0.7/src/js/winbox.js";
 </script>
 ```
 
@@ -283,6 +283,12 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
+        <td>modal</td>
+        <td>boolean</td>
+        <td>Show the window as modal.</td>
+    </tr>
+    <tr></tr>
+    <tr>
         <td>onmove</td>
         <td>function(x, y)</td>
         <td>Callback triggered when the window moves. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
@@ -338,7 +344,9 @@ WinBox.new("Window Title");
 
 Alternatively:
 ```js
-new WinBox({ title: "Window Title" });
+new WinBox({ 
+    title: "Window Title" 
+});
 ```
 
 Alternatively:
@@ -436,6 +444,15 @@ winbox.y = 50;
 winbox.move();
 ```
 
+#### Modal Window
+
+```js
+new WinBox({
+    title: "Modal Window",
+    modal: true
+});
+```
+
 #### Set innerHTML
 
 ```js
@@ -454,14 +471,12 @@ winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
 
 #### Mount DOM (Cloned)
 
-> By cloning you can easily create multiple window instances of the same content.
+> By cloning you can easily create multiple window instances of the same content in parallel.
 
 ```html
 <div id="content">
     <h1>Lorem Ipsum</h1>
-    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-    <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+    <p>Lorem ipsum [...]</p>
 </div>
 ```
 
@@ -484,7 +499,7 @@ winbox.mount(node.cloneNode(true));
 
 #### Mount DOM (Singleton) + Auto-Unmount
 
-> A singleton is a unique fragment which can move inside the document.
+> A singleton is a unique fragment which can move inside the document. When creating multiple windows and mounting the same fragment to it, the fragment will leave the old window (see the method above for cloning).
 
 You can simply use a hidden backstore to hold contents, as well you can use any other strategy like a templating engine etc.
 
@@ -492,9 +507,7 @@ You can simply use a hidden backstore to hold contents, as well you can use any 
 <div id="backstore" style="display: none">
     <div id="content">
         <h1>Lorem Ipsum</h1>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-        <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+        <p>Lorem ipsum [...]</p>
     </div>
 </div>
 ```
@@ -507,6 +520,8 @@ new WinBox("Mount DOM", {
 });
 ```
 
+> Auto-Unmount is a great feature which automatically moves back the fragment to the backstore source when closing the window.
+
 Alternatively:
 ```js
 var node = document.getElementById("content");
@@ -515,37 +530,117 @@ var winbox = new WinBox("Mount DOM");
 winbox.mount(node);
 ```
 
-#### Open Url (iFrame)
+#### Explicit Unmount
+
+```html
+<div id="backstore" style="display: none">
+    <div id="content">
+        <h1>Lorem Ipsum</h1>
+        <p>Lorem ipsum [...]</p>
+    </div>
+</div>
+<div id="backstore-2" style="display: none"></div>
+```
 
 ```js
 var node = document.getElementById("content");
+var winbox = new WinBox("Mount DOM");
+```
 
-new WinBox("Open Url", {
+Move fragment from hidden backstore to the window body:
+
+```js
+winbox.mount(node);
+```
+
+Move fragment back to the hidden backstore source:
+
+```js
+winbox.unmount();
+```
+
+Or move fragment to another destination:
+
+```js
+winbox.unmount(document.getElementById("backstore-2"));
+```
+
+Or just auto-unmount as default when closing:
+
+```js
+winbox.close();
+```
+
+Override default auto-unmount behavior when closing the window:
+
+```js
+new WinBox("Mount DOM", {
+    mount: node,
+    onclose: function(winbox){
+        winbox.unmount(document.getElementById("backstore-2"));
+    }
+});
+```
+
+#### Open URI / URL
+
+> You can use every URI scheme which is supported by `src` attribute, e.g. URL, image or video, base64 encoded data.
+
+```js
+new WinBox("Open URL", {
+    
     url: "https://wikipedia.com"
 });
 ```
 
 Alternatively:
 ```js
-var winbox = new WinBox("Open Url");
+var winbox = new WinBox("Open URL");
 
 winbox.setUrl("https://wikipedia.com");
 ```
 
+## Modify Features via CSS
 
-#### Unmount
+Hide or disable specific icons:
 
-```js
-var node = document.getElementById("content");
+```css
+.winbox .icon-min {
+    display: none;
+}
+.winbox .icon-fullscreen {
+    display: none;
+}
+.winbox .icon-max {
+    display: none;
+}
+.winbox .icon-close {
+    display: none;
+}
+```
 
-new WinBox("Mount DOM", {
-    mount: document.getElementById("content"),
-    onclose: function(winbox){
-        winbox.unmount(
-            document.getElementById("backstore")
-        );
-    }
-});
+Hide or disable all icons:
+
+```css
+.winbox-icon {
+    display: none;
+}
+```
+
+## Customize Window
+
+Disable or modify the window drop shadow:
+```css
+.winbox {
+    box-shadow: none;
+}
+```
+
+Disable or modify the window drop shadow:
+```css
+.winbox {
+    box-shadow: none;
+}
 ```
 
 ---

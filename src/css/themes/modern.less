@@ -1,52 +1,79 @@
 .winbox.modern {
-    background: linear-gradient(90deg, #ff00f0, #0050ff);
-    border-radius: 12px 12px 0 0;
-}
+    & {
+        background: linear-gradient(90deg, #ff00f0, #0050ff);
+        border-radius: 12px 12px 0 0;
+    }
 
-.winbox.modern.max,
-.winbox.modern.min {
-    border-radius: 0;
-}
+    &.max,
+    &.min {
+        border-radius: 0;
+    }
 
-.winbox.modern.max{
     /* fix iOS bug when border-radius is changed, wtf? */
-    overflow: visible;
-}
+    /* Workaround 1: */
 
-.winbox.modern .winbox-title {
-    font-size: 13px;
-    text-transform: uppercase;
-    font-weight: 600;
-}
+    & {
+        overflow: visible;
+    }
 
-.winbox.modern .winbox-icon span{
-    opacity: 0.65;
-}
+    &.min {
+        overflow: hidden;
+    }
 
-.winbox.modern .winbox-icon span:hover{
-    opacity: 1;
-}
+    /* fix iOS bug when border-radius is changed, wtf? */
+    /* Workaround 2: */
 
-.winbox.modern .winbox-body {
-    /* width of window border: */
-    margin: 4px;
-    color: #fff;
-    background: #131820;
-}
+    /*
+    &.max{
+        overflow: visible;
+        // fix iOS bug when box-shadow used,
+        // caused by changed overflow from the line above
+        box-shadow: none;
+    }
+    */
 
-.winbox.modern .winbox-body::-webkit-scrollbar {
-    width: 12px;
-}
-.winbox.modern .winbox-body::-webkit-scrollbar-track {
-    background: transparent;
-}
-.winbox.modern .winbox-body::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #263040;
-}
-.winbox.modern .winbox-body::-webkit-scrollbar-thumb:window-inactive {
-    background: #181f2a;
-}
-.winbox.modern .winbox-body::-webkit-scrollbar-corner {
-    background-color: #181f2a;
+    .winbox-title {
+        font-size: 13px;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .winbox-icon span {
+        opacity: 0.65;
+    }
+
+    .winbox-icon span:hover {
+        opacity: 1;
+    }
+
+    .winbox-body {
+
+        & {
+            /* width of window border: */
+            margin: 4px;
+            color: #fff;
+            background: #131820;
+        }
+
+        &::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: #263040;
+        }
+
+        &::-webkit-scrollbar-thumb:window-inactive {
+            background: #181f2a;
+        }
+
+        &::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+    }
 }

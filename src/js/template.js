@@ -1,16 +1,8 @@
-let template = document.createElement("div");
+const template = document.createElement("div");
+template.className = "winbox";
 template.innerHTML = (
 
-    '<div class=winbox>' +
-
-        '<div class=bar-n></div>' +
-        '<div class=bar-s></div>' +
-        '<div class=bar-w></div>' +
-        '<div class=bar-e></div>' +
-        '<div class=bar-nw></div>' +
-        '<div class=bar-ne></div>' +
-        '<div class=bar-se></div>' +
-        '<div class=bar-sw></div>' +
+    //'<div class=winbox>' +
 
         '<div class=winbox-header>' +
             '<div class=winbox-title><span> </span></div>' +
@@ -24,10 +16,19 @@ template.innerHTML = (
 
         '<div class=winbox-body></div>' +
 
-    '</div>'
+        '<div class=bar-n></div>' +
+        '<div class=bar-s></div>' +
+        '<div class=bar-w></div>' +
+        '<div class=bar-e></div>' +
+        '<div class=bar-nw></div>' +
+        '<div class=bar-ne></div>' +
+        '<div class=bar-se></div>' +
+        '<div class=bar-sw></div>'
+
+    //'</div>'
 );
 
-template = template.firstChild;
+//template = template.firstChild;
 
 export default function(){
 

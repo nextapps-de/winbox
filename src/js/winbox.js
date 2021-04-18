@@ -53,6 +53,7 @@ function WinBox(params, _title){
         left,
         bottom,
         right,
+        modal,
         onclose,
         onfocus,
         onblur,
@@ -76,6 +77,12 @@ function WinBox(params, _title){
         }
         else{
 
+            if((modal = params["modal"])){
+
+                x = y = "center";
+                addClass(this.dom, "modal");
+            }
+
             id = params["id"];
             root = params["root"];
             title = title || params["title"];
@@ -84,8 +91,8 @@ function WinBox(params, _title){
             url = params["url"];
             width = params["width"];
             height = params["height"];
-            x = params["x"];
-            y = params["y"];
+            x = params["x"] || x;
+            y = params["y"] || y;
             max = params["max"];
             top = params["top"];
             left = params["left"];
@@ -181,7 +188,7 @@ function WinBox(params, _title){
         this.setUrl(url);
     }
 
-    register(this);
+    register(this, modal);
     (root || document.body).appendChild(this.dom);
 }
 
@@ -247,43 +254,52 @@ function setup(){
 
 /**
  * @param {WinBox} self
+ * @param {boolean=} modal
  */
 
-function register(self){
+function register(self, modal){
 
-    addWindowListener(self, "winbox-title");
-    addWindowListener(self, "bar-n");
-    addWindowListener(self, "bar-s");
-    addWindowListener(self, "bar-w");
-    addWindowListener(self, "bar-e");
-    addWindowListener(self, "bar-nw");
-    addWindowListener(self, "bar-ne");
-    addWindowListener(self, "bar-se");
-    addWindowListener(self, "bar-sw");
+    if(!modal){
 
-    addListener(getByClass(self.dom, "icon-min"), "click", function(event){
+        addWindowListener(self, "winbox-title");
+        addWindowListener(self, "bar-n");
+        addWindowListener(self, "bar-s");
+        addWindowListener(self, "bar-w");
+        addWindowListener(self, "bar-e");
+        addWindowListener(self, "bar-nw");
+        addWindowListener(self, "bar-ne");
+        addWindowListener(self, "bar-se");
+        addWindowListener(self, "bar-sw");
 
-        self.init().minimize();
-        preventEvent(event);
-    });
+        addListener(getByClass(self.dom, "icon-min"), "click", function(event){
 
-    addListener(getByClass(self.dom, "icon-max"), "click", function(event){
-
-        self.init().maximize();
-        preventEvent(event);
-    });
-
-    if(prefix_request){
-
-        addListener(getByClass(self.dom, "icon-fullscreen"), "click", function(event){
-
-            self.fullscreen();
+            self.init().minimize();
             preventEvent(event);
         });
-    }
-    else{
 
-        setStyle(getByClass(self.dom, "icon-fullscreen"), "display", "none");
+        addListener(getByClass(self.dom, "icon-max"), "click", function(event){
+
+            self.init().maximize();
+            preventEvent(event);
+        });
+
+        if(prefix_request){
+
+            addListener(getByClass(self.dom, "icon-fullscreen"), "click", function(event){
+
+                self.fullscreen();
+                preventEvent(event);
+            });
+        }
+        else{
+
+            setStyle(getByClass(self.dom, "icon-fullscreen"), "display", "none");
+        }
+
+        addListener(self.dom, "mousedown", function(event){
+
+            self.focus();
+        });
     }
 
     addListener(getByClass(self.dom, "icon-close"), "click", function(event){
@@ -292,11 +308,6 @@ function register(self){
         self = null;
 
         preventEvent(event);
-    });
-
-    addListener(self.dom, "mousedown", function(event){
-
-        self.focus();
     });
 }
 
@@ -622,8 +633,8 @@ WinBox.prototype.minimize = function(state){
     else if((state !== false) && !this.min){
 
         stack_min.push(this);
-        update_min_stack(this);
         addClass(this.dom, "min");
+        update_min_stack(this);
         this.dom.title = this.title;
         this.min = true;
     }
@@ -653,6 +664,8 @@ WinBox.prototype.maximize = function(state){
 
         if((this.max = !this.max)){
 
+            addClass(this.dom, "max");
+
             this.resize(
 
                 this.root_w - this.left - this.right,
@@ -665,8 +678,6 @@ WinBox.prototype.maximize = function(state){
                 this.top,
                 true
             );
-
-            addClass(this.dom, "max");
         }
         else{
 

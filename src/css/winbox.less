@@ -30,7 +30,6 @@
   height: 35px;
   color: #fff;
   vertical-align: middle;
-  z-index: 10;
 }
 
 .winbox-body {
@@ -43,7 +42,7 @@
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
   will-change: scroll-position;
-  background-color: #fff;
+  background: #fff;
   margin-top: 0 !important;
   box-sizing: border-box;
 }
@@ -78,7 +77,6 @@
   right: 0;
   height: 5px;
   cursor: n-resize;
-  z-index: 11;
 }
 
 .bar-e {
@@ -88,7 +86,6 @@
   bottom: 0;
   width: 5px;
   cursor: w-resize;
-  z-index: 11;
 }
 
 .bar-s {
@@ -98,7 +95,6 @@
   right: 0;
   height: 5px;
   cursor: n-resize;
-  z-index: 11;
 }
 
 .bar-w {
@@ -108,7 +104,6 @@
   bottom: 0;
   width: 5px;
   cursor: w-resize;
-  z-index: 11;
 }
 
 .bar-nw {
@@ -118,7 +113,6 @@
   width: 5px;
   height: 5px;
   cursor: nw-resize;
-  z-index: 11;
 }
 
 .bar-ne {
@@ -128,7 +122,6 @@
   width: 5px;
   height: 5px;
   cursor: ne-resize;
-  z-index: 11;
 }
 
 .bar-sw {
@@ -138,7 +131,6 @@
   width: 5px;
   height: 5px;
   cursor: ne-resize;
-  z-index: 11;
 }
 
 .bar-se {
@@ -148,7 +140,6 @@
   width: 5px;
   height: 5px;
   cursor: nw-resize;
-  z-index: 11;
 }
 
 .winbox-icon{
@@ -205,6 +196,8 @@ span.icon-min {
 .winbox:fullscreen > div,
 .winbox:fullscreen .winbox-title,
 */
+.winbox.modal > div,
+.winbox.modal .winbox-title,
 .winbox.min > div,
 .winbox.min .winbox-title,
 .winbox.max > div,
@@ -212,13 +205,56 @@ span.icon-min {
   cursor: default;
 }
 
+/*
 .winbox .winbox-hide{
   display: none
 }
+*/
 
 .winbox iframe{
   position: absolute;
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+.winbox.modal{
+  &{
+    overflow: visible;
+    contain: layout size style;
+  }
+  &:before{
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+  }
+  &:after{
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: #0d1117;
+    animation: fade-in 0.2s ease-out forwards;
+    z-index: -1;
+  }
+  .icon-min,
+  .icon-max,
+  .icon-fullscreen{
+    display: none;
+  }
+}
+
+@keyframes fade-in {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 0.85;
+  }
 }

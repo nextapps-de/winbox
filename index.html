@@ -79,7 +79,7 @@
             background: #181f2a;
         }
         .winbox.custom .winbox-body::-webkit-scrollbar-corner {
-            background-color: #181f2a;
+            background: transparent;
         }
 
         .winbox.my-theme .winbox-body {
@@ -198,6 +198,18 @@
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['position']()">Run Code</div>
+        <br><br>
+
+        <hr>
+        <br>
+        Modal Window
+        <br><br>
+        <pre><code class="language-js">new WinBox("Modal Window", {
+
+    modal: true
+});</code></pre>
+        <div class="break"></div>
+        <div class="button" onclick="window.examples['modal']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -443,7 +455,7 @@
     background: #181f2a;
 }
 .winbox-body::-webkit-scrollbar-corner {
-    background-color: #181f2a;
+    background: transparent;
 }</code></pre>
         <div class="break"></div>
         <pre><code class="language-js">new WinBox("Custom CSS", {
@@ -589,6 +601,13 @@
                         y: "center",
                         width: "50%",
                         height: "50%"
+                    });
+                },
+                "modal": function(){
+
+                    new WinBox("Modal Window", {
+
+                        modal: true
                     });
                 },
                 "innerhtml": function(){
