@@ -9,6 +9,8 @@
 
 <a href="https://nextapps-de.github.io/winbox/">Demo</a> &ensp;&bull;&ensp; <a href="#started">Getting Started</a> &ensp;&bull;&ensp; <a href="#options">Options</a> &ensp;&bull;&ensp; <a href="#api">API</a> &ensp;&bull;&ensp; <a href="#styling">Styling</a> &ensp;&bull;&ensp; <a href="#controls">Controls</a></a> &ensp;&bull;&ensp; <a href="CHANGELOG.md">Changelog</a>
 
+<h3>Examples: <a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a></h3>
+
 <a name="started" id="started"></a>
 ## Getting Started
 
@@ -667,7 +669,7 @@ winbox.close();
 
 The window boilerplate:
 
-<img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/boilerplate.png" width="100%" alt="WinBox Boilerplate">
+<img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/boilerplate.svg?v=4" width="100%" alt="WinBox Boilerplate">
 
 Hide or disable specific icons:
 
