@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/railscasts.min.css">
     <title>WinBox.js Demo</title>
     <link rel="stylesheet" href="dist/css/winbox.css">
@@ -88,6 +89,22 @@
             background: #131820;
         }
     </style>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="WinBox is a professional HTML5 window manager for the web. Lightweight, outstanding performance, no dependencies, fully customizable, free and open source!">
+    <meta name="keywords" content="window manager, web window, html5 popup, javascript window, web desktop, html5 windows, web frame, web box">
+    <meta name="thumbnail" content="https://nextapps-de.github.io/winbox/demo/favicon.png">
+    <meta property="og:url" content="https://nextapps-de.github.io/winbox/">
+    <meta property="og:site_name" content="WinBox - HTML5 window manager">
+    <meta property="og:image" content="https://nextapps-de.github.io/winbox/demo/og-image.png">
+    <meta property="og:title" content="WinBox - HTML5 window manager">
+    <meta property="og:description" content="WinBox is a professional HTML5 window manager for the web. Lightweight, outstanding performance, no dependencies, fully customizable, free and open source!">
+    <meta property="og:type" content="Software">
+    <meta property="og:url" content="https://nextapps-de.github.io/winbox/">
+    <link rel="icon" sizes="16x16 32x32 48x48 64x64" type="image/png" href="https://nextapps-de.github.io/winbox/demo/favicon.png">
+    <!--
+    <link rel="icon" sizes="96x96 128x128 160x160 192x192 256x256" type="image/png" href="img/icon.png">
+    -->
+    <link rel="icon" sizes="512x512 1024x1024" type="image/png" href="https://nextapps-de.github.io/winbox/demo/og-image.png">
 </head>
 <body>
     <header>
@@ -338,31 +355,31 @@
         <div class="break"></div>
         <pre><code class="language-js">window.buttons = {
 
-    "minimize": function(){
+    minimize: function(){
 
         winbox.minimize();
     },
-    "maximize": function(){
+    maximize: function(){
 
         winbox.maximize();
     },
-    "fullscreen": function(){
+    fullscreen: function(){
 
         winbox.fullscreen();
     },
-    "move": function(){
+    move: function(){
 
         winbox.move("center", "center");
     },
-    "resize": function(){
+    resize: function(){
 
         winbox.resize("50%", "50%");
     },
-    "title": function(){
+    title: function(){
 
         winbox.setTitle("Title-" + Math.random());
     },
-    "color": function(){
+    color: function(){
 
         winbox.setBackground(
             "rgb(" + (Math.random() * 255 | 0) + "," +
@@ -370,7 +387,7 @@
                      (Math.random() * 255 | 0) + ")"
         );
     },
-    "close": function(){
+    close: function(){
 
         winbox.close();
     }
@@ -383,6 +400,12 @@
         <div class="break"></div>
         <div class="button" onclick="window.examples['controls']()">Run Code</div>
         <br><br>
+
+        <hr>
+        <br>
+        Window Boilerplate
+        <br><br>
+        <img src="demo/boilerplate.svg" width="100%" alt="WinBox Boilerplate">
 
         <hr>
         <br>
@@ -724,31 +747,31 @@
 
             window.buttons = {
 
-                "minimize": function(){
+                minimize: function(){
 
                     winbox.minimize();
                 },
-                "maximize": function(){
+                maximize: function(){
 
                     winbox.maximize();
                 },
-                "fullscreen": function(){
+                fullscreen: function(){
 
                     winbox.fullscreen();
                 },
-                "move": function(){
+                move: function(){
 
                     winbox.move("center", "center");
                 },
-                "resize": function(){
+                resize: function(){
 
                     winbox.resize("50%", "50%");
                 },
-                "title": function(){
+                title: function(){
 
                     winbox.setTitle("Title-" + Math.random());
                 },
-                "color": function(){
+                color: function(){
 
                     winbox.setBackground(
                         "rgb(" + (Math.random() * 255 | 0) + "," +
@@ -756,7 +779,7 @@
                                  (Math.random() * 255 | 0) + ")"
                     );
                 },
-                "close": function(){
+                close: function(){
 
                     winbox.close();
                 }

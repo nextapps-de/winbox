@@ -103,7 +103,7 @@ The bundled version includes all assets like js, css, html and icon images as ba
 ```html
 <html>
 <head>
-    <script src="dist/winbox.bundle.js"></script>
+    <script src="winbox.bundle.js"></script>
 </head>
 <body></body>
 </html>
@@ -600,11 +600,74 @@ var winbox = new WinBox("Open URL");
 winbox.setUrl("https://wikipedia.com");
 ```
 
+#### The Window Instance
+
+```js
+var winbox = new WinBox();
+
+console.log("Window ID:", winbox.id);
+console.log("Current Position X:", winbox.x);
+console.log("Current Position Y:", winbox.y);
+console.log("Current Width:", winbox.width);
+console.log("Current Height:", winbox.height);
+console.log("Current Maximize State:", winbox.max);
+console.log("Current Minimize State:", winbox.min);
+```
+
+#### Controls
+
+```js
+var winbox = new WinBox();
+```
+
+Focus a window (bring up to front):
+```js
+winbox.focus();
+```
+
+Toggle the minimized state of a window:
+```js
+winbox.minimize();
+```
+
+Explicitly set the minimized state of a window:
+```js
+winbox.minimize(true);
+winbox.minimize(false);
+```
+
+Toggle the maximized state of a window:
+```js
+winbox.maximize();
+```
+
+Explicitly set the maximized state of a window:
+```js
+winbox.maximize(true);
+winbox.maximize(false);
+```
+
+Toggle the fullscreen state of a window:
+```js
+winbox.fullscreen();
+```
+
+Explicitly set the fullscreen state of a window:
+```js
+winbox.fullscreen(true);
+winbox.fullscreen(false);
+```
+
+Close and destroy a window:
+```js
+winbox.close();
+```
+
 ## Customize Window
 
 The window boilerplate:
 
-<img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/boilerplate.svg" width="100%" alt="WinBox Boilerplate">
+<img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/boilerplate.png" width="100%" alt="WinBox Boilerplate">
 
 Hide or disable specific icons:
 
@@ -667,7 +730,7 @@ Style the header title:
 .wb-title { font-size: 12px }
 ```
 
-Style the body of window element including window border (like document.body):
+Style the body of a window element incl. the window border:
 ```css
 .wb-body{
     /* the width of window border: */
@@ -717,7 +780,13 @@ Apply styles when window is in "modal" state:
 .winbox.modal .wb-close {
     display: none;
 }
+/* customize the modal background overlay: */
+.winbox.modal:after{
+    background: #0d1117;
+    animation: none;
+}
 ```
+
 
 ---
 

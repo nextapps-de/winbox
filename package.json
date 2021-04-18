@@ -6,7 +6,7 @@
   "author": "Thomas Wilkerling",
   "copyright": "Nextapps GmbH",
   "license": "Apache-2.0",
-  "keywords": ["windowmanager", "windows", "popup", "window-manager", "dekstop", "window", "frame", "box"],
+  "keywords": ["windowmanager", "windows", "popup", "window-manager", "desktop", "window", "frame", "box"],
   "bugs": {
     "url": "https://github.com/nextapps-de/winbox/issues",
     "email": "info@nextapps.de"
