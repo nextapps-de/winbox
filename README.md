@@ -9,7 +9,7 @@
 
 <a href="https://nextapps-de.github.io/winbox/">Demo</a> &ensp;&bull;&ensp; <a href="#started">Getting Started</a> &ensp;&bull;&ensp; <a href="#options">Options</a> &ensp;&bull;&ensp; <a href="#api">API</a> &ensp;&bull;&ensp; <a href="#styling">Styling</a> &ensp;&bull;&ensp; <a href="#controls">Controls</a></a> &ensp;&bull;&ensp; <a href="CHANGELOG.md">Changelog</a>
 
-<h3>Live Demo / Code Examples: <a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a></h3>
+<h3>Live Demo / Code Examples: <br><a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a></h3>
 
 <a name="started" id="started"></a>
 ## Getting Started
@@ -579,10 +579,25 @@ Override default auto-unmount behavior when closing the window:
 ```js
 new WinBox("Mount DOM", {
     mount: node,
-    onclose: function(winbox){
-        winbox.unmount(document.getElementById("backstore-2"));
+    onclose: function(){
+        this.unmount(document.getElementById("backstore-2"));
     }
 });
+```
+
+#### Manual Mount
+
+Feel free to use the `winbox.body` directly:
+```js
+var node = document.getElementById("content");
+var winbox = new WinBox("Mount DOM");
+
+winbox.body.appendChild(node);
+```
+
+Or delegate it as a root to your templating engine, e.g.:
+```js
+Mikado(template).mount(winbox.body).render(data);
 ```
 
 #### Open URI / URL
@@ -846,6 +861,8 @@ Apply styles when window is in "modal" state:
 
 ## Useful Examples
 
+> Without the header the user isn't able to move the window frame. Instead, you can place your own control elements to the page.
+
 Always hide the window header:
 
 ```css
@@ -867,8 +884,6 @@ Hide the header just in maximize mode:
     top:0;
 }
 ```
-
-> Without the header the user isn't able to move the window frame. You can place your own control elements to the page.
 
 ---
 

@@ -9,7 +9,6 @@ html, body{
     border: 0;
     font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, "Open Sans", OpenSans, Roboto, Segoe UI, sans-serif;
     text-align: center;
-    background: linear-gradient(135deg, #0d1117, #131820) fixed;
     color: #fff;
 
     -webkit-tap-highlight-color: transparent;
@@ -21,6 +20,14 @@ html, body{
     -ms-user-select: none;
     user-select: none;
 }
+.background{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(135deg, #0d1117, #131820);
+}
 header{
     position: fixed;
     top: 0;
@@ -29,12 +36,15 @@ header{
     background-color: rgba(13, 17, 23, 0.94);
     padding: 15px 0;
     border-bottom: 1px solid #1c2431;
+    z-index: 2;
 }
 .wrapper{
+    position: relative;
     display: inline-block;
     max-width: 600px;
     text-align: left;
     padding: 90px 1.2em 1.2em 1.2em;
+    z-index: 1;
 }
 pre{
     -webkit-touch-callout: default !important;

@@ -13,7 +13,7 @@ import { addListener, removeListener, getByClass, setStyle, setText, addClass, r
 
 const doc = document.documentElement;
 const stack_min = [];
-let index = 0;
+let index_counter = 0;
 let id_counter = 0;
 let is_fullscreen;
 let last_focus;
@@ -35,7 +35,7 @@ function WinBox(params, _title){
         return new WinBox(params);
     }
 
-    index || setup();
+    index_counter || setup();
 
     this.dom = template();
     this.body = getByClass(this.dom, "wb-body");
@@ -55,6 +55,7 @@ function WinBox(params, _title){
         left,
         bottom,
         right,
+        //index,
         modal,
         onclose,
         onfocus,
@@ -100,6 +101,7 @@ function WinBox(params, _title){
             left = params["left"];
             bottom = params["bottom"];
             right = params["right"];
+            //index = params["index"];
             onclose = params["onclose"];
             onfocus = params["onfocus"];
             onblur = params["onblur"];
@@ -123,6 +125,11 @@ function WinBox(params, _title){
 
                 addClass(this.dom, classname);
             }
+
+            // if(index > index_counter){
+            //
+            //     index_counter = index - 1;
+            // }
         }
     }
 
@@ -618,17 +625,19 @@ WinBox.prototype.focus = function(){
 
     if(last_focus !== this){
 
-        setStyle(this.dom, "z-index", ++index);
+        // set minimum z-index of 10 to prevent common issues
+        // make it configurable?
+
+        setStyle(this.dom, "z-index", 10 + (++index_counter));
         addClass(this.dom, "focus");
 
         if(last_focus){
 
             removeClass(last_focus.dom, "focus");
-
             last_focus.onblur && last_focus.onblur();
-            last_focus = this;
         }
 
+        last_focus = this;
         this.onfocus && this.onfocus();
     }
 
