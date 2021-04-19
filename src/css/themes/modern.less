@@ -9,29 +9,6 @@
         border-radius: 0;
     }
 
-    /* fix iOS bug when border-radius is changed, wtf? */
-    /* Workaround 1: */
-
-    & {
-        overflow: visible;
-    }
-
-    &.min {
-        overflow: hidden;
-    }
-
-    /* fix iOS bug when border-radius is changed, wtf? */
-    /* Workaround 2: */
-
-    /*
-    &.max{
-        overflow: visible;
-        // fix iOS bug when box-shadow used,
-        // caused by changed overflow from the line above
-        box-shadow: none;
-    }
-    */
-
     .wb-title {
         font-size: 13px;
         text-transform: uppercase;

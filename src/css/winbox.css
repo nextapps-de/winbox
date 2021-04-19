@@ -1,5 +1,3 @@
-@import "images.less";
-
 .winbox {
   position: fixed;
   left: 0;
@@ -8,7 +6,7 @@
   /* hidden overflow will cut off the resizing are */
   /*overflow: hidden;*/
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transition: width .3s, height .3s, transform .3s;
+  transition: width 0.3s, height 0.3s, transform 0.3s;
   transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
   will-change: transform, width, height;
   contain: strict;
@@ -21,7 +19,6 @@
   transition: none !important;
 }
 */
-
 .wb-header {
   /*
   display: table;
@@ -30,13 +27,10 @@
   position: absolute;
   width: 100%;
   left: 0;
-  //right: 0;
   top: 0;
   height: 35px;
   color: #fff;
-  //vertical-align: middle;
 }
-
 .wb-body {
   position: absolute;
   left: 0;
@@ -51,25 +45,19 @@
   margin-top: 0 !important;
   box-sizing: border-box;
 }
-
-.wb-title{
-  //display: table-cell;
+.wb-title {
   font-size: 14px;
   padding-left: 10px;
   cursor: move;
-  //width: 100%;
   line-height: 35px;
-  //vertical-align: middle;
   width: calc(100% - 120px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .winbox.min .wb-title {
   width: calc(100% - 65px);
 }
-
 .wb-n {
   position: absolute;
   top: -5px;
@@ -78,7 +66,6 @@
   height: 10px;
   cursor: n-resize;
 }
-
 .wb-e {
   position: absolute;
   top: 0;
@@ -87,7 +74,6 @@
   width: 10px;
   cursor: w-resize;
 }
-
 .wb-s {
   position: absolute;
   bottom: -5px;
@@ -96,7 +82,6 @@
   height: 10px;
   cursor: n-resize;
 }
-
 .wb-w {
   position: absolute;
   top: 0;
@@ -105,7 +90,6 @@
   width: 10px;
   cursor: w-resize;
 }
-
 .wb-nw {
   position: absolute;
   top: -5px;
@@ -114,7 +98,6 @@
   height: 10px;
   cursor: nw-resize;
 }
-
 .wb-ne {
   position: absolute;
   top: -5px;
@@ -123,7 +106,6 @@
   height: 10px;
   cursor: ne-resize;
 }
-
 .wb-sw {
   position: absolute;
   bottom: -5px;
@@ -132,7 +114,6 @@
   height: 10px;
   cursor: ne-resize;
 }
-
 .wb-se {
   position: absolute;
   bottom: -5px;
@@ -141,14 +122,12 @@
   height: 10px;
   cursor: nw-resize;
 }
-
-.wb-icon{
+.wb-icon {
   position: absolute;
   top: 0;
   bottom: 0;
   right: 1px;
 }
-
 .wb-icon * {
   display: inline-block;
   width: 30px;
@@ -157,39 +136,32 @@
   background-repeat: no-repeat;
   cursor: pointer;
 }
-
 .wb-min {
-  background-image: url(@min);
+  background-image: url("../img/min.svg");
   background-size: 14px auto;
   background-position: center bottom 11px;
 }
-
 .wb-max {
-  background-image: url(@max);
+  background-image: url("../img/max.svg");
   background-size: 17px auto;
 }
-
 .wb-close {
-  background-image: url(@close);
+  background-image: url("../img/close.svg");
   background-size: 15px auto;
 }
-
 .wb-full {
-  background-image: url(@full);
+  background-image: url("../img/full.svg");
   background-size: 16px auto;
 }
-
 .winbox.min .wb-full,
 .winbox.min .wb-min {
   display: none;
 }
-
 /*
 .winbox:fullscreen .wb-full{
   background-image: url(@minimize);
 }
 */
-
 /*
 .winbox:fullscreen > div,
 .winbox:fullscreen .wb-title,
@@ -199,60 +171,54 @@
 .winbox.min > div,
 .winbox.min .wb-title,
 .winbox.max > div,
-.winbox.max .wb-title{
+.winbox.max .wb-title {
   cursor: default;
 }
-
 /*
 .winbox .wb-hide{
   display: none
 }
 */
-
-.winbox iframe{
+.winbox iframe {
   position: absolute;
   width: 100%;
   height: 100%;
   border: 0;
 }
-
-.winbox.modal{
-  &{
-    overflow: visible;
-    contain: layout size style;
-  }
-  &:before{
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: inherit;
-  }
-  &:after{
-    content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    right: -50%;
-    bottom: -50%;
-    background: #0d1117;
-    animation: fade-in 0.2s ease-out forwards;
-    z-index: -1;
-  }
-  .wb-min,
-  .wb-max,
-  .wb-full{
-    display: none;
-  }
+.winbox.modal {
+  overflow: visible;
+  contain: layout size style;
 }
-
+.winbox.modal:before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+}
+.winbox.modal:after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: #0d1117;
+  animation: fade-in 0.2s ease-out forwards;
+  z-index: -1;
+}
+.winbox.modal .wb-min,
+.winbox.modal .wb-max,
+.winbox.modal .wb-full {
+  display: none;
+}
 @keyframes fade-in {
-  0%{
+  0% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 0.85;
   }
 }

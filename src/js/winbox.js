@@ -590,7 +590,7 @@ WinBox.prototype.unmount = function(dest){
 
 WinBox.prototype.setTitle = function(title){
 
-    setText(getByClass(this.dom, "wb-title").firstChild, this.title = title);
+    setText(getByClass(this.dom, "wb-title"), this.title = title);
 
     return this;
 };
