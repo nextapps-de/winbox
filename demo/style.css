@@ -134,12 +134,13 @@ pre code.hljs{
    }
 }
 
-.wb-body{
+.wb-body {
     color: #000;
-    text-align: left;
+}
+.wb-body > *{
     padding: 1.2em;
 }
-.winbox.iframe .wb-body{
+.winbox.iframe .wb-body > *{
     padding: 0;
 }
 

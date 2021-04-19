@@ -13,11 +13,11 @@ const style = process.argv[2] === "--style";
 
         const compressed = {
 
-            autofit: base64Sync('dist/img/autofit.svg'),
+            max: base64Sync('dist/img/max.svg'),
             close: base64Sync('dist/img/close.svg'),
-            maximize: base64Sync('dist/img/maximize.svg'),
-            //minimize: base64Sync('dist/img/minimize.svg'),
-            minus: base64Sync('dist/img/minus.svg')
+            full: base64Sync('dist/img/full.svg'),
+            //exit: base64Sync('dist/img/exit.svg'),
+            min: base64Sync('dist/img/min.svg')
         };
 
         let tmp = "";

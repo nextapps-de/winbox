@@ -704,16 +704,26 @@ The window boilerplate:
 Hide or disable specific icons:
 
 ```css
-.winbox .wb-min   { display: none }
-.winbox .wb-full  { display: none }
-.winbox .wb-max   { display: none }
-.winbox .wb-close { display: none }
+.wb-min   { display: none }
+.wb-full  { display: none }
+.wb-max   { display: none }
+.wb-close { display: none }
 ```
 
 Hide or disable all icons:
 
 ```css
 .wb-icon { display: none }
+```
+
+Modify a specific icon:
+
+```css
+.wb-max {
+    background-image: url(src/img/max.png);
+    background-position: center;
+    background-size: 15px auto;
+}
 ```
 
 Disable resizing areas:
@@ -764,7 +774,7 @@ Style the header title:
 
 Style the body of a window element incl. the window border:
 ```css
-.wb-body{
+.wb-body {
     /* the width of window border: */
     margin: 4px;
     color: #fff;
@@ -849,12 +859,14 @@ Apply styles when window is __not__ in "focus" state (the same logic from exampl
 
 Apply styles when window is in "modal" state:
 ```css
-.winbox.modal .wb-close {
-    display: none;
-}
-/* customize the modal background overlay: */
+.winbox.modal .wb-close { display: none }
+```
+
+Customize the modal background overlay:
+```css
 .winbox.modal:after{
     background: #0d1117;
+    opacity: 0.5;
     animation: none;
 }
 ```
@@ -866,23 +878,15 @@ Apply styles when window is in "modal" state:
 Always hide the window header:
 
 ```css
-.wb-header{
-    display: none;
-}
-.wb-body {
-    top:0;
-}
+.wb-header { display: none }
+.wb-body   { top: 0 }
 ```
 
 Hide the header just in maximize mode:
 
 ```css
-.winbox.max .wb-header{
-    display: none;
-}
-.winbox.max .wb-body {
-    top:0;
-}
+.winbox.max .wb-header { display: none }
+.winbox.max .wb-body   { top: 0 }
 ```
 
 ---

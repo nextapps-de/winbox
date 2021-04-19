@@ -12,6 +12,8 @@
   will-change: transform, width, height;
   contain: strict;
   z-index: 10;
+  /* explicitly set text align to left fixes an issue with iframes alignment when centered */
+  text-align: left;
 }
 /*
 .winbox:fullscreen{
@@ -50,7 +52,6 @@
 .wb-title{
   display: table-cell;
   font-size: 14px;
-  text-align: left;
   padding-left: 10px;
   cursor: move;
   width: 100%;
@@ -150,7 +151,7 @@
   padding-right: 2px;
 }
 
-.wb-icon span{
+.wb-icon * {
   display: inline-block;
   width: 30px;
   height: 100%;
@@ -159,31 +160,30 @@
   cursor: pointer;
 }
 
-span.wb-min {
-  background-image: url(@minus);
-  background-position: center bottom 5px;
-  background-size: 14px 14px;
+.wb-min {
+  background-image: url(@min);
+  background-size: 14px auto;
+  background-position: center bottom 11px;
+}
+
+.wb-max {
+  background-image: url(@max);
+  background-size: 17px auto;
+}
+
+.wb-close {
+  background-image: url(@close);
+  background-size: 15px auto;
+}
+
+.wb-full {
+  background-image: url(@full);
+  background-size: 16px auto;
 }
 
 .winbox.min .wb-full,
 .winbox.min .wb-min {
   display: none;
-}
-
-.wb-max {
-  background-image: url(@autofit);
-  background-size: 18px 18px;
-}
-
-.wb-close {
-  //float: right;
-  background-image: url(@close);
-  background-size: 15px 15px;
-}
-
-.wb-full {
-  background-image: url(@maximize);
-  background-size: 17px 17px;
 }
 
 /*

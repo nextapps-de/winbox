@@ -34,30 +34,29 @@
             font-weight: 600;
         }
 
-        .winbox.custom .wb-icon span{
+        .winbox.custom .wb-icon * {
             opacity: 0.65;
         }
 
-        .winbox.custom .wb-icon span:hover{
+        .winbox.custom .wb-icon *:hover{
             opacity: 1;
         }
 
-        .winbox.custom .wb-min {
-            background-image: url(src/img/minus.svg);
-            background-size: 14px 14px;
+        .winbox.custom .wb-max {
+            background-image: url(src/img/max.svg);
+            background-size: 17px auto;
         }
 
-        .winbox.custom .wb-fullscreen {
-            display: none;
+        .winbox.custom .wb-min {
+            background-image: url(src/img/min.svg);
         }
 
         .winbox.custom .wb-close {
             background-image: url(src/img/close.svg);
-            background-size: 14px 14px;
         }
 
-        .winbox.custom .wb-fullscreen {
-            background-image: url(src/img/maximize.svg);
+        .winbox.custom .wb-full {
+            display: none;
         }
 
         .winbox.custom .wb-body {
@@ -438,30 +437,29 @@
 
         Custom Icons
         <br><br>
-        <pre><code class="language-css">.wb-icon span{
+        <pre><code class="language-css">.wb-icon * {
     opacity: 0.65;
 }
 
-.wb-icon span:hover{
+.wb-icon *:hover{
     opacity: 1;
 }
 
 .wb-min {
-    background-image: url(src/img/minus.svg);
-    background-size: 14px 14px;
+    background-image: url(src/img/min.svg);
+    background-size: 15px center;
 }
 
 .wb-max {
-    display: none;
+    background-image: url(src/img/max.svg);
 }
 
 .wb-close {
     background-image: url(src/img/close.svg);
-    background-size: 14px 14px;
 }
 
-.wb-fullscreen {
-    background-image: url(src/img/maximize.svg);
+.wb-full {
+    display: none;
 }</code></pre>
         <div class="break"></div>
 
