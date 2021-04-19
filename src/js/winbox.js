@@ -142,11 +142,10 @@ function WinBox(params, _title){
 
     index = index || 10;
 
-    this.dom.className = "winbox" + (modal ? " modal" : "") +
-                                    (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "");
     this.dom.id =
     this.id = id || ("winbox-" + (++id_counter));
-
+    this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") +
+                                    (modal ? " modal" : "");
     this.x = x;
     this.y = y;
     this.width = width;
@@ -189,7 +188,7 @@ function WinBox(params, _title){
         this.setUrl(url);
     }
 
-    register(this, modal);
+    register(this);
     (root || document.body).appendChild(this.dom);
 }
 
@@ -263,54 +262,45 @@ function setup(){
 
 /**
  * @param {WinBox} self
- * @param {boolean=} modal
  */
 
-function register(self, modal){
+function register(self){
 
-    if(!modal){
+    addWindowListener(self, "title");
+    addWindowListener(self, "n");
+    addWindowListener(self, "s");
+    addWindowListener(self, "w");
+    addWindowListener(self, "e");
+    addWindowListener(self, "nw");
+    addWindowListener(self, "ne");
+    addWindowListener(self, "se");
+    addWindowListener(self, "sw");
 
-        addWindowListener(self, "title");
-        addWindowListener(self, "n");
-        addWindowListener(self, "s");
-        addWindowListener(self, "w");
-        addWindowListener(self, "e");
-        addWindowListener(self, "nw");
-        addWindowListener(self, "ne");
-        addWindowListener(self, "se");
-        addWindowListener(self, "sw");
+    addListener(getByClass(self.dom, "wb-min"), "click", function(event){
 
-        addListener(getByClass(self.dom, "wb-min"), "click", function(event){
+        init();
+        self.minimize();
+        preventEvent(event);
+    });
 
-            init();
-            self.minimize();
+    addListener(getByClass(self.dom, "wb-max"), "click", function(event){
+
+        init();
+        self.maximize();
+        preventEvent(event);
+    });
+
+    if(prefix_request){
+
+        addListener(getByClass(self.dom, "wb-full"), "click", function(event){
+
+            self.fullscreen();
             preventEvent(event);
         });
+    }
+    else{
 
-        addListener(getByClass(self.dom, "wb-max"), "click", function(event){
-
-            init();
-            self.maximize();
-            preventEvent(event);
-        });
-
-        if(prefix_request){
-
-            addListener(getByClass(self.dom, "wb-full"), "click", function(event){
-
-                self.fullscreen();
-                preventEvent(event);
-            });
-        }
-        else{
-
-            setStyle(getByClass(self.dom, "wb-full"), "display", "none");
-        }
-
-        addListener(self.dom, "mousedown", function(event){
-
-            self.focus();
-        });
+        setStyle(getByClass(self.dom, "wb-full"), "display", "none");
     }
 
     addListener(getByClass(self.dom, "wb-close"), "click", function(event){
@@ -319,6 +309,11 @@ function register(self, modal){
         self = null;
 
         preventEvent(event);
+    });
+
+    addListener(self.dom, "mousedown", function(event){
+
+        self.focus();
     });
 }
 
@@ -389,31 +384,28 @@ function addWindowListener(self, dir){
             remove_min_stack(self);
             self.resize().move();
         }
-        else{
+        else /*if(!self.min && !self.max)*/ { // already disabled by css
 
-            if(!self.min && !self.max){
+            disable_animation(self);
 
-                disable_animation(self);
+            addListener(window, "mousemove", handler_mousemove);
+            addListener(window, "mouseup", handler_mouseup);
+            addListener(window, "touchmove", handler_mousemove);
+            addListener(window, "touchend", handler_mouseup);
 
-                addListener(window, "mousemove", handler_mousemove);
-                addListener(window, "mouseup", handler_mouseup);
-                addListener(window, "touchmove", handler_mousemove);
-                addListener(window, "touchend", handler_mouseup);
+            if(event.touches){
 
-                if(event.touches){
-
-                    event = event.touches[0] || event;
-                }
-
-                x = event.pageX;
-                y = event.pageY;
-
-                // appearing scrollbars on the root element does not trigger "window.onresize",
-                // force refresh window size via init()
-
-                init();
-                self.focus();
+                event = event.touches[0] || event;
             }
+
+            x = event.pageX;
+            y = event.pageY;
+
+            // appearing scrollbars on the root element does not trigger "window.onresize",
+            // force refresh window size via init()
+
+            init();
+            self.focus();
         }
     }
 

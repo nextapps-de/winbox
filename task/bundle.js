@@ -31,6 +31,7 @@ const style = process.argv[2] === "--style";
         }
 
         writeFileSync("tmp/images.less", tmp);
+        writeFileSync("tmp/bundle.less", '@import "../src/css/winbox.less"; @import "images.less";');
     }
 
     // ----------------------
@@ -47,7 +48,7 @@ const style = process.argv[2] === "--style";
         writeFileSync("tmp/style.js",
 
             'const style = document.createElement("style");' +
-            'style.innerHTML = "' + readFileSync("tmp/winbox.css", "utf8") + '";' +
+            'style.innerHTML = "' + readFileSync("dist/css/winbox.min.css", "utf8") + '";' +
             'const head = document.getElementsByTagName("head")[0];' +
             'if(head.firstChild) head.insertBefore(style, head.firstChild); else head.appendChild(style);'
         );

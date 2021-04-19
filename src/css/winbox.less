@@ -1,4 +1,5 @@
 @import "images.less";
+//@import "control.less";
 
 .winbox {
   position: fixed;
@@ -12,7 +13,6 @@
   transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
   will-change: transform, width, height;
   contain: strict;
-  //z-index: 10;
   /* explicitly set text align to left fixes an issue with iframes alignment when centered */
   text-align: left;
 }
@@ -185,12 +185,17 @@
 .winbox:fullscreen > div,
 .winbox:fullscreen .wb-title,
 */
-.winbox.modal > div,
+
+.winbox.modal .wb-body ~ div,
 .winbox.modal .wb-title,
-.winbox.min > div,
-.winbox.min .wb-title,
-.winbox.max > div,
-.winbox.max .wb-title{
+.winbox.min .wb-body ~ div,
+//.winbox.min .wb-title,
+.winbox.max .wb-body ~ div,
+.winbox.max .wb-title {
+  pointer-events: none;
+}
+
+.winbox.min .wb-title{
   cursor: default;
 }
 
@@ -208,7 +213,7 @@
   }
   &:before{
     content: '';
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -217,11 +222,11 @@
   }
   &:after{
     content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    right: -50%;
-    bottom: -50%;
+    position: absolute;
+    top: -100vh;
+    left: -100vw;
+    right: -100vw;
+    bottom: -100vh;
     background: #0d1117;
     animation: fade-in 0.2s ease-out forwards;
     z-index: -1;

@@ -940,6 +940,20 @@ const winbox = WinBox({
 });
 ```
 
+## Custom Builds
+
+Go to the root directory of WinBox and run:
+```cmd
+npm install
+```
+
+Perform a build:
+```cmd
+npm run build
+```
+
+The final build is located in the `dist/` folder.
+
 ---
 
 

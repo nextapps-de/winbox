@@ -565,6 +565,7 @@
             <button onclick="window.buttons['minimize']()">Minimize (Toggle)</button>
             <button onclick="window.buttons['maximize']()">Maximize (Toggle)</button>
             <button onclick="window.buttons['fullscreen']()">Fullscreen (Toggle)</button>
+            <button onclick="window.buttons['modal']()">Modal (Toggle)</button>
             <button onclick="window.buttons['move']()">Move (Center, Center)</button>
             <button onclick="window.buttons['resize']()">Resize (50%, 50%)</button>
             <button onclick="window.buttons['title']()">Set Title</button>
@@ -777,6 +778,10 @@
                                  (Math.random() * 255 | 0) + "," +
                                  (Math.random() * 255 | 0) + ")"
                     );
+                },
+                modal: function(){
+
+                    winbox.body.parentNode.classList.toggle("modal");
                 },
                 close: function(){
 

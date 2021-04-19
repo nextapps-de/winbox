@@ -161,12 +161,14 @@
 .winbox:fullscreen > div,
 .winbox:fullscreen .wb-title,
 */
-.winbox.modal > div,
+.winbox.modal .wb-body ~ div,
 .winbox.modal .wb-title,
-.winbox.min > div,
-.winbox.min .wb-title,
-.winbox.max > div,
+.winbox.min .wb-body ~ div,
+.winbox.max .wb-body ~ div,
 .winbox.max .wb-title {
+  pointer-events: none;
+}
+.winbox.min .wb-title {
   cursor: default;
 }
 .winbox iframe {
@@ -177,10 +179,16 @@
 }
 .winbox.modal {
   contain: layout size;
+  /*
+  .wb-body ~ div,
+  .wb-title {
+    pointer-events: none;
+  }
+  */
 }
 .winbox.modal:before {
   content: '';
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -189,11 +197,11 @@
 }
 .winbox.modal:after {
   content: '';
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
+  position: absolute;
+  top: -100vh;
+  left: -100vw;
+  right: -100vw;
+  bottom: -100vh;
   background: #0d1117;
   animation: fade-in 0.2s ease-out forwards;
   z-index: -1;
