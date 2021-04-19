@@ -9,7 +9,7 @@
 
 <a href="https://nextapps-de.github.io/winbox/">Demo</a> &ensp;&bull;&ensp; <a href="#started">Getting Started</a> &ensp;&bull;&ensp; <a href="#options">Options</a> &ensp;&bull;&ensp; <a href="#api">API</a> &ensp;&bull;&ensp; <a href="#styling">Styling</a> &ensp;&bull;&ensp; <a href="#controls">Controls</a></a> &ensp;&bull;&ensp; <a href="CHANGELOG.md">Changelog</a>
 
-<h3>Examples: <a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a></h3>
+<h3>Live Demo / Code Examples: <a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a></h3>
 
 <a name="started" id="started"></a>
 ## Getting Started
@@ -44,8 +44,8 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>winbox.bundle.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.7/dist/winbox.bundle.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/winbox.bundle.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.8/dist/winbox.bundle.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.8/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.8/dist/winbox.bundle.js</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -54,19 +54,19 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>winbox.min.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.7/dist/js/winbox.min.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/js/winbox.min.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.8/dist/js/winbox.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.8/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.8/dist/js/winbox.min.js</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.css</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.7/dist/css/winbox.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.7/dist/css/winbox.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.0.8/dist/css/winbox.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.0.8/dist/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.0.8/dist/css/winbox.css</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>img.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.7/dist/img" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.8/dist/img" target="_blank">Download</a></td>
         <td>Alternatively when using non-bundled version you can download icons from <i>/dist/img/</i></td>
     </tr>
     <tr>
@@ -76,7 +76,7 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>src.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.7/src/js" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.0.8/src/js" target="_blank">Download</a></td>
         <td>The <i>"/src/js"</i>-folder of this Github repository</td>
     </tr>
 </table>
@@ -84,7 +84,7 @@ __Get Latest Build (Stable):__
 
 __Get Latest Build (Nightly):__
 
-Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.0.7__/dist/" into "/winbox/__master__/dist".
+Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.0.8__/dist/" into "/winbox/__master__/dist".
 
 
 __Get Latest (NPM):__
@@ -173,7 +173,7 @@ You can also load modules via CDN, e.g.:
 
 ```html
 <script type="module">
-  import WinBox from "https://unpkg.com/winbox@0.0.7/src/js/winbox.js";
+  import WinBox from "https://unpkg.com/winbox@0.0.8/src/js/winbox.js";
 </script>
 ```
 
@@ -384,7 +384,8 @@ winbox.setBackground("#ff005d");
 #### Custom Border
 
 ```js
-new WinBox("Custom Border", {
+new WinBox({
+    title: "Custom Border",
     border: 4
 });
 ```
@@ -429,8 +430,8 @@ Alternatively (also supports units):
 ```js
 var winbox = new WinBox("Custom Viewport");
 
-winbox.resize("50%", "50%");
-winbox.move("center", "center");
+winbox.resize("50%", "50%")
+      .move("center", "center");
 ```
 
 Alternatively (does not support units!):
@@ -665,6 +666,20 @@ Close and destroy a window:
 winbox.close();
 ```
 
+#### Chaining Methods
+
+```js
+var winbox = WinBox();
+
+winbox.setTitle("Title")
+      .setBackground("#fff")
+      .resize("50%", "50%")
+      .move("center", "center")
+      .mount(document.getElementById("content"));
+```
+
+> When using "center" as position you need to call `resize()` before `move()`.
+
 ## Customize Window
 
 The window boilerplate:
@@ -757,6 +772,13 @@ Apply styles when window is in "minimized" state:
 }
 ```
 
+Apply styles when window is __not__ in "minimized" state:
+```css
+.winbox:not(.min) {
+    /* apply styles */
+}
+```
+
 Apply styles when window is in "maximized" state:
 ```css
 .winbox {
@@ -770,10 +792,43 @@ Apply styles when window is in "maximized" state:
 }
 ```
 
+Apply styles when window is __not__ in "maximized" state:
+```css
+.winbox:not(.max) {
+    /* apply styles */
+}
+```
+
 Apply styles when window is in "fullscreen" state:
 ```css
 .wb-body:fullscreen {
     /* apply styles */
+}
+```
+
+Apply styles when window is in "focus" state:
+```css
+.winbox {
+    background: #999;
+}
+.winbox.focus {
+    background: #0050ff;
+}
+.winbox .wb-icon {
+    display: none;
+}
+.winbox.focus .wb-icon {
+    display: block;
+}
+```
+
+Apply styles when window is __not__ in "focus" state (the same logic from example above, but shorter):
+```css
+.winbox:not(.focus) {
+    background: #999;
+}
+.winbox:not(.focus) .wb-icon {
+    display: none;
 }
 ```
 
@@ -789,6 +844,31 @@ Apply styles when window is in "modal" state:
 }
 ```
 
+## Useful Examples
+
+Always hide the window header:
+
+```css
+.wb-header{
+    display: none;
+}
+.wb-body {
+    top:0;
+}
+```
+
+Hide the header just in maximize mode:
+
+```css
+.winbox.max .wb-header{
+    display: none;
+}
+.winbox.max .wb-body {
+    top:0;
+}
+```
+
+> Without the header the user isn't able to move the window frame. You can place your own control elements to the page.
 
 ---
 

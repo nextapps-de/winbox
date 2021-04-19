@@ -11,6 +11,7 @@ import { addListener, removeListener, getByClass, setStyle, setText, addClass, r
 
 //const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window["MSStream"];
 
+const doc = document.documentElement;
 const stack_min = [];
 let index = 0;
 let id_counter = 0;
@@ -18,6 +19,7 @@ let is_fullscreen;
 let last_focus;
 let prefix_request;
 let prefix_exit;
+let root_w, root_h;
 
 /**
  * @param {string|Object=} params
@@ -124,10 +126,10 @@ function WinBox(params, _title){
         }
     }
 
-    this.init().setTitle(title || "");
+    this.setTitle(title || "");
 
-    let max_width = this.root_w;
-    let max_height = this.root_h;
+    let max_width = root_w;
+    let max_height = root_h;
 
     top = top ? parse(top, max_height) : 0;
     bottom = bottom ? parse(bottom, max_height) : 0;
@@ -250,6 +252,14 @@ function setup(){
                       .replace("mozRequest", "mozCancel")
                       .replace("Request", "Exit")
     );
+
+    addListener(window, "resize", function(){
+
+        init();
+        update_min_stack();
+    });
+
+    init();
 }
 
 /**
@@ -273,13 +283,15 @@ function register(self, modal){
 
         addListener(getByClass(self.dom, "wb-min"), "click", function(event){
 
-            self.init().minimize();
+            init();
+            self.minimize();
             preventEvent(event);
         });
 
         addListener(getByClass(self.dom, "wb-max"), "click", function(event){
 
-            self.init().maximize();
+            init();
+            self.maximize();
             preventEvent(event);
         });
 
@@ -318,24 +330,22 @@ function register(self, modal){
 function remove_min_stack(self){
 
     stack_min.splice(stack_min.indexOf(self), 1);
-    update_min_stack(self);
+    update_min_stack();
     removeClass(self.dom, "min");
     self.min = false;
     self.dom.title = "";
 }
 
-/**
- * @param {WinBox} self
- */
+function update_min_stack(){
 
-function update_min_stack(self){
+    const len = stack_min.length;
+    const width = Math.min(root_w / len, 250);
 
-    const width = Math.min(self.root_w / stack_min.length, 250);
+    for(let i = 0, self; i < len; i++){
 
-    for(let i = 0; i < stack_min.length; i++){
-
-        stack_min[i].resize(width, 35, true)
-                    .move(self.left + i * width, self.root_h - self.bottom - (/*self.preserve ? 0 :*/ 35), true);
+        self = stack_min[i];
+        self.resize(width, 35, true)
+            .move(self.left + i * width, root_h - self.bottom - (/*self.preserve ? 0 :*/ 35), true);
     }
 }
 
@@ -382,11 +392,6 @@ function addWindowListener(self, dir){
         }
         else{
 
-            if(event.touches){
-
-                event = event.touches[0] || event;
-            }
-
             if(!self.min && !self.max){
 
                 disable_animation(self);
@@ -396,13 +401,19 @@ function addWindowListener(self, dir){
                 addListener(window, "touchmove", handler_mousemove);
                 addListener(window, "touchend", handler_mouseup);
 
+                if(event.touches){
+
+                    event = event.touches[0] || event;
+                }
+
                 x = event.pageX;
                 y = event.pageY;
 
                 // appearing scrollbars on the root element does not trigger "window.onresize",
                 // force refresh window size via init()
 
-                self.init().focus();
+                init();
+                self.focus();
             }
         }
     }
@@ -464,12 +475,12 @@ function addWindowListener(self, dir){
 
             if(resize_w){
 
-                self.width = Math.max(Math.min(self.width, self.root_w - self.x - self.right), 250);
+                self.width = Math.max(Math.min(self.width, root_w - self.x - self.right), 250);
             }
 
             if(resize_h){
 
-                self.height = Math.max(Math.min(self.height, self.root_h - self.y - self.bottom - 1), 35);
+                self.height = Math.max(Math.min(self.height, root_h - self.y - self.bottom - 1), 35);
             }
 
             self.resize();
@@ -479,12 +490,12 @@ function addWindowListener(self, dir){
 
             if(move_x){
 
-                self.x = Math.max(Math.min(self.x, self.root_w - self.width - self.right), self.left);
+                self.x = Math.max(Math.min(self.x, root_w - self.width - self.right), self.left);
             }
 
             if(move_y){
 
-                self.y = Math.max(Math.min(self.y, self.root_h - self.height - self.bottom - 1), self.top);
+                self.y = Math.max(Math.min(self.y, root_h - self.height - self.bottom - 1), self.top);
             }
 
             self.move();
@@ -507,25 +518,27 @@ function addWindowListener(self, dir){
     }
 }
 
-/**
- * @this WinBox
- */
+function init(){
 
-WinBox.prototype.init = function(){
+    root_w = doc.clientWidth;
+    root_h = doc.clientHeight;
+}
 
-    const doc = document.documentElement;
-    //const rect = doc.getBoundingClientRect();
-
-    this.root_w = doc.clientWidth; //rect.width || (rect.right - rect.left);
-    this.root_h = doc.clientHeight; //rect.height || (rect.top - rect.bottom);
-
-    // if(ios){
-    //
-    //     this.root_h = window.innerHeight * (this.root_w / window.innerWidth);
-    // }
-
-    return this;
-};
+// WinBox.prototype.init = function(){
+//
+//     const doc = document.documentElement;
+//     //const rect = doc.getBoundingClientRect();
+//
+//     this.root_w = doc.clientWidth; //rect.width || (rect.right - rect.left);
+//     this.root_h = doc.clientHeight; //rect.height || (rect.top - rect.bottom);
+//
+//     // if(ios){
+//     //
+//     //     this.root_h = window.innerHeight * (this.root_w / window.innerWidth);
+//     // }
+//
+//     return this;
+// };
 
 /**
  * @param {Element=} src
@@ -533,6 +546,9 @@ WinBox.prototype.init = function(){
  */
 
 WinBox.prototype.mount = function(src){
+
+    // handles mounting over:
+    this.unmount();
 
     src._backstore || (src._backstore = src.parentNode);
     this.body.textContent = "";
@@ -603,9 +619,15 @@ WinBox.prototype.focus = function(){
     if(last_focus !== this){
 
         setStyle(this.dom, "z-index", ++index);
+        addClass(this.dom, "focus");
 
-        last_focus && last_focus.onblur && last_focus.onblur();
-        last_focus = this;
+        if(last_focus){
+
+            removeClass(last_focus.dom, "focus");
+
+            last_focus.onblur && last_focus.onblur();
+            last_focus = this;
+        }
 
         this.onfocus && this.onfocus();
     }
@@ -634,7 +656,7 @@ WinBox.prototype.minimize = function(state){
 
         stack_min.push(this);
         addClass(this.dom, "min");
-        update_min_stack(this);
+        update_min_stack();
         this.dom.title = this.title;
         this.min = true;
     }
@@ -668,8 +690,8 @@ WinBox.prototype.maximize = function(state){
 
             this.resize(
 
-                this.root_w - this.left - this.right,
-                this.root_h - this.top - this.bottom - 1,
+                root_w - this.left - this.right,
+                root_h - this.top - this.bottom - 1,
                 true
 
             ).move(
@@ -797,8 +819,8 @@ WinBox.prototype.move = function(x, y, _skip_update){
     }
     else if(!_skip_update){
 
-        this.x = x ? x = parse(x, this.root_w - this.left - this.right, this.width) : 0;
-        this.y = y ? y = parse(y, this.root_h - this.top - this.bottom, this.height) : 0;
+        this.x = x ? x = parse(x, root_w - this.left - this.right, this.width) : 0;
+        this.y = y ? y = parse(y, root_h - this.top - this.bottom, this.height) : 0;
     }
 
     setStyle(this.dom, "transform", "translate(" + x + "px," + y + "px)");
@@ -824,8 +846,8 @@ WinBox.prototype.resize = function(w, h, _skip_update){
     }
     else if(!_skip_update){
 
-        this.width = w ? w = parse(w, this.root_w - this.left - this.right) : 0;
-        this.height = h ? h = parse(h, this.root_h - this.top - this.bottom) : 0;
+        this.width = w ? w = parse(w, root_w - this.left - this.right) : 0;
+        this.height = h ? h = parse(h, root_h - this.top - this.bottom) : 0;
     }
 
     setStyle(this.dom, "width", w + "px");
