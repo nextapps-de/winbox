@@ -1,5 +1,5 @@
 /**
- * WinBox.js v0.0.9 (Bundle)
+ * WinBox.js v0.1.0 (Bundle)
  * Copyright 2021 Nextapps GmbH
  * Author: Thomas Wilkerling
  * Licence: Apache-2.0

@@ -23,18 +23,12 @@
 */
 
 .wb-header {
-  /*
-  display: table;
-  table-layout: fixed;
-  */
   position: absolute;
   width: 100%;
   left: 0;
-  //right: 0;
   top: 0;
   height: 35px;
   color: #fff;
-  //vertical-align: middle;
 }
 
 .wb-body {
@@ -53,13 +47,10 @@
 }
 
 .wb-title{
-  //display: table-cell;
   font-size: 14px;
   padding-left: 10px;
   cursor: move;
-  //width: 100%;
   line-height: 35px;
-  //vertical-align: middle;
   width: calc(100% - 120px);
   white-space: nowrap;
   overflow: hidden;
@@ -203,12 +194,6 @@
   cursor: default;
 }
 
-/*
-.winbox .wb-hide{
-  display: none
-}
-*/
-
 .winbox iframe{
   position: absolute;
   width: 100%;
@@ -218,8 +203,8 @@
 
 .winbox.modal{
   &{
-    overflow: visible;
-    contain: layout size style;
+    //overflow: visible;
+    contain: layout size;
   }
   &:before{
     content: '';

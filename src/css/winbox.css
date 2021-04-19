@@ -186,8 +186,7 @@
   border: 0;
 }
 .winbox.modal {
-  overflow: visible;
-  contain: layout size style;
+  contain: layout size;
 }
 .winbox.modal:before {
   content: '';
