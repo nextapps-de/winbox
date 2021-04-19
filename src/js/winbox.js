@@ -82,7 +82,6 @@ function WinBox(params, _title){
             if((modal = params["modal"])){
 
                 x = y = "center";
-                addClass(this.dom, "modal");
             }
 
             id = params["id"];
@@ -143,7 +142,8 @@ function WinBox(params, _title){
 
     index = index || 10;
 
-    this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "");
+    this.dom.className = "winbox" + (modal ? " modal" : "") +
+                                    (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "");
     this.dom.id =
     this.id = id || ("winbox-" + (++id_counter));
 
