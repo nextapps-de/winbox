@@ -13,8 +13,8 @@ import { addListener, removeListener, getByClass, setStyle, setText, addClass, r
 
 const doc = document.documentElement;
 const stack_min = [];
-let index_counter = 0;
 let id_counter = 0;
+let index;
 let is_fullscreen;
 let last_focus;
 let prefix_request;
@@ -35,7 +35,7 @@ function WinBox(params, _title){
         return new WinBox(params);
     }
 
-    index_counter || setup();
+    index || setup();
 
     this.dom = template();
     this.body = getByClass(this.dom, "wb-body");
@@ -55,7 +55,6 @@ function WinBox(params, _title){
         left,
         bottom,
         right,
-        //index,
         modal,
         onclose,
         onfocus,
@@ -101,7 +100,7 @@ function WinBox(params, _title){
             left = params["left"];
             bottom = params["bottom"];
             right = params["right"];
-            //index = params["index"];
+            index = params["index"];
             onclose = params["onclose"];
             onfocus = params["onfocus"];
             onblur = params["onblur"];
@@ -120,16 +119,6 @@ function WinBox(params, _title){
 
                 setStyle(this.body, "margin", border + "px");
             }
-
-            if(classname){
-
-                addClass(this.dom, classname);
-            }
-
-            // if(index > index_counter){
-            //
-            //     index_counter = index - 1;
-            // }
         }
     }
 
@@ -152,6 +141,9 @@ function WinBox(params, _title){
     x = x ? parse(x, max_width, width) : left;
     y = y ? parse(y, max_height, height) : top;
 
+    index = index || 10;
+
+    this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "");
     this.dom.id =
     this.id = id || ("winbox-" + (++id_counter));
 
@@ -628,7 +620,7 @@ WinBox.prototype.focus = function(){
         // set minimum z-index of 10 to prevent common issues
         // make it configurable?
 
-        setStyle(this.dom, "z-index", 10 + (++index_counter));
+        setStyle(this.dom, "z-index", index++);
         addClass(this.dom, "focus");
 
         if(last_focus){

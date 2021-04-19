@@ -249,6 +249,12 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
+        <td>index</td>
+        <td>number</td>
+        <td>Set the <code>z-index</code> of the window to this value (or above).</td>
+    </tr>
+    <tr></tr>
+    <tr>
         <td>title</td>
         <td>string</td>
         <td>The window title.</td>
@@ -899,6 +905,39 @@ Hide the header just in maximize mode:
 ```css
 .winbox.max .wb-header { display: none }
 .winbox.max .wb-body   { top: 0 }
+```
+
+#### Use Declarative Configurations
+
+Define your features/states as css classes, use this as a base:
+```css
+.winbox.no-animation { transition: none }
+.winbox.no-shadow { box-shadow: none }
+.winbox.no-header .wb-header { display: none }
+.winbox.no-header .wb-body { top: 0 }
+.winbox.no-min .wb-min { display: none }
+.winbox.no-max .wb-max { display: none }
+.winbox.no-full .wb-full { display: none }
+.winbox.no-close .wb-close { display: none }
+.winbox.no-resize .wb-body ~ div { display: none }
+.winbox.no-move:not(.min) .wb-title { pointer-events: none }
+```
+
+Pass in classnames when creating the window:
+```js
+const winbox = WinBox({
+    class: [
+        "no-animation",
+        "no-shadow", 
+        "no-header", 
+        "no-min",
+        "no-max",
+        "no-full",
+        "no-close",
+        "no-resize",
+        "no-move"
+    ]
+});
 ```
 
 ---

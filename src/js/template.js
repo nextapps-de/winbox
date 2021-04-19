@@ -1,5 +1,5 @@
 const template = document.createElement("div");
-template.className = "winbox";
+//template.className = "winbox";
 template.innerHTML = (
 
     //'<div class=winbox>' +
