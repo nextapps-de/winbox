@@ -44,8 +44,8 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>winbox.bundle.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.0/dist/winbox.bundle.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.0/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.0/dist/winbox.bundle.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.1/dist/winbox.bundle.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/winbox.bundle.js</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -54,14 +54,14 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>winbox.min.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.0/dist/js/winbox.min.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.0/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.0/dist/js/winbox.min.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.1/dist/js/winbox.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/js/winbox.min.js</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.min.css</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.0/dist/css/winbox.min.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.0/dist/css/winbox.min.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.0/dist/css/winbox.min.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.1/dist/css/winbox.min.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/css/winbox.min.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/css/winbox.min.css</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -70,25 +70,25 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>ES6 Modules</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.0/src/js" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.1/src/js" target="_blank">Download</a></td>
         <td>The <i>/src/js</i> folder of this Github repository</td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.less (source)</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.0/src/css/winbox.less" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.0/src/css/winbox.less" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.0/src/css/winbox.less</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.1/src/css/winbox.less" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/src/css/winbox.less" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/src/css/winbox.less</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.css (compiled)</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.0/src/css/winbox.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.0/src/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.0/src/css/winbox.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.1/src/css/winbox.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/src/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/src/css/winbox.css</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>src.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.0/dist" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.1/dist" target="_blank">Download</a></td>
         <td>Download all source files including image original resources.</td>
     </tr>
 </table>
@@ -96,7 +96,7 @@ __Get Latest Build (Stable):__
 
 __Get Latest Build (Nightly):__
 
-Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.1.0__/dist/" into "/winbox/__master__/dist".
+Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.1.1__/dist/" into "/winbox/__master__/dist".
 
 
 __Get Latest (NPM):__
@@ -185,7 +185,7 @@ You can also load modules via CDN, e.g.:
 
 ```html
 <script type="module">
-  import WinBox from "https://unpkg.com/winbox@0.1.0/src/js/winbox.js";
+  import WinBox from "https://unpkg.com/winbox@0.1.1/src/js/winbox.js";
 </script>
 ```
 
@@ -210,6 +210,8 @@ Instance methods:
 - <a href="#winbox.resize">winbox.**resize**(width, height)</a>
 - <a href="#winbox.close">winbox.**close**()</a>
 - <a href="#winbox.focus">winbox.**focus**()</a>
+- <a href="#winbox.hide">winbox.**hide**()</a>
+- <a href="#winbox.show">winbox.**show**()</a>
 - <a href="#winbox.minimize">winbox.**minimize**(state)</a>
 - <a href="#winbox.maximize">winbox.**maximize**(state)</a>
 - <a href="#winbox.fullscreen">winbox.**fullscreen**(state)</a>
@@ -245,7 +247,7 @@ Instance properties:
     <tr>
         <td>id</td>
         <td>number | string</td>
-        <td>Set a unique id to the window. Used to define custom styles in css, query elements by context or just to identify the corresponding window instance.</td>
+        <td>Set a unique id to the window. Used to define custom styles in css, query elements by context or just to identify the corresponding window instance. If no ID was set it will automatically create one for you.</td>
     </tr>
     <tr></tr>
     <tr>
@@ -287,7 +289,7 @@ Instance properties:
     <tr>
         <td>x<br>y</td>
         <td>number | string</td>
-        <td>Set the initial position of the window (supports "center" and also units "px" and "%").</td>
+        <td>Set the initial position of the window (supports: "right" for x-axis, "bottom" for y-axis, "center" for both, units "px" and "%" for both).</td>
     </tr>
     <tr></tr>
     <tr>
@@ -339,9 +341,9 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
-        <td>classname</td>
+        <td>class</td>
         <td>string</td>
-        <td>Add one or more classnames to the window (multiple classnames needs separated with whitespaces, e.g. "class-a class-b"). Used to define custom styles in css, query elements by context or just to tag the corresponding window instance.</td>
+        <td>Add one or more classnames to the window (multiple classnames as array or separated with whitespaces e.g. "class-a class-b"). Used to define custom styles in css, query elements by context (also for styling) or just to tag the corresponding window instance.<br><br>WinBox provides you some useful <a href="#control-classes">Built-in Control Classes</a>.</td>
     </tr>
 </table>
 
@@ -433,7 +435,7 @@ winbox.left = 50;
 
 #### Custom Position / Size
 
-> Supports units "px" and "%". Also support the keyword "center" for xy-position.
+> Supports "right" for x-axis, "bottom" for y-axis, "center" for both, units "px" and "%" also for both.
 
 ```js
 new WinBox("Custom Viewport", {
@@ -444,7 +446,16 @@ new WinBox("Custom Viewport", {
 });
 ```
 
-Alternatively (also supports units):
+```js
+new WinBox("Custom Viewport", {
+    x: "right",
+    y: "bottom",
+    width: "50%",
+    height: "50%"
+});
+```
+
+Alternatively (also supports same units):
 ```js
 var winbox = new WinBox("Custom Viewport");
 
@@ -694,6 +705,16 @@ winbox.fullscreen(true);
 winbox.fullscreen(false);
 ```
 
+Hide a specific window:
+```js
+winbox.hide();
+```
+
+Show a specific hidden window:
+```js
+winbox.show();
+```
+
 Close and destroy a window:
 ```js
 winbox.close();
@@ -713,6 +734,97 @@ winbox.setTitle("Title")
 
 > When using "center" as position you need to call `resize()` before `move()`.
 
+<a name="control-classes" id="control-classes"></a>
+#### Use Control Classes
+
+WinBox provides you some built-in control classes you can pass when creating a window instance. 
+
+<table>
+    <tr></tr>
+    <tr>
+        <td>Classname&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>Description</td>
+    </tr>
+    <tr>
+        <td>no-animation</td>
+        <td>Disables the windows transition animation</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>no-shadow</td>
+        <td>Disables the windows drop shadow</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>no-header</td>
+        <td>Hide the window header incl. title and toolbar</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>no-min</td>
+        <td>Hide the minimize icon</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>no-max</td>
+        <td>Hide the maximize icon</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>no-full</td>
+        <td>Hide the fullscreen icon</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>no-close</td>
+        <td>Hide the close icon</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>no-resize</td>
+        <td>Disables the window resizing capability</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>no-move</td>
+        <td>Disables the window moving capability</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>modal</td>
+        <td>Open the window in modal mode</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>hide</td>
+        <td>Open the window in hidden state</td>
+    </tr>
+</table>
+
+> Without the header the user isn't able to move the window frame but may be useful for creating modal popups.
+
+Pass in classnames when creating the window to apply behaviour:
+```js
+const winbox = WinBox({
+    class: [
+        "no-min",
+        "no-max",
+        "no-full",
+        "no-resize",
+        "no-move"
+    ]
+});
+```
+
+> The example above is a perfect workaround to use WinBox for classical popups.
+
+Alternatively you can use a whitespace separated string:
+```js
+const winbox = WinBox({
+    class: "no-min no-max no-full no-resize no-move"
+});
+```
+
 ## Customize Window
 
 The window boilerplate:
@@ -728,12 +840,6 @@ Hide or disable specific icons:
 .wb-close { display: none }
 ```
 
-Hide or disable all icons:
-
-```css
-.wb-icon { display: none }
-```
-
 Modify a specific icon:
 
 ```css
@@ -744,7 +850,7 @@ Modify a specific icon:
 }
 ```
 
-Disable resizing areas:
+Modify or disable resizing areas on the window borders:
 
 ```css
 /* north */
@@ -772,17 +878,9 @@ Disable resizing areas:
 .wb-se { display: none }
 ```
 
-Disable or modify the window drop shadow:
+Modify or disable the window drop shadow:
 ```css
 .winbox { box-shadow: none }
-```
-
-Style the window background:
-```css
-.winbox {
-    background: linear-gradient(90deg, #ff00f0, #0050ff);
-    border-radius: 12px 12px 0 0;
-}
 ```
 
 Style the header title:
@@ -790,10 +888,18 @@ Style the header title:
 .wb-title { font-size: 12px }
 ```
 
-Style the body of a window element incl. the window border:
+Style the window background (frame):
+```css
+.winbox {
+    background: linear-gradient(90deg, #ff00f0, #0050ff);
+    border-radius: 12px 12px 0 0;
+}
+```
+
+Style the body of a window element and set the frame border:
 ```css
 .wb-body {
-    /* the width of window border: */
+    /* the width of window frame border: */
     margin: 4px;
     color: #fff;
     background: #131820;
@@ -889,54 +995,61 @@ Customize the modal background overlay:
 }
 ```
 
-## Useful Examples
-
-> Without the header the user isn't able to move the window frame. Instead, you can place your own control elements to the page.
-
-Always hide the window header:
+#### Style Scrollbars
 
 ```css
-.wb-header { display: none }
-.wb-body   { top: 0 }
+.wb-body::-webkit-scrollbar {
+    width: 12px;
+}
+.wb-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.wb-body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #263040;
+}
+.wb-body::-webkit-scrollbar-thumb:window-inactive {
+    background: #181f2a;
+}
+.wb-body::-webkit-scrollbar-corner {
+    background: transparent;
+}
 ```
 
-Hide the header just in maximize mode:
+## Useful Hints
+
+Often you need to hide specific content parts when it was mounted to a window. You can solve this easily by using some css:
 
 ```css
-.winbox.max .wb-header { display: none }
-.winbox.max .wb-body   { top: 0 }
+.winbox .wb-hide { display: none }
 ```
 
-#### Use Declarative Configurations
+The same for hiding when NOT inside a window:
 
-Define your features/states as css classes, use this as a base:
 ```css
-.winbox.no-animation { transition: none }
-.winbox.no-shadow { box-shadow: none }
-.winbox.no-header .wb-header { display: none }
-.winbox.no-header .wb-body { top: 0 }
-.winbox.no-min .wb-min { display: none }
-.winbox.no-max .wb-max { display: none }
-.winbox.no-full .wb-full { display: none }
-.winbox.no-close .wb-close { display: none }
-.winbox.no-resize .wb-body ~ div { display: none }
-.winbox.no-move:not(.min) .wb-title { pointer-events: none }
+.wb-show { display: none }
+.winbox .wb-show { display: block }
 ```
 
-Pass in classnames when creating the window:
+Now you can add this two classes to any element to control visibility between the two states "inside" and "outside" a window:
+
+```html
+<body>
+    <main id="content">
+        <header class="wb-hide">Hide this header when in windowed mode</header>
+        <section>
+            <!-- page contents -->
+        </section>
+        <footer class="wb-show">Hide this footer when NOT in windowed mode</footer>
+    </main>
+</body>
+```
+
+The property `display: block` might not fit your needs. That's why this workaround was not added as one of the built-in classes yet. Please change to your desired display-state accordingly.
+
 ```js
-const winbox = WinBox({
-    class: [
-        "no-animation",
-        "no-shadow", 
-        "no-header", 
-        "no-min",
-        "no-max",
-        "no-full",
-        "no-close",
-        "no-resize",
-        "no-move"
-    ]
+new WinBox({
+    mount: document.getElementById("content")
 });
 ```
 

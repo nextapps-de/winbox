@@ -212,6 +212,10 @@ function parse(num, base, center){
 
         num = (base - center) / 2;
     }
+    else if(num === "right" || num === "bottom"){
+
+        num = (base - center);
+    }
     else if(typeof num === "string"){
 
         const value = parseFloat(num);
@@ -300,7 +304,8 @@ function register(self){
     }
     else{
 
-        setStyle(getByClass(self.dom, "wb-full"), "display", "none");
+        addClass(self.dom, "no-full");
+        //setStyle(getByClass(self.dom, "wb-full"), "display", "none");
     }
 
     addListener(getByClass(self.dom, "wb-close"), "click", function(event){
@@ -627,6 +632,28 @@ WinBox.prototype.focus = function(){
 
     return this;
 };
+
+/**
+ * @this WinBox
+ */
+
+WinBox.prototype.hide = function(){
+
+    addClass(this.dom, "hide");
+
+    return this;
+}
+
+/**
+ * @this WinBox
+ */
+
+WinBox.prototype.show = function(){
+
+    removeClass(this.dom, "hide");
+
+    return this;
+}
 
 /**
  * @this WinBox

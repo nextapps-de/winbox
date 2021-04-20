@@ -1,39 +1,40 @@
 .winbox.no-animation {
-  transition: none
+  transition: none;
 }
 
 .winbox.no-shadow {
-  box-shadow: none
+  box-shadow: none;
 }
 
-.winbox.no-header .wb-header {
-  display: none
-}
-
-.winbox.no-header .wb-body {
-  top: 0
+.winbox.no-header {
+  .wb-header {
+    display: none;
+  }
+  .wb-body {
+    top: 0;
+  }
 }
 
 .winbox.no-min .wb-min {
-  display: none
+  display: none;
 }
 
 .winbox.no-max .wb-max {
-  display: none
+  display: none;
 }
 
 .winbox.no-full .wb-full {
-  display: none
+  display: none;
 }
 
 .winbox.no-close .wb-close {
-  display: none
+  display: none;
 }
 
 .winbox.no-resize .wb-body ~ div {
-  display: none
+  display: none;
 }
 
 .winbox.no-move:not(.min) .wb-title {
-  pointer-events: none
+  pointer-events: none;
 }

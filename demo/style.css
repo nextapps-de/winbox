@@ -10,6 +10,7 @@ html, body{
     font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, "Open Sans", OpenSans, Roboto, Segoe UI, sans-serif;
     text-align: center;
     color: #fff;
+    background: linear-gradient(135deg, #0d1117, #131820);
 
     -webkit-tap-highlight-color: transparent;
     -webkit-text-size-adjust: 100%;
@@ -26,7 +27,7 @@ html, body{
     right: 0;
     bottom: 0;
     left: 0;
-    background: linear-gradient(135deg, #0d1117, #131820);
+    background: inherit;
 }
 header{
     position: fixed;

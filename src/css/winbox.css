@@ -1,3 +1,33 @@
+.winbox.no-animation {
+  transition: none;
+}
+.winbox.no-shadow {
+  box-shadow: none;
+}
+.winbox.no-header .wb-header {
+  display: none;
+}
+.winbox.no-header .wb-body {
+  top: 0;
+}
+.winbox.no-min .wb-min {
+  display: none;
+}
+.winbox.no-max .wb-max {
+  display: none;
+}
+.winbox.no-full .wb-full {
+  display: none;
+}
+.winbox.no-close .wb-close {
+  display: none;
+}
+.winbox.no-resize .wb-body ~ div {
+  display: none;
+}
+.winbox.no-move:not(.min) .wb-title {
+  pointer-events: none;
+}
 .winbox {
   position: fixed;
   left: 0;
@@ -179,12 +209,6 @@
 }
 .winbox.modal {
   contain: layout size;
-  /*
-  .wb-body ~ div,
-  .wb-title {
-    pointer-events: none;
-  }
-  */
 }
 .winbox.modal:before {
   content: '';
