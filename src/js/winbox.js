@@ -116,7 +116,7 @@ function WinBox(params, _title){
 
             if(border){
 
-                setStyle(this.body, "margin", border + "px");
+                setStyle(this.body, "margin", border + (isNaN(border) ? "" : "px"));
             }
         }
     }
@@ -207,26 +207,29 @@ export default WinBox;
 
 function parse(num, base, center){
 
-    if(num === "center"){
+    if(typeof num === "string"){
 
-        num = ((base - center) / 2) | 0;
-    }
-    else if(num === "right" || num === "bottom"){
+        if(num === "center"){
 
-        num = (base - center);
-    }
-    else if(typeof num === "string"){
+            num = ((base - center) / 2) | 0;
+        }
+        else if(num === "right" || num === "bottom"){
 
-        const value = parseFloat(num);
-        const unit = (("" + value) !== num) && num.substring(("" + value).length);
-
-        if(unit === "%"){
-
-            num = base / 100 * value;
+            num = (base - center);
         }
         else{
 
-            num = value;
+            const value = parseFloat(num);
+            const unit = (("" + value) !== num) && num.substring(("" + value).length);
+
+            if(unit === "%"){
+
+                num = base / 100 * value;
+            }
+            else{
+
+                num = value;
+            }
         }
     }
     // else if(!num && (num !== 0)){

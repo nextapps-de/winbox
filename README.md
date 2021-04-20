@@ -7,7 +7,7 @@
 <a target="_blank" href="https://github.com/nextapps-de/winbox/issues"><img src="https://img.shields.io/github/issues/nextapps-de/winbox.svg"></a>
 <a target="_blank" href="https://github.com/nextapps-de/winbox/blob/master/LICENSE.md"><img src="https://img.shields.io/npm/l/winbox.svg"></a>
 
-<a href="https://nextapps-de.github.io/winbox/">Demo</a> &ensp;&bull;&ensp; <a href="#started">Getting Started</a> &ensp;&bull;&ensp; <a href="#options">Options</a> &ensp;&bull;&ensp; <a href="#api">API</a> &ensp;&bull;&ensp; <a href="#styling">Styling</a> &ensp;&bull;&ensp; <a href="#controls">Controls</a></a> &ensp;&bull;&ensp; <a href="CHANGELOG.md">Changelog</a>
+<a href="https://nextapps-de.github.io/winbox/">Demo</a> &ensp;&bull;&ensp; <a href="#started">Getting Started</a> &ensp;&bull;&ensp; <a href="#options">Options</a> &ensp;&bull;&ensp; <a href="#api">API</a> &ensp;&bull;&ensp; <a href="#customize">Customize</a> &ensp;&bull;&ensp; <a href="CHANGELOG.md">Changelog</a>
 
 <h3>Live Demo / Code Examples: <br><a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a></h3>
 
@@ -218,8 +218,8 @@ Instance methods:
 - <a href="#winbox.setBackground">winbox.**setBackground**(string)</a>
 - <a href="#winbox.setTitle">winbox.**setTitle**(string)</a>
 - <a href="#winbox.setUrl">winbox.**setUrl**(string)</a>
-- <a href="#winbox.addClass">winbox.**addClass**(classname)</a>
-- <a href="#winbox.removeClass">winbox.**removeClass**(classname)</a>
+- <a href="#winbox.addClass">winbox.**addClass**(name)</a>
+- <a href="#winbox.removeClass">winbox.**removeClass**(name)</a>
 
 Instance properties:
 
@@ -307,6 +307,24 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
+        <td>background</td>
+        <td>string</td>
+        <td>Set the background of the window (supports all CSS styles which are also supported by the style-attribute "background", e.g. colors, transparent colors, hsl, gradients, background images)</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>border</td>
+        <td>number</td>
+        <td>Set the border width of the window (supports all css units, like px, %, em, rem, vh, vmax).</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>class</td>
+        <td>string</td>
+        <td>Add one or more classnames to the window (multiple classnames as array or separated with whitespaces e.g. "class-a class-b"). Used to define custom styles in css, query elements by context (also for styling) or just to tag the corresponding window instance.<br><br>WinBox provides you some useful <a href="#control-classes">Built-in Control Classes</a>.</td>
+    </tr>
+    <tr></tr>
+    <tr>
         <td>modal</td>
         <td>boolean</td>
         <td>Show the window as modal.</td>
@@ -329,30 +347,12 @@ Instance properties:
         <td>function()</td>
         <td>Callbacks to several events (Note: the event 'onclose' will be triggered right before closing). The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
     </tr>
-    <tr></tr>
-    <tr>
-        <td>background</td>
-        <td>string</td>
-        <td>Set the background of the window (supports all CSS styles which are also supported by the style-attribute "background", e.g. colors, transparent colors, hsl, gradients, background images)</td>
-    </tr>
-    <tr></tr>
-    <tr>
-        <td>border</td>
-        <td>number</td>
-        <td>Set the border width of the window.</td>
-    </tr>
-    <tr></tr>
-    <tr>
-        <td>class</td>
-        <td>string</td>
-        <td>Add one or more classnames to the window (multiple classnames as array or separated with whitespaces e.g. "class-a class-b"). Used to define custom styles in css, query elements by context (also for styling) or just to tag the corresponding window instance.<br><br>WinBox provides you some useful <a href="#control-classes">Built-in Control Classes</a>.</td>
-    </tr>
 </table>
 
 
 ## Examples
 
-<a name="winbox.new" id="winbox.new"></a>
+<a name="winbox.new"></a>
 #### Basic Window
 
 > When no `root` was specified the window will append to the `document.body`.
@@ -374,6 +374,7 @@ new WinBox({
 ```
 
 Alternatively:
+<a name="winbox.setTitle"></a>
 ```js
 var winbox = WinBox();
 winbox.setTitle("Window Title");
@@ -398,6 +399,7 @@ new WinBox("Custom Color", {
 ```
 
 Alternatively:
+<a name="winbox.setBackground"></a>
 ```js
 var winbox = new WinBox("Custom Color");
 winbox.setBackground("#ff005d");
@@ -435,6 +437,7 @@ winbox.bottom = 50;
 winbox.left = 50;
 ```
 
+<a name="winbox.move"></a><a name="winbox.resize"></a>
 #### Custom Position / Size
 
 > Supports "right" for x-axis, "bottom" for y-axis, "center" for both, units "px" and "%" also for both.
@@ -503,6 +506,7 @@ var winbox = new WinBox("Set innerHTML");
 winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
 ```
 
+<a name="winbox.mount"></a>
 #### Mount DOM (Cloned)
 
 > By cloning you can easily create multiple window instances of the same content in parallel.
@@ -564,6 +568,7 @@ var winbox = new WinBox("Mount DOM");
 winbox.mount(node);
 ```
 
+<a name="winbox.unmount"></a>
 #### Explicit Unmount
 
 ```html
@@ -637,30 +642,96 @@ Mikado(template).mount(winbox.body).render(data);
 
 ```js
 new WinBox("Open URL", {
-    
     url: "https://wikipedia.com"
 });
 ```
 
 Alternatively:
+<a name="winbox.setUrl"></a>
 ```js
 var winbox = new WinBox("Open URL");
-
 winbox.setUrl("https://wikipedia.com");
 ```
 
 #### The Window Instance
 
+<a name="winbox.id"></a><a name="winbox.max"></a><a name="winbox.min"></a>
+Window States / Information:
 ```js
 var winbox = new WinBox();
 
 console.log("Window ID:", winbox.id);
-console.log("Current Position X:", winbox.x);
-console.log("Current Position Y:", winbox.y);
-console.log("Current Width:", winbox.width);
-console.log("Current Height:", winbox.height);
 console.log("Current Maximize State:", winbox.max);
 console.log("Current Minimize State:", winbox.min);
+```
+
+<a name="winbox.width"></a><a name="winbox.height"></a>
+Window Size:
+```js
+var winbox = new WinBox();
+
+winbox.width = 50;
+winbox.height = 50;
+winbox.resize();
+
+console.log("Current Viewport Left:", winbox.width);
+console.log("Current Viewport Right:", winbox.height);
+```
+
+<a name="winbox.x"></a><a name="winbox.y"></a>
+Window Position:
+```js
+var winbox = new WinBox();
+
+winbox.x = 50;
+winbox.y = 50;
+winbox.move();
+
+console.log("Current Position X:", winbox.x);
+console.log("Current Position Y:", winbox.y);
+```
+
+<a name="winbox.top"></a><a name="winbox.right"></a><a name="winbox.bottom"></a><a name="winbox.left"></a>
+Window Viewport:
+```js
+var winbox = new WinBox();
+
+winbox.top = 50;
+winbox.right = 50;
+winbox.bottom = 50;
+winbox.left = 50;
+
+console.log("Current Viewport Left:", winbox.width);
+console.log("Current Viewport Right:", winbox.height);
+console.log("Current Viewport Top:", winbox.width);
+console.log("Current Viewport Bottom:", winbox.height);
+```
+
+<a name="winbox.body"></a>
+The window body acts like the `document.body` and has a scroll pane:
+```js
+var winbox = new WinBox();
+winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
+```
+
+> The parent element of the window body `winbox.body.parentNode` points to the window most outer root element which also holds the window control and state classes:
+
+```js
+const root = winbox.body.parentNode;
+const hidden = root.classList.contains("hide");
+const focused = root.classList.contains("focus");
+```
+
+```js
+const root = winbox.body.parentNode;
+root.classList.remove("modal");
+root.classList.add("my-theme");
+```
+
+When changing classes you can use the WinBox built-in methods:
+```js
+winbox.removeClass("modal");
+winbox.addClass("my-theme");
 ```
 
 #### Controls
@@ -669,11 +740,13 @@ console.log("Current Minimize State:", winbox.min);
 var winbox = new WinBox();
 ```
 
+<a name="winbox.focus"></a>
 Focus a window (bring up to front):
 ```js
 winbox.focus();
 ```
 
+<a name="winbox.minimize"></a>
 Toggle the minimized state of a window:
 ```js
 winbox.minimize();
@@ -685,6 +758,7 @@ winbox.minimize(true);
 winbox.minimize(false);
 ```
 
+<a name="winbox.maximize"></a>
 Toggle the maximized state of a window:
 ```js
 winbox.maximize();
@@ -696,6 +770,7 @@ winbox.maximize(true);
 winbox.maximize(false);
 ```
 
+<a name="winbox.fullscreen"></a>
 Toggle the fullscreen state of a window:
 ```js
 winbox.fullscreen();
@@ -707,16 +782,19 @@ winbox.fullscreen(true);
 winbox.fullscreen(false);
 ```
 
+<a name="winbox.hide"></a>
 Hide a specific window:
 ```js
 winbox.hide();
 ```
 
+<a name="winbox.show"></a>
 Show a specific hidden window:
 ```js
 winbox.show();
 ```
 
+<a name="winbox.close"></a>
 Close and destroy a window:
 ```js
 winbox.close();
@@ -741,7 +819,7 @@ winbox.setTitle("Title")
 
 WinBox provides you some built-in control classes you can pass when creating a window instance. 
 
-> All control classes could be added or removed during lifetime of the window (but state classes like "max" or "min" not, there aren't control classes).
+> All control classes from this list could be added or removed during lifetime of the window (after creation). State classes e.g. "max", "min" and "focus" could not be changed manually.
 
 <table>
     <tr></tr>
@@ -829,18 +907,21 @@ const winbox = WinBox({
 });
 ```
 
-You can add or remove all control classes from above procedural along the window lifetime:
+<a name="winbox.addClass"></a><a name="winbox.removeClass"></a>
+You can add or remove all control classes from above along the window's lifetime:
 
 ```js
 const winbox = WinBox();
 
 winbox.addClass("no-resize")
       .addClass("no-move");
-
+```
+```js
 winbox.removeClass("no-resize")
       .removeClass("no-move");
 ```
 
+<a name="customize"></a>
 ## Customize Window
 
 The window boilerplate:
