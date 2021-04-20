@@ -12,58 +12,47 @@
     <!--<script src="dist/winbox.bundle.js"></script>-->
     <link rel="stylesheet" href="demo/style.css">
     <style>
+
+        /* Custom Theme */
+
         .winbox.custom {
             background: linear-gradient(90deg, #ff00f0, #0050ff);
             box-shadow: none;
             border-radius: 12px 12px 0 0;
         }
-
         .winbox.custom.max,
-        .winbox.custom.min{
+        .winbox.custom.min {
             border-radius: 0;
         }
-
-        .winbox.custom.max{
-            /* fix iOS bug when border-radius is changed, wtf? */
-            /*overflow: visible;*/
-        }
-
-        .winbox.custom .wb-title {
-            font-size: 13px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .winbox.custom .wb-icon * {
-            opacity: 0.65;
-        }
-
-        .winbox.custom .wb-icon *:hover{
-            opacity: 1;
-        }
-
-        .winbox.custom .wb-max {
-            background-image: url(src/img/max.svg);
-            background-size: 17px auto;
-        }
-
-        .winbox.custom .wb-min {
-            background-image: url(src/img/min.svg);
-        }
-
-        .winbox.custom .wb-close {
-            background-image: url(src/img/close.svg);
-        }
-
-        .winbox.custom .wb-full {
-            display: none;
-        }
-
         .winbox.custom .wb-body {
             /* width of window border: */
             margin: 4px;
             color: #fff;
             background: #131820;
+        }
+        .winbox.custom .wb-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .winbox.custom .wb-icon * {
+            opacity: 0.65;
+        }
+        .winbox.custom .wb-icon *:hover {
+            opacity: 1;
+        }
+        .winbox.custom .wb-max {
+            background-image: url(src/img/max.svg);
+            background-size: 17px auto;
+        }
+        .winbox.custom .wb-min {
+            background-image: url(src/img/min.svg);
+        }
+        .winbox.custom .wb-close {
+            background-image: url(src/img/close.svg);
+        }
+        .winbox.custom .wb-full {
+            display: none;
         }
 
         .winbox.custom .wb-body::-webkit-scrollbar {
@@ -164,19 +153,6 @@
 
         <hr>
         <br>
-        Custom Color
-        <br><br>
-        <pre><code class="language-js">new WinBox({
-
-    title: "Custom Color",
-    background: "#ff005d"
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['color']()">Run Code</div>
-        <br><br>
-
-        <hr>
-        <br>
         Custom Border
         <br><br>
         <pre><code class="language-js">new WinBox("Custom Border", {
@@ -185,6 +161,20 @@
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['border']()">Run Code</div>
+        <br><br>
+
+        <hr>
+        <br>
+        Custom Color
+        <br><br>
+        <pre><code class="language-js">new WinBox({
+
+    title: "Custom Color",
+    background: "#ff005d",
+    border: 4
+});</code></pre>
+        <div class="break"></div>
+        <div class="button" onclick="window.examples['color']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -575,6 +565,8 @@
             <button onclick="window.buttons['resize']()">Resize (50%, 50%)</button>
             <button onclick="window.buttons['title']()">Set Title</button>
             <button onclick="window.buttons['color']()">Set Color</button>
+            <button onclick="window.buttons['add']()">Add Class (modern)</button>
+            <button onclick="window.buttons['remove']()">Remove Class (modern)</button>
             <button onclick="window.buttons['close']()">Close</button>
         </div>
     </div>
@@ -598,18 +590,19 @@
                         root: document.body
                     });
                 },
+                "border": function(){
+
+                    new WinBox("Custom Border", {
+
+                        border: 4
+                    });
+                },
                 "color": function(){
 
                     new WinBox({
 
                         title: "Custom Color",
-                        background: "#ff005d"
-                    });
-                },
-                "border": function(){
-
-                    new WinBox("Custom Border", {
-
+                        background: "#ff005d",
                         border: 4
                     });
                 },
@@ -746,7 +739,8 @@
 
                     winbox = new WinBox("Controls", {
 
-                        mount: document.getElementById("controls")
+                        mount: document.getElementById("controls"),
+                        border: 4
                     });
                 }
             };
@@ -792,6 +786,14 @@
                 modal: function(){
 
                     winbox.body.parentNode.classList.toggle("modal");
+                },
+                add: function(){
+
+                    winbox.addClass("modern");
+                },
+                remove: function(){
+
+                    winbox.removeClass("modern");
                 },
                 close: function(){
 

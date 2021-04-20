@@ -15,14 +15,6 @@ export function getByClass(root, name){
 
 export function setStyle(node, style, value){
 
-    // node._style || (node._style = {});
-    //
-    // if(node._style[style] !== value){
-    //
-    //     node.style.setProperty(style, value);
-    //     node._style[style] = value;
-    // }
-
     if(node["_s_" + style] !== value){
 
         node.style.setProperty(style, value);
@@ -32,11 +24,7 @@ export function setStyle(node, style, value){
 
 export function setText(node, value){
 
-    if(node._text !== value){
-
-        node.firstChild.nodeValue = value;
-        node._text = value;
-    }
+    node.firstChild.nodeValue = value;
 }
 
 export function preventEvent(event){
@@ -48,34 +36,10 @@ export function preventEvent(event){
 
 export function addClass(node, classname){
 
-    // node._class || (node._class = {});
-    //
-    // if(!node._class[classname]){
-    //
-    //     node.classList.add(classname);
-    //     node._class[classname] = 1;
-    // }
-
-    //if(!node["_c_" + classname]){
-
-        node.classList.add(classname);
-        //node["_c_" + classname] = 1;
-    //}
+    node.classList.add(classname);
 }
 
 export function removeClass(node, classname){
 
-    // node._class || (node._class = {});
-    //
-    // if(!node._class[classname]){
-    //
-    //     node.classList.add(classname);
-    //     node._class[classname] = 1;
-    // }
-
-    //if(node["_c_" + classname] !== 0){
-
-        node.classList.remove(classname);
-        //node["_c_" + classname] = 0;
-    //}
+    node.classList.remove(classname);
 }

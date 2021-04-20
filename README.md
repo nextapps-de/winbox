@@ -44,8 +44,8 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>winbox.bundle.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.1/dist/winbox.bundle.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/winbox.bundle.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.2/dist/winbox.bundle.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.2/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.2/dist/winbox.bundle.js</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -54,14 +54,14 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>winbox.min.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.1/dist/js/winbox.min.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/js/winbox.min.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.2/dist/js/winbox.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.2/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.2/dist/js/winbox.min.js</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.min.css</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.1/dist/css/winbox.min.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/css/winbox.min.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/dist/css/winbox.min.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.2/dist/css/winbox.min.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.2/dist/css/winbox.min.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.2/dist/css/winbox.min.css</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -70,25 +70,25 @@ __Get Latest Build (Stable):__
     </tr>
     <tr>
         <td>ES6 Modules</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.1/src/js" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.2/src/js" target="_blank">Download</a></td>
         <td>The <i>/src/js</i> folder of this Github repository</td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.less (source)</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.1/src/css/winbox.less" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/src/css/winbox.less" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/src/css/winbox.less</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.2/src/css/winbox.less" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.2/src/css/winbox.less" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.2/src/css/winbox.less</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.css (compiled)</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.1/src/css/winbox.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/src/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.1/src/css/winbox.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.2/src/css/winbox.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.2/src/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.2/src/css/winbox.css</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>src.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.1/dist" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.2/dist" target="_blank">Download</a></td>
         <td>Download all source files including image original resources.</td>
     </tr>
 </table>
@@ -96,7 +96,7 @@ __Get Latest Build (Stable):__
 
 __Get Latest Build (Nightly):__
 
-Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.1.1__/dist/" into "/winbox/__master__/dist".
+Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.1.2__/dist/" into "/winbox/__master__/dist".
 
 
 __Get Latest (NPM):__
@@ -185,7 +185,7 @@ You can also load modules via CDN, e.g.:
 
 ```html
 <script type="module">
-  import WinBox from "https://unpkg.com/winbox@0.1.1/src/js/winbox.js";
+  import WinBox from "https://unpkg.com/winbox@0.1.2/src/js/winbox.js";
 </script>
 ```
 
@@ -217,7 +217,9 @@ Instance methods:
 - <a href="#winbox.fullscreen">winbox.**fullscreen**(state)</a>
 - <a href="#winbox.setBackground">winbox.**setBackground**(string)</a>
 - <a href="#winbox.setTitle">winbox.**setTitle**(string)</a>
-- <a href="#winbox.setTitle">winbox.**setUrl**(string)</a>
+- <a href="#winbox.setUrl">winbox.**setUrl**(string)</a>
+- <a href="#winbox.addClass">winbox.**addClass**(classname)</a>
+- <a href="#winbox.removeClass">winbox.**removeClass**(classname)</a>
 
 Instance properties:
 
@@ -739,6 +741,8 @@ winbox.setTitle("Title")
 
 WinBox provides you some built-in control classes you can pass when creating a window instance. 
 
+> All control classes could be added or removed during lifetime of the window (but state classes like "max" or "min" not, there aren't control classes).
+
 <table>
     <tr></tr>
     <tr>
@@ -792,12 +796,12 @@ WinBox provides you some built-in control classes you can pass when creating a w
     <tr></tr>
     <tr>
         <td>modal</td>
-        <td>Open the window in modal mode</td>
+        <td>Show the window in modal mode</td>
     </tr>
     <tr></tr>
     <tr>
         <td>hide</td>
-        <td>Open the window in hidden state</td>
+        <td>Hide the window</td>
     </tr>
 </table>
 
@@ -823,6 +827,18 @@ Alternatively you can use a whitespace separated string:
 const winbox = WinBox({
     class: "no-min no-max no-full no-resize no-move"
 });
+```
+
+You can add or remove all control classes from above procedural along the window lifetime:
+
+```js
+const winbox = WinBox();
+
+winbox.addClass("no-resize")
+      .addClass("no-move");
+
+winbox.removeClass("no-resize")
+      .removeClass("no-move");
 ```
 
 ## Customize Window

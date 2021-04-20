@@ -1,12 +1,12 @@
-.winbox.no-animation {
+.no-animation {
   transition: none;
 }
 
-.winbox.no-shadow {
+.no-shadow {
   box-shadow: none;
 }
 
-.winbox.no-header {
+.no-header {
   .wb-header {
     display: none;
   }
@@ -15,26 +15,40 @@
   }
 }
 
-.winbox.no-min .wb-min {
+.no-min .wb-min {
   display: none;
 }
 
-.winbox.no-max .wb-max {
+.no-max .wb-max {
   display: none;
 }
 
-.winbox.no-full .wb-full {
+.no-full .wb-full {
   display: none;
 }
 
-.winbox.no-close .wb-close {
+.no-close .wb-close {
   display: none;
 }
 
-.winbox.no-resize .wb-body ~ div {
+.no-resize .wb-body ~ div {
   display: none;
 }
 
-.winbox.no-move:not(.min) .wb-title {
+.no-move:not(.min) .wb-title {
   pointer-events: none;
 }
+
+/*
+.winbox .wb-hide {
+  display: none;
+}
+
+.wb-show {
+  display: none;
+}
+
+.winbox .wb-show {
+  display: revert;
+}
+*/

@@ -1,5 +1,4 @@
 @import "images.less";
-@import "control.less";
 
 .winbox {
   position: fixed;
@@ -55,10 +54,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.winbox.min .wb-title {
-  width: calc(100% - 65px);
 }
 
 .wb-n {
@@ -170,11 +165,6 @@
   background-size: 16px auto;
 }
 
-.winbox.min .wb-full,
-.winbox.min .wb-min {
-  display: none;
-}
-
 /*
 .winbox:fullscreen .wb-full{
   background-image: url(@minimize);
@@ -195,8 +185,15 @@
   pointer-events: none;
 }
 
-.winbox.min .wb-title{
-  cursor: default;
+.winbox.min {
+  .wb-full,
+  .wb-min {
+    display: none;
+  }
+  .wb-title {
+    cursor: default;
+    width: calc(100% - 65px);
+  }
 }
 
 .winbox iframe{
@@ -246,3 +243,5 @@
     opacity: 0.85;
   }
 }
+
+@import "control.less";

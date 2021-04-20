@@ -7,7 +7,7 @@
  */
 
 import template from "./template.js";
-import { addListener, removeListener, getByClass, setStyle, setText, addClass, removeClass, preventEvent } from "./helper.js";
+import { addListener, removeListener, setStyle, setText, getByClass, addClass, removeClass, preventEvent } from "./helper.js";
 
 //const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window["MSStream"];
 
@@ -99,7 +99,7 @@ function WinBox(params, _title){
             left = params["left"];
             bottom = params["bottom"];
             right = params["right"];
-            index = params["index"];
+            index = params["index"] || index;
             onclose = params["onclose"];
             onfocus = params["onfocus"];
             onblur = params["onblur"];
@@ -134,8 +134,8 @@ function WinBox(params, _title){
     max_width -= left + right;
     max_height -= top + bottom;
 
-    width = width ? parse(width, max_width) : max_width / 2;
-    height = height ? parse(height, max_height) : max_height / 2;
+    width = width ? parse(width, max_width) : (max_width / 2) | 0;
+    height = height ? parse(height, max_height) : (max_height / 2) | 0;
 
     x = x ? parse(x, max_width, width) : left;
     y = y ? parse(y, max_height, height) : top;
@@ -156,7 +156,6 @@ function WinBox(params, _title){
     this.left = left;
 
     this.border = border;
-    this.class = classname;
     this.min = false;
     this.max = false;
 
@@ -210,7 +209,7 @@ function parse(num, base, center){
 
     if(num === "center"){
 
-        num = (base - center) / 2;
+        num = ((base - center) / 2) | 0;
     }
     else if(num === "right" || num === "bottom"){
 
@@ -304,8 +303,7 @@ function register(self){
     }
     else{
 
-        addClass(self.dom, "no-full");
-        //setStyle(getByClass(self.dom, "wb-full"), "display", "none");
+        self.addClass("no-full");
     }
 
     addListener(getByClass(self.dom, "wb-close"), "click", function(event){
@@ -330,7 +328,7 @@ function remove_min_stack(self){
 
     stack_min.splice(stack_min.indexOf(self), 1);
     update_min_stack();
-    removeClass(self.dom, "min");
+    self.removeClass("min");
     self.min = false;
     self.dom.title = "";
 }
@@ -580,7 +578,6 @@ WinBox.prototype.unmount = function(dest){
 WinBox.prototype.setTitle = function(title){
 
     setText(getByClass(this.dom, "wb-title"), this.title = title);
-
     return this;
 };
 
@@ -591,7 +588,6 @@ WinBox.prototype.setTitle = function(title){
 WinBox.prototype.setBackground = function(background){
 
     setStyle(this.dom, "background", background);
-
     return this;
 };
 
@@ -602,7 +598,6 @@ WinBox.prototype.setBackground = function(background){
 WinBox.prototype.setUrl = function(url){
 
     this.body.innerHTML = '<iframe src="' + url + '"></iframe>';
-
     return this;
 };
 
@@ -618,11 +613,11 @@ WinBox.prototype.focus = function(){
         // make it configurable?
 
         setStyle(this.dom, "z-index", index++);
-        addClass(this.dom, "focus");
+        this.addClass("focus");
 
         if(last_focus){
 
-            removeClass(last_focus.dom, "focus");
+            last_focus.removeClass("focus");
             last_focus.onblur && last_focus.onblur();
         }
 
@@ -639,10 +634,8 @@ WinBox.prototype.focus = function(){
 
 WinBox.prototype.hide = function(){
 
-    addClass(this.dom, "hide");
-
-    return this;
-}
+    return this.addClass("hide");
+};
 
 /**
  * @this WinBox
@@ -650,10 +643,8 @@ WinBox.prototype.hide = function(){
 
 WinBox.prototype.show = function(){
 
-    removeClass(this.dom, "hide");
-
-    return this;
-}
+    return this.removeClass("hide");
+};
 
 /**
  * @this WinBox
@@ -675,15 +666,15 @@ WinBox.prototype.minimize = function(state){
     else if((state !== false) && !this.min){
 
         stack_min.push(this);
-        addClass(this.dom, "min");
         update_min_stack();
         this.dom.title = this.title;
+        this.addClass("min");
         this.min = true;
     }
 
     if(this.max){
 
-        removeClass(this.dom, "max");
+        this.removeClass("max");
         this.max = false;
     }
 
@@ -706,9 +697,7 @@ WinBox.prototype.maximize = function(state){
 
         if((this.max = !this.max)){
 
-            addClass(this.dom, "max");
-
-            this.resize(
+            this.addClass("max").resize(
 
                 root_w - this.left - this.right,
                 root_h - this.top - this.bottom - 1,
@@ -723,8 +712,7 @@ WinBox.prototype.maximize = function(state){
         }
         else{
 
-            this.resize().move();
-            removeClass(this.dom, "max");
+            this.resize().move().removeClass("max");
         }
     }
 
@@ -819,8 +807,6 @@ WinBox.prototype.close = function(){
 
         last_focus = null;
     }
-
-    //return this;
 };
 
 /**
@@ -846,7 +832,6 @@ WinBox.prototype.move = function(x, y, _skip_update){
     setStyle(this.dom, "transform", "translate(" + x + "px," + y + "px)");
 
     this.onmove && this.onmove(x, y);
-
     return this;
 };
 
@@ -874,6 +859,27 @@ WinBox.prototype.resize = function(w, h, _skip_update){
     setStyle(this.dom, "height", h + "px");
 
     this.onresize && this.onresize(w, h);
+    return this;
+};
 
+/**
+ * @param {string} classname
+ * @this WinBox
+ */
+
+WinBox.prototype.addClass = function(classname){
+
+    addClass(this.dom, classname);
+    return this;
+};
+
+/**
+ * @param {string} classname
+ * @this WinBox
+ */
+
+WinBox.prototype.removeClass = function(classname){
+
+    removeClass(this.dom, classname);
     return this;
 };
