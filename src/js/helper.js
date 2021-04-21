@@ -1,7 +1,21 @@
+//const event_options = { "capture": true, "passive": false };
+
+/**
+ * @param {Window|Element} node
+ * @param {string} event
+ * @param {Function} fn
+ */
+
 export function addListener(node, event, fn){
 
     node.addEventListener(event, fn);
 }
+
+/**
+ * @param {Window|Element} node
+ * @param {string} event
+ * @param {Function} fn
+ */
 
 export function removeListener(node, event, fn){
 
@@ -30,7 +44,8 @@ export function setText(node, value){
 export function preventEvent(event){
 
     event.preventDefault();
-    event.stopImmediatePropagation();
+    event.stopPropagation();
+    //event.stopImmediatePropagation();
     //event.returnValue = false;
 }
 

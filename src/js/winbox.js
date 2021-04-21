@@ -286,14 +286,14 @@ function register(self){
 
         init();
         self.minimize();
-        preventEvent(event);
+        //preventEvent(event);
     });
 
     addListener(getByClass(self.dom, "wb-max"), "click", function(event){
 
         init();
         self.maximize();
-        preventEvent(event);
+        //preventEvent(event);
     });
 
     if(prefix_request){
@@ -301,7 +301,7 @@ function register(self){
         addListener(getByClass(self.dom, "wb-full"), "click", function(event){
 
             self.fullscreen();
-            preventEvent(event);
+            //preventEvent(event);
         });
     }
     else{
@@ -314,7 +314,7 @@ function register(self){
         self.close();
         self = null;
 
-        preventEvent(event);
+        //preventEvent(event);
     });
 
     addListener(self.dom, "mousedown", function(event){
@@ -417,13 +417,11 @@ function addWindowListener(self, dir){
 
     function handler_mousemove(event){
 
+        //preventEvent(event);
+
         if(event.touches){
 
             event = event.touches[0] || event;
-        }
-        else{
-
-            preventEvent(event);
         }
 
         const pageX = event.pageX;
@@ -511,7 +509,7 @@ function addWindowListener(self, dir){
         removeListener(window, "touchmove", handler_mousemove);
         removeListener(window, "touchend", handler_mouseup);
 
-        preventEvent(event);
+        //preventEvent(event);
     }
 }
 
