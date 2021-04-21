@@ -6,7 +6,16 @@
   "author": "Thomas Wilkerling",
   "copyright": "Nextapps GmbH",
   "license": "Apache-2.0",
-  "keywords": ["windowmanager", "windows", "popup", "window-manager", "desktop", "window", "frame", "box"],
+  "keywords": [
+    "windowmanager",
+    "windows",
+    "popup",
+    "window-manager",
+    "desktop",
+    "window",
+    "frame",
+    "box"
+  ],
   "bugs": {
     "url": "https://github.com/nextapps-de/winbox/issues",
     "email": "info@nextapps.de"
@@ -22,7 +31,7 @@
   "scripts": {
     "copy": "cpx \"src/img/*.*\" dist/img/",
     "clean": "if exist dist rmdir dist /s /q && mkdir dist",
-    "build:css": "lessc --autoprefix=\">=1%\" src/css/winbox.less src/css/winbox.css",
+    "build:css": "lessc-each src/css/ src/css/ && lessc-each src/css/themes/ src/css/themes/",
     "build:css:bundle": "node task/bundle --image && lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" tmp/bundle.less dist/css/winbox.min.css && csso dist/css/winbox.min.css --output dist/css/winbox.min.css",
     "build:css:themes": "lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/modern.less dist/css/themes/modern.min.css && csso dist/css/themes/modern.min.css --output dist/css/themes/modern.min.css",
     "build:js": "node task/build",
@@ -52,6 +61,7 @@
     "less-plugin-autoprefix": "^2.0.0",
     "less-plugin-clean-css": "^1.5.1",
     "less-plugin-csswring": "^0.0.1",
+    "lessc-each": "^1.1.0",
     "svgo": "^2.3.0",
     "web-servo": "^0.5.1"
   }

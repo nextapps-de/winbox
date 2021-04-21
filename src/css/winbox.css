@@ -6,7 +6,7 @@
   /* hidden overflow will cut off the resizing are */
   /*overflow: hidden;*/
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transition: width 0.3s, height 0.3s, transform 0.3s;
+  transition: width .3s, height .3s, transform .3s;
   transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
   will-change: transform, width, height;
   contain: strict;

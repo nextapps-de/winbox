@@ -7,32 +7,12 @@
 <a target="_blank" href="https://github.com/nextapps-de/winbox/issues"><img src="https://img.shields.io/github/issues/nextapps-de/winbox.svg"></a>
 <a target="_blank" href="https://github.com/nextapps-de/winbox/blob/master/LICENSE.md"><img src="https://img.shields.io/npm/l/winbox.svg"></a>
 
-<a href="https://nextapps-de.github.io/winbox/">Demo</a> &ensp;&bull;&ensp; <a href="#started">Getting Started</a> &ensp;&bull;&ensp; <a href="#options">Options</a> &ensp;&bull;&ensp; <a href="#api">API</a> &ensp;&bull;&ensp; <a href="#customize">Customize</a> &ensp;&bull;&ensp; <a href="CHANGELOG.md">Changelog</a>
+<a href="https://nextapps-de.github.io/winbox/">Demo</a> &ensp;&bull;&ensp; <a href="#started">Getting Started</a> &ensp;&bull;&ensp; <a href="#options">Options</a> &ensp;&bull;&ensp; <a href="#api">API</a> &ensp;&bull;&ensp; <a href="#themes">Themes</a> &ensp;&bull;&ensp; <a href="#customize">Customize</a> &ensp;&bull;&ensp; <a href="CHANGELOG.md">Changelog</a>
 
 <h3>Live Demo / Code Examples: <br><a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a></h3>
 
-<a name="started" id="started"></a>
+<a name="started"></a>
 ## Getting Started
-
-<!--
-__Version Explanation__
-
-<table>
-    <tr>
-        <td>Bundle</td>
-        <td>
-            All assets bundled into one single file (js + css + html + icons).
-        </td>
-    </tr>
-    <tr></tr>
-    <tr>
-        <td>Non-Bundled</td>
-        <td>
-            Each asset file exists separately. Recommended when using own bundler.
-        </td>
-    </tr>
-</table>
--->
 
 __Get Latest Build (Stable):__
 
@@ -98,13 +78,11 @@ __Get Latest Build (Nightly):__
 
 Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.1.3__/dist/" into "/winbox/__master__/dist".
 
-
 __Get Latest (NPM):__
 
 ```cmd
 npm install winbox
 ```
-
 
 __Get Latest (ES6 Modules):__
 
@@ -349,7 +327,6 @@ Instance properties:
     </tr>
 </table>
 
-
 ## Examples
 
 <a name="winbox.new"></a>
@@ -494,7 +471,6 @@ new WinBox({
 
 ```js
 new WinBox("Set innerHTML", {
-
     html: "<h1>Lorem Ipsum</h1>"
 });
 ```
@@ -502,9 +478,43 @@ new WinBox("Set innerHTML", {
 Alternatively:
 ```js
 var winbox = new WinBox("Set innerHTML");
-
 winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
 ```
+
+<a name="themes"></a>
+#### Themes
+
+> Feel free to create your own themes and share them with us.
+
+You will find all themes <a href="src/img/theme/">here</a>.
+
+Load the corresponding css files (or use a bundler), e.g.:
+
+```html
+<head>
+    <link rel="stylesheet" href="dist/css/winbox.min.css">
+    <link rel="stylesheet" href="dist/css/themes/modern.min.css">
+    <script src="dist/js/winbox.min.js"></script>
+</head>
+```
+
+Just add the name of the theme as a class:
+
+```js
+var winbox = new WinBox({
+    title: "Theme: Modern",
+    class: "modern"
+});
+```
+
+Alternatively:
+
+```js
+var winbox = new WinBox("Theme: Modern");
+winbox.addClass("modern");
+```
+
+You can change themes during the lifetime of the window.
 
 <a name="winbox.mount"></a>
 #### Mount DOM (Cloned)
@@ -522,7 +532,6 @@ winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
 var node = document.getElementById("content");
 
 new WinBox("Mount DOM", {
-
     mount: node.cloneNode(true)
 });
 ```
@@ -819,9 +828,9 @@ winbox.setTitle("Title")
 
 WinBox provides you some built-in control classes you can pass when creating a window instance. 
 
-> All control classes from this list could be added or removed during lifetime of the window (after creation). State classes e.g. "max", "min" and "focus" could not be changed manually.
+> All control classes from this list could be added or removed during lifetime of the window (after creation). State classes like "max", "min" and "focus" could not be changed manually.
 
-<table>
+<table width="100%">
     <tr></tr>
     <tr>
         <td>Classname&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -871,7 +880,16 @@ WinBox provides you some built-in control classes you can pass when creating a w
         <td>no-move</td>
         <td>Disables the window moving capability</td>
     </tr>
+</table>
+
+Also, only this two css-only state classes could be toggled programmatically:
+
+<table style="width: 100%">
     <tr></tr>
+    <tr>
+        <td>Classname&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>Description</td>
+    </tr>
     <tr>
         <td>modal</td>
         <td>Show the window in modal mode</td>
@@ -1090,7 +1108,7 @@ Apply styles when window is in "modal" state:
 
 Customize the modal background overlay:
 ```css
-.winbox.modal:after{
+.winbox.modal:after {
     background: #0d1117;
     opacity: 0.5;
     animation: none;
@@ -1154,6 +1172,30 @@ new WinBox({
     mount: document.getElementById("content")
 });
 ```
+
+#### Did you know a solution for this issue?
+
+Please let me know if you have a stable workaround to fall back to a user-specified display state via CSS to prevent the `display: block` issue (e.g. on tables which have a table display instead of a block display). Please suggest no hacks like `width: 0` or `left: -9999px` or `opacity: 0; pointer-events: none` because they have the same issue and didn't fall back safely to the user-specified original state.
+
+The current best idea I came to was by inner-wrapping contents in a new blank tag like:
+
+```html
+<body>
+   <main id="content">
+      <header>
+         <div class="wb-hide">Hide this header when in windowed mode</div>
+      </header>
+      <section>
+          <!-- page contents -->
+      </section>
+      <footer>
+         <div class="wb-show">Hide this footer when NOT in windowed mode</div>
+      </footer>
+   </main>
+</body>
+```
+
+In this case the display state could be `inherit` safely. This workaround does not come without any conventions, so I'm not happy enough about it.
 
 ## Custom Builds
 
