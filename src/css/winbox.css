@@ -116,7 +116,7 @@
 .wb-icon {
   float: right;
   height: 35px;
-  max-width: 110%;
+  max-width: 120%;
   padding: 0 2px;
   text-align: center;
 }
@@ -161,17 +161,12 @@
 .winbox.max .wb-title {
   pointer-events: none;
 }
-.winbox.min {
-  /*
-  .wb-title {
-    cursor: default;
-    width: calc(100% - 65px);
-  }
-  */
-}
 .winbox.min .wb-full,
 .winbox.min .wb-min {
   display: none;
+}
+.winbox.min .wb-title {
+  cursor: default;
 }
 .winbox iframe {
   position: absolute;
@@ -190,6 +185,7 @@
   right: 0;
   bottom: 0;
   background: inherit;
+  border-radius: inherit;
 }
 .winbox.modal:after {
   content: '';

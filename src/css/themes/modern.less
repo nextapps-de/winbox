@@ -2,6 +2,11 @@
     & {
         background: linear-gradient(90deg, #ff00f0, #0050ff);
         border-radius: 12px 12px 0 0;
+        animation: popup 0.3s cubic-bezier(0.3, 1, 0.3, 1) backwards;
+    }
+
+    &:not(.focus){
+        background: #666;
     }
 
     &.max,
@@ -52,5 +57,14 @@
         &::-webkit-scrollbar-corner {
             background: transparent;
         }
+    }
+}
+
+@keyframes popup {
+    0%{
+        transform: scale(0.8);
+    }
+    100%{
+        transform: scale(1);
     }
 }

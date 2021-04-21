@@ -339,13 +339,13 @@ function remove_min_stack(self){
 function update_min_stack(){
 
     const len = stack_min.length;
-    const width = Math.min(root_w / len, 250);
 
-    for(let i = 0, self; i < len; i++){
+    for(let i = 0, self, width; i < len; i++){
 
         self = stack_min[i];
+        width = Math.min((root_w - self.left * 2) / len, 250);
         self.resize(width, 35, true)
-            .move(self.left + i * width, root_h - self.bottom - (/*self.preserve ? 0 :*/ 35), true);
+            .move((self.left + i * width) | 0, root_h - self.bottom - (/*self.preserve ? 0 :*/ 35), true);
     }
 }
 
@@ -388,7 +388,7 @@ function addWindowListener(self, dir){
         if(self.min){
 
             remove_min_stack(self);
-            self.resize().move();
+            self.resize().move().focus();
         }
         else /*if(!self.min && !self.max)*/ { // already disabled by css
 
