@@ -50,7 +50,8 @@
   padding-left: 10px;
   cursor: move;
   line-height: 35px;
-  width: calc(100% - 120px);
+  //width: auto;
+  //width: calc(100% - 120px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -129,10 +130,11 @@
 }
 
 .wb-icon{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 1px;
+  float: right;
+  height: 35px;
+  max-width: 110%;
+  padding: 0 2px;
+  text-align: center;
 }
 
 .wb-icon * {
@@ -190,10 +192,12 @@
   .wb-min {
     display: none;
   }
+  /*
   .wb-title {
     cursor: default;
     width: calc(100% - 65px);
   }
+  */
 }
 
 .winbox iframe{

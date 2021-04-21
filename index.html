@@ -76,6 +76,12 @@
             color: #fff;
             background: #131820;
         }
+        .winbox.my-theme .wb-title {
+            color: #000;
+        }
+        .winbox.my-theme .wb-icon {
+            filter: invert(1);
+        }
     </style>
     <meta name="format-detection" content="telephone=no">
     <meta name="description" content="WinBox is a modern HTML5 window manager for the web. Lightweight, outstanding performance, no dependencies, fully customizable, free and open source!">
@@ -157,7 +163,7 @@
         <br><br>
         <pre><code class="language-js">new WinBox("Custom Border", {
 
-    border: 4
+    border: "0.3em"
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['border']()">Run Code</div>
@@ -287,10 +293,10 @@
         <pre><code class="language-js">new WinBox({
 
     id: "my-window",
-    class: "my-theme",
+    class: ["no-full", "my-theme"],
     root: document.body,
     title: "All Options",
-    background: "#ff005d",
+    background: "#fff",
     border: 4,
     width: 200,
     height: 200,
@@ -303,7 +309,7 @@
     left: 50,
     html: "width: 200, height: 200",
     onfocus: function(){
-        this.setBackground("#ff005d"); // this => WinBox
+        this.setBackground("#fff");
     },
     onblur: function(){
         this.setBackground("#999");
@@ -594,7 +600,7 @@
 
                     new WinBox("Custom Border", {
 
-                        border: 4
+                        border: "0.3em"
                     });
                 },
                 "color": function(){
@@ -673,7 +679,7 @@
                         class: ["no-full", "my-theme"],
                         root: document.body,
                         title: "All Options",
-                        background: "#ff005d",
+                        background: "#fff",
                         border: 4,
                         index: 50,
                         width: 200,
@@ -687,7 +693,7 @@
                         left: 50,
                         html: "width: 200, height: 200",
                         onfocus: function(){
-                            this.setBackground("#ff005d");
+                            this.setBackground("#fff");
                         },
                         onblur: function(){
                             this.setBackground("#999");

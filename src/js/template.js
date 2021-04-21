@@ -5,13 +5,13 @@ template.innerHTML = (
     //'<div class=winbox>' +
 
         '<div class=wb-header>' +
-            '<div class=wb-title> </div>' +
             '<div class=wb-icon>' +
                 '<span class=wb-min></span>' +
                 '<span class=wb-max></span>' +
                 '<span class=wb-full></span>' +
                 '<span class=wb-close></span>' +
             '</div>' +
+            '<div class=wb-title> </div>' +
         '</div>' +
 
         '<div class=wb-body></div>' +
