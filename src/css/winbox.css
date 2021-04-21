@@ -12,6 +12,8 @@
   contain: strict;
   /* explicitly set text align to left fixes an issue with iframes alignment when centered */
   text-align: left;
+  /* workaround for using passive listeners */
+  touch-action: none;
 }
 /*
 .winbox:fullscreen{
@@ -25,6 +27,7 @@
   width: 100%;
   height: 35px;
   color: #fff;
+  overflow: hidden;
 }
 .wb-body {
   position: absolute;
@@ -38,7 +41,7 @@
   will-change: scroll-position;
   background: #fff;
   margin-top: 0 !important;
-  box-sizing: border-box;
+  /*box-sizing: border-box;*/
 }
 .wb-title {
   font-size: 14px;
@@ -197,6 +200,7 @@
   background: #0d1117;
   animation: fade-in 0.2s ease-out forwards;
   z-index: -1;
+  touch-action: none;
 }
 .winbox.modal .wb-min,
 .winbox.modal .wb-max,

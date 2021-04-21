@@ -224,7 +224,7 @@ function parse(num, base, center){
 
             if(unit === "%"){
 
-                num = base / 100 * value;
+                num = (base / 100 * value) | 0;
             }
             else{
 
@@ -265,6 +265,8 @@ function setup(){
 
     init();
 }
+
+const event_options = { /*"capture": true,*/ "passive": true };
 
 /**
  * @param {WinBox} self
@@ -379,11 +381,11 @@ function addWindowListener(self, dir){
     let x, y;
 
     addListener(node, "mousedown", mousedown);
-    addListener(node, "touchstart", mousedown);
+    addListener(node, "touchstart", mousedown, event_options);
 
     function mousedown(event){
 
-        preventEvent(event);
+        //preventEvent(event);
 
         if(self.min){
 
@@ -396,7 +398,7 @@ function addWindowListener(self, dir){
 
             addListener(window, "mousemove", handler_mousemove);
             addListener(window, "mouseup", handler_mouseup);
-            addListener(window, "touchmove", handler_mousemove);
+            addListener(window, "touchmove", handler_mousemove, event_options);
             addListener(window, "touchend", handler_mouseup);
 
             if(event.touches){
@@ -506,7 +508,7 @@ function addWindowListener(self, dir){
 
         removeListener(window, "mousemove", handler_mousemove);
         removeListener(window, "mouseup", handler_mouseup);
-        removeListener(window, "touchmove", handler_mousemove);
+        removeListener(window, "touchmove", handler_mousemove, event_options);
         removeListener(window, "touchend", handler_mouseup);
 
         //preventEvent(event);

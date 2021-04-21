@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="demo/style.css">
     <style>
 
-        /* Custom Theme */
+        /* WinBox Theme: "custom" */
 
         .winbox.custom {
             background: linear-gradient(90deg, #ff00f0, #0050ff);
@@ -54,7 +54,6 @@
         .winbox.custom .wb-full {
             display: none;
         }
-
         .winbox.custom .wb-body::-webkit-scrollbar {
             width: 12px;
         }
@@ -71,6 +70,8 @@
         .winbox.custom .wb-body::-webkit-scrollbar-corner {
             background: transparent;
         }
+
+        /* WinBox Theme: "my-theme" */
 
         .winbox.my-theme .wb-body {
             color: #fff;
@@ -571,8 +572,8 @@
             <button onclick="window.buttons['resize']()">Resize (50%, 50%)</button>
             <button onclick="window.buttons['title']()">Set Title</button>
             <button onclick="window.buttons['color']()">Set Color</button>
-            <button onclick="window.buttons['add']()">Add Class (modern)</button>
-            <button onclick="window.buttons['remove']()">Remove Class (modern)</button>
+            <button onclick="window.buttons['add']()">Add Class (my-theme)</button>
+            <button onclick="window.buttons['remove']()">Remove Class (my-theme)</button>
             <button onclick="window.buttons['close']()">Close</button>
         </div>
     </div>
@@ -795,11 +796,11 @@
                 },
                 add: function(){
 
-                    winbox.addClass("modern");
+                    winbox.addClass("my-theme");
                 },
                 remove: function(){
 
-                    winbox.removeClass("modern");
+                    winbox.removeClass("my-theme");
                 },
                 close: function(){
 

@@ -1,25 +1,25 @@
-//const event_options = { "capture": true, "passive": false };
-
 /**
  * @param {Window|Element} node
  * @param {string} event
  * @param {Function} fn
+ * @param {!Object|boolean=} opt
  */
 
-export function addListener(node, event, fn){
+export function addListener(node, event, fn, opt){
 
-    node.addEventListener(event, fn);
+    node.addEventListener(event, fn, opt);
 }
 
 /**
  * @param {Window|Element} node
  * @param {string} event
  * @param {Function} fn
+ * @param {!Object|boolean=} opt
  */
 
-export function removeListener(node, event, fn){
+export function removeListener(node, event, fn, opt){
 
-    node.removeEventListener(event, fn);
+    node.removeEventListener(event, fn, opt);
 }
 
 export function getByClass(root, name){
