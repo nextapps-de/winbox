@@ -41,10 +41,16 @@ export function setText(node, value){
     node.firstChild.nodeValue = value;
 }
 
-export function preventEvent(event){
+/**
+ * @param event
+ * @param {boolean=} prevent
+ */
 
-    event.preventDefault();
+export function preventEvent(event, prevent){
+
     event.stopPropagation();
+    prevent && event.preventDefault();
+
     //event.stopImmediatePropagation();
     //event.returnValue = false;
 }

@@ -73,7 +73,6 @@ __Get Latest Build (Stable):__
     </tr>
 </table>
 
-
 __Get Latest Build (Nightly):__
 
 Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.1.31__/dist/" into "/winbox/__master__/dist".

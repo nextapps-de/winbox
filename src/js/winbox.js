@@ -266,8 +266,6 @@ function setup(){
     init();
 }
 
-const event_options = { /*"capture": true,*/ "passive": true };
-
 /**
  * @param {WinBox} self
  */
@@ -370,6 +368,8 @@ function enable_animation(self){
     setStyle(self.dom, "transition", "");
 }
 
+const event_options = { "passive": false };
+
 /**
  * @param {WinBox} self
  * @param {string} dir
@@ -385,7 +385,7 @@ function addWindowListener(self, dir){
 
     function mousedown(event){
 
-        //preventEvent(event);
+        preventEvent(event, true);
 
         if(self.min){
 
@@ -398,7 +398,7 @@ function addWindowListener(self, dir){
 
             addListener(window, "mousemove", handler_mousemove);
             addListener(window, "mouseup", handler_mouseup);
-            addListener(window, "touchmove", handler_mousemove, event_options);
+            addListener(window, "touchmove", handler_mousemove);
             addListener(window, "touchend", handler_mouseup);
 
             if(event.touches){
@@ -419,7 +419,7 @@ function addWindowListener(self, dir){
 
     function handler_mousemove(event){
 
-        //preventEvent(event);
+        preventEvent(event);
 
         if(event.touches){
 
@@ -504,14 +504,13 @@ function addWindowListener(self, dir){
 
     function handler_mouseup(event){
 
+        preventEvent(event);
         enable_animation(self);
 
         removeListener(window, "mousemove", handler_mousemove);
         removeListener(window, "mouseup", handler_mouseup);
-        removeListener(window, "touchmove", handler_mousemove, event_options);
+        removeListener(window, "touchmove", handler_mousemove);
         removeListener(window, "touchend", handler_mouseup);
-
-        //preventEvent(event);
     }
 }
 
