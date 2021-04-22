@@ -8,6 +8,7 @@
     <title>WinBox &ndash; Modern HTML5 Window Manager</title>
     <link rel="stylesheet" href="dist/css/winbox.min.css">
     <link rel="stylesheet" href="dist/css/themes/modern.min.css">
+    <link rel="stylesheet" href="dist/css/themes/white.min.css">
     <script src="dist/js/winbox.min.js"></script>
     <!--<script src="dist/winbox.bundle.js"></script>-->
     <link rel="stylesheet" href="demo/style.css">
@@ -25,7 +26,7 @@
             border-radius: 0;
         }
         .winbox.custom .wb-body {
-            /* width of window border: */
+            /* margin represents the width of window border: */
             margin: 4px;
             color: #fff;
             background: #131820;
@@ -86,6 +87,7 @@
         .winbox.my-theme .wb-icon {
             filter: invert(1);
         }
+
     </style>
     <meta name="format-detection" content="telephone=no">
     <meta name="description" content="WinBox is a modern HTML5 window manager for the web. Lightweight, outstanding performance, no dependencies, fully customizable, free and open source!">
@@ -445,7 +447,7 @@
     opacity: 0.65;
 }
 
-.wb-icon *:hover{
+.wb-icon *:hover {
     opacity: 1;
 }
 
@@ -497,43 +499,30 @@
 
         <hr>
         <br>
-        Custom Styles (By Classname)
+        Custom Styles By Classname
         <br><br>
-        <pre><code class="language-css">.winbox.custom {
-    background: linear-gradient(90deg, #ff00f0, #0050ff);
-    border-radius: 12px 12px 0 0;
-    box-shadow: none;
+        <pre><code class="language-css">.winbox.my-theme{
+    background: #fff;
 }
-
-.winbox.custom.min {
-    border-radius: 0;
-}
-
-.winbox.custom .wb-title {
-    font-size: 13px;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.winbox.custom .wb-max {
-    display: none;
-}
-
-.winbox.custom .wb-body {
-    /* the width of window border: */
-    margin: 4px;
+.winbox.my-theme .wb-body {
     color: #fff;
-    background: #0d1117;
+    background: #131820;
+}
+.winbox.my-theme .wb-title {
+    color: #000;
+}
+.winbox.my-theme .wb-icon {
+    filter: invert(1);
 }</code></pre>
         <div class="break"></div>
-        <pre><code class="language-js">new WinBox("Custom CSS", {
+        <pre><code class="language-js">new WinBox("Custom CSS (Class)", {
 
-    class: "custom",
+    class: "my-theme",
     mount: document.getElementById("content")
                    .cloneNode(true)
 });</code></pre>
         <div class="break"></div>
-        <div class="button" onclick="window.examples['custom-css']()">Run Code</div>
+        <div class="button" onclick="window.examples['custom-class']()">Run Code</div>
         <br><br>
 
         <hr>
@@ -730,10 +719,11 @@
                 },
                 "custom-class": function(){
 
-                    new WinBox("Custom Class", {
+                    new WinBox("Custom CSS (Class)", {
 
-                        class: "custom",
+                        class: "my-theme",
                         mount: document.getElementById("content")
+                                       .cloneNode(true)
                     });
                 },
                 "theme-modern": function(){

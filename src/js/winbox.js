@@ -167,12 +167,14 @@ function WinBox(params, _title){
 
     if(max){
 
-        this.maximize().focus();
+        this.maximize();
     }
     else{
 
-        this.move().resize().focus();
+        this.move().resize();
     }
+
+    this.focus();
 
     if(mount){
 
@@ -232,10 +234,6 @@ function parse(num, base, center){
             }
         }
     }
-    // else if(!num && (num !== 0)){
-    //
-    //     num = current || 0;
-    // }
 
     return num;
 }
@@ -284,24 +282,24 @@ function register(self){
 
     addListener(getByClass(self.dom, "wb-min"), "click", function(event){
 
+        preventEvent(event);
         init();
         self.minimize();
-        //preventEvent(event);
     });
 
     addListener(getByClass(self.dom, "wb-max"), "click", function(event){
 
+        preventEvent(event);
         init();
         self.maximize();
-        //preventEvent(event);
     });
 
     if(prefix_request){
 
         addListener(getByClass(self.dom, "wb-full"), "click", function(event){
 
+            preventEvent(event);
             self.fullscreen();
-            //preventEvent(event);
         });
     }
     else{
@@ -311,14 +309,14 @@ function register(self){
 
     addListener(getByClass(self.dom, "wb-close"), "click", function(event){
 
+        preventEvent(event);
         self.close();
         self = null;
-
-        //preventEvent(event);
     });
 
     addListener(self.dom, "mousedown", function(event){
 
+        preventEvent(event);
         self.focus();
     });
 }
@@ -345,7 +343,7 @@ function update_min_stack(){
         self = stack_min[i];
         width = Math.min((root_w - self.left * 2) / len, 250);
         self.resize(width, 35, true)
-            .move((self.left + i * width) | 0, root_h - self.bottom - (/*self.preserve ? 0 :*/ 35), true);
+            .move((self.left + i * width) | 0, root_h - self.bottom - 35, true);
     }
 }
 
@@ -516,12 +514,6 @@ function addWindowListener(self, dir){
 
 function init(){
 
-    root_w = doc.clientWidth;
-    root_h = doc.clientHeight;
-}
-
-// WinBox.prototype.init = function(){
-//
 //     const doc = document.documentElement;
 //     //const rect = doc.getBoundingClientRect();
 //
@@ -532,9 +524,10 @@ function init(){
 //     //
 //     //     this.root_h = window.innerHeight * (this.root_w / window.innerWidth);
 //     // }
-//
-//     return this;
-// };
+
+    root_w = doc.clientWidth;
+    root_h = doc.clientHeight;
+}
 
 /**
  * @param {Element=} src
@@ -610,9 +603,6 @@ WinBox.prototype.setUrl = function(url){
 WinBox.prototype.focus = function(){
 
     if(last_focus !== this){
-
-        // set minimum z-index of 10 to prevent common issues
-        // make it configurable?
 
         setStyle(this.dom, "z-index", index++);
         this.addClass("focus");

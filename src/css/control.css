@@ -1,0 +1,43 @@
+.no-animation {
+  transition: none;
+}
+.no-shadow {
+  box-shadow: none;
+}
+.no-header .wb-header {
+  display: none;
+}
+.no-header .wb-body {
+  top: 0;
+}
+.no-min .wb-min {
+  display: none;
+}
+.no-max .wb-max {
+  display: none;
+}
+.no-full .wb-full {
+  display: none;
+}
+.no-close .wb-close {
+  display: none;
+}
+.no-resize .wb-body ~ div {
+  display: none;
+}
+.no-move:not(.min) .wb-title {
+  pointer-events: none;
+}
+/*
+.winbox .wb-hide {
+  display: none;
+}
+
+.wb-show {
+  display: none;
+}
+
+.winbox .wb-show {
+  display: revert;
+}
+*/
