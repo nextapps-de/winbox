@@ -168,6 +168,12 @@
 .winbox.min .wb-title {
   cursor: default;
 }
+.max {
+  box-shadow: none;
+}
+.max .wb-body {
+  margin: 0 !important;
+}
 .winbox iframe {
   position: absolute;
   width: 100%;

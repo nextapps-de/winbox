@@ -16,6 +16,13 @@
         &.min:not(:hover) {
             background: #666;
         }
+
+        .wb-icon * {
+            opacity: 0.65;
+        }
+        .wb-icon *:hover {
+            opacity: 1;
+        }
     }
 
     @media (hover: none) {
@@ -24,8 +31,8 @@
         }
     }
 
-    &.max,
-    &.min {
+    //&.min,
+    &.max {
         border-radius: 0;
     }
 
@@ -33,14 +40,6 @@
         font-size: 13px;
         text-transform: uppercase;
         font-weight: 600;
-    }
-
-    .wb-icon * {
-        opacity: 0.65;
-    }
-
-    .wb-icon *:hover {
-        opacity: 1;
     }
 
     .wb-body {

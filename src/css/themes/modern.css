@@ -10,26 +10,25 @@
   .winbox.modern.min:not(:hover) {
     background: #666;
   }
+  .winbox.modern .wb-icon * {
+    opacity: 0.65;
+  }
+  .winbox.modern .wb-icon *:hover {
+    opacity: 1;
+  }
 }
 @media (hover: none) {
   .winbox.modern.min {
     background: #666;
   }
 }
-.winbox.modern.max,
-.winbox.modern.min {
+.winbox.modern.max {
   border-radius: 0;
 }
 .winbox.modern .wb-title {
   font-size: 13px;
   text-transform: uppercase;
   font-weight: 600;
-}
-.winbox.modern .wb-icon * {
-  opacity: 0.65;
-}
-.winbox.modern .wb-icon *:hover {
-  opacity: 1;
 }
 .winbox.modern .wb-body {
   /* width of window border: */
