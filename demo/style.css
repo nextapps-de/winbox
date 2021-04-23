@@ -3,7 +3,6 @@
     touch-action: manipulation;
 }
 html, body{
-    position: relative;
     margin: 0;
     padding: 0;
     border: 0;
