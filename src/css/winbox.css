@@ -9,7 +9,7 @@
   transition: width .3s, height .3s, transform .3s;
   transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
   will-change: transform, width, height;
-  contain: strict;
+  contain: layout size;
   /* explicitly set text align to left fixes an issue with iframes alignment when centered */
   text-align: left;
   /* workaround for using passive listeners */
@@ -193,7 +193,11 @@
   border: 0;
 }
 .winbox.modal {
-  contain: layout size;
+  /*
+  &{
+    contain: layout size;
+  }
+  */
 }
 .winbox.modal:before {
   content: '';

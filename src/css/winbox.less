@@ -11,7 +11,9 @@
   transition: width .3s, height .3s, transform .3s;
   transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
   will-change: transform, width, height;
-  contain: strict;
+  // strict contain does not make overflow contents selectable
+  //contain: strict;
+  contain: layout size;
   /* explicitly set text align to left fixes an issue with iframes alignment when centered */
   text-align: left;
   /* workaround for using passive listeners */
@@ -224,10 +226,11 @@
 }
 
 .winbox.modal{
+  /*
   &{
-    //overflow: visible;
     contain: layout size;
   }
+  */
   &:before{
     content: '';
     position: absolute;
