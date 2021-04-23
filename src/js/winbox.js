@@ -342,7 +342,7 @@ function update_min_stack(){
 
         self = stack_min[i];
         width = Math.min((root_w - self.left * 2) / len, 250);
-        self.resize(width, 35, true)
+        self.resize((width + 1) | 0, 35, true)
             .move((self.left + i * width) | 0, root_h - self.bottom - 35, true);
     }
 }

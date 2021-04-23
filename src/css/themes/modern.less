@@ -5,9 +5,23 @@
         animation: popup 0.3s cubic-bezier(0.3, 1, 0.3, 1) backwards;
     }
 
-    &.min:not(:hover),
+    //&.min:not(:hover),
     &:not(.min):not(.focus) {
         background: #666;
+    }
+
+    // hover fix for mobile devices which keeps the :hover state when touched
+
+    @media (hover: hover) {
+        &.min:not(:hover) {
+            background: #666;
+        }
+    }
+
+    @media (hover: none) {
+        &.min {
+            background: #666;
+        }
     }
 
     &.max,
