@@ -5,25 +5,17 @@
   left: 0;
   top: 0;
   background: #0050ff;
-  /* hidden overflow will cut off the resizing are */
-  /*overflow: hidden;*/
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   transition: width .3s, height .3s, transform .3s;
   transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
   will-change: transform, width, height;
-  // strict contain does not make overflow contents selectable
-  //contain: strict;
+  /* contain "strict" does not make overflow contents selectable */
   contain: layout size;
   /* explicitly set text align to left fixes an issue with iframes alignment when centered */
   text-align: left;
   /* workaround for using passive listeners */
   touch-action: none;
 }
-/*
-.winbox:fullscreen{
-  transition: none !important;
-}
-*/
 
 .wb-header {
   position: absolute;
@@ -48,9 +40,8 @@
   background: #fff;
   /* when no border is set there is some thin line visible */
   //margin: -1px;
-  /* always prevent top border */
+  /* always hide top border visually */
   margin-top: 0 !important;
-  /*box-sizing: border-box;*/
 }
 
 .wb-title{
@@ -59,8 +50,6 @@
   padding-left: 10px;
   cursor: move;
   line-height: 35px;
-  //width: auto;
-  //width: calc(100% - 120px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -177,12 +166,12 @@
 }
 
 /*
+.winbox:fullscreen{
+  transition: none !important;
+}
 .winbox:fullscreen .wb-full{
   background-image: url(@minimize);
 }
-*/
-
-/*
 .winbox:fullscreen > div,
 .winbox:fullscreen .wb-title,
 */
@@ -197,18 +186,6 @@
 }
 
 .winbox.min {
-  // hiding large contents when minimized does not save any noticeable performance or memory?
-  /*
-  .wb-body > * {
-    display: none;
-  }
-  */
-  // hide box-shadow when minimized?
-  /*
-  & {
-    box-shadow: none;
-  }
-  */
   .wb-full,
   .wb-min {
     display: none;
@@ -226,11 +203,6 @@
 }
 
 .winbox.modal{
-  /*
-  &{
-    contain: layout size;
-  }
-  */
   &:before{
     content: '';
     position: absolute;

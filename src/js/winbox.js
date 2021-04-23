@@ -470,7 +470,7 @@ function addWindowListener(self, dir){
 
             if(resize_w){
 
-                self.width = Math.max(Math.min(self.width, root_w - self.x - self.right), 250);
+                self.width = Math.max(Math.min(self.width, root_w - self.x - self.right), 150);
             }
 
             if(resize_h){

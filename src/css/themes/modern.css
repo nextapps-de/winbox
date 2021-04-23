@@ -39,6 +39,7 @@
 }
 .winbox.modern .wb-body::-webkit-scrollbar {
   width: 12px;
+  height: 12px;
 }
 .winbox.modern .wb-body::-webkit-scrollbar-track {
   background: transparent;

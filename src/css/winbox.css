@@ -3,23 +3,17 @@
   left: 0;
   top: 0;
   background: #0050ff;
-  /* hidden overflow will cut off the resizing are */
-  /*overflow: hidden;*/
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   transition: width .3s, height .3s, transform .3s;
   transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
   will-change: transform, width, height;
+  /* contain "strict" does not make overflow contents selectable */
   contain: layout size;
   /* explicitly set text align to left fixes an issue with iframes alignment when centered */
   text-align: left;
   /* workaround for using passive listeners */
   touch-action: none;
 }
-/*
-.winbox:fullscreen{
-  transition: none !important;
-}
-*/
 .wb-header {
   position: absolute;
   left: 0;
@@ -41,9 +35,8 @@
   will-change: scroll-position;
   background: #fff;
   /* when no border is set there is some thin line visible */
-  /* always prevent top border */
+  /* always hide top border visually */
   margin-top: 0 !important;
-  /*box-sizing: border-box;*/
 }
 .wb-title {
   font-family: Arial, sans-serif;
@@ -152,11 +145,12 @@
   background-size: 16px auto;
 }
 /*
+.winbox:fullscreen{
+  transition: none !important;
+}
 .winbox:fullscreen .wb-full{
   background-image: url(@minimize);
 }
-*/
-/*
 .winbox:fullscreen > div,
 .winbox:fullscreen .wb-title,
 */
@@ -166,18 +160,6 @@
 .winbox.max .wb-body ~ div,
 .winbox.max .wb-title {
   pointer-events: none;
-}
-.winbox.min {
-  /*
-  .wb-body > * {
-    display: none;
-  }
-  */
-  /*
-  & {
-    box-shadow: none;
-  }
-  */
 }
 .winbox.min .wb-full,
 .winbox.min .wb-min {
@@ -191,13 +173,6 @@
   width: 100%;
   height: 100%;
   border: 0;
-}
-.winbox.modal {
-  /*
-  &{
-    contain: layout size;
-  }
-  */
 }
 .winbox.modal:before {
   content: '';
