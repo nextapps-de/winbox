@@ -2,24 +2,24 @@
  * @param {Window|Element} node
  * @param {string} event
  * @param {Function} fn
- * @param {!Object|boolean=} opt
+ * @param {AddEventListenerOptions=} opt
  */
 
 export function addListener(node, event, fn, opt){
 
-    node.addEventListener(event, fn, opt);
+    node.addEventListener(event, fn, opt || void 0);
 }
 
 /**
  * @param {Window|Element} node
  * @param {string} event
  * @param {Function} fn
- * @param {!Object|boolean=} opt
+ * @param {EventListenerOptions=} opt
  */
 
 export function removeListener(node, event, fn, opt){
 
-    node.removeEventListener(event, fn, opt);
+    node.removeEventListener(event, fn, opt || void 0);
 }
 
 export function getByClass(root, name){

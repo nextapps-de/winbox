@@ -39,8 +39,7 @@
     "build:bundle": "node task/build --bundle",
     "build:svg": "node task/svgo",
     "build": "npm run clean && npm run copy && npm run build:svg && npm run build:css && npm run build:css:bundle && npm run build:css:theme-modern && npm run build:css:theme-white && node task/bundle --style && npm run build:js && npm run build:bundle && echo Build Complete. && exit 0",
-    "server": "node task/server.js",
-    "update": "npm install svgo@latest && npm install base64-img@latest && npm install cpx@latest && npm install csso@latest && npm install csso-cli@latest && npm install google-closure-compiler@nightly && npm install less@latest && npm install less-plugin-autoprefix@latest && npm install less-plugin-clean-css@latest && npm install web-servo@latest"
+    "server": "node task/server.js"
   },
   "files": [
     "dist/",

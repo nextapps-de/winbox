@@ -143,6 +143,9 @@ pre code.hljs{
 .winbox.iframe .wb-body > *{
     padding: 0;
 }
+.winbox.iframe .wb-body{
+    background: linear-gradient(135deg, #0d1117, #131820);
+}
 
 .hljs{
     color: #fff4ec;

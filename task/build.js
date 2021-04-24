@@ -75,6 +75,7 @@ const parameter = (function(opt){
     process_common_js_modules: true,
     module_resolution: "BROWSER",
     dependency_mode: "PRUNE_LEGACY",
+    rewrite_polyfills: false,
     //js_module_root: "./",
     entry_point: "./src/js/webpack.js",
     //manage_closure_dependencies: true,
