@@ -283,14 +283,14 @@ function register(self){
     addListener(getByClass(self.dom, "wb-min"), "click", function(event){
 
         preventEvent(event);
-        init();
+        //init();
         self.minimize();
     });
 
     addListener(getByClass(self.dom, "wb-max"), "click", function(event){
 
         preventEvent(event);
-        init();
+        //init();
         self.maximize();
     });
 
@@ -408,9 +408,10 @@ function addWindowListener(self, dir){
             y = event.pageY;
 
             // appearing scrollbars on the root element does not trigger "window.onresize",
-            // force refresh window size via init()
+            // force refresh window size via init(), also force layout recalculation (layout trashing)
+            // it is probably very rare that the body overflow changes between window open and close
 
-            init();
+            //init();
             self.focus();
         }
     }

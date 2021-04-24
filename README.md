@@ -166,7 +166,7 @@ You can also load modules via CDN, e.g.:
 </script>
 ```
 
-The ES6 modules are not minified. Please use your own bundler for this purpose.
+The ES6 modules are not minified. Please use your favored bundler or build tool for this purpose.
 
 <a name="api"></a>
 ## Overview
@@ -232,7 +232,7 @@ Instance properties:
     <tr>
         <td>index</td>
         <td>number</td>
-        <td>Set the <code>z-index</code> of the window to this value (or above).</td>
+        <td>Set the initial <code>z-index</code> of the window to this value (could be increased automatically when unfocused/focused).</td>
     </tr>
     <tr></tr>
     <tr>
@@ -244,19 +244,19 @@ Instance properties:
     <tr>
         <td>mount</td>
         <td>HTMLElement</td>
-        <td>Mount a element (widget, template, etc.) into the window body.</td>
+        <td>Mount an element (widget, template, etc.) to the window body.</td>
     </tr>
     <tr></tr>
     <tr>
         <td>html</td>
         <td>string</td>
-        <td>Set <code>innerHTML</code> of the window body.</td>
+        <td>Set the <code>innerHTML</code> of the window body.</td>
     </tr>
     <tr></tr>
     <tr>
         <td>url</td>
         <td>string</td>
-        <td>Open URL inside the window (iframe).</td>
+        <td>Open URL inside the window (loaded via iframe).</td>
     </tr>
     <tr></tr>
     <tr>
@@ -280,7 +280,7 @@ Instance properties:
     <tr>
         <td>top<br>right<br>bottom<br>left</td>
         <td>number | string</td>
-        <td>Set or limit the viewport of the window available area (supports units "px" and "%").</td>
+        <td>Set or limit the viewport of the window's available area (supports units "px" and "%").</td>
     </tr>
     <tr></tr>
     <tr>
@@ -298,13 +298,13 @@ Instance properties:
     <tr>
         <td>class</td>
         <td>string</td>
-        <td>Add one or more classnames to the window (multiple classnames as array or separated with whitespaces e.g. "class-a class-b"). Used to define custom styles in css, query elements by context (also for styling) or just to tag the corresponding window instance.<br><br>WinBox provides you some useful <a href="#control-classes">Built-in Control Classes</a>.</td>
+        <td>Add one or more classnames to the window (multiple classnames as array or separated with whitespaces e.g. "class-a class-b"). Used to define custom styles in css, query elements by context (also within CSS) or just to tag the corresponding window instance.<br><br>WinBox provides you some useful <a href="#control-classes">Built-in Control Classes</a> to easily setup a custom configuration.</td>
     </tr>
     <tr></tr>
     <tr>
         <td>modal</td>
         <td>boolean</td>
-        <td>Show the window as modal.</td>
+        <td>Shows the window as modal.</td>
     </tr>
     <tr></tr>
     <tr>
@@ -326,7 +326,7 @@ Instance properties:
     </tr>
 </table>
 
-## Examples
+## Create and Setup Window
 
 <a name="winbox.new"></a>
 #### Basic Window
@@ -358,6 +358,8 @@ winbox.setTitle("Window Title");
 
 #### Custom Root
 
+> The root is the unique element in a document where the window will append to. In most cases that is usually the `document.body` which is the default root. Multiple roots at the same time are just partially supported (they share the same viewport actually).
+
 ```js
 new WinBox("Window Title", {
     root: document.body
@@ -383,16 +385,26 @@ winbox.setBackground("#ff005d");
 
 #### Custom Border
 
+> Supports all units.
+
 ```js
 new WinBox({
     title: "Custom Border",
-    border: 4
+    border: "1em"
+});
+```
+
+You can also define multiple border values (the order is: top, right, bottom, left):
+```js
+new WinBox({
+    title: "Custom Border",
+    border: "0 1em 15px 1em"
 });
 ```
 
 ####  Custom Viewport
 
-> Define the available area (supports units "px" and "%").
+> Define the available area (relative to the document) in which the window can move or could be resized (supports units "px" and "%").
 
 ```js
 new WinBox("Custom Viewport", {
@@ -403,14 +415,14 @@ new WinBox("Custom Viewport", {
 });
 ```
 
-Alternatively (does not support units!):
+Alternatively (just support numbers!):
 ```js
 var winbox = new WinBox("Custom Viewport");
 
 winbox.top = 50;
-winbox.right = 50;
-winbox.bottom = 50;
-winbox.left = 50;
+winbox.right = 200;
+winbox.bottom = 0;
+winbox.left = 200
 ```
 
 <a name="winbox.move"></a><a name="winbox.resize"></a>
@@ -436,7 +448,7 @@ new WinBox("Custom Viewport", {
 });
 ```
 
-Alternatively (also supports same units):
+Alternatively (also supports same units as above):
 ```js
 var winbox = new WinBox("Custom Viewport");
 
@@ -444,16 +456,16 @@ winbox.resize("50%", "50%")
       .move("center", "center");
 ```
 
-Alternatively (does not support units!):
+Alternatively (just support numbers!):
 ```js
 var winbox = new WinBox("Custom Viewport");
 
-winbox.width = 50;
-winbox.height = 50;
+winbox.width = 200;
+winbox.height = 200;
 winbox.resize();
 
-winbox.x = 50;
-winbox.y = 50;
+winbox.x = 100;
+winbox.y = 100;
 winbox.move();
 ```
 
@@ -464,20 +476,6 @@ new WinBox({
     title: "Modal Window",
     modal: true
 });
-```
-
-#### Set innerHTML
-
-```js
-new WinBox("Set innerHTML", {
-    html: "<h1>Lorem Ipsum</h1>"
-});
-```
-
-Alternatively:
-```js
-var winbox = new WinBox("Set innerHTML");
-winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
 ```
 
 <a name="themes"></a>
@@ -514,6 +512,22 @@ winbox.addClass("modern");
 ```
 
 You can change themes during the lifetime of the window.
+
+## Manage Window Content
+
+#### Set innerHTML
+
+```js
+new WinBox("Set innerHTML", {
+    html: "<h1>Lorem Ipsum</h1>"
+});
+```
+
+Alternatively:
+```js
+var winbox = new WinBox("Set innerHTML");
+winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
+```
 
 <a name="winbox.mount"></a>
 #### Mount DOM (Cloned)
@@ -661,7 +675,7 @@ var winbox = new WinBox("Open URL");
 winbox.setUrl("https://wikipedia.com");
 ```
 
-#### The Window Instance
+## The Window Instance
 
 <a name="winbox.id"></a><a name="winbox.max"></a><a name="winbox.min"></a>
 Window States / Information:
@@ -678,12 +692,12 @@ Window Size:
 ```js
 var winbox = new WinBox();
 
-winbox.width = 50;
-winbox.height = 50;
+winbox.width = 200;
+winbox.height = 200;
 winbox.resize();
 
-console.log("Current Viewport Left:", winbox.width);
-console.log("Current Viewport Right:", winbox.height);
+console.log("Current Width:", winbox.width);
+console.log("Current Height:", winbox.height);
 ```
 
 <a name="winbox.x"></a><a name="winbox.y"></a>
@@ -691,8 +705,8 @@ Window Position:
 ```js
 var winbox = new WinBox();
 
-winbox.x = 50;
-winbox.y = 50;
+winbox.x = 100;
+winbox.y = 100;
 winbox.move();
 
 console.log("Current Position X:", winbox.x);
@@ -709,10 +723,11 @@ winbox.right = 50;
 winbox.bottom = 50;
 winbox.left = 50;
 
-console.log("Current Viewport Left:", winbox.width);
-console.log("Current Viewport Right:", winbox.height);
-console.log("Current Viewport Top:", winbox.width);
-console.log("Current Viewport Bottom:", winbox.height);
+
+console.log("Current Viewport Top:", winbox.top);
+console.log("Current Viewport Right:", winbox.right);
+console.log("Current Viewport Bottom:", winbox.bottom);
+console.log("Current Viewport Left:", winbox.left);
 ```
 
 <a name="winbox.body"></a>
@@ -900,7 +915,7 @@ Also, only this two css-only state classes could be toggled programmatically:
     </tr>
 </table>
 
-> Without the header the user isn't able to move the window frame but may be useful for creating modal popups.
+> Without the header the user isn't able to move the window frame. It may be useful for creating fixed popups.
 
 Pass in classnames when creating the window to apply behaviour:
 ```js
@@ -915,7 +930,7 @@ const winbox = WinBox({
 });
 ```
 
-> The example above is a perfect workaround to use WinBox for classical popups.
+> The example above is a good start to create classical popups.
 
 Alternatively you can use a whitespace separated string:
 ```js
@@ -941,14 +956,13 @@ winbox.removeClass("no-resize")
 <a name="customize"></a>
 ## Customize Window
 
-> Take a look into the <a href="https://github.com/nextapps-de/winbox/tree/master/src/css/themes">themes folder</a> to easily get some basics how to customize the window.
+> Additionally, take a look into the <a href="https://github.com/nextapps-de/winbox/tree/master/src/css/themes">themes folder</a> to get some ideas how to customize the window.
 
 The window boilerplate:
 
 <img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/boilerplate.svg?v=4" width="100%" alt="WinBox Boilerplate">
 
 Hide or disable specific icons:
-
 ```css
 .wb-min   { display: none }
 .wb-full  { display: none }
@@ -957,7 +971,6 @@ Hide or disable specific icons:
 ```
 
 Modify a specific icon:
-
 ```css
 .wb-max {
     background-image: url(src/img/max.png);
@@ -972,7 +985,6 @@ Use black standard icons (useful for bright backgrounds):
 ```
 
 Modify or disable resizing areas on the window borders:
-
 ```css
 /* north */
 .wb-n  { display: none }
@@ -1042,7 +1054,7 @@ Apply styles when window is in "minimized" state:
 }
 ```
 
-Apply styles when window is __not__ in "minimized" state:
+Apply styles when window is NOT in "minimized" state:
 ```css
 .winbox:not(.min) {
     /* apply styles */
@@ -1062,7 +1074,7 @@ Apply styles when window is in "maximized" state:
 }
 ```
 
-Apply styles when window is __not__ in "maximized" state:
+Apply styles when window is NOT in "maximized" state:
 ```css
 .winbox:not(.max) {
     /* apply styles */
@@ -1082,7 +1094,7 @@ Apply styles when window is in "focus" state:
     background: #999;
 }
 .winbox.focus {
-    background: #0050ff;
+    background: #0050ff; 
 }
 .winbox .wb-icon {
     display: none;
@@ -1092,7 +1104,7 @@ Apply styles when window is in "focus" state:
 }
 ```
 
-Apply styles when window is __not__ in "focus" state (the same logic from example above, but shorter):
+Apply styles when window is NOT in "focus" state (the same logic from example above, but shorter):
 ```css
 .winbox:not(.focus) {
     background: #999;
@@ -1174,31 +1186,10 @@ new WinBox({
 });
 ```
 
-<!--
-#### Did you know a solution for this issue?
+#### Best Practices
 
-Please let me know if you have a stable workaround to fall back to a user-specified display state via CSS to prevent the `display: block` issue (e.g. on tables which have a table display instead of a block display). Please suggest no hacks like `width: 0` or `left: -9999px` or `opacity: 0; pointer-events: none` because they have the same issue and didn't fall back safely to the user-specified original state.
-
-The current best idea I came to was by inner-wrapping contents in a new blank tag like:
-
-```html
-<body>
-   <main id="content">
-      <header>
-         <div class="wb-hide">Hide this header when in windowed mode</div>
-      </header>
-      <section>
-          -- page contents --
-      </section>
-      <footer>
-         <div class="wb-show">Hide this footer when NOT in windowed mode</div>
-      </footer>
-   </main>
-</body>
-```
-
-In this case the display state could be `inherit` safely. This workaround does not come without any conventions, so I'm not happy enough about it.
--->
+- Use a non-scrolling body element to get the best user experience.
+- Provide an alternative view strategy for mobile devices, e.g. when the device is a touch device then open a classical app view. If a mouse pointer is available mount this view to the WinBox window. Also, you can place a switch button in your application where the user can also toggles between these two modes.
 
 ## Custom Builds
 
