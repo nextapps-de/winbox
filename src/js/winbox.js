@@ -283,15 +283,13 @@ function register(self){
     addListener(getByClass(self.dom, "wb-min"), "click", function(event){
 
         preventEvent(event);
-        //init();
         self.minimize();
     });
 
     addListener(getByClass(self.dom, "wb-max"), "click", function(event){
 
         preventEvent(event);
-        //init();
-        self.maximize();
+        self.focus().maximize();
     });
 
     if(prefix_request){
@@ -299,7 +297,7 @@ function register(self){
         addListener(getByClass(self.dom, "wb-full"), "click", function(event){
 
             preventEvent(event);
-            self.fullscreen();
+            self.focus().fullscreen();
         });
     }
     else{
@@ -314,11 +312,12 @@ function register(self){
         self = null;
     });
 
-    addListener(self.dom, "mousedown", function(event){
+    addListener(self.dom, "click", function(event){
 
-        preventEvent(event);
+        // stop propagation would disable global listeners used inside window content
         self.focus();
-    });
+
+    }, false);
 }
 
 /**
@@ -381,6 +380,7 @@ function addWindowListener(self, dir){
 
     function mousedown(event){
 
+        // prevent event to iterate through the fallback chain from a touch event (touch > mouse > click)
         preventEvent(event, true);
 
         if(self.min){
@@ -402,14 +402,19 @@ function addWindowListener(self, dir){
 
             if(touch){
 
-                addListener(window, "touchmove", handler_mousemove, true);
-                addListener(window, "touchend", handler_mouseup, true);
+                // TODO: fix when touch events bubbles up to the document body
+                // addListener(self.dom, "touchmove", function(event){
+                //     preventEvent(event);
+                // });
+
+                addListener(window, "touchmove", handler_mousemove);
+                addListener(window, "touchend", handler_mouseup);
             }
             else{
 
                 //addListener(this, "mouseleave", handler_mouseup);
-                addListener(window, "mousemove", handler_mousemove, true);
-                addListener(window, "mouseup", handler_mouseup, true);
+                addListener(window, "mousemove", handler_mousemove);
+                addListener(window, "mouseup", handler_mouseup);
             }
 
             // appearing scrollbars on the root element does not trigger "window.onresize",
@@ -513,13 +518,13 @@ function addWindowListener(self, dir){
 
         if(touch){
 
-            removeListener(window, "touchmove", handler_mousemove, true);
-            removeListener(window, "touchend", handler_mouseup, true);
+            removeListener(window, "touchmove", handler_mousemove);
+            removeListener(window, "touchend", handler_mouseup);
         }
         else{
 
-            removeListener(window, "mousemove", handler_mousemove, true);
-            removeListener(window, "mouseup", handler_mouseup, true);
+            removeListener(window, "mousemove", handler_mousemove);
+            removeListener(window, "mouseup", handler_mouseup);
         }
     }
 }

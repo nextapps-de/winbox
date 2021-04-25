@@ -7,19 +7,19 @@
 
 export function addListener(node, event, fn, opt){
 
-    node.addEventListener(event, fn, opt || void 0);
+    node.addEventListener(event, fn, opt || (opt === false) ? opt : true);
 }
 
 /**
  * @param {Window|Element} node
  * @param {string} event
  * @param {Function} fn
- * @param {EventListenerOptions|boolean=} opt
+ * @param {AddEventListenerOptions|boolean=} opt
  */
 
 export function removeListener(node, event, fn, opt){
 
-    node.removeEventListener(event, fn, opt || void 0);
+    node.removeEventListener(event, fn, opt || (opt === false) ? opt : true);
 }
 
 export function getByClass(root, name){
@@ -49,7 +49,7 @@ export function setText(node, value){
 export function preventEvent(event, prevent){
 
     event.stopPropagation();
-    prevent && event.preventDefault();
+    /*prevent &&*/ event.cancelable && event.preventDefault();
 
     //event.stopImmediatePropagation();
     //event.returnValue = false;
