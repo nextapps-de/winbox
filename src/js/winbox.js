@@ -366,8 +366,6 @@ function enable_animation(self){
     setStyle(self.dom, "transition", "");
 }
 
-const event_options = { "passive": false };
-
 /**
  * @param {WinBox} self
  * @param {string} dir
@@ -376,10 +374,10 @@ const event_options = { "passive": false };
 function addWindowListener(self, dir){
 
     const node = getByClass(self.dom, "wb-" + dir);
-    let x, y;
+    let touch, x, y;
 
     addListener(node, "mousedown", mousedown);
-    addListener(node, "touchstart", mousedown, event_options);
+    addListener(node, "touchstart", mousedown, { "passive": false });
 
     function mousedown(event){
 
@@ -394,18 +392,25 @@ function addWindowListener(self, dir){
 
             disable_animation(self);
 
-            addListener(window, "mousemove", handler_mousemove);
-            addListener(window, "mouseup", handler_mouseup);
-            addListener(window, "touchmove", handler_mousemove);
-            addListener(window, "touchend", handler_mouseup);
+            if((touch = event.touches)){
 
-            if(event.touches){
-
-                event = event.touches[0] || event;
+                event = (touch = touch[0]) || event;
             }
 
             x = event.pageX;
             y = event.pageY;
+
+            if(touch){
+
+                addListener(window, "touchmove", handler_mousemove, true);
+                addListener(window, "touchend", handler_mouseup, true);
+            }
+            else{
+
+                //addListener(this, "mouseleave", handler_mouseup);
+                addListener(window, "mousemove", handler_mousemove, true);
+                addListener(window, "mouseup", handler_mouseup, true);
+            }
 
             // appearing scrollbars on the root element does not trigger "window.onresize",
             // force refresh window size via init(), also force layout recalculation (layout trashing)
@@ -506,10 +511,16 @@ function addWindowListener(self, dir){
         preventEvent(event);
         enable_animation(self);
 
-        removeListener(window, "mousemove", handler_mousemove);
-        removeListener(window, "mouseup", handler_mouseup);
-        removeListener(window, "touchmove", handler_mousemove);
-        removeListener(window, "touchend", handler_mouseup);
+        if(touch){
+
+            removeListener(window, "touchmove", handler_mousemove, true);
+            removeListener(window, "touchend", handler_mouseup, true);
+        }
+        else{
+
+            removeListener(window, "mousemove", handler_mousemove, true);
+            removeListener(window, "mouseup", handler_mouseup, true);
+        }
     }
 }
 

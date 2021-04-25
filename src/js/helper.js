@@ -2,7 +2,7 @@
  * @param {Window|Element} node
  * @param {string} event
  * @param {Function} fn
- * @param {AddEventListenerOptions=} opt
+ * @param {AddEventListenerOptions|boolean=} opt
  */
 
 export function addListener(node, event, fn, opt){
@@ -14,7 +14,7 @@ export function addListener(node, event, fn, opt){
  * @param {Window|Element} node
  * @param {string} event
  * @param {Function} fn
- * @param {EventListenerOptions=} opt
+ * @param {EventListenerOptions|boolean=} opt
  */
 
 export function removeListener(node, event, fn, opt){
