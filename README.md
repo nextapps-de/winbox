@@ -1,5 +1,5 @@
 <h1>
-    <img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/winbox.svg" alt="WinBox.js: HTML5 Window Manager for the Web." width="100%">
+    <img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/winbox.png" alt="WinBox.js: HTML5 Window Manager for the Web." width="100%">
 </h1>
 <h3>Modern window manager for the web: lightweight, outstanding performance, no dependencies, fully customizable, open source!</h3>
 

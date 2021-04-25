@@ -314,7 +314,7 @@ function register(self){
 
     addListener(self.dom, "click", function(event){
 
-        // stop propagation would disable global listeners used inside window content
+        // stop propagation would disable global listeners used inside window contents
         self.focus();
 
     }, false);
@@ -380,7 +380,7 @@ function addWindowListener(self, dir){
 
     function mousedown(event){
 
-        // prevent event to iterate through the fallback chain from a touch event (touch > mouse > click)
+        // prevent the full iteration through the fallback chain of a touch event (touch > mouse > click)
         preventEvent(event, true);
 
         if(self.min){
@@ -392,21 +392,12 @@ function addWindowListener(self, dir){
 
             disable_animation(self);
 
-            if((touch = event.touches)){
+            if((touch = event.touches) && (touch = touch[0])){
 
-                event = (touch = touch[0]) || event;
-            }
-
-            x = event.pageX;
-            y = event.pageY;
-
-            if(touch){
+                event = touch;
 
                 // TODO: fix when touch events bubbles up to the document body
-                // addListener(self.dom, "touchmove", function(event){
-                //     preventEvent(event);
-                // });
-
+                //addListener(self.dom, "touchmove", preventEvent);
                 addListener(window, "touchmove", handler_mousemove);
                 addListener(window, "touchend", handler_mouseup);
             }
@@ -416,6 +407,9 @@ function addWindowListener(self, dir){
                 addListener(window, "mousemove", handler_mousemove);
                 addListener(window, "mouseup", handler_mouseup);
             }
+
+            x = event.pageX;
+            y = event.pageY;
 
             // appearing scrollbars on the root element does not trigger "window.onresize",
             // force refresh window size via init(), also force layout recalculation (layout trashing)
@@ -430,9 +424,9 @@ function addWindowListener(self, dir){
 
         preventEvent(event);
 
-        if(event.touches){
+        if(touch){
 
-            event = event.touches[0] || event;
+            event = event.touches[0];
         }
 
         const pageX = event.pageX;
@@ -518,6 +512,7 @@ function addWindowListener(self, dir){
 
         if(touch){
 
+            //removeListener(self.dom, "touchmove", preventEvent);
             removeListener(window, "touchmove", handler_mousemove);
             removeListener(window, "touchend", handler_mouseup);
         }
@@ -531,16 +526,16 @@ function addWindowListener(self, dir){
 
 function init(){
 
-//     const doc = document.documentElement;
-//     //const rect = doc.getBoundingClientRect();
-//
-//     this.root_w = doc.clientWidth; //rect.width || (rect.right - rect.left);
-//     this.root_h = doc.clientHeight; //rect.height || (rect.top - rect.bottom);
-//
-//     // if(ios){
-//     //
-//     //     this.root_h = window.innerHeight * (this.root_w / window.innerWidth);
-//     // }
+    // TODO: the window height of iOS isn't determined correctly when the bottom toolbar disappears
+
+    // the bounding rect provides more precise dimensions (float values)
+    // //const rect = doc.getBoundingClientRect();
+    // this.root_w = doc.clientWidth; //rect.width || (rect.right - rect.left);
+    // this.root_h = doc.clientHeight; //rect.height || (rect.top - rect.bottom);
+
+    // if(ios){
+    //     this.root_h = window.innerHeight * (this.root_w / window.innerWidth);
+    // }
 
     root_w = doc.clientWidth;
     root_h = doc.clientHeight;

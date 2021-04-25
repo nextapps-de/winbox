@@ -22,25 +22,6 @@ export function removeListener(node, event, fn, opt){
     node.removeEventListener(event, fn, opt || (opt === false) ? opt : true);
 }
 
-export function getByClass(root, name){
-
-    return root.getElementsByClassName(name)[0];
-}
-
-export function setStyle(node, style, value){
-
-    if(node["_s_" + style] !== value){
-
-        node.style.setProperty(style, value);
-        node["_s_" + style] = value;
-    }
-}
-
-export function setText(node, value){
-
-    node.firstChild.nodeValue = value;
-}
-
 /**
  * @param event
  * @param {boolean=} prevent
@@ -55,6 +36,11 @@ export function preventEvent(event, prevent){
     //event.returnValue = false;
 }
 
+export function getByClass(root, name){
+
+    return root.getElementsByClassName(name)[0];
+}
+
 export function addClass(node, classname){
 
     node.classList.add(classname);
@@ -63,4 +49,18 @@ export function addClass(node, classname){
 export function removeClass(node, classname){
 
     node.classList.remove(classname);
+}
+
+export function setStyle(node, style, value){
+
+    if(node["_s_" + style] !== value){
+
+        node.style.setProperty(style, value);
+        node["_s_" + style] = value;
+    }
+}
+
+export function setText(node, value){
+
+    node.firstChild.nodeValue = value;
 }
