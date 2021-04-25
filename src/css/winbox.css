@@ -32,11 +32,12 @@
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
-  will-change: scroll-position;
+  will-change: contents;
   background: #fff;
   /* when no border is set there is some thin line visible */
   /* always hide top border visually */
   margin-top: 0 !important;
+  contain: strict;
 }
 .wb-title {
   font-family: Arial, sans-serif;
@@ -167,6 +168,9 @@
 }
 .winbox.min .wb-title {
   cursor: default;
+}
+.winbox.min .wb-body > * {
+  display: none;
 }
 .max {
   box-shadow: none;

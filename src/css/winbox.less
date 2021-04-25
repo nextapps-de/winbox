@@ -36,12 +36,13 @@
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
-  will-change: scroll-position;
+  will-change: contents;
   background: #fff;
   /* when no border is set there is some thin line visible */
   //margin: -1px;
   /* always hide top border visually */
   margin-top: 0 !important;
+  contain: strict;
 }
 
 .wb-title{
@@ -192,6 +193,9 @@
   }
   .wb-title {
     cursor: default;
+  }
+  .wb-body > *{
+    display: none;
   }
 }
 
