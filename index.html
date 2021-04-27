@@ -105,444 +105,445 @@
 </head>
 <body>
     <div class="background"></div>
-    <header>
-        <a href="https://github.com/nextapps-de/winbox">Goto Github</a>
-    </header>
-    <div class="wrapper">
-        <h1 style="margin-bottom: 0"><img src="demo/winbox.png" alt="WinBox.js: HTML5 Window Manager for the Web." width="2400" height="811"></h1>
-        <h2>WinBox is a modern HTML5 window manager for the web. Lightweight, outstanding performance, no dependencies, fully customizable, free and open source!</h2>
-        <br>
-        <div class="button" onclick="window.examples['theme-modern']()" style="background-color: #ca00b4">Show Example</div>
-        <br><br>
+    <div class="scroll">
+        <header>
+            <a href="https://github.com/nextapps-de/winbox">Goto Github</a>
+        </header>
+        <div class="wrapper">
+            <h1 style="margin-bottom: 0"><img src="demo/winbox.png" alt="WinBox.js: HTML5 Window Manager for the Web." width="2400" height="811"></h1>
+            <h2>WinBox is a modern HTML5 window manager for the web. Lightweight, outstanding performance, no dependencies, fully customizable, free and open source!</h2>
+            <br>
+            <div class="button" onclick="window.examples['theme-modern']()" style="background-color: #ca00b4">Show Example</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Load Library (Bundle)
-        <br><br>
-        <pre><code class="language-html">&lt;head>
-    &lt;script src="dist/winbox.bundle.js">&lt;/script>
-&lt;/head></code></pre>
-        <div class="break"></div>
-        <br>
-        Load Library (Non-Bundle)
-        <br><br>
-        <pre><code class="language-html">&lt;head>
-    &lt;link rel="stylesheet" href="dist/css/winbox.min.css">
-    &lt;script src="dist/js/winbox.min.js">&lt;/script>
-&lt;/head></code></pre>
-        <div class="break"></div>
+            <hr>
+            <br>
+            Load Library (Bundle)
+            <br><br>
+            <pre><code class="language-html">&lt;head>
+        &lt;script src="dist/winbox.bundle.js">&lt;/script>
+    &lt;/head></code></pre>
+            <div class="break"></div>
+            <br>
+            Load Library (Non-Bundle)
+            <br><br>
+            <pre><code class="language-html">&lt;head>
+        &lt;link rel="stylesheet" href="dist/css/winbox.min.css">
+        &lt;script src="dist/js/winbox.min.js">&lt;/script>
+    &lt;/head></code></pre>
+            <div class="break"></div>
 
-        <hr>
-        <br>
-        Class Constructor
-        <br><br>
-        <pre><code class="language-js">WinBox(title, options&lt;key: value>)</code></pre>
-        <br>
+            <hr>
+            <br>
+            Class Constructor
+            <br><br>
+            <pre><code class="language-js">WinBox(title, options&lt;key: value>)</code></pre>
+            <br>
 
-        <hr>
-        <br>
-        Basic Window
-        <br><br>
-        <pre><code class="language-js">new WinBox("Basic Window");</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['basic']()">Run Code</div>
-        <br><br>
+            <hr>
+            <br>
+            Basic Window
+            <br><br>
+            <pre><code class="language-js">new WinBox("Basic Window");</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['basic']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Custom Root
-        <br><br>
-        <pre><code class="language-js">new WinBox("Custom Root", {
+            <hr>
+            <br>
+            Custom Root
+            <br><br>
+            <pre><code class="language-js">new WinBox("Custom Root", {
 
-    root: document.body
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['root']()">Run Code</div>
-        <br><br>
+        root: document.body
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['root']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Custom Border
-        <br><br>
-        <pre><code class="language-js">new WinBox("Custom Border", {
+            <hr>
+            <br>
+            Custom Border
+            <br><br>
+            <pre><code class="language-js">new WinBox("Custom Border", {
 
-    border: "0.3em"
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['border']()">Run Code</div>
-        <br><br>
+        border: "0.3em"
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['border']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Custom Color
-        <br><br>
-        <pre><code class="language-js">new WinBox({
+            <hr>
+            <br>
+            Custom Color
+            <br><br>
+            <pre><code class="language-js">new WinBox({
 
-    title: "Custom Color",
-    background: "#ff005d",
-    border: 4
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['color']()">Run Code</div>
-        <br><br>
+        title: "Custom Color",
+        background: "#ff005d",
+        border: 4
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['color']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Limit Viewport
-        <br><br>
-        <pre><code class="language-js">new WinBox("Limit Viewport", {
+            <hr>
+            <br>
+            Limit Viewport
+            <br><br>
+            <pre><code class="language-js">new WinBox("Limit Viewport", {
 
-    top: 50,
-    right: 50,
-    bottom: 0,
-    left: 50
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['viewport']()">Run Code</div>
-        <br><br>
+        top: 50,
+        right: 50,
+        bottom: 0,
+        left: 50
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['viewport']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Custom Position / Size
-        <br><br>
-        <pre><code class="language-js">new WinBox({
+            <hr>
+            <br>
+            Custom Position / Size
+            <br><br>
+            <pre><code class="language-js">new WinBox({
 
-    title: "Custom Position / Size",
-    x: "center",
-    y: "center",
-    width: "50%",
-    height: "50%"
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['position']()">Run Code</div>
-        <br><br>
+        title: "Custom Position / Size",
+        x: "center",
+        y: "center",
+        width: "50%",
+        height: "50%"
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['position']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Modal Window
-        <br><br>
-        <pre><code class="language-js">new WinBox("Modal Window", {
+            <hr>
+            <br>
+            Modal Window
+            <br><br>
+            <pre><code class="language-js">new WinBox("Modal Window", {
 
-    modal: true
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['modal']()">Run Code</div>
-        <br><br>
+        modal: true
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['modal']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Set innerHTML
-        <br><br>
-        <pre><code class="language-js">new WinBox({
+            <hr>
+            <br>
+            Set innerHTML
+            <br><br>
+            <pre><code class="language-js">new WinBox({
 
-    title: "Set innerHTML",
-    html: "&lt;h1>Lorem Ipsum&lt;/h1>"
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['innerhtml']()">Run Code</div>
-        <br><br>
+        title: "Set innerHTML",
+        html: "&lt;h1>Lorem Ipsum&lt;/h1>"
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['innerhtml']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Mount DOM (Cloned)
-        <br><br>
+            <hr>
+            <br>
+            Mount DOM (Cloned)
+            <br><br>
 
-        <pre><code class="language-html">&lt;div id="backstore" style="display: none">
-    &lt;div id="content">
-        &lt;h1>Lorem Ipsum&lt;/h1>
-        &lt;p>Lorem ipsum [...]&lt;/p>
-        &lt;p>Duis autem vel [...]&lt;/p>
-        &lt;p>Ut wisi enim [...]&lt;/p>
-    &lt;/div>
-&lt;/div></code></pre>
-        <div class="break"></div>
-        <pre><code class="language-js">new WinBox("Mount DOM", {
+            <pre><code class="language-html">&lt;div id="backstore" style="display: none">
+        &lt;div id="content">
+            &lt;h1>Lorem Ipsum&lt;/h1>
+            &lt;p>Lorem ipsum [...]&lt;/p>
+            &lt;p>Duis autem vel [...]&lt;/p>
+            &lt;p>Ut wisi enim [...]&lt;/p>
+        &lt;/div>
+    &lt;/div></code></pre>
+            <div class="break"></div>
+            <pre><code class="language-js">new WinBox("Mount DOM", {
 
-    mount: document.getElementById("content")
-                   .cloneNode(true)
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['mount-clone']()">Run Code</div>
-        <br><br>
+        mount: document.getElementById("content")
+                       .cloneNode(true)
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['mount-clone']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Mount DOM (Singleton) + Auto-Unmount
-        <br><br>
-        <pre><code class="language-js">new WinBox("Mount DOM", {
+            <hr>
+            <br>
+            Mount DOM (Singleton) + Auto-Unmount
+            <br><br>
+            <pre><code class="language-js">new WinBox("Mount DOM", {
 
-    mount: document.getElementById("content")
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['mount-auto']()">Run Code</div>
-        <br><br>
+        mount: document.getElementById("content")
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['mount-auto']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        Open URI / URL
-        <br><br>
-        <pre><code class="language-js">new WinBox("WinBox.js", {
+            <hr>
+            <br>
+            Open URI / URL
+            <br><br>
+            <pre><code class="language-js">new WinBox("WinBox.js", {
 
-    url: "https://nextapps-de.github.io/winbox/"
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['iframe']()">Run Code</div>
-        <br><br>
+        url: "https://nextapps-de.github.io/winbox/"
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['iframe']()">Run Code</div>
+            <br><br>
 
-        <hr>
-        <br>
-        All Options
-        <br><br>
-        <pre><code class="language-js">new WinBox({
+            <hr>
+            <br>
+            All Options
+            <br><br>
+            <pre><code class="language-js">new WinBox({
 
-    id: "my-window",
-    class: ["no-full", "my-theme"],
-    root: document.body,
-    title: "All Options",
-    background: "#fff",
-    border: 4,
-    width: 200,
-    height: 200,
-    x: "center",
-    y: "center",
-    max: false,
-    top: 50,
-    right: 50,
-    bottom: 0,
-    left: 50,
-    html: "width: 200, height: 200",
-    onfocus: function(){
-        this.setBackground("#fff");
-    },
-    onblur: function(){
-        this.setBackground("#999");
-    },
-    onresize: function(width, height){
-        this.body.textContent = (
-            "width: " + width + ", " +
-            "height: " + height
-        );
-    },
-    onmove: function(x, y){
-        this.body.textContent = (
-            "x: " + x + ", " +
-            "y: " + y
-        );
-    },
-    onclose: function(){
-        alert("event 'onclose' fired")
+        id: "my-window",
+        class: ["no-full", "my-theme"],
+        root: document.body,
+        title: "All Options",
+        background: "#fff",
+        border: 4,
+        width: 200,
+        height: 200,
+        x: "center",
+        y: "center",
+        max: false,
+        top: 50,
+        right: 50,
+        bottom: 0,
+        left: 50,
+        html: "width: 200, height: 200",
+        onfocus: function(){
+            this.setBackground("#fff");
+        },
+        onblur: function(){
+            this.setBackground("#999");
+        },
+        onresize: function(width, height){
+            this.body.textContent = (
+                "width: " + width + ", " +
+                "height: " + height
+            );
+        },
+        onmove: function(x, y){
+            this.body.textContent = (
+                "x: " + x + ", " +
+                "y: " + y
+            );
+        },
+        onclose: function(){
+            alert("event 'onclose' fired")
+        }
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['all-options']()">Run Code</div>
+            <br><br>
+
+            <hr>
+            <br>
+            Control Programmatically
+            <br><br>
+            <pre><code class="language-html">&lt;div id="controls">
+        &lt;button onclick="buttons.minimize()">Minimize (Toggle)&lt;/button>
+        &lt;button onclick="buttons.maximize()">Maximize (Toggle)&lt;/button>
+        &lt;button onclick="buttons.fullscreen()">Fullscreen (Toggle)&lt;/button>
+        &lt;button onclick="buttons.move()">Move (Center, Center)&lt;/button>
+        &lt;button onclick="buttons.resize()">Resize (50%, 50%)&lt;/button>
+        &lt;button onclick="buttons.title()">Set Title&lt;/button>
+        &lt;button onclick="buttons.color()">Set Color&lt;/button>
+        &lt;button onclick="buttons.close()">Close&lt;/button>
+    &lt;/div></code></pre>
+            <div class="break"></div>
+            <pre><code class="language-js">var winbox = new WinBox("Controls", {
+
+        mount: document.getElementById("controls")
+    });</code></pre>
+            <div class="break"></div>
+            <pre><code class="language-js">window.buttons = {
+
+        minimize: function(){
+
+            winbox.minimize();
+        },
+        maximize: function(){
+
+            winbox.maximize();
+        },
+        fullscreen: function(){
+
+            winbox.fullscreen();
+        },
+        move: function(){
+
+            winbox.move("center", "center");
+        },
+        resize: function(){
+
+            winbox.resize("50%", "50%");
+        },
+        title: function(){
+
+            winbox.setTitle("Title-" + Math.random());
+        },
+        color: function(){
+
+            winbox.setBackground(
+                "rgb(" + (Math.random() * 255 | 0) + "," +
+                         (Math.random() * 255 | 0) + "," +
+                         (Math.random() * 255 | 0) + ")"
+            );
+        },
+        modal: function(){
+
+            winbox.body.parentNode.classList.toggle("modal");
+        },
+        close: function(){
+
+            winbox.close();
+        }
+    };</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['controls']()">Run Code</div>
+            <br><br>
+
+            <hr>
+            <br>
+            Window Boilerplate
+            <br><br>
+            <img src="demo/boilerplate.svg" width="100%" alt="WinBox Boilerplate">
+
+            <hr>
+            <br>
+            Custom Styles (Global)
+            <br><br>
+            <pre><code class="language-css">.winbox {
+        background: linear-gradient(90deg, #ff00f0, #0050ff);
+        border-radius: 12px 12px 0 0;
+        box-shadow: none;
     }
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['all-options']()">Run Code</div>
-        <br><br>
 
-        <hr>
-        <br>
-        Control Programmatically
-        <br><br>
-        <pre><code class="language-html">&lt;div id="controls">
-    &lt;button onclick="buttons.minimize()">Minimize (Toggle)&lt;/button>
-    &lt;button onclick="buttons.maximize()">Maximize (Toggle)&lt;/button>
-    &lt;button onclick="buttons.fullscreen()">Fullscreen (Toggle)&lt;/button>
-    &lt;button onclick="buttons.move()">Move (Center, Center)&lt;/button>
-    &lt;button onclick="buttons.resize()">Resize (50%, 50%)&lt;/button>
-    &lt;button onclick="buttons.title()">Set Title&lt;/button>
-    &lt;button onclick="buttons.color()">Set Color&lt;/button>
-    &lt;button onclick="buttons.close()">Close&lt;/button>
-&lt;/div></code></pre>
-        <div class="break"></div>
-        <pre><code class="language-js">var winbox = new WinBox("Controls", {
-
-    mount: document.getElementById("controls")
-});</code></pre>
-        <div class="break"></div>
-        <pre><code class="language-js">window.buttons = {
-
-    minimize: function(){
-
-        winbox.minimize();
-    },
-    maximize: function(){
-
-        winbox.maximize();
-    },
-    fullscreen: function(){
-
-        winbox.fullscreen();
-    },
-    move: function(){
-
-        winbox.move("center", "center");
-    },
-    resize: function(){
-
-        winbox.resize("50%", "50%");
-    },
-    title: function(){
-
-        winbox.setTitle("Title-" + Math.random());
-    },
-    color: function(){
-
-        winbox.setBackground(
-            "rgb(" + (Math.random() * 255 | 0) + "," +
-                     (Math.random() * 255 | 0) + "," +
-                     (Math.random() * 255 | 0) + ")"
-        );
-    },
-    modal: function(){
-
-        winbox.body.parentNode.classList.toggle("modal");
-    },
-    close: function(){
-
-        winbox.close();
+    .winbox.min {
+        border-radius: 0;
     }
-};</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['controls']()">Run Code</div>
-        <br><br>
 
-        <hr>
-        <br>
-        Window Boilerplate
-        <br><br>
-        <img src="demo/boilerplate.svg" width="100%" alt="WinBox Boilerplate">
+    .wb-body {
+        /* the width of window border: */
+        margin: 4px;
+        color: #fff;
+        background: #131820;
+    }
 
-        <hr>
-        <br>
-        Custom Styles (Global)
-        <br><br>
-        <pre><code class="language-css">.winbox {
-    background: linear-gradient(90deg, #ff00f0, #0050ff);
-    border-radius: 12px 12px 0 0;
-    box-shadow: none;
-}
+    .wb-title {
+        font-size: 13px;
+        text-transform: uppercase;
+        font-weight: 600;
+    }</code></pre>
+            <div class="break"></div>
 
-.winbox.min {
-    border-radius: 0;
-}
+            Custom Icons
+            <br><br>
+            <pre><code class="language-css">.wb-icon * {
+        opacity: 0.65;
+    }
 
-.wb-body {
-    /* the width of window border: */
-    margin: 4px;
-    color: #fff;
-    background: #131820;
-}
+    .wb-icon *:hover {
+        opacity: 1;
+    }
 
-.wb-title {
-    font-size: 13px;
-    text-transform: uppercase;
-    font-weight: 600;
-}</code></pre>
-        <div class="break"></div>
+    .wb-min {
+        background-image: url(src/img/min.svg);
+        background-size: 15px center;
+    }
 
-        Custom Icons
-        <br><br>
-        <pre><code class="language-css">.wb-icon * {
-    opacity: 0.65;
-}
+    .wb-max {
+        background-image: url(src/img/max.svg);
+    }
 
-.wb-icon *:hover {
-    opacity: 1;
-}
+    .wb-close {
+        background-image: url(src/img/close.svg);
+    }
 
-.wb-min {
-    background-image: url(src/img/min.svg);
-    background-size: 15px center;
-}
+    .wb-full {
+        display: none;
+    }</code></pre>
+            <div class="break"></div>
 
-.wb-max {
-    background-image: url(src/img/max.svg);
-}
+            Custom Scrollbars
+            <br><br>
+            <pre><code class="language-css">.wb-body::-webkit-scrollbar {
+        width: 12px;
+    }
+    .wb-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .wb-body::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #263040;
+    }
+    .wb-body::-webkit-scrollbar-thumb:window-inactive {
+        background: #181f2a;
+    }
+    .wb-body::-webkit-scrollbar-corner {
+        background: transparent;
+    }</code></pre>
+            <div class="break"></div>
+            <pre><code class="language-js">new WinBox("Custom CSS", {
 
-.wb-close {
-    background-image: url(src/img/close.svg);
-}
+        mount: document.getElementById("content")
+                       .cloneNode(true)
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['custom-css']()">Run Code</div>
+            <br><br>
 
-.wb-full {
-    display: none;
-}</code></pre>
-        <div class="break"></div>
+            <hr>
+            <br>
+            Custom Styles By Classname
+            <br><br>
+            <pre><code class="language-css">.winbox.my-theme{
+        background: #fff;
+    }
+    .winbox.my-theme .wb-body {
+        color: #fff;
+        background: #131820;
+    }
+    .winbox.my-theme .wb-title {
+        color: #000;
+    }
+    .winbox.my-theme .wb-icon {
+        filter: invert(1);
+    }</code></pre>
+            <div class="break"></div>
+            <pre><code class="language-js">new WinBox("Custom CSS (Class)", {
 
-        Custom Scrollbars
-        <br><br>
-        <pre><code class="language-css">.wb-body::-webkit-scrollbar {
-    width: 12px;
-}
-.wb-body::-webkit-scrollbar-track {
-    background: transparent;
-}
-.wb-body::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #263040;
-}
-.wb-body::-webkit-scrollbar-thumb:window-inactive {
-    background: #181f2a;
-}
-.wb-body::-webkit-scrollbar-corner {
-    background: transparent;
-}</code></pre>
-        <div class="break"></div>
-        <pre><code class="language-js">new WinBox("Custom CSS", {
+        class: "my-theme",
+        mount: document.getElementById("content")
+                       .cloneNode(true)
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['custom-class']()">Run Code</div>
+            <br><br>
 
-    mount: document.getElementById("content")
-                   .cloneNode(true)
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['custom-css']()">Run Code</div>
-        <br><br>
+            <hr>
+            <br>
+            Use Theme
+            <br><br>
+            <pre><code class="language-html">&lt;head>
+        &lt;link rel="stylesheet" href="dist/css/winbox.min.css">
+        &lt;link rel="stylesheet" href="dist/css/themes/modern.min.css">
+        &lt;script src="dist/js/winbox.min.js">&lt;/script>
+    &lt;/head></code></pre>
+            <div class="break"></div>
+            <pre><code class="language-js">new WinBox("Theme", {
 
-        <hr>
-        <br>
-        Custom Styles By Classname
-        <br><br>
-        <pre><code class="language-css">.winbox.my-theme{
-    background: #fff;
-}
-.winbox.my-theme .wb-body {
-    color: #fff;
-    background: #131820;
-}
-.winbox.my-theme .wb-title {
-    color: #000;
-}
-.winbox.my-theme .wb-icon {
-    filter: invert(1);
-}</code></pre>
-        <div class="break"></div>
-        <pre><code class="language-js">new WinBox("Custom CSS (Class)", {
+        class: "modern",
+        mount: document.getElementById("content")
+                       .cloneNode(true)
+    });</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['theme-modern']()">Run Code</div>
+            <br><br>
 
-    class: "my-theme",
-    mount: document.getElementById("content")
-                   .cloneNode(true)
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['custom-class']()">Run Code</div>
-        <br><br>
-
-        <hr>
-        <br>
-        Use Theme
-        <br><br>
-        <pre><code class="language-html">&lt;head>
-    &lt;link rel="stylesheet" href="dist/css/winbox.min.css">
-    &lt;link rel="stylesheet" href="dist/css/themes/modern.min.css">
-    &lt;script src="dist/js/winbox.min.js">&lt;/script>
-&lt;/head></code></pre>
-        <div class="break"></div>
-        <pre><code class="language-js">new WinBox("Theme", {
-
-    class: "modern",
-    mount: document.getElementById("content")
-                   .cloneNode(true)
-});</code></pre>
-        <div class="break"></div>
-        <div class="button" onclick="window.examples['theme-modern']()">Run Code</div>
-        <br><br>
-
-        <br><br>
+        </div>
     </div>
     <div id="backstore" style="display: none">
         <div id="content">

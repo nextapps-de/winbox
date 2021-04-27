@@ -3,6 +3,12 @@
     touch-action: manipulation;
 }
 html, body{
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    right:0;
+    bottom:0;
+    left:0;
     margin: 0;
     padding: 0;
     border: 0;
@@ -21,7 +27,7 @@ html, body{
     user-select: none;
 }
 .background{
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
@@ -38,12 +44,25 @@ header{
     border-bottom: 1px solid #1c2431;
     z-index: 2;
 }
+.scroll{
+    position: absolute;
+    top: 0;
+    right:0;
+    bottom:0;
+    left:0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+}
 .wrapper{
     position: relative;
-    display: inline-block;
+    display: block;
+    margin: auto;
     max-width: 600px;
     text-align: left;
-    padding: 90px 1.2em 1.2em 1.2em;
+    padding: 1.2em;
+    padding-top: 90px;
     z-index: 1;
 }
 pre{
@@ -130,9 +149,9 @@ pre code.hljs{
 }
 
 @media (max-height: 550px) {
-   header{
-       position: absolute;
-   }
+    header{
+        position: absolute;
+    }
 }
 
 .wb-body {
