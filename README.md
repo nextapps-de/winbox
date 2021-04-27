@@ -14,7 +14,7 @@
 <a name="started"></a>
 ## Getting Started
 
-__Get Latest Build (Stable):__
+__Get Latest Stable Build (Recommended):__
 
 <table>
     <tr>
@@ -55,9 +55,9 @@ __Get Latest Build (Stable):__
     </tr>
     <tr></tr>
     <tr>
-        <td>winbox.less (source)</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.7/src/css/winbox.less" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.7/src/css/winbox.less" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.7/src/css/winbox.less</a></td>
+        <td>LESS Files (source)</td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.7/src/css" target="_blank">Download</a></td>
+        <td>The <i>/src/css</i> folder of this Github repository</td>
     </tr>
     <tr></tr>
     <tr>
@@ -73,7 +73,7 @@ __Get Latest Build (Stable):__
     </tr>
 </table>
 
-__Get Latest Build (Nightly):__
+__Get Latest Nightly Build (Do not use for production!):__
 
 Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.1.7__/dist/" into "/winbox/__master__/dist".
 
