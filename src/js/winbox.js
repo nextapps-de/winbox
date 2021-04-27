@@ -11,6 +11,7 @@ import { addListener, removeListener, setStyle, setText, getByClass, addClass, r
 
 //const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window["MSStream"];
 
+const use_raf = false;
 const doc = document.documentElement;
 const stack_min = [];
 let id_counter = 0;
@@ -378,6 +379,25 @@ function addWindowListener(self, dir){
     addListener(node, "mousedown", mousedown);
     addListener(node, "touchstart", mousedown, { "passive": false });
 
+    let raf, raf_move, raf_resize;
+
+    function loop(){
+
+        raf = requestAnimationFrame(loop);
+
+        if(raf_resize){
+
+            self.resize();
+            raf_resize = false;
+        }
+
+        if(raf_move){
+
+            self.move();
+            raf_move = false;
+        }
+    }
+
     function mousedown(event){
 
         // prevent the full iteration through the fallback chain of a touch event (touch > mouse > click)
@@ -391,6 +411,7 @@ function addWindowListener(self, dir){
         else /*if(!self.min && !self.max)*/ { // already disabled by css
 
             disable_animation(self);
+            use_raf && loop();
 
             if((touch = event.touches) && (touch = touch[0])){
 
@@ -480,10 +501,10 @@ function addWindowListener(self, dir){
 
             if(resize_h){
 
-                self.height = Math.max(Math.min(self.height, root_h - self.y - self.bottom - 1), 35);
+                self.height = Math.max(Math.min(self.height, root_h - self.y - self.bottom /* - 1 */), 35);
             }
 
-            self.resize();
+            use_raf ? raf_resize = true : self.resize();
         }
 
         if(move_x || move_y){
@@ -495,10 +516,10 @@ function addWindowListener(self, dir){
 
             if(move_y){
 
-                self.y = Math.max(Math.min(self.y, root_h - self.height - self.bottom - 1), self.top);
+                self.y = Math.max(Math.min(self.y, root_h - self.height - self.bottom /* - 1 */), self.top);
             }
 
-            self.move();
+            use_raf ? raf_move = true : self.move();
         }
 
         x = pageX;
@@ -509,6 +530,7 @@ function addWindowListener(self, dir){
 
         preventEvent(event);
         enable_animation(self);
+        use_raf && cancelAnimationFrame(raf);
 
         if(touch){
 
@@ -704,7 +726,7 @@ WinBox.prototype.maximize = function(state){
             this.addClass("max").resize(
 
                 root_w - this.left - this.right,
-                root_h - this.top - this.bottom - 1,
+                root_h - this.top - this.bottom /* - 1 */,
                 true
 
             ).move(

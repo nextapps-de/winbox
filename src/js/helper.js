@@ -53,6 +53,8 @@ export function removeClass(node, classname){
 
 export function setStyle(node, style, value){
 
+    value = "" + value;
+
     if(node["_s_" + style] !== value){
 
         node.style.setProperty(style, value);

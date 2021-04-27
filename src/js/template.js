@@ -1,5 +1,4 @@
 const template = document.createElement("div");
-//template.className = "winbox";
 template.innerHTML = (
 
     //'<div class=winbox>' +
@@ -27,8 +26,6 @@ template.innerHTML = (
 
     //'</div>'
 );
-
-//template = template.firstChild;
 
 export default function(){
 

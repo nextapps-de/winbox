@@ -4,7 +4,7 @@
   top: 0;
   background: #0050ff;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transition: width .3s, height .3s, transform .3s;
+  transition: width 0.3s, height 0.3s, transform 0.3s;
   transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
   will-change: transform, width, height;
   /* contain "strict" does not make overflow contents selectable */
@@ -85,32 +85,32 @@
   position: absolute;
   top: -5px;
   left: -5px;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   cursor: nw-resize;
 }
 .wb-ne {
   position: absolute;
   top: -5px;
   right: -5px;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   cursor: ne-resize;
 }
 .wb-sw {
   position: absolute;
   bottom: -5px;
   left: -5px;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   cursor: ne-resize;
 }
 .wb-se {
   position: absolute;
   bottom: -5px;
   right: -5px;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   cursor: nw-resize;
 }
 .wb-icon {
