@@ -517,6 +517,8 @@ You can change themes during the lifetime of the window.
 
 #### Set innerHTML
 
+> Do not forget to sanitize any user inputs which is part of the __html__ as this can lead to unintended XSS!
+
 ```js
 new WinBox("Set innerHTML", {
     html: "<h1>Lorem Ipsum</h1>"
@@ -660,13 +662,15 @@ Mikado(template).mount(winbox.body).render(data);
 
 #### Open URI / URL
 
-> You can use every URI scheme which is supported by `src` attribute, e.g. URL, image or video, base64 encoded data.
+> Do not forget to sanitize any user inputs which is part of the __url__ as this can lead to unintended XSS!
 
 ```js
 new WinBox("Open URL", {
     url: "https://wikipedia.com"
 });
 ```
+
+> You can use every URI scheme which is supported by `src` attribute, e.g. URL, image or video, base64 encoded data.
 
 Alternatively:
 <a name="winbox.setUrl"></a>
