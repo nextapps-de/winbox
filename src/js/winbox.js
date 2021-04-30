@@ -821,8 +821,7 @@ function cancel_fullscreen(self){
  * @this WinBox
  */
 
-WinBox.prototype.close = function (is_immediate = false) {
-
+WinBox.prototype.close = function(is_immediate = false) {
 
     if (this.onclose && !is_immediate) {
         if (this.onclose()) {
