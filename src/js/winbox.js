@@ -309,7 +309,10 @@ function register(self){
     addListener(getByClass(self.dom, "wb-close"), "click", function(event){
 
         preventEvent(event);
-        self.close();
+        var is_cancel = self.close();
+        if (is_cancel) {
+            return;
+        }
         self = null;
     });
 
@@ -818,14 +821,20 @@ function cancel_fullscreen(self){
  * @this WinBox
  */
 
-WinBox.prototype.close = function(){
+WinBox.prototype.close = function(is_immediate = false) {
+
+    if (this.onclose && !is_immediate) {
+        if (this.onclose()) {
+            // cancel close
+            return true;
+        }
+    }
 
     if(this.min){
 
         remove_min_stack(this);
     }
 
-    this.onclose && this.onclose();
     this.unmount();
     this.dom.parentNode.removeChild(this.dom);
 
