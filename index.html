@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
     <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/railscasts.min.css">
     <title>WinBox.js &ndash; Modern HTML5 Window Manager</title>
-
+    <link rel="stylesheet" href="dist/css/winbox.min.css">
     <link rel="stylesheet" href="dist/css/themes/modern.min.css">
     <link rel="stylesheet" href="dist/css/themes/white.min.css">
-
-    <script src="dist/winbox.bundle.js"></script>
+    <script src="dist/js/winbox.min.js"></script>
+    <!--<script src="dist/winbox.bundle.js"></script>-->
     <style>
+
         /* WinBox Theme: "custom" */
 
         .winbox.custom {
@@ -20,94 +20,73 @@
             box-shadow: none;
             border-radius: 12px 12px 0 0;
         }
-
         .winbox.custom.max,
         .winbox.custom.min {
             border-radius: 0;
         }
-
         .winbox.custom .wb-body {
             /* margin represents the width of window border: */
             margin: 4px;
             color: #fff;
             background: #131820;
         }
-
         .winbox.custom .wb-title {
             font-size: 13px;
             text-transform: uppercase;
             font-weight: 600;
         }
-
         .winbox.custom .wb-icon * {
             opacity: 0.65;
         }
-
         .winbox.custom .wb-icon *:hover {
             opacity: 1;
         }
-
         .winbox.custom .wb-max {
             background-image: url(src/img/max.svg);
             background-size: 17px auto;
         }
-
         .winbox.custom .wb-min {
             background-image: url(src/img/min.svg);
         }
-
         .winbox.custom .wb-close {
             background-image: url(src/img/close.svg);
         }
-
         .winbox.custom .wb-full {
             display: none;
         }
-
         .winbox.custom .wb-body::-webkit-scrollbar {
             width: 12px;
         }
-
         .winbox.custom .wb-body::-webkit-scrollbar-track {
             background: transparent;
         }
-
         .winbox.custom .wb-body::-webkit-scrollbar-thumb {
             border-radius: 10px;
             background: #263040;
         }
-
         .winbox.custom .wb-body::-webkit-scrollbar-thumb:window-inactive {
             background: #181f2a;
         }
-
         .winbox.custom .wb-body::-webkit-scrollbar-corner {
             background: transparent;
         }
 
         /* WinBox Theme: "my-theme" */
 
-        .winbox.my-theme {
+        .winbox.my-theme{
             background: #fff;
         }
-
         .winbox.my-theme .wb-body {
             color: #fff;
             background: #131820;
         }
-
         .winbox.my-theme .wb-title {
             color: #000;
         }
-
         .winbox.my-theme .wb-icon {
             filter: invert(1);
         }
 
-        .winbox.my-theme .wb-icon:hover {
-            filter: none;
-            background: red;
-        }
     </style>
     <link rel="stylesheet" href="demo/style.css">
     <meta name="format-detection" content="telephone=no">
@@ -124,7 +103,6 @@
     <link rel="icon" sizes="16x16 32x32 48x48 64x64" type="image/png" href="https://nextapps-de.github.io/winbox/demo/favicon.png">
     <link rel="icon" sizes="512x512 1024x1024" type="image/png" href="https://nextapps-de.github.io/winbox/demo/og-image.png">
 </head>
-
 <body>
     <div class="background"></div>
     <div class="scroll">
@@ -142,7 +120,7 @@
             <br>
             Load Library (Bundle)
             <br><br>
-            <pre><code class="language-html">&lt;head>
+        <pre><code class="language-html">&lt;head>
     &lt;script src="dist/winbox.bundle.js">&lt;/script>
 &lt;/head></code></pre>
             <div class="break"></div>
@@ -161,6 +139,10 @@
             <br><br>
             <pre><code class="language-js">WinBox(title, options&lt;key: value>)</code></pre>
             <br>
+
+            <hr>
+            <br>
+            <div style="color: #79c0ff; line-height: 22px;">You can open the browser dev tools and copy and paste the js-code blocks into the console and play with them.</div>
 
             <hr>
             <br>
@@ -352,8 +334,8 @@
             "y: " + y
         );
     },
-    onclose: function(){
-        alert("event 'onclose' fired")
+    onclose: function(force){
+        return !force && !window.confirm("Are you sure to close window?");
     }
 });</code></pre>
             <div class="break"></div>
@@ -374,10 +356,14 @@
     &lt;button onclick="buttons.color()">Set Color&lt;/button>
     &lt;button onclick="buttons.close()">Close&lt;/button>
 &lt;/div></code></pre>
-            <div class="break"></div>
-            <pre><code class="language-js">var winbox = new WinBox("Controls", {
+        <div class="break"></div>
+        <pre><code class="language-js">var winbox = new WinBox("Controls", {
 
-    mount: document.getElementById("controls")
+    mount: document.getElementById("controls"),
+    border: 4,
+    onclose: function(force){
+        return !force && !window.confirm("Are you sure to close window?");
+    }
 });</code></pre>
             <div class="break"></div>
             <pre><code class="language-js">window.buttons = {
@@ -587,44 +573,37 @@
             <button onclick="window.buttons['add']()">Add Class (my-theme)</button>
             <button onclick="window.buttons['remove']()">Remove Class (my-theme)</button>
             <button onclick="window.buttons['close']()">Close</button>
-            <button onclick="window.buttons['force_close']()">force_close</button>
+            <button onclick="window.buttons['force_close']()">Force Close</button>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
     <script>
 
-        (function () {
+        (function(){
 
             let winbox;
 
-            var foo_are_you_sure = function () {
-                var sure = window.confirm("are you sure to close window?")
-                if (!sure) {
-                    return true;
-                }
-            }
-
             window.examples = {
 
-                "basic": function () {
+                "basic": function(){
 
                     new WinBox("Basic Window");
                 },
-                "root": function () {
+                "root": function(){
 
                     new WinBox("Custom Root", {
 
                         root: document.body
                     });
                 },
-                "border": function () {
+                "border": function(){
 
                     new WinBox("Custom Border", {
 
                         border: "0.3em"
                     });
                 },
-                "color": function () {
+                "color": function(){
 
                     new WinBox({
 
@@ -633,7 +612,7 @@
                         border: 4
                     });
                 },
-                "viewport": function () {
+                "viewport": function(){
 
                     new WinBox("Limit Viewport", {
 
@@ -643,7 +622,7 @@
                         left: 50
                     });
                 },
-                "position": function () {
+                "position": function(){
 
                     new WinBox({
 
@@ -654,14 +633,14 @@
                         height: "50%"
                     });
                 },
-                "modal": function () {
+                "modal": function(){
 
                     new WinBox("Modal Window", {
 
                         modal: true
                     });
                 },
-                "innerhtml": function () {
+                "innerhtml": function(){
 
                     new WinBox({
 
@@ -669,22 +648,22 @@
                         html: "<h1>Lorem Ipsum</h1>"
                     });
                 },
-                "mount-clone": function () {
+                "mount-clone": function(){
 
                     new WinBox("Mount DOM", {
 
                         mount: document.getElementById("content")
-                            .cloneNode(true)
+                                       .cloneNode(true)
                     });
                 },
-                "mount-auto": function () {
+                "mount-auto": function(){
 
                     new WinBox("Mount DOM", {
 
                         mount: document.getElementById("content")
                     });
                 },
-                "iframe": function () {
+                "iframe": function(){
 
                     new WinBox("WinBox.js", {
 
@@ -692,7 +671,7 @@
                         class: "iframe"
                     });
                 },
-                "all-options": function () {
+                "all-options": function(){
 
                     new WinBox({
 
@@ -713,119 +692,120 @@
                         bottom: 0,
                         left: 50,
                         html: "width: 200, height: 200",
-                        onfocus: function () {
+                        onfocus: function(){
                             this.setBackground("#fff");
                         },
-                        onblur: function () {
+                        onblur: function(){
                             this.setBackground("#999");
                         },
-                        onresize: function (width, height) {
+                        onresize: function(width, height){
                             this.body.textContent = (
                                 "width: " + width + ", " +
                                 "height: " + height
                             );
                         },
-                        onmove: function (x, y) {
+                        onmove: function(x, y){
                             this.body.textContent = (
                                 "x: " + x + ", " +
                                 "y: " + y
                             );
                         },
-                        onclose: function () {
-                            alert("event 'onclose' fired")
+                        onclose: function(force){
+                            return !force && !window.confirm("Are you sure to close window?");
                         }
                     });
                 },
-                "custom-css": function () {
+                "custom-css": function(){
 
                     new WinBox("Custom CSS", {
 
                         class: "custom",
                         mount: document.getElementById("content")
-                            .cloneNode(true)
+                                       .cloneNode(true)
                     });
                 },
-                "custom-class": function () {
+                "custom-class": function(){
 
                     new WinBox("Custom CSS (Class)", {
 
                         class: "my-theme",
                         mount: document.getElementById("content")
-                            .cloneNode(true)
+                                       .cloneNode(true)
                     });
                 },
-                "theme-modern": function () {
+                "theme-modern": function(){
 
                     new WinBox("Theme: Modern", {
 
                         class: "modern",
                         mount: document.getElementById("content")
-                            .cloneNode(true),
-                        onclose: foo_are_you_sure
+                                       .cloneNode(true)
                     });
                 },
-                "controls": function () {
+                "controls": function(){
 
                     winbox = new WinBox("Controls", {
 
                         mount: document.getElementById("controls"),
                         border: 4,
-                        onclose: foo_are_you_sure
+                        onclose: function(force){
+                            return !force && !window.confirm("Are you sure to close window?");
+                        }
                     });
                 }
             };
 
             window.buttons = {
 
-                minimize: function () {
+                minimize: function(){
 
                     winbox.minimize();
                 },
-                maximize: function () {
+                maximize: function(){
 
                     winbox.maximize();
                 },
-                fullscreen: function () {
+                fullscreen: function(){
 
                     winbox.fullscreen();
                 },
-                center: function () {
+                center: function(){
 
                     winbox.move("center", "center");
                 },
-                move: function () {
+                move: function(){
 
                     winbox.move("right", "bottom");
                 },
-                resize: function () {
+                resize: function(){
 
                     winbox.resize("50%", "50%");
                 },
-                title: function () {
+                title: function(){
 
                     winbox.setTitle("Title-" + Math.random());
                 },
-                color: function () {
+                color: function(){
 
                     winbox.setBackground(
                         "rgb(" + (Math.random() * 255 | 0) + "," +
-                        (Math.random() * 255 | 0) + "," +
-                        (Math.random() * 255 | 0) + ")"
+                                 (Math.random() * 255 | 0) + "," +
+                                 (Math.random() * 255 | 0) + ")"
                     );
                 },
-                modal: function () {
+                modal: function(){
 
                     winbox.body.parentNode.classList.toggle("modal");
                 },
-                add: function () {
+                add: function(){
 
                     winbox.addClass("my-theme");
                 },
-                remove: function () {
+                remove: function(){
 
                     winbox.removeClass("my-theme");
                 },
-                close: function () {
+                close: function(){
 
                     winbox.close();
                 },
@@ -841,5 +821,4 @@
 
     </script>
 </body>
-
 </html>

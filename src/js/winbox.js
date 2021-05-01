@@ -309,11 +309,7 @@ function register(self){
     addListener(getByClass(self.dom, "wb-close"), "click", function(event){
 
         preventEvent(event);
-        var is_cancel = self.close();
-        if (is_cancel) {
-            return;
-        }
-        self = null;
+        self.close() || (self = null);
     });
 
     addListener(self.dom, "click", function(event){
@@ -818,16 +814,15 @@ function cancel_fullscreen(self){
 }
 
 /**
+ * @param {boolean=} force
  * @this WinBox
  */
 
-WinBox.prototype.close = function(is_immediate = false) {
+WinBox.prototype.close = function(force) {
 
-    if (this.onclose && !is_immediate) {
-        if (this.onclose()) {
-            // cancel close
-            return true;
-        }
+    if(this.onclose && this.onclose(force)){
+
+        return true;
     }
 
     if(this.min){
@@ -853,7 +848,7 @@ WinBox.prototype.close = function(is_immediate = false) {
 
 WinBox.prototype.move = function(x, y, _skip_update){
 
-    if(typeof x === "undefined"){
+    if(!x && (x !== 0)){
 
         x = this.x;
         y = this.y;
@@ -879,7 +874,7 @@ WinBox.prototype.move = function(x, y, _skip_update){
 
 WinBox.prototype.resize = function(w, h, _skip_update){
 
-    if(typeof w === "undefined"){
+    if(!w && (w !== 0)){
 
         w = this.width;
         h = this.height;

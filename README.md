@@ -322,7 +322,7 @@ Instance properties:
     <tr>
         <td>onclose<br>onfocus<br>onblur</td>
         <td>function()</td>
-        <td>Callbacks to several events (Note: the event 'onclose' will be triggered right before closing). The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
+        <td>Callbacks to several events. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance. Note: the event 'onclose' will be triggered right before closing and stops closing when a callback was applied and returns a truthy value.</td>
     </tr>
 </table>
 
