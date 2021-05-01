@@ -335,7 +335,7 @@
         );
     },
     onclose: function(force){
-        return !force && !window.confirm("Are you sure to close window?");
+        return !confirm("Close window?");
     }
 });</code></pre>
             <div class="break"></div>
@@ -362,7 +362,7 @@
     mount: document.getElementById("controls"),
     border: 4,
     onclose: function(force){
-        return !force && !window.confirm("Are you sure to close window?");
+        return !force && !confirm("Close window?");
     }
 });</code></pre>
             <div class="break"></div>
@@ -407,6 +407,10 @@
     close: function(){
 
         winbox.close();
+    },
+    force_close: function(){
+
+        winbox.close(true);
     }
 };</code></pre>
             <div class="break"></div>
@@ -711,7 +715,7 @@
                             );
                         },
                         onclose: function(force){
-                            return !force && !window.confirm("Are you sure to close window?");
+                            return !confirm("Close window?");
                         }
                     });
                 },
@@ -749,7 +753,7 @@
                         mount: document.getElementById("controls"),
                         border: 4,
                         onclose: function(force){
-                            return !force && !window.confirm("Are you sure to close window?");
+                            return !force && !confirm("Close window?");
                         }
                     });
                 }

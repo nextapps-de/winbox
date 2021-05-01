@@ -185,7 +185,7 @@ Instance methods:
 - <a href="#winbox.unmount">winbox.**unmount**(dest)</a>
 - <a href="#winbox.move">winbox.**move**(x, y)</a>
 - <a href="#winbox.resize">winbox.**resize**(width, height)</a>
-- <a href="#winbox.close">winbox.**close**()</a>
+- <a href="#winbox.close">winbox.**close**(boolean)</a>
 - <a href="#winbox.focus">winbox.**focus**()</a>
 - <a href="#winbox.hide">winbox.**hide**()</a>
 - <a href="#winbox.show">winbox.**show**()</a>
@@ -320,9 +320,15 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
-        <td>onclose<br>onfocus<br>onblur</td>
+        <td>onclose</td>
+        <td>function(force)</td>
+        <td>Callbacks triggered when the window is closing. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance. Note: the event 'onclose' will be triggered right before closing and stops closing when a callback was applied and returns a truthy value.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onfocus<br>onblur</td>
         <td>function()</td>
-        <td>Callbacks to several events. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance. Note: the event 'onclose' will be triggered right before closing and stops closing when a callback was applied and returns a truthy value.</td>
+        <td>Callbacks to several events. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
     </tr>
 </table>
 
@@ -840,6 +846,75 @@ winbox.setTitle("Title")
 ```
 
 > When using "center" as position you need to call `resize()` before `move()`.
+
+#### Callbacks
+
+You can assign callbacks via the option payload when creating a window.
+
+> The keyword `this` in your callback function refers to the corresponding WinBox Instance.
+
+```js
+var winbox = WinBox({
+    onfocus: function(){
+        this.setBackground("#fff");
+    },
+    onblur: function(){
+        this.setBackground("#999");
+    },
+    onresize: function(width, height){
+        console.log("width", width);
+        console.log("height", height);
+    },
+    onmove: function(x, y){
+        console.log("x", x);
+        console.log("y", y);
+    },
+    onclose: function(force){
+        // return "true" to skip the closing
+        // return "false" to allow closing
+        // use delegated force parameter optionally
+        return !confirm("Close window?");
+    }
+});
+```
+
+#### The "onclose" callback
+
+> The event `onclose` will be triggered right before closing and __stops__ closing when a callback was applied and returns a __truthy value__.
+
+Within your callback function just return `true` to stops the closing or return `false` to perform closing as default.
+```js
+new WinBox({ 
+    onclose: function(){
+        // return "true" to skip the closing
+        // return "false" to allow closing
+        if(do_some_checks()){
+            return true;
+        }
+    } 
+});
+```
+
+The `force` parameter from the `winbox.close(boolean)` will be delegated to your callback function as the first parameter. You need to handle the "force" state in your callback function.
+
+```js
+var winbox = WinBox({ 
+    onclose: function onclose(force){
+        // use delegated force parameter optionally
+        return !force && !confirm("Close window?");
+    } 
+});
+```
+
+Close the window and execute callback as default (will show the prompt from example above):
+```js
+winbox.close();
+```
+
+Force closing the window (does not show the prompt from example above):
+```js
+winbox.close(true);
+```
 
 <a name="control-classes" id="control-classes"></a>
 #### Use Control Classes
