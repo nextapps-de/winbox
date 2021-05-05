@@ -73,19 +73,16 @@ __Get Latest Stable Build (Recommended):__
     </tr>
 </table>
 
-__Get Latest Nightly Build (Do not use for production!):__
-
-Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.1.8__/dist/" into "/winbox/__master__/dist".
-
 __Get Latest (NPM):__
 
 ```cmd
 npm install winbox
 ```
 
-__Get Latest (ES6 Modules):__
+__Get Latest Nightly (Do not use for production!):__
 
-https://github.com/nextapps-de/winbox/tree/master/src/js
+Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.1.8__/dist/" into "/winbox/__master__/dist".
+
 
 ### Use Bundled Version
 
@@ -568,6 +565,8 @@ winbox.mount(node.cloneNode(true));
 #### Mount DOM (Singleton) + Auto-Unmount
 
 > A singleton is a unique fragment which can move inside the document. When creating multiple windows and mounting the same fragment to it, the fragment will leave the old window (see the method above for cloning).
+
+> This workaround is also compatible if you are using server-side rendering.
 
 You can simply use a hidden backstore to hold contents, as well you can use any other strategy like a templating engine etc.
 

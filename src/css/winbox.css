@@ -158,9 +158,11 @@
 .winbox.modal .wb-body ~ div,
 .winbox.modal .wb-title,
 .winbox.min .wb-body ~ div,
-.winbox.max .wb-body ~ div,
-.winbox.max .wb-title {
+.winbox.max .wb-body ~ div {
   pointer-events: none;
+}
+.winbox.max .wb-title {
+  cursor: default;
 }
 .winbox.min .wb-full,
 .winbox.min .wb-min {

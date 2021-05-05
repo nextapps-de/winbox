@@ -15,6 +15,7 @@ const use_raf = false;
 const doc = document.documentElement;
 const stack_min = [];
 let id_counter = 0;
+let dblclick_timer = 0;
 let index;
 let is_fullscreen;
 let last_focus;
@@ -404,39 +405,57 @@ function addWindowListener(self, dir){
 
         if(self.min){
 
-            remove_min_stack(self);
-            self.resize().move().focus();
+            // remove_min_stack(self);
+            // self.resize().move().focus();
+            self.minimize();
         }
-        else /*if(!self.min && !self.max)*/ { // already disabled by css
+        else {
 
-            disable_animation(self);
-            use_raf && loop();
+            if(dir === "title"){
 
-            if((touch = event.touches) && (touch = touch[0])){
+                const now = Date.now();
+                const diff = now - dblclick_timer;
 
-                event = touch;
+                dblclick_timer = now;
 
-                // TODO: fix when touch events bubbles up to the document body
-                //addListener(self.dom, "touchmove", preventEvent);
-                addListener(window, "touchmove", handler_mousemove);
-                addListener(window, "touchend", handler_mouseup);
-            }
-            else{
+                if(diff < 250){
 
-                //addListener(this, "mouseleave", handler_mouseup);
-                addListener(window, "mousemove", handler_mousemove);
-                addListener(window, "mouseup", handler_mouseup);
+                    self.maximize();
+                    return;
+                }
             }
 
-            x = event.pageX;
-            y = event.pageY;
+            if(!self.max){
 
-            // appearing scrollbars on the root element does not trigger "window.onresize",
-            // force refresh window size via init(), also force layout recalculation (layout trashing)
-            // it is probably very rare that the body overflow changes between window open and close
+                disable_animation(self);
+                use_raf && loop();
 
-            //init();
-            self.focus();
+                if((touch = event.touches) && (touch = touch[0])){
+
+                    event = touch;
+
+                    // TODO: fix when touch events bubbles up to the document body
+                    //addListener(self.dom, "touchmove", preventEvent);
+                    addListener(window, "touchmove", handler_mousemove);
+                    addListener(window, "touchend", handler_mouseup);
+                }
+                else{
+
+                    //addListener(this, "mouseleave", handler_mouseup);
+                    addListener(window, "mousemove", handler_mousemove);
+                    addListener(window, "mouseup", handler_mouseup);
+                }
+
+                x = event.pageX;
+                y = event.pageY;
+
+                // appearing scrollbars on the root element does not trigger "window.onresize",
+                // force refresh window size via init(), also force layout recalculation (layout trashing)
+                // it is probably very rare that the body overflow changes between window open and close
+
+                //init();
+                self.focus();
+            }
         }
     }
 
@@ -539,6 +558,7 @@ function addWindowListener(self, dir){
         }
         else{
 
+            //removeListener(this, "mouseleave", handler_mouseup);
             removeListener(window, "mousemove", handler_mousemove);
             removeListener(window, "mouseup", handler_mouseup);
         }
@@ -686,7 +706,7 @@ WinBox.prototype.minimize = function(state){
     if(!state && this.min){
 
         remove_min_stack(this);
-        this.resize().move();
+        this.resize().move().focus();
     }
     else if((state !== false) && !this.min){
 

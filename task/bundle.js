@@ -36,19 +36,12 @@ const style = process.argv[2] === "--style";
 
     // ----------------------
 
-    // if(template){
-    //
-    //     writeFileSync("tmp/template.js", readFileSync("src/js/template.js", "utf8").replace(/>\s+</g, "><"));
-    // }
-
-    // ----------------------
-
     if(style){
 
         writeFileSync("tmp/style.js",
 
             'const style = document.createElement("style");' +
-            'style.innerHTML = "' + readFileSync("dist/css/winbox.min.css", "utf8") + '";' +
+            'style.innerHTML = "' + readFileSync("dist/css/winbox.min.css", "utf8").replace(/"/g, "'") + '";' +
             'const head = document.getElementsByTagName("head")[0];' +
             'if(head.firstChild) head.insertBefore(style, head.firstChild); else head.appendChild(style);'
         );
