@@ -355,6 +355,7 @@ function update_min_stack(){
 function disable_animation(self){
 
     setStyle(self.dom, "transition", "none");
+    setStyle(self.body, "pointer-events", "none");
 }
 
 /**
@@ -364,6 +365,7 @@ function disable_animation(self){
 function enable_animation(self){
 
     setStyle(self.dom, "transition", "");
+    setStyle(self.body, "pointer-events", "");
 }
 
 /**
