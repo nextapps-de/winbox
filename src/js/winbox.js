@@ -349,36 +349,13 @@ function update_min_stack(){
 
 /**
  * @param {WinBox} self
- * @param {HTMLIFrameElement=} iframe
- */
-
-
-function disable_animation(self, iframe){
-
-    setStyle(self.dom, "transition", "none");
-    iframe && setStyle(iframe, "pointer-events", "none");
-}
-
-/**
- * @param {WinBox} self
- * @param {HTMLIFrameElement=} iframe
- */
-
-function enable_animation(self, iframe){
-
-    setStyle(self.dom, "transition", "");
-    iframe && setStyle(iframe, "pointer-events", "");
-}
-
-/**
- * @param {WinBox} self
  * @param {string} dir
  */
 
 function addWindowListener(self, dir){
 
     const node = getByClass(self.dom, "wb-" + dir);
-    let touch, x, y, iframe;
+    let touch, x, y;
 
     addListener(node, "mousedown", mousedown);
     addListener(node, "touchstart", mousedown, { "passive": false });
@@ -431,9 +408,7 @@ function addWindowListener(self, dir){
 
             if(!self.max){
 
-                iframe = self.body.getElementsByTagName("iframe")[0];
-
-                disable_animation(self, iframe);
+                self.addClass("drag");
                 use_raf && loop();
 
                 if((touch = event.touches) && (touch = touch[0])){
@@ -553,9 +528,8 @@ function addWindowListener(self, dir){
     function handler_mouseup(event){
 
         preventEvent(event);
-        enable_animation(self, iframe);
+        self.removeClass("drag");
         use_raf && cancelAnimationFrame(raf);
-        iframe = null;
 
         if(touch){
 

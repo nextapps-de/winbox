@@ -186,6 +186,12 @@
   height: 100%;
   border: 0;
 }
+.winbox.drag {
+  transition: none;
+}
+.winbox.drag iframe {
+  pointer-events: none;
+}
 .winbox.modal:before {
   content: '';
   position: absolute;
