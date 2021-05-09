@@ -349,23 +349,25 @@ function update_min_stack(){
 
 /**
  * @param {WinBox} self
+ * @param {HTMLIFrameElement=} iframe
  */
 
 
-function disable_animation(self){
+function disable_animation(self, iframe){
 
     setStyle(self.dom, "transition", "none");
-    setStyle(self.body, "pointer-events", "none");
+    iframe && setStyle(iframe, "pointer-events", "none");
 }
 
 /**
  * @param {WinBox} self
+ * @param {HTMLIFrameElement=} iframe
  */
 
-function enable_animation(self){
+function enable_animation(self, iframe){
 
     setStyle(self.dom, "transition", "");
-    setStyle(self.body, "pointer-events", "");
+    iframe && setStyle(iframe, "pointer-events", "");
 }
 
 /**
@@ -376,7 +378,7 @@ function enable_animation(self){
 function addWindowListener(self, dir){
 
     const node = getByClass(self.dom, "wb-" + dir);
-    let touch, x, y;
+    let touch, x, y, iframe;
 
     addListener(node, "mousedown", mousedown);
     addListener(node, "touchstart", mousedown, { "passive": false });
@@ -429,7 +431,9 @@ function addWindowListener(self, dir){
 
             if(!self.max){
 
-                disable_animation(self);
+                iframe = self.body.getElementsByTagName("iframe")[0];
+
+                disable_animation(self, iframe);
                 use_raf && loop();
 
                 if((touch = event.touches) && (touch = touch[0])){
@@ -549,8 +553,9 @@ function addWindowListener(self, dir){
     function handler_mouseup(event){
 
         preventEvent(event);
-        enable_animation(self);
+        enable_animation(self, iframe);
         use_raf && cancelAnimationFrame(raf);
+        iframe = null;
 
         if(touch){
 
