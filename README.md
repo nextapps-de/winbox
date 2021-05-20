@@ -8,7 +8,9 @@
 
 <a href="https://nextapps-de.github.io/winbox/">Demo</a> &ensp;&bull;&ensp; <a href="#started">Getting Started</a> &ensp;&bull;&ensp; <a href="#options">Options</a> &ensp;&bull;&ensp; <a href="#api">API</a> &ensp;&bull;&ensp; <a href="#themes">Themes</a> &ensp;&bull;&ensp; <a href="#customize">Customize</a> &ensp;&bull;&ensp; <a href="CHANGELOG.md">Changelog</a>
 
-<h3>Live Demo / Code Examples: <br><a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a></h3>
+<h3>Live Demo / Code Examples: <br><a href="https://nextapps-de.github.io/winbox/" target="_blank">https://nextapps-de.github.io/winbox/ </a></h3>
+
+<h3>StackBlitz Demo for Angular Usage: <br><a href="https://stackblitz.com/edit/angular-winbox-sample" target="_blank">https://stackblitz.com/edit/angular-winbox-sample</a></h3>
 
 <a name="started"></a>
 ## Getting Started
