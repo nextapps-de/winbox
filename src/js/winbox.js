@@ -65,7 +65,8 @@ function WinBox(params, _title){
         onresize,
         background,
         border,
-        classname;
+        classname,
+        splitscreen;
 
     if(params){
 
@@ -110,6 +111,7 @@ function WinBox(params, _title){
             background = params["background"];
             border = params["border"];
             classname = params["class"];
+            splitscreen = params["splitscreen"];
 
             if(background){
 
@@ -166,6 +168,7 @@ function WinBox(params, _title){
     this.onblur = onblur;
     this.onmove = onmove;
     this.onresize = onresize;
+    this.splitscreen = splitscreen;
 
     if(max){
 
@@ -853,6 +856,14 @@ WinBox.prototype.move = function(x, y, _skip_update){
 
         x = this.x;
         y = this.y;
+
+        if( this.splitscreen ){
+            if( x === 0 ){
+                this.resize(root_w / 2, root_h);
+            } else if( x === (root_w - this.width) ){
+                this.resize(root_w / 2, root_h);
+            }
+        }
     }
     else if(!_skip_update){
 
