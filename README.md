@@ -262,6 +262,12 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
+        <td>minwidth<br>minheight</td>
+        <td>number | string</td>
+        <td>Set the minimal width/height of the window (supports units "px" and "%").</td>
+    </tr>
+    <tr></tr>
+    <tr>
         <td>x<br>y</td>
         <td>number | string</td>
         <td>Set the initial position of the window (supports: "right" for x-axis, "bottom" for y-axis, "center" for both, units "px" and "%" for both).</td>
