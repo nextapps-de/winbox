@@ -12,8 +12,9 @@ import { addListener, removeListener, setStyle, setText, getByClass, addClass, r
 //const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window["MSStream"];
 
 const use_raf = false;
-const doc = document.documentElement;
+//const doc = document.documentElement;
 const stack_min = [];
+let body;
 let id_counter = 0;
 let dblclick_timer = 0;
 let index;
@@ -192,7 +193,7 @@ function WinBox(params, _title){
     }
 
     register(this);
-    (root || document.body).appendChild(this.dom);
+    (root || body).appendChild(this.dom);
 }
 
 WinBox["new"] = function(params){
@@ -242,7 +243,7 @@ function parse(num, base, center){
 
 function setup(){
 
-    const body = document.body;
+    body = document.body;
 
     body[prefix_request = "requestFullscreen"] ||
     body[prefix_request = "msRequestFullscreen"] ||
@@ -316,6 +317,7 @@ function register(self){
     addListener(self.dom, "click", function(event){
 
         // stop propagation would disable global listeners used inside window contents
+        // use event bubbling for this listener to skip this handler by the other click listeners
         self.focus();
 
     }, false);
@@ -386,8 +388,6 @@ function addWindowListener(self, dir){
 
         if(self.min){
 
-            // remove_min_stack(self);
-            // self.resize().move().focus();
             self.minimize();
         }
         else {
@@ -500,7 +500,7 @@ function addWindowListener(self, dir){
 
             if(resize_h){
 
-                self.height = Math.max(Math.min(self.height, root_h - self.y - self.bottom /* - 1 */), 35);
+                self.height = Math.max(Math.min(self.height, root_h - self.y - self.bottom), 35);
             }
 
             use_raf ? raf_resize = true : self.resize();
@@ -515,7 +515,7 @@ function addWindowListener(self, dir){
 
             if(move_y){
 
-                self.y = Math.max(Math.min(self.y, root_h - self.height - self.bottom /* - 1 */), self.top);
+                self.y = Math.max(Math.min(self.y, root_h - self.height - self.bottom), self.top);
             }
 
             use_raf ? raf_move = true : self.move();
@@ -559,8 +559,11 @@ function init(){
     //     this.root_h = window.innerHeight * (this.root_w / window.innerWidth);
     // }
 
-    root_w = doc.clientWidth;
-    root_h = doc.clientHeight;
+    // root_w = doc.clientWidth;
+    // root_h = doc.clientHeight;
+
+    root_w = body.clientWidth;
+    root_h = body.clientHeight;
 }
 
 /**
