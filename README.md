@@ -23,8 +23,8 @@ __Get Latest Stable Build (Recommended):__
     </tr>
     <tr>
         <td>winbox.bundle.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.8/dist/winbox.bundle.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.8/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.8/dist/winbox.bundle.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.0/dist/winbox.bundle.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/winbox.bundle.js</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -33,14 +33,14 @@ __Get Latest Stable Build (Recommended):__
     </tr>
     <tr>
         <td>winbox.min.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.8/dist/js/winbox.min.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.8/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.8/dist/js/winbox.min.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.0/dist/js/winbox.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/js/winbox.min.js</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.min.css</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.8/dist/css/winbox.min.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.8/dist/css/winbox.min.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.8/dist/css/winbox.min.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.0/dist/css/winbox.min.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/css/winbox.min.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/css/winbox.min.css</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -49,25 +49,25 @@ __Get Latest Stable Build (Recommended):__
     </tr>
     <tr>
         <td>ES6 Modules</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.8/src/js" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.0/src/js" target="_blank">Download</a></td>
         <td>The <i>/src/js</i> folder of this Github repository</td>
     </tr>
     <tr></tr>
     <tr>
         <td>LESS Files (source)</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.8/src/css" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.0/src/css" target="_blank">Download</a></td>
         <td>The <i>/src/css</i> folder of this Github repository</td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.css (compiled)</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.1.8/src/css/winbox.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.1.8/src/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.1.8/src/css/winbox.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.0/src/css/winbox.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/src/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/src/css/winbox.css</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>src.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.1.8/dist" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.0/dist" target="_blank">Download</a></td>
         <td>Download all source files including image original resources.</td>
     </tr>
 </table>
@@ -80,7 +80,7 @@ npm install winbox
 
 __Get Latest Nightly (Do not use for production!):__
 
-Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.1.8__/dist/" into "/winbox/__master__/dist".
+Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.2.0__/dist/" into "/winbox/__master__/dist".
 
 
 ### Use Bundled Version
@@ -158,7 +158,7 @@ You can also load modules via CDN, e.g.:
 
 ```html
 <script type="module">
-  import WinBox from "https://unpkg.com/winbox@0.1.8/src/js/winbox.js";
+  import WinBox from "https://unpkg.com/winbox@0.2.0/src/js/winbox.js";
 </script>
 ```
 
@@ -926,51 +926,6 @@ Force closing the window (does not show the prompt from example above):
 winbox.close(true);
 ```
 
-## Custom Splitscreen
-
-Use the viewport limit to define your own splitscreen areas, e.g. for a simple vertical split:
-
-```js
-new WinBox("Split Left", {
-    right: "50%"
-});
-
-new WinBox("Split Right", {
-    x: "50%",
-    left: "100%" // 100% of its own size
-});
-```
-
-Same way you can also define custom sizes for each split as well as different grids, e.g.:
-
-```js
-new WinBox("Split Top-Left", { right: "66%", bottom: "50%", max: true });
-new WinBox("Split Bottom-Left", { right: "66%", top: "50%", max: true });
-
-new WinBox("Split Middle", { left: "34%", right: "34%", max: true });
-
-new WinBox("Split Top-Right", { left: "66%", bottom: "50%", max: true });
-new WinBox("Split Bottom-Right", { left: "66%", top: "50%", max: true });
-```
-
-This looks like this grid:
-
-```
----------------------------------------------
-|             |              |              |
-|             |              |              |
-|  Top Left   |              |  Top right   |
-|             |              |              |
-|             |              |              |
----------------    Middle    ----------------
-|             |              |              |
-|             |              |              |
-| Bottom Left |              | Bottom right |
-|             |              |              |
-|             |              |              |
----------------------------------------------
-```
-
 <a name="control-classes" id="control-classes"></a>
 #### Use Control Classes
 
@@ -1086,6 +1041,53 @@ winbox.addClass("no-resize")
 winbox.removeClass("no-resize")
       .removeClass("no-move");
 ```
+
+## Custom Splitscreen
+
+Use the viewport limit to define your own splitscreen areas, e.g. for a simple vertical split:
+
+```js
+new WinBox("Split Left", {
+    right: "50%"
+});
+
+new WinBox("Split Right", {
+    x: "50%",
+    left: "100%" // 100% of its own size
+});
+```
+
+Same way you can also define custom sizes and positions for each split as well as complex grids, e.g.:
+
+```js
+new WinBox("Split Top-Left", { right: "66%", bottom: "50%", max: true });
+new WinBox("Split Bottom-Left", { right: "66%", top: "50%", max: true });
+
+new WinBox("Split Middle", { left: "34%", right: "34%", max: true });
+
+new WinBox("Split Top-Right", { left: "66%", bottom: "50%", max: true });
+new WinBox("Split Bottom-Right", { left: "66%", top: "50%", max: true });
+```
+
+The splitscreen from above will look like this grid:
+
+```
+---------------------------------------------
+|             |              |              |
+|             |              |              |
+|  Top Left   |              |  Top Right   |
+|             |              |              |
+|             |              |              |
+---------------    Middle    ----------------
+|             |              |              |
+|             |              |              |
+| Bottom Left |              | Bottom Right |
+|             |              |              |
+|             |              |              |
+---------------------------------------------
+```
+
+You can set the values for the viewport dynamically, doing this makes it possible to growth up the grid dynamically and also change the grid schema.
 
 <a name="customize"></a>
 ## Customize Window
