@@ -332,6 +332,12 @@ Instance properties:
         <td>function()</td>
         <td>Callbacks to several events. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
     </tr>
+    <tr></tr>
+    <tr>
+        <td>splitscreen</td>
+        <td>boolean</td>
+        <td>Enable split screen to see two windows side by side by drag at the side the window</td>
+    </tr>
 </table>
 
 ## Create and Setup Window
