@@ -51,6 +51,8 @@ function WinBox(params, _title){
         url,
         width,
         height,
+        minwidth,
+        minheight,
         x,
         y,
         max,
@@ -95,6 +97,8 @@ function WinBox(params, _title){
             url = params["url"];
             width = params["width"];
             height = params["height"];
+            minwidth = params["minwidth"];
+            minheight = params["minheight"];
             x = params["x"] || x;
             y = params["y"] || y;
             max = params["max"];
@@ -140,6 +144,9 @@ function WinBox(params, _title){
     width = width ? parse(width, max_width) : (max_width / 2) | 0;
     height = height ? parse(height, max_height) : (max_height / 2) | 0;
 
+    minwidth = minwidth ? parse(minwidth, max_width) : 0;
+    minheight = minheight ? parse(minheight, max_height) : 0;
+
     x = x ? parse(x, max_width, width) : left;
     y = y ? parse(y, max_height, height) : top;
 
@@ -153,6 +160,8 @@ function WinBox(params, _title){
     this.y = y;
     this.width = width;
     this.height = height;
+    this.minwidth = minwidth;
+    this.minheight = minheight;
     this.top = top;
     this.right = right;
     this.bottom = bottom;
@@ -888,6 +897,9 @@ WinBox.prototype.resize = function(w, h, _skip_update){
         this.width = w ? w = parse(w, root_w - this.left - this.right) : 0;
         this.height = h ? h = parse(h, root_h - this.top - this.bottom) : 0;
     }
+
+    w = Math.max(w, this.minwidth);
+    h = Math.max(h, this.minheight);
 
     setStyle(this.dom, "width", w + "px");
     setStyle(this.dom, "height", h + "px");
