@@ -208,6 +208,26 @@
 
             <hr>
             <br>
+            Splitscreen
+            <br><br>
+            <pre><code class="language-js">new WinBox("Splitscreen (Left)", {
+
+    right: "50%",
+    max: true
+});
+
+new WinBox("Splitscreen (Right)", {
+
+    x: "100%",
+    left: "50%",
+    max: true
+});</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['splitscreen']()">Run Code</div>
+            <br><br>
+
+            <hr>
+            <br>
             Custom Position / Size
             <br><br>
             <pre><code class="language-js">new WinBox({
@@ -625,6 +645,21 @@
                         right: 50,
                         bottom: 0,
                         left: 50
+                    });
+                },
+                "splitscreen": function(){
+
+                    new WinBox("Splitscreen (Left)", {
+
+                        right: "50%",
+                        max: true
+                    });
+
+                    new WinBox("Splitscreen (Right)", {
+
+                        x: "100%",
+                        left: "50%",
+                        max: true
                     });
                 },
                 "position": function(){

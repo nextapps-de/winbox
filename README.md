@@ -926,6 +926,51 @@ Force closing the window (does not show the prompt from example above):
 winbox.close(true);
 ```
 
+## Custom Splitscreen
+
+Use the viewport limit to define your own splitscreen areas, e.g. for a simple vertical split:
+
+```js
+new WinBox("Split Left", {
+    right: "50%"
+});
+
+new WinBox("Split Right", {
+    x: "50%",
+    left: "100%" // 100% of its own size
+});
+```
+
+Same way you can also define custom sizes for each split as well as different grids, e.g.:
+
+```js
+new WinBox("Split Top-Left", { right: "66%", bottom: "50%", max: true });
+new WinBox("Split Bottom-Left", { right: "66%", top: "50%", max: true });
+
+new WinBox("Split Middle", { left: "34%", right: "34%", max: true });
+
+new WinBox("Split Top-Right", { left: "66%", bottom: "50%", max: true });
+new WinBox("Split Bottom-Right", { left: "66%", top: "50%", max: true });
+```
+
+This looks like this grid:
+
+```
+---------------------------------------------
+|             |              |              |
+|             |              |              |
+|  Top Left   |              |  Top right   |
+|             |              |              |
+|             |              |              |
+---------------    Middle    ----------------
+|             |              |              |
+|             |              |              |
+| Bottom Left |              | Bottom right |
+|             |              |              |
+|             |              |              |
+---------------------------------------------
+```
+
 <a name="control-classes" id="control-classes"></a>
 #### Use Control Classes
 
@@ -1277,24 +1322,8 @@ new WinBox({
 
 #### Best Practices
 
-- Use a non-scrolling body element to get the best user experience.
-- Provide an alternative view strategy for mobile devices, e.g. when the device is a touch device then open a classical app view. If a mouse pointer is available mount this view to the WinBox window. Also, you can place a switch button in your application where the user can also toggles between these two modes.
-
-## Custom Builds
-
-Go to the root directory of WinBox and run:
-```cmd
-npm install
-```
-
-Perform a build:
-```cmd
-npm run build
-```
-
-The final build is located in the `dist/` folder.
-
----
+- Use a non-scrolling body element to get the best user experience on mobile devices.
+- Or provide an alternative view strategy for mobile devices, e.g. when the device is a touch device then open a classical app view. If a mouse pointer is available, then mount this view to the WinBox window. Also, you can place a switch button in your application where the user can also toggle between these two modes.
 
 ## WinBox on Angular application
 
@@ -1327,6 +1356,22 @@ export class AppComponent {
   }
 }
 ```
+
+## Custom Builds
+
+Go to the root directory of WinBox and run:
+```cmd
+npm install
+```
+
+Perform a build:
+```cmd
+npm run build
+```
+
+The final build is located in the `dist/` folder.
+
+---
 
 Copyright 2021 Nextapps GmbH<br>
 Released under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0 License</a><br>
