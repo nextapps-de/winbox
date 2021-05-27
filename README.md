@@ -1296,6 +1296,37 @@ The final build is located in the `dist/` folder.
 
 ---
 
+## WinBox on Angular application
+
+Step 1: Install WinBox library
+
+```
+npm i winbox
+```
+
+Step 2: Install WinBox types
+
+```
+npm i @types/winbox --save-dev
+```
+
+Step 3: Import WinBox in a component
+
+```ts
+import { Component } from '@angular/core';
+import 'winbox';
+declare const WinBox: WinBox.WinBoxConstructor;
+
+@Component({
+  selector: 'my-app',
+  template: '<button (click)="openWindow()">Open Window</button>'
+})
+export class AppComponent {
+  openWindow() {
+    WinBox.new();
+  }
+}
+```
 
 Copyright 2021 Nextapps GmbH<br>
 Released under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0 License</a><br>
