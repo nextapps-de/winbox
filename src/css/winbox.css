@@ -187,10 +187,10 @@
   height: 100%;
   border: 0;
 }
-.winbox.drag {
+body.wb-drag .winbox {
   transition: none;
 }
-.winbox.drag iframe {
+body.wb-drag iframe {
   pointer-events: none;
 }
 .winbox.modal:before {

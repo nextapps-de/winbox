@@ -408,7 +408,7 @@ function addWindowListener(self, dir){
 
             if(!self.max){
 
-                self.addClass("drag");
+                addClass(body, "wb-drag");
                 use_raf && loop();
 
                 if((touch = event.touches) && (touch = touch[0])){
@@ -528,7 +528,7 @@ function addWindowListener(self, dir){
     function handler_mouseup(event){
 
         preventEvent(event);
-        self.removeClass("drag");
+        removeClass(body, "wb-drag");
         use_raf && cancelAnimationFrame(raf);
 
         if(touch){
