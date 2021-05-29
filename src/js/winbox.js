@@ -351,13 +351,33 @@ function remove_min_stack(self){
 function update_min_stack(){
 
     const len = stack_min.length;
+    const tile_index = {};
+    const tile_len = {};
 
-    for(let i = 0, self, width; i < len; i++){
+    for(let i = 0, self, key; i < len; i++){
 
         self = stack_min[i];
-        width = Math.min((root_w - self.left * 2) / len, 250);
+        key = self.left + ":" + self.top;
+
+        if(tile_len[key]){
+
+            tile_len[key]++;
+        }
+        else{
+
+            tile_len[key] = 1;
+        }
+    }
+
+    for(let i = 0, self, key, width; i < len; i++){
+
+        self = stack_min[i]
+        key = self.left + ":" + self.top;
+        width = Math.min((root_w - self.left - self.right) / tile_len[key], 250);
+        tile_index[key] || (tile_index[key] = 0);
         self.resize((width + 1) | 0, 35, true)
-            .move((self.left + i * width) | 0, root_h - self.bottom - 35, true);
+            .move((self.left + tile_index[key] * width) | 0, root_h - self.bottom - 35, true);
+        tile_index[key]++;
     }
 }
 
