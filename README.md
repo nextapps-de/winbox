@@ -1359,6 +1359,12 @@ export class AppComponent {
 }
 ```
 
+## WinBox on Vue application
+
+https://github.com/wobsoriano/vue-winbox
+
+It uses the native [teleport](https://v3.vuejs.org/api/built-in-components.html#teleport) component in Vue 3 and recommends https://github.com/LinusBorg/vue-simple-portal for Vue 2 users.
+
 ## Custom Builds
 
 Go to the root directory of WinBox and run:
