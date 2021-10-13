@@ -7,7 +7,7 @@
  */
 
 import template from "./template.js";
-import { addListener, removeListener, setStyle, setText, getByClass, addClass, removeClass, preventEvent } from "./helper.js";
+import { addListener, removeListener, setStyle, setText, getByClass, addClass, removeClass, hasClass, preventEvent } from "./helper.js";
 
 //const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window["MSStream"];
 
@@ -424,7 +424,7 @@ function addWindowListener(self, dir){
         }
         else {
 
-            if(dir === "title"){
+            if(dir === "title" && !this.hasClass(self.dom, "no-max")){
 
                 const now = Date.now();
                 const diff = now - dblclick_timer;
@@ -958,5 +958,16 @@ WinBox.prototype.addClass = function(classname){
 WinBox.prototype.removeClass = function(classname){
 
     removeClass(this.dom, classname);
+    return this;
+};
+
+/**
+ * @param {string} classname
+ * @this WinBox
+ */
+
+WinBox.prototype.hasClass = function(classname){
+
+    hasClass(this.dom, classname);
     return this;
 };

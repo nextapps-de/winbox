@@ -46,6 +46,11 @@ export function addClass(node, classname){
     node.classList.add(classname);
 }
 
+export function hasClass(node, classname){
+
+    return node.classList.contains(classname);
+}
+
 export function removeClass(node, classname){
 
     node.classList.remove(classname);
