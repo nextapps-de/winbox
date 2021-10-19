@@ -175,6 +175,10 @@
 .winbox.min .wb-body > * {
   display: none;
 }
+.winbox.hide {
+  display: none;
+  visibility: hidden;
+}
 .max {
   box-shadow: none;
 }
