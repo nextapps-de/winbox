@@ -204,6 +204,8 @@ function WinBox(params, _title){
         this.setUrl(url);
     }
 
+    this.dom.winbox = this;
+
     register(this);
     (root || body).appendChild(this.dom);
 }
