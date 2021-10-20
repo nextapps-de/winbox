@@ -34,13 +34,13 @@
     "build:css": "lessc src/css/winbox.less dist/css/winbox.css",
     "build:css:bundle": "node task/bundle --image && lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" tmp/bundle.less dist/css/winbox.min.css && csso dist/css/winbox.min.css --output dist/css/winbox.min.css",
     "build:css:theme-modern": "lessc src/css/themes/modern.less dist/css/themes/modern.css",
-    "build:css:bundle:theme-modern": "lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/modern.less dist/css/themes/modern.min.css && csso dist/css/themes/modern.min.css --output dist/css/themes/modern.min.css",
+    "build:css:minify:theme-modern": "lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/modern.less dist/css/themes/modern.min.css && csso dist/css/themes/modern.min.css --output dist/css/themes/modern.min.css",
     "build:css:theme-white": "lessc src/css/themes/white.less dist/css/themes/white.css",
-    "build:css:bundle:theme-white": "lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/white.less dist/css/themes/white.min.css && csso dist/css/themes/white.min.css --output dist/css/themes/white.min.css",
+    "build:css:minify:theme-white": "lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/white.less dist/css/themes/white.min.css && csso dist/css/themes/white.min.css --output dist/css/themes/white.min.css",
     "build:js": "node task/build && node task/build --minified",
     "build:bundle": "node task/build --bundle && node task/build --bundle --minified",
     "build:svg": "node task/svgo",
-    "build": "npm run clean && npm run copy && npm run build:svg && npm run build:css && npm run build:css:bundle && npm run build:css:theme-modern && npm run build:css:bundle:theme-modern && npm run build:css:bundle:theme-white && npm run build:css:theme-white && node task/bundle --style && npm run build:js && npm run build:bundle && echo Build Complete. && exit 0",
+    "build": "npm run clean && npm run copy && npm run build:svg && npm run build:css && npm run build:css:bundle && npm run build:css:theme-modern && npm run build:css:minify:theme-modern && npm run build:css:theme-white && npm run build:css:minify:theme-white && node task/bundle --style && npm run build:js && npm run build:bundle && echo Build Complete. && exit 0",
     "server": "node task/server.js"
   },
   "files": [
