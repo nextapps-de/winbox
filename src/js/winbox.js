@@ -40,11 +40,9 @@ function WinBox(params, _title){
 
     index || setup();
 
-    this.dom = template();
-    this.body = getByClass(this.dom, "wb-body");
-
     let id,
         root,
+        customTemplate,
         title,
         mount,
         html,
@@ -92,6 +90,7 @@ function WinBox(params, _title){
 
             id = params["id"];
             root = params["root"];
+            customTemplate = params["template"];
             title = title || params["title"];
             mount = params["mount"];
             html = params["html"];
@@ -117,17 +116,28 @@ function WinBox(params, _title){
             border = params["border"];
             classname = params["class"];
             splitscreen = params["splitscreen"];
-
-            if(background){
-
-                this.setBackground(background);
-            }
-
-            if(border){
-
-                setStyle(this.body, "margin", border + (isNaN(border) ? "" : "px"));
-            }
         }
+    }
+
+    if(customTemplate){
+
+        this.dom = customTemplate;
+    }
+    else{
+
+        this.dom = template();
+    }
+
+    this.body = getByClass(this.dom, "wb-body");
+
+    if(background){
+
+        this.setBackground(background);
+    }
+
+    if(border){
+
+        setStyle(this.body, "margin", border + (isNaN(border) ? "" : "px"));
     }
 
     this.setTitle(title || "");
