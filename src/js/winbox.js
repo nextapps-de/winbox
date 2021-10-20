@@ -69,7 +69,11 @@ function WinBox(params, _title){
         background,
         border,
         classname,
-        splitscreen;
+        splitscreen,
+        dynamicsize,
+        clonedBody,
+        contentWidth,
+        contentHeight;
 
     if(params){
 
@@ -117,6 +121,7 @@ function WinBox(params, _title){
             border = params["border"];
             classname = params["class"];
             splitscreen = params["splitscreen"];
+            dynamicsize = params["dynamicsize"];
 
             if(background){
 
@@ -128,6 +133,26 @@ function WinBox(params, _title){
                 setStyle(this.body, "margin", border + (isNaN(border) ? "" : "px"));
             }
         }
+    }
+
+    index = index || 10;
+
+    this.dom.id =
+    this.id = id || ("winbox-" + (++id_counter));
+    this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") +
+                                    (modal ? " modal" : "");
+
+    if(mount){
+
+        this.mount(mount);
+    }
+    else if(html){
+
+        this.body.innerHTML = html;
+    }
+    else if(url){
+
+        this.setUrl(url);
     }
 
     this.setTitle(title || "");
@@ -143,8 +168,33 @@ function WinBox(params, _title){
     max_width -= left + right;
     max_height -= top + bottom;
 
-    width = width ? parse(width, max_width) : (max_width / 2) | 0;
-    height = height ? parse(height, max_height) : (max_height / 2) | 0;
+    if (dynamicsize && (!width || !height)){
+
+        clonedBody = this.body.cloneNode(true);
+
+        setStyle(clonedBody, "contain", "unset");
+        setStyle(clonedBody, "margin", "");
+        setStyle(clonedBody, "position", "relative");
+        setStyle(clonedBody, "visibility", "hidden");
+
+        if(!hasClass(this.dom, "no-header")){
+
+            clonedBody.insertAdjacentElement("afterbegin", getByClass(this.dom, "wb-title").cloneNode(true));
+        }
+
+        if(width) setStyle(clonedBody, "width", parse(width, max_width));
+        if(height) setStyle(clonedBody, "height", parse(width, max_width));
+
+        (root || body).appendChild(clonedBody);
+
+        contentWidth = Math.min(clonedBody.clientWidth, max_width);
+        contentHeight = Math.min(clonedBody.clientHeight, max_height);
+
+        (root || body).removeChild(clonedBody);
+    }
+
+    width = width ? parse(width, max_width) : contentWidth || (max_width / 2) | 0;
+    height = height ? parse(height, max_height) : contentHeight || (max_height / 2) | 0;
 
     minwidth = minwidth ? parse(minwidth, max_width) : 0;
     minheight = minheight ? parse(minheight, max_height) : 0;
@@ -152,12 +202,6 @@ function WinBox(params, _title){
     x = x ? parse(x, max_width, width) : left;
     y = y ? parse(y, max_height, height) : top;
 
-    index = index || 10;
-
-    this.dom.id =
-    this.id = id || ("winbox-" + (++id_counter));
-    this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") +
-                                    (modal ? " modal" : "");
     this.x = x;
     this.y = y;
     this.width = width;
@@ -190,19 +234,6 @@ function WinBox(params, _title){
     }
 
     this.focus();
-
-    if(mount){
-
-        this.mount(mount);
-    }
-    else if(html){
-
-        this.body.innerHTML = html;
-    }
-    else if(url){
-
-        this.setUrl(url);
-    }
 
     register(this);
     (root || body).appendChild(this.dom);
