@@ -21,6 +21,6 @@ const removeDir = function(path) {
     }
 }
 
-const distPath = path.join(__dirname, 'dist')
+const distPath = path.join('dist')
 
 removeDir(distPath);

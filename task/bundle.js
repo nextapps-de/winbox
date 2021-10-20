@@ -3,6 +3,8 @@ const fs = require('fs');
 
 fs.existsSync("log") || fs.mkdirSync("log");
 fs.existsSync("tmp") || fs.mkdirSync("tmp");
+fs.existsSync("dist") || fs.mkdirSync("dist");
+fs.existsSync("dist/js") || fs.mkdirSync("dist/js");
 
 const image = process.argv[2] === "--image";
 //const template = process.argv[2] === "--template";
