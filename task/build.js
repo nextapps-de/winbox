@@ -1,9 +1,6 @@
 const child_process = require('child_process');
 const fs = require('fs');
 
-console.log("Start build .....");
-console.log();
-
 fs.existsSync("log") || fs.mkdirSync("log");
 fs.existsSync("tmp") || fs.mkdirSync("tmp");
 
@@ -32,8 +29,15 @@ const options = (function(argv){
 })(process.argv);
 */
 
-const bundle = process.argv[2] === "--bundle";
+const bundle = process.argv.includes('--bundle');
 //const extern = process.argv[2] === "--extern";
+
+const minified = process.argv.includes('--minified');
+
+const compilation_level = minified ? "ADVANCED_OPTIMIZATIONS" : "BUNDLE";
+const formatting = minified ? null : "PRETTY_PRINT";
+
+const output_file = (bundle ? "dist/winbox.bundle" : "dist/js/winbox") + (minified ? ".min.js" : ".js");
 
 const parameter = (function(opt){
 
@@ -41,7 +45,7 @@ const parameter = (function(opt){
 
     for(let index in opt){
 
-        if(opt.hasOwnProperty(index)){
+        if(opt.hasOwnProperty(index) && opt[index] !== null){
 
             parameter += ' --' + index + '=' + opt[index];
         }
@@ -50,7 +54,7 @@ const parameter = (function(opt){
     return parameter;
 })({
 
-    compilation_level: "ADVANCED_OPTIMIZATIONS", //"WHITESPACE"
+    compilation_level: compilation_level,
     use_types_for_optimization: true,
     //new_type_inf: true,
     //jscomp_warning: "newCheckTypes",
@@ -81,10 +85,10 @@ const parameter = (function(opt){
     //manage_closure_dependencies: true,
     //dependency_mode: "PRUNE_LEGACY",
 
-    isolation_mode: "IIFE"
+    isolation_mode: "IIFE",
     //output_wrapper: "(function(){%output%}());"
 
-    //formatting: "PRETTY_PRINT"
+    formatting: formatting
 });
 
 exec((/^win/.test(process.platform) ?
@@ -93,18 +97,16 @@ exec((/^win/.test(process.platform) ?
 :
     "java -jar node_modules/google-closure-compiler-java/compiler.jar"
 
-) + parameter + (bundle ? " --js='tmp/**.js'" : "") + " --js='src/js/**.js' --js_output_file='" + (bundle ? "dist/winbox.bundle.js" : "dist/js/winbox.min.js") + "' && exit 0", function(){
+) + parameter + (bundle ? " --js='tmp/**.js'" : "") + " --js='src/js/**.js' --js_output_file='" + output_file + "' && exit 0", function(){
 
-    let build = fs.readFileSync((bundle ? "dist/winbox.bundle.js" : "dist/js/winbox.min.js"));
+    let build = fs.readFileSync(output_file);
     let preserve = fs.readFileSync("src/js/winbox.js", "utf8");
 
     const package_json = require("../package.json");
 
     preserve = preserve.replace("* WinBox.js", "* WinBox.js v" + package_json.version + (bundle ? " (Bundle)" : ""));
     build = preserve.substring(0, preserve.indexOf('*/') + 2) + "\n" + build;
-    fs.writeFileSync((bundle ? "dist/winbox.bundle.js" : "dist/js/winbox.min.js"), build);
-
-    console.log("Build Complete.");
+    fs.writeFileSync(output_file, build);
 });
 
 function exec(prompt, callback){
