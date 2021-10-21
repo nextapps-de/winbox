@@ -182,8 +182,8 @@ function WinBox(params, _title){
             clonedBody.insertAdjacentElement("afterbegin", getByClass(this.dom, "wb-title").cloneNode(true));
         }
 
-        if(width) setStyle(clonedBody, "width", parse(width, max_width));
-        if(height) setStyle(clonedBody, "height", parse(width, max_width));
+        if(width) setStyle(clonedBody, "width", parse(width, max_width) + 'px');
+        if(height) setStyle(clonedBody, "height", parse(width, max_width) + 'px');
 
         (root || body).appendChild(clonedBody);
 
