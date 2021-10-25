@@ -40,11 +40,9 @@ function WinBox(params, _title){
 
     index || setup();
 
-    this.dom = template();
-    this.body = getByClass(this.dom, "wb-body");
-
     let id,
         root,
+        customTemplate,
         title,
         mount,
         html,
@@ -56,6 +54,7 @@ function WinBox(params, _title){
         x,
         y,
         max,
+        hidden,
         top,
         left,
         bottom,
@@ -92,6 +91,7 @@ function WinBox(params, _title){
 
             id = params["id"];
             root = params["root"];
+            customTemplate = params["template"];
             title = title || params["title"];
             mount = params["mount"];
             html = params["html"];
@@ -103,6 +103,7 @@ function WinBox(params, _title){
             x = params["x"] || x;
             y = params["y"] || y;
             max = params["max"];
+            hidden = params["hidden"];
             top = params["top"];
             left = params["left"];
             bottom = params["bottom"];
@@ -117,17 +118,28 @@ function WinBox(params, _title){
             border = params["border"];
             classname = params["class"];
             splitscreen = params["splitscreen"];
-
-            if(background){
-
-                this.setBackground(background);
-            }
-
-            if(border){
-
-                setStyle(this.body, "margin", border + (isNaN(border) ? "" : "px"));
-            }
         }
+    }
+
+    if(customTemplate){
+
+        this.dom = customTemplate;
+    }
+    else{
+
+        this.dom = template();
+    }
+
+    this.body = getByClass(this.dom, "wb-body");
+
+    if(background){
+
+        this.setBackground(background);
+    }
+
+    if(border){
+
+        setStyle(this.body, "margin", border + (isNaN(border) ? "" : "px"));
     }
 
     this.setTitle(title || "");
@@ -189,8 +201,6 @@ function WinBox(params, _title){
         this.move().resize();
     }
 
-    this.focus();
-
     if(mount){
 
         this.mount(mount);
@@ -204,6 +214,15 @@ function WinBox(params, _title){
         this.setUrl(url);
     }
 
+    if(hidden){
+      
+        this.hide();
+    }
+    else{
+      
+        this.focus();
+    }
+  
     this.dom.winbox = this;
 
     register(this);
