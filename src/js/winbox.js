@@ -56,6 +56,7 @@ function WinBox(params, _title){
         x,
         y,
         max,
+        hidden,
         top,
         left,
         bottom,
@@ -103,6 +104,7 @@ function WinBox(params, _title){
             x = params["x"] || x;
             y = params["y"] || y;
             max = params["max"];
+            hidden = params["hidden"];
             top = params["top"];
             left = params["left"];
             bottom = params["bottom"];
@@ -189,8 +191,6 @@ function WinBox(params, _title){
         this.move().resize();
     }
 
-    this.focus();
-
     if(mount){
 
         this.mount(mount);
@@ -202,6 +202,13 @@ function WinBox(params, _title){
     else if(url){
 
         this.setUrl(url);
+    }
+
+    if(hidden){
+        this.hide();
+    }
+    else{
+        this.focus();
     }
 
     register(this);
