@@ -70,7 +70,7 @@ function WinBox(params, _title){
         border,
         classname,
         splitscreen,
-        dynamicsize,
+        autosize,
         clonedBody,
         contentWidth,
         contentHeight;
@@ -121,7 +121,7 @@ function WinBox(params, _title){
             border = params["border"];
             classname = params["class"];
             splitscreen = params["splitscreen"];
-            dynamicsize = params["dynamicsize"];
+            autosize = params["autosize"];
 
             if(background){
 
@@ -168,7 +168,7 @@ function WinBox(params, _title){
     max_width -= left + right;
     max_height -= top + bottom;
 
-    if (dynamicsize && (!width || !height)){
+    if (autosize && (!width || !height)){
 
         clonedBody = this.body.cloneNode(true);
 
