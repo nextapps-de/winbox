@@ -215,11 +215,15 @@ function WinBox(params, _title){
     }
 
     if(hidden){
+      
         this.hide();
     }
     else{
+      
         this.focus();
     }
+  
+    this.dom.winbox = this;
 
     register(this);
     (root || body).appendChild(this.dom);
