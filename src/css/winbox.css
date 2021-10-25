@@ -14,12 +14,25 @@
   /* workaround for using passive listeners */
   touch-action: none;
 }
+/* Header height */
+.winbox {
+  min-height: 35px;
+}
+.wb-header,
+.wb-icon {
+  height: 35px;
+}
+.wb-title {
+  line-height: 35px;
+}
+.wb-body {
+  top: 35px;
+}
 .wb-header {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  height: 35px;
   color: #fff;
   overflow: hidden;
 }
@@ -27,7 +40,6 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 35px;
   bottom: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -44,8 +56,6 @@
   font-size: 14px;
   padding-left: 10px;
   cursor: move;
-  height: 35px;
-  line-height: 35px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -116,7 +126,6 @@
 }
 .wb-icon {
   float: right;
-  height: 35px;
   max-width: 100%;
   text-align: center;
 }
