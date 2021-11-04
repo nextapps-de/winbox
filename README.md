@@ -8,7 +8,15 @@
 
 <a href="https://nextapps-de.github.io/winbox/">Demo</a> &ensp;&bull;&ensp; <a href="#started">Getting Started</a> &ensp;&bull;&ensp; <a href="#options">Options</a> &ensp;&bull;&ensp; <a href="#api">API</a> &ensp;&bull;&ensp; <a href="#themes">Themes</a> &ensp;&bull;&ensp; <a href="#customize">Customize</a> &ensp;&bull;&ensp; <a href="CHANGELOG.md">Changelog</a>
 
-<h3>Live Demo / Code Examples: <br><a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a></h3>
+<a name="demo"></a>
+### Live Demo and Code Examples
+
+<a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a>
+
+<a name="addon"></a>
+### Plugins / Add-ons / Extensions
+Vue 2 and 3 (a wrapper component that adds the ability to mount Vue components in WinBox.js):<br>
+<a href="https://github.com/wobsoriano/vue-winbox">https://github.com/wobsoriano/vue-winbox </a><br>
 
 <a name="started"></a>
 ## Getting Started
