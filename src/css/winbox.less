@@ -40,6 +40,7 @@
   width: 100%;
   color: #fff;
   overflow: hidden;
+  z-index: 1;
 }
 
 .wb-body {
@@ -57,6 +58,7 @@
   /* always hide top border visually */
   margin-top: 0 !important;
   contain: strict;
+  //content-visibility: auto;
 }
 
 .wb-title{
@@ -260,7 +262,7 @@ body.wb-drag iframe {
     right: -100vw;
     bottom: -100vh;
     background: #0d1117;
-    animation: fade-in 0.2s ease-out forwards;
+    animation: wb-fade-in 0.2s ease-out forwards;
     z-index: -1;
   }
   .wb-min,
@@ -270,7 +272,7 @@ body.wb-drag iframe {
   }
 }
 
-@keyframes fade-in {
+@keyframes wb-fade-in {
   0%{
     opacity: 0;
   }

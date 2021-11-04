@@ -447,7 +447,7 @@ function addWindowListener(self, dir){
         }
         else {
 
-            if(dir === "title" && !this.hasClass(self.dom, "no-max")){
+            if(dir === "title" && !self.hasClass("no-max")){
 
                 const now = Date.now();
                 const diff = now - dblclick_timer;
@@ -984,6 +984,7 @@ WinBox.prototype.removeClass = function(classname){
     return this;
 };
 
+
 /**
  * @param {string} classname
  * @this WinBox
@@ -991,6 +992,5 @@ WinBox.prototype.removeClass = function(classname){
 
 WinBox.prototype.hasClass = function(classname){
 
-    hasClass(this.dom, classname);
-    return this;
+    return hasClass(this.dom, classname);
 };
