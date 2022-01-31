@@ -35,6 +35,10 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.onblur;
 /** @export */ WinBox.onmove;
 /** @export */ WinBox.onresize;
+/** @export */ WinBox.onfullscreen;
+/** @export */ WinBox.onmaximize;
+/** @export */ WinBox.onminimize;
+/** @export */ WinBox.onwindowize;
 /** @export */ WinBox.winbox;
 
 window["WinBox"] = WinBox;
