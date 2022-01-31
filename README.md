@@ -330,6 +330,30 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
+        <td>onfullscreen</td>
+        <td>function()</td>
+        <td>Callback triggered when the window enters fullscreen.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onminimize</td>
+        <td>function()</td>
+        <td>Callback triggered when the window enters minimized mode.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onmaximize</td>
+        <td>function()</td>
+        <td>Callback triggered when the window enters maximize mode.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onwindowize</td>
+        <td>function()</td>
+        <td>Callback triggered when the window returns to a windowed state from a Fullscreen, Minimized or Maximized state.</td>
+    </tr>
+    <tr></tr>
+    <tr>
         <td>onclose</td>
         <td>function(force)</td>
         <td>Callbacks triggered when the window is closing. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance. Note: the event 'onclose' will be triggered right before closing and stops closing when a callback was applied and returns a truthy value.</td>
@@ -883,6 +907,18 @@ var winbox = WinBox({
         console.log("width", width);
         console.log("height", height);
     },
+    onfullscreen: function(){
+        this.setBackground("#666");
+    },
+    onminimize: function(){
+        this.setBackground("#999");
+    },
+    onmaximize: function(){
+        this.setBackground("#AAA");
+    },
+    onwindowize: function(){
+        this.setBackground("#DDD");
+    },    
     onmove: function(x, y){
         console.log("x", x);
         console.log("y", y);
