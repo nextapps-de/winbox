@@ -354,6 +354,18 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
+        <td>onhide</td>
+        <td>function()</td>
+        <td>Callback triggered when the window is hidden with win.hide()</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onshow</td>
+        <td>function()</td>
+        <td>Callback triggered when the window is shown with win.show()</td>
+    </tr>
+    <tr></tr>
+    <tr>
         <td>onclose</td>
         <td>function(force)</td>
         <td>Callbacks triggered when the window is closing. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance. Note: the event 'onclose' will be triggered right before closing and stops closing when a callback was applied and returns a truthy value.</td>
