@@ -201,6 +201,7 @@ function WinBox(params, _title){
     this.onfullscreen = onfullscreen;
     this.onmaximize = onmaximize;
     this.onminimize = onminimize;
+    this.onwindowize = onwindowize;
     this.splitscreen = splitscreen;
 
     if(max){
