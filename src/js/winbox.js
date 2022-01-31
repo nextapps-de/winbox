@@ -69,6 +69,8 @@ function WinBox(params, _title){
         onmaximize,
         onminimize,
         onwindowize,
+        onhide,
+        onshow,
         background,
         border,
         classname,
@@ -122,6 +124,8 @@ function WinBox(params, _title){
             onmaximize = params["onmaximize"];
             onminimize = params["onminimize"];
             onwindowize = params["onwindowize"];
+            onhide = params["onhide"];
+            onshow = params["onshow"];
             background = params["background"];
             border = params["border"];
             classname = params["class"];
@@ -202,6 +206,8 @@ function WinBox(params, _title){
     this.onmaximize = onmaximize;
     this.onminimize = onminimize;
     this.onwindowize = onwindowize;
+    this.onhide = onhide;
+    this.onshow = onshow;
     this.splitscreen = splitscreen;
 
     if(max){
@@ -729,7 +735,7 @@ WinBox.prototype.focus = function(){
  */
 
 WinBox.prototype.hide = function(){
-
+    this.onhide && this.onhide();
     return this.addClass("hide");
 };
 
@@ -738,7 +744,7 @@ WinBox.prototype.hide = function(){
  */
 
 WinBox.prototype.show = function(){
-
+    this.onshow && this.onshow();
     return this.removeClass("hide");
 };
 
@@ -758,7 +764,7 @@ WinBox.prototype.minimize = function(state){
 
         remove_min_stack(this);
         this.resize().move().focus();
-        this.onwindowize();
+        this.onwindowize && this.onwindowize();
     }
     else if((state !== false) && !this.min){
 
@@ -767,14 +773,14 @@ WinBox.prototype.minimize = function(state){
         this.dom.title = this.title;
         this.addClass("min");
         this.min = true;
-        this.onminimize();
+        this.onminimize && this.onminimize();
     }
 
     if(this.max){
 
         this.removeClass("max");
         this.max = false;
-        this.onminimize();
+        this.onminimize && this.onminimize();
     }
 
     return this;
@@ -808,12 +814,12 @@ WinBox.prototype.maximize = function(state){
                 this.top,
                 true
             );
-            this.onmaximize();
+            this.onmaximize && this.onmaximize();
         }
         else{
 
             this.resize().move().removeClass("max");
-            this.onwindowize();
+            this.onwindowize && this.onwindowize();
         }
     }
 
@@ -846,7 +852,7 @@ WinBox.prototype.fullscreen = function(state){
             //this.dom[prefix_request]();
             this.body[prefix_request]();
             is_fullscreen = true;
-            this.onfullscreen();
+            this.onfullscreen && this.onfullscreen();
         }
 
     }
