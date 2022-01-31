@@ -65,6 +65,10 @@ function WinBox(params, _title){
         onblur,
         onmove,
         onresize,
+        onfullscreen,
+        onmaximize,
+        onminimize,
+        onwindowize,
         background,
         border,
         classname,
@@ -114,6 +118,10 @@ function WinBox(params, _title){
             onblur = params["onblur"];
             onmove = params["onmove"];
             onresize = params["onresize"];
+            onfullscreen = params["onfullscreen"];
+            onmaximize = params["onmaximize"];
+            onminimize = params["onminimize"];
+            onwindowize = params["onwindowize"];
             background = params["background"];
             border = params["border"];
             classname = params["class"];
@@ -190,6 +198,9 @@ function WinBox(params, _title){
     this.onblur = onblur;
     this.onmove = onmove;
     this.onresize = onresize;
+    this.onfullscreen = onfullscreen;
+    this.onmaximize = onmaximize;
+    this.onminimize = onminimize;
     this.splitscreen = splitscreen;
 
     if(max){
@@ -746,6 +757,7 @@ WinBox.prototype.minimize = function(state){
 
         remove_min_stack(this);
         this.resize().move().focus();
+        this.onwindowize();
     }
     else if((state !== false) && !this.min){
 
@@ -754,12 +766,14 @@ WinBox.prototype.minimize = function(state){
         this.dom.title = this.title;
         this.addClass("min");
         this.min = true;
+        this.onminimize();
     }
 
     if(this.max){
 
         this.removeClass("max");
         this.max = false;
+        this.onminimize();
     }
 
     return this;
@@ -793,10 +807,12 @@ WinBox.prototype.maximize = function(state){
                 this.top,
                 true
             );
+            this.onmaximize();
         }
         else{
 
             this.resize().move().removeClass("max");
+            this.onwindowize();
         }
     }
 
@@ -829,14 +845,9 @@ WinBox.prototype.fullscreen = function(state){
             //this.dom[prefix_request]();
             this.body[prefix_request]();
             is_fullscreen = true;
+            this.onfullscreen();
         }
 
-        // dispatch resize callback on fullscreen?
-
-        // else{
-        //
-        //     this.onresize && this.onresize(this.width, this.height);
-        // }
     }
 
     return this;
