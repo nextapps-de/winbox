@@ -30,9 +30,9 @@ __Get Latest Stable Build (Recommended):__
         </td>
     </tr>
     <tr>
-        <td>winbox.bundle.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.0/dist/winbox.bundle.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/winbox.bundle.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/winbox.bundle.js</a></td>
+        <td>winbox.bundle.min.js</td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.0/dist/winbox.bundle.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/winbox.bundle.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/winbox.bundle.min.js</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -98,7 +98,7 @@ The bundled version includes all assets like js, css, html and icon images as ba
 ```html
 <html>
 <head>
-    <script src="winbox.bundle.js"></script>
+    <script src="winbox.bundle.min.js"></script>
 </head>
 <body></body>
 </html>
@@ -126,7 +126,7 @@ Just add a link tag to the header sections which indicated to preload the script
 <html>
 <head>
     <title></title>
-    <link rel="preload" href="winbox.bundle.js" as="script">
+    <link rel="preload" href="winbox.bundle.min.js" as="script">
 </head>
 <body>
     <!--
@@ -135,7 +135,7 @@ Just add a link tag to the header sections which indicated to preload the script
     
     -->
     <!-- BOTTOM OF BODY -->
-    <script src="winbox.bundle.js" defer></script>
+    <script src="winbox.bundle.min.js" defer></script>
     <!-- YOUR SCRIPT -->
     <script src="my-script.js" defer></script>
 </body>

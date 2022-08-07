@@ -17,6 +17,7 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.prototype.setUrl;
 /** @export */ WinBox.prototype.addClass;
 /** @export */ WinBox.prototype.removeClass;
+/** @export */ //WinBox.prototype.use;
 
 /** @export */ WinBox.id;
 /** @export */ WinBox.body;

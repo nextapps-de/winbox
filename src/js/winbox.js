@@ -994,3 +994,11 @@ WinBox.prototype.hasClass = function(classname){
 
     return hasClass(this.dom, classname);
 };
+
+/*
+WinBox.prototype.use = function(plugin){
+
+    plugin(this);
+    return this;
+};
+*/
