@@ -1,6 +1,6 @@
 {
   "name": "winbox",
-  "version": "0.2.01",
+  "version": "0.2.1",
   "description": "Modern HTML5 window manager for the web.",
   "homepage": "https://nextapps-de.github.io/winbox/",
   "author": "Thomas Wilkerling",
@@ -30,7 +30,7 @@
   },
   "scripts": {
     "copy": "cpx \"src/img/*.*\" dist/img/",
-    "clean": "if exist dist rmdir dist /s /q && mkdir dist",
+    "clean": "node task/clean",
     "build:css": "lessc src/css/winbox.less src/css/winbox.css",
     "build:css:bundle": "node task/bundle --image && lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" tmp/bundle.less dist/css/winbox.min.css && csso dist/css/winbox.min.css --output dist/css/winbox.min.css",
     "build:css:theme-modern": "lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/modern.less dist/css/themes/modern.min.css && csso dist/css/themes/modern.min.css --output dist/css/themes/modern.min.css",
@@ -60,7 +60,7 @@
     "less": "^4.1.1",
     "less-plugin-autoprefix": "^2.0.0",
     "less-plugin-clean-css": "^1.5.1",
-    "less-plugin-csswring": "^0.0.1",
+    "less-plugin-csswring": "git+https://github.com/kodie/less-plugin-csswring#patch-1",
     "svgo": "^2.3.0",
     "web-servo": "^0.5.1"
   }

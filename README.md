@@ -8,7 +8,15 @@
 
 <a href="https://nextapps-de.github.io/winbox/">Demo</a> &ensp;&bull;&ensp; <a href="#started">Getting Started</a> &ensp;&bull;&ensp; <a href="#options">Options</a> &ensp;&bull;&ensp; <a href="#api">API</a> &ensp;&bull;&ensp; <a href="#themes">Themes</a> &ensp;&bull;&ensp; <a href="#customize">Customize</a> &ensp;&bull;&ensp; <a href="CHANGELOG.md">Changelog</a>
 
-<h3>Live Demo / Code Examples: <br><a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a></h3>
+<a name="demo"></a>
+### Live Demo and Code Examples
+
+<a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a>
+
+<a name="addon"></a>
+### Plugins / Add-ons / Extensions
+Vue 2 and 3 (a wrapper component that adds the ability to mount Vue components in WinBox.js):<br>
+<a href="https://github.com/wobsoriano/vue-winbox">https://github.com/wobsoriano/vue-winbox </a><br>
 
 <a name="started"></a>
 ## Getting Started
@@ -319,6 +327,42 @@ Instance properties:
         <td>onresize</td>
         <td>function(width,&nbsp;height)</td>
         <td>Callback triggered when the window resizes. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onfullscreen</td>
+        <td>function()</td>
+        <td>Callback triggered when the window enters fullscreen.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onminimize</td>
+        <td>function()</td>
+        <td>Callback triggered when the window enters minimized mode.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onmaximize</td>
+        <td>function()</td>
+        <td>Callback triggered when the window enters maximize mode.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onwindowize</td>
+        <td>function()</td>
+        <td>Callback triggered when the window returns to a windowed state from a Fullscreen, Minimized or Maximized state.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onhide</td>
+        <td>function()</td>
+        <td>Callback triggered when the window is hidden with win.hide()</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onshow</td>
+        <td>function()</td>
+        <td>Callback triggered when the window is shown with win.show()</td>
     </tr>
     <tr></tr>
     <tr>
@@ -875,6 +919,18 @@ var winbox = WinBox({
         console.log("width", width);
         console.log("height", height);
     },
+    onfullscreen: function(){
+        this.setBackground("#666");
+    },
+    onminimize: function(){
+        this.setBackground("#999");
+    },
+    onmaximize: function(){
+        this.setBackground("#AAA");
+    },
+    onwindowize: function(){
+        this.setBackground("#DDD");
+    },    
     onmove: function(x, y){
         console.log("x", x);
         console.log("y", y);
