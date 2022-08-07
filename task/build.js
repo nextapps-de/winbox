@@ -95,16 +95,16 @@ exec((/^win/.test(process.platform) ?
 :
     "java -jar node_modules/google-closure-compiler-java/compiler.jar"
 
-) + parameter + (bundle ? " --js='tmp/**.js'" : "") + " --js='src/js/**.js' --js_output_file='" + (bundle ? "dist/winbox.bundle.js" : "dist/js/winbox.min.js") + "' && exit 0", function(){
+) + parameter + (bundle ? " --js='tmp/**.js'" : "") + " --js='src/js/**.js' --js_output_file='" + (bundle ? "dist/winbox.bundle.min.js" : "dist/js/winbox.min.js") + "' && exit 0", function(){
 
-    let build = fs.readFileSync((bundle ? "dist/winbox.bundle.js" : "dist/js/winbox.min.js"));
+    let build = fs.readFileSync((bundle ? "dist/winbox.bundle.min.js" : "dist/js/winbox.min.js"));
     let preserve = fs.readFileSync("src/js/winbox.js", "utf8");
 
     const package_json = require("../package.json");
 
     preserve = preserve.replace("* WinBox.js", "* WinBox.js v" + package_json.version + (bundle ? " (Bundle)" : ""));
     build = preserve.substring(0, preserve.indexOf('*/') + 2) + "\n" + build;
-    fs.writeFileSync((bundle ? "dist/winbox.bundle.js" : "dist/js/winbox.min.js"), build);
+    fs.writeFileSync((bundle ? "dist/winbox.bundle.min.js" : "dist/js/winbox.min.js"), build);
 
     console.log("Build Complete.");
 });

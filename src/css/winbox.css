@@ -68,6 +68,7 @@
   right: 0;
   height: 10px;
   cursor: n-resize;
+  z-index: 2;
 }
 .wb-e {
   position: absolute;
@@ -76,6 +77,7 @@
   bottom: 0;
   width: 10px;
   cursor: w-resize;
+  z-index: 2;
 }
 .wb-s {
   position: absolute;
@@ -84,6 +86,7 @@
   right: 0;
   height: 10px;
   cursor: n-resize;
+  z-index: 2;
 }
 .wb-w {
   position: absolute;
@@ -92,6 +95,7 @@
   bottom: 0;
   width: 10px;
   cursor: w-resize;
+  z-index: 2;
 }
 .wb-nw {
   position: absolute;
@@ -100,6 +104,7 @@
   width: 15px;
   height: 15px;
   cursor: nw-resize;
+  z-index: 2;
 }
 .wb-ne {
   position: absolute;
@@ -108,6 +113,7 @@
   width: 15px;
   height: 15px;
   cursor: ne-resize;
+  z-index: 2;
 }
 .wb-sw {
   position: absolute;
@@ -116,6 +122,7 @@
   width: 15px;
   height: 15px;
   cursor: ne-resize;
+  z-index: 2;
 }
 .wb-se {
   position: absolute;
@@ -124,6 +131,7 @@
   width: 15px;
   height: 15px;
   cursor: nw-resize;
+  z-index: 2;
 }
 .wb-icon {
   float: right;

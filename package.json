@@ -22,7 +22,7 @@
   },
   "main": "src/js/winbox.js",
   "type": "module",
-  "browser": "dist/winbox.bundle.js",
+  "browser": "dist/winbox.bundle.min.js",
   "preferGlobal": false,
   "repository": {
     "type": "git",

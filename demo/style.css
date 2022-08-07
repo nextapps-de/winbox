@@ -54,6 +54,7 @@ header{
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
+    /*content-visibility: auto;*/
 }
 .wrapper{
     position: relative;

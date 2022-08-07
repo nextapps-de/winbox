@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="dist/css/winbox.min.css">
     <link rel="stylesheet" href="dist/css/themes/modern.min.css">
     <link rel="stylesheet" href="dist/css/themes/white.min.css">
-    <script src="dist/js/winbox.min.js"></script>
-    <!--<script src="dist/winbox.bundle.js"></script>-->
+    <!--<script src="dist/js/winbox.min.js"></script>-->
+    <!--<script src="dist/winbox.bundle.min.js"></script>-->
     <style>
 
         /* WinBox Theme: "custom" */
@@ -121,7 +121,7 @@
             Load Library (Bundle)
             <br><br>
         <pre><code class="language-html">&lt;head>
-    &lt;script src="dist/winbox.bundle.js">&lt;/script>
+    &lt;script src="dist/winbox.bundle.min.js">&lt;/script>
 &lt;/head></code></pre>
             <div class="break"></div>
             <br>
@@ -602,7 +602,11 @@ new WinBox("Splitscreen (Right)", {
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
-    <script>
+    <script type="module">
+
+        import WinBox from "./src/js/winbox.js";
+
+        window.WinBox = WinBox;
 
         (function(){
 
