@@ -65,10 +65,20 @@ function WinBox(params, _title){
         onblur,
         onmove,
         onresize,
+        onfullscreen,
+        onmaximize,
+        onminimize,
+        onwindowize,
+        onhide,
+        onshow,
         background,
         border,
         classname,
-        splitscreen;
+        splitscreen,
+        autosize,
+        clonedBody,
+        contentWidth,
+        contentHeight;
 
     if(params){
 
@@ -114,10 +124,17 @@ function WinBox(params, _title){
             onblur = params["onblur"];
             onmove = params["onmove"];
             onresize = params["onresize"];
+            onfullscreen = params["onfullscreen"];
+            onmaximize = params["onmaximize"];
+            onminimize = params["onminimize"];
+            onwindowize = params["onwindowize"];
+            onhide = params["onhide"];
+            onshow = params["onshow"];
             background = params["background"];
             border = params["border"];
             classname = params["class"];
             splitscreen = params["splitscreen"];
+            autosize = params["autosize"];
         }
     }
 
@@ -142,6 +159,26 @@ function WinBox(params, _title){
         setStyle(this.body, "margin", border + (isNaN(border) ? "" : "px"));
     }
 
+    index = index || 10;
+
+    this.dom.id =
+    this.id = id || ("winbox-" + (++id_counter));
+    this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") +
+                                    (modal ? " modal" : "");
+
+    if(mount){
+
+        this.mount(mount);
+    }
+    else if(html){
+
+        this.body.innerHTML = html;
+    }
+    else if(url){
+
+        this.setUrl(url);
+    }
+
     this.setTitle(title || "");
 
     let max_width = root_w;
@@ -155,8 +192,33 @@ function WinBox(params, _title){
     max_width -= left + right;
     max_height -= top + bottom;
 
-    width = width ? parse(width, max_width) : (max_width / 2) | 0;
-    height = height ? parse(height, max_height) : (max_height / 2) | 0;
+    if (autosize && (!width || !height)){
+
+        clonedBody = this.body.cloneNode(true);
+
+        setStyle(clonedBody, "contain", "unset");
+        setStyle(clonedBody, "margin", "");
+        setStyle(clonedBody, "position", "relative");
+        setStyle(clonedBody, "visibility", "hidden");
+
+        if(!hasClass(this.dom, "no-header")){
+
+            clonedBody.insertAdjacentElement("afterbegin", getByClass(this.dom, "wb-title").cloneNode(true));
+        }
+
+        if(width) setStyle(clonedBody, "width", parse(width, max_width) + 'px');
+        if(height) setStyle(clonedBody, "height", parse(width, max_width) + 'px');
+
+        (root || body).appendChild(clonedBody);
+
+        contentWidth = Math.min(clonedBody.clientWidth, max_width);
+        contentHeight = Math.min(clonedBody.clientHeight, max_height);
+
+        (root || body).removeChild(clonedBody);
+    }
+
+    width = width ? parse(width, max_width) : contentWidth || (max_width / 2) | 0;
+    height = height ? parse(height, max_height) : contentHeight || (max_height / 2) | 0;
 
     minwidth = minwidth ? parse(minwidth, max_width) : 0;
     minheight = minheight ? parse(minheight, max_height) : 0;
@@ -164,12 +226,6 @@ function WinBox(params, _title){
     x = x ? parse(x, max_width, width) : left;
     y = y ? parse(y, max_height, height) : top;
 
-    index = index || 10;
-
-    this.dom.id =
-    this.id = id || ("winbox-" + (++id_counter));
-    this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") +
-                                    (modal ? " modal" : "");
     this.x = x;
     this.y = y;
     this.width = width;
@@ -180,7 +236,6 @@ function WinBox(params, _title){
     this.right = right;
     this.bottom = bottom;
     this.left = left;
-
     this.border = border;
     this.min = false;
     this.max = false;
@@ -190,6 +245,12 @@ function WinBox(params, _title){
     this.onblur = onblur;
     this.onmove = onmove;
     this.onresize = onresize;
+    this.onfullscreen = onfullscreen;
+    this.onmaximize = onmaximize;
+    this.onminimize = onminimize;
+    this.onwindowize = onwindowize;
+    this.onhide = onhide;
+    this.onshow = onshow;
     this.splitscreen = splitscreen;
 
     if(max){
@@ -224,7 +285,6 @@ function WinBox(params, _title){
     }
   
     this.dom.winbox = this;
-
     register(this);
     (root || body).appendChild(this.dom);
 }
@@ -717,7 +777,7 @@ WinBox.prototype.focus = function(){
  */
 
 WinBox.prototype.hide = function(){
-
+    this.onhide && this.onhide();
     return this.addClass("hide");
 };
 
@@ -726,7 +786,7 @@ WinBox.prototype.hide = function(){
  */
 
 WinBox.prototype.show = function(){
-
+    this.onshow && this.onshow();
     return this.removeClass("hide");
 };
 
@@ -746,6 +806,7 @@ WinBox.prototype.minimize = function(state){
 
         remove_min_stack(this);
         this.resize().move().focus();
+        this.onwindowize && this.onwindowize();
     }
     else if((state !== false) && !this.min){
 
@@ -754,12 +815,14 @@ WinBox.prototype.minimize = function(state){
         this.dom.title = this.title;
         this.addClass("min");
         this.min = true;
+        this.onminimize && this.onminimize();
     }
 
     if(this.max){
 
         this.removeClass("max");
         this.max = false;
+        this.onminimize && this.onminimize();
     }
 
     return this;
@@ -793,10 +856,12 @@ WinBox.prototype.maximize = function(state){
                 this.top,
                 true
             );
+            this.onmaximize && this.onmaximize();
         }
         else{
 
             this.resize().move().removeClass("max");
+            this.onwindowize && this.onwindowize();
         }
     }
 
@@ -829,14 +894,9 @@ WinBox.prototype.fullscreen = function(state){
             //this.dom[prefix_request]();
             this.body[prefix_request]();
             is_fullscreen = true;
+            this.onfullscreen && this.onfullscreen();
         }
 
-        // dispatch resize callback on fullscreen?
-
-        // else{
-        //
-        //     this.onresize && this.onresize(this.width, this.height);
-        // }
     }
 
     return this;
