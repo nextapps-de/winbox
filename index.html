@@ -220,7 +220,6 @@
 
 new WinBox("Splitscreen (Right)", {
 
-    x: "100%",
     left: "50%",
     max: true
 });</code></pre>
@@ -343,7 +342,6 @@ new WinBox("Splitscreen (Right)", {
     max: false,
     min: false,
     hidden: false,
-    splitscreen: false,
     html: "width: 250, height: 200",
     onfocus: function(){
         this.setBackground("#fff");
@@ -669,7 +667,6 @@ new WinBox("Splitscreen (Right)", {
 
                     new WinBox("Splitscreen (Right)", {
 
-                        x: "100%",
                         left: "50%",
                         max: true
                     });
@@ -741,7 +738,6 @@ new WinBox("Splitscreen (Right)", {
                         x: "center",
                         y: "center",
                         max: false,
-                        splitscreen: false,
                         autosize: true,
                         top: 50,
                         right: 50,
@@ -775,6 +771,8 @@ new WinBox("Splitscreen (Right)", {
 
                     new WinBox("Custom CSS", {
 
+                        width: 350,
+                        height: 250,
                         class: "custom",
                         mount: document.getElementById("content")
                                        .cloneNode(true)

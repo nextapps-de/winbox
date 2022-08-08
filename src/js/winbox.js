@@ -64,10 +64,10 @@ function WinBox(params, _title){
         background,
         border,
         classname,
-        splitscreen,
+        // splitscreen,
         autosize,
-        contentWidth,
-        contentHeight,
+        // contentWidth,
+        // contentHeight,
 
         oncreate,
         onclose,
@@ -128,7 +128,7 @@ function WinBox(params, _title){
             background = params["background"];
             border = params["border"] || 0;
             classname = params["class"];
-            splitscreen = params["splitscreen"];
+            //splitscreen = params["splitscreen"];
             autosize = params["autosize"];
 
             onclose = params["onclose"];
@@ -222,7 +222,8 @@ function WinBox(params, _title){
     this.max = false;
     this.full = false;
     this.hidden = false;
-    this.splitscreen = splitscreen;
+    this.focused = false;
+    //this.splitscreen = splitscreen;
 
     this.onclose = onclose;
     this.onfocus = onfocus;
@@ -758,6 +759,7 @@ WinBox.prototype.focus = function(state){
         this.addClass("focus");
         last_focus = this;
 
+        this.focused = true;
         this.onfocus && this.onfocus();
     }
 
@@ -779,7 +781,9 @@ WinBox.prototype.blur = function(state){
     if(last_focus === this){
 
         this.removeClass("focus");
+        this.focused = false;
         this.onblur && this.onblur();
+
         // TODO focus next window
         last_focus = null;
     }

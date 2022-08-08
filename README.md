@@ -1,5 +1,5 @@
 <h1>
-    <img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/winbox-gradient.svg" alt="WinBox.js: HTML5 Window Manager for the Web." width="100%">
+    <img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/winbox-gradient.svg" alt="WinBox.js: A modern HTML5 window manager for the web." width="100%">
 </h1>
 <h3>Modern window manager for the web: lightweight, outstanding performance, no dependencies, fully customizable, open source!</h3>
 
@@ -86,11 +86,6 @@ __Get Latest (NPM):__
 npm install winbox
 ```
 
-__Get Latest Nightly (Do not use for production!):__
-
-Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.2.2__/dist/" into "/winbox/__master__/dist".
-
-
 ### Use Bundled Version
 
 The bundled version includes all assets like js, css, html and icon images as base64.
@@ -106,7 +101,7 @@ The bundled version includes all assets like js, css, html and icon images as ba
 
 ### Use Non-Bundled Version
 
-The non-bundled version needs to load js and css separately (css also includes icons as base64).
+The non-bundled version needs to load js and css separately (css already includes icons as base64).
 
 ```html
 <html>
@@ -144,11 +139,9 @@ Just add a link tag to the header sections which indicated to preload the script
 
 You can also load the non-bundled version in the same way.
 
-> In rare situations it might produce a short flashing/reflow after page load, depending on your stack. Moving the script tag into the head section will solve this issue. Also try to use the non-bundled version.
-
 ### ES6 Modules
 
-The ES6 modules are located in `src/js/`. You need to load the stylesheet file explicitly (includes icons as base64).
+The ES6 modules are located in `src/js/`. But you need to load the stylesheet file explicitly since this is just automatically loaded by the bundle version.
 
 ```html
 <head>
@@ -183,31 +176,33 @@ Global methods:
 
 - <a href="#winbox.new">WinBox.**new**(title, options\<key: value\>)</a> : winbox
 
-Instance methods:
+Instance member methods:
 
 - <a href="#winbox.mount">winbox.**mount**(src)</a>
 - <a href="#winbox.unmount">winbox.**unmount**(dest)</a>
+- <a href="#winbox.setUrl">winbox.**setUrl**(string)</a>
+- <a href="#winbox.setTitle">winbox.**setTitle**(string)</a>
 - <a href="#winbox.move">winbox.**move**(x, y)</a>
 - <a href="#winbox.resize">winbox.**resize**(width, height)</a>
 - <a href="#winbox.close">winbox.**close**(boolean)</a>
-- <a href="#winbox.focus">winbox.**focus**()</a>
-- <a href="#winbox.hide">winbox.**hide**()</a>
-- <a href="#winbox.show">winbox.**show**()</a>
+- <a href="#winbox.focus">winbox.**focus**(state)</a>
+- <a href="#winbox.blur">winbox.**blur**(state)</a>
+- <a href="#winbox.hide">winbox.**hide**(state)</a>
+- <a href="#winbox.show">winbox.**show**(state)</a>
 - <a href="#winbox.minimize">winbox.**minimize**(state)</a>
 - <a href="#winbox.maximize">winbox.**maximize**(state)</a>
 - <a href="#winbox.fullscreen">winbox.**fullscreen**(state)</a>
+- <a href="#winbox.restore">winbox.**restore**(state)</a>
 - <a href="#winbox.setBackground">winbox.**setBackground**(string)</a>
-- <a href="#winbox.setTitle">winbox.**setTitle**(string)</a>
-- <a href="#winbox.setUrl">winbox.**setUrl**(string)</a>
 - <a href="#winbox.addClass">winbox.**addClass**(name)</a>
 - <a href="#winbox.removeClass">winbox.**removeClass**(name)</a>
+- <a href="#winbox.hasClass">winbox.**hasClass**(name)</a>
+- <a href="#winbox.toggleClass">winbox.**toggleClass**(name)</a>
 
-Instance properties:
+Instance properties (editable):
 
 - <a href="#winbox.id">winbox.**id**</a>
 - <a href="#winbox.body">winbox.**body**</a>
-- <a href="#winbox.min">winbox.**min**</a>
-- <a href="#winbox.max">winbox.**max**</a>
 - <a href="#winbox.x">winbox.**x**</a>
 - <a href="#winbox.y">winbox.**y**</a>
 - <a href="#winbox.width">winbox.**width**</a>
@@ -216,6 +211,31 @@ Instance properties:
 - <a href="#winbox.right">winbox.**right**</a>
 - <a href="#winbox.bottom">winbox.**bottom**</a>
 - <a href="#winbox.left">winbox.**left**</a>
+- <a href="#winbox.minwidth">winbox.**minwidth**</a>
+- <a href="#winbox.minheight">winbox.**minheight**</a>
+
+Instance state boolean properties (non-editable):
+
+- <a href="#winbox.min">winbox.**min**</a>
+- <a href="#winbox.max">winbox.**max**</a>
+- <a href="#winbox.full">winbox.**full**</a>
+- <a href="#winbox.hidden">winbox.**hidden**</a>
+- <a href="#winbox.focused">winbox.**focused**</a>
+
+Callback methods:
+
+- <a href="#winbox.oncreate">winbox.**oncreate**</a>
+- <a href="#winbox.onshow">winbox.**onshow**</a>
+- <a href="#winbox.onhide">winbox.**onhide**</a>
+- <a href="#winbox.onclose">winbox.**onclose**</a>
+- <a href="#winbox.onfocus">winbox.**onfocus**</a>
+- <a href="#winbox.onblur">winbox.**onblur**</a>
+- <a href="#winbox.onmove">winbox.**onmove**</a>
+- <a href="#winbox.onresize">winbox.**onresize**</a>
+- <a href="#winbox.onfullscreen">winbox.**onfullscreen**</a>
+- <a href="#winbox.onmaximize">winbox.**onmaximize**</a>
+- <a href="#winbox.onminimize">winbox.**onminimize**</a>
+- <a href="#winbox.onrestore">winbox.**onrestore**</a>
 
 <a name="options" id="options"></a>
 ## Options
@@ -236,7 +256,7 @@ Instance properties:
     <tr>
         <td>index</td>
         <td>number</td>
-        <td>Set the initial <code>z-index</code> of the window to this value (could be increased automatically when unfocused/focused).</td>
+        <td>Set the initial <code>z-index</code> of the window to this value (will be increased automatically when unfocused/focused).</td>
     </tr>
     <tr></tr>
     <tr>
@@ -272,7 +292,13 @@ Instance properties:
     <tr>
         <td>minwidth<br>minheight</td>
         <td>number | string</td>
-        <td>Set the minimal width/height of the window (supports units "px" and "%").</td>
+        <td>Set the minimal width/height of the window (supports units "px" and "%"). Should be at least the height of the window header title bar.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>autosize</td>
+        <td>boolean</td>
+        <td>Automatically size the window to fit the window content.</td>
     </tr>
     <tr></tr>
     <tr>
@@ -288,9 +314,15 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
+        <td>min</td>
+        <td>boolean</td>
+        <td>Automatically toggles the window into minimized state when created.</td>
+    </tr>
+    <tr></tr>
+    <tr>
         <td>top<br>right<br>bottom<br>left</td>
         <td>number | string</td>
-        <td>Set or limit the viewport of the window's available area (supports units "px" and "%").</td>
+        <td>Set or limit the viewport of the window's available area (supports units "px" and "%"). Also used for custom splitscreen configurations.</td>
     </tr>
     <tr></tr>
     <tr>
@@ -376,12 +408,6 @@ Instance properties:
         <td>function()</td>
         <td>Callbacks to several events. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
     </tr>
-    <tr></tr>
-    <tr>
-        <td>splitscreen</td>
-        <td>boolean</td>
-        <td>Enable split screen to see two windows side by side by drag at the side the window</td>
-    </tr>
 </table>
 
 ## Create and Setup Window
@@ -426,7 +452,7 @@ new WinBox("Window Title", {
 
 #### Custom Color
 
-> Supports all CSS styles which are also supported by the style-attribute "background", e.g. colors, transparent colors, hsl, gradients, background images.
+> Supports all CSS styles which are also supported by the style-attribute "background", e.g. colors, rgba, hsl, gradients, background images.
 
 ```js
 new WinBox("Custom Color", {
@@ -486,7 +512,7 @@ winbox.left = 200
 <a name="winbox.move"></a><a name="winbox.resize"></a>
 #### Custom Position / Size
 
-> Supports "right" for x-axis, "bottom" for y-axis, "center" for both, units "px" and "%" also for both.
+> Supports keywords `"right"` for x-axis, `"bottom"` for y-axis, `"center"` for both, units `px` and `%` also for both.
 
 ```js
 new WinBox("Custom Viewport", {
@@ -501,12 +527,12 @@ new WinBox("Custom Viewport", {
 new WinBox("Custom Viewport", {
     x: "right",
     y: "bottom",
-    width: "50%",
-    height: "50%"
+    width: "200px",
+    height: "200px"
 });
 ```
 
-Alternatively (also supports same units as above):
+Alternatively (also supports same units and keywords as above):
 ```js
 var winbox = new WinBox("Custom Viewport");
 
@@ -514,7 +540,7 @@ winbox.resize("50%", "50%")
       .move("center", "center");
 ```
 
-Alternatively (just support numbers!):
+Alternatively (just support numeric values as `px` when directly assigned!):
 ```js
 var winbox = new WinBox("Custom Viewport");
 
@@ -722,11 +748,13 @@ Mikado(template).mount(winbox.body).render(data);
 
 #### Open URI / URL
 
-> Do not forget to sanitize any user inputs which is part of the __url__ as this can lead to unintended XSS!
+> Do not forget to sanitize any user inputs when it is part of the __url__ as this can lead to unintended XSS!
 
+The onload callback is optionally.
 ```js
 new WinBox("Open URL", {
-    url: "https://wikipedia.com"
+    url: "https://wikipedia.com",
+    onload: function(){ /* extern page loaded */}
 });
 ```
 
@@ -736,12 +764,14 @@ Alternatively:
 <a name="winbox.setUrl"></a>
 ```js
 var winbox = new WinBox("Open URL");
-winbox.setUrl("https://wikipedia.com");
+winbox.setUrl("https://wikipedia.com", function(){ 
+    /* extern page loaded */
+});
 ```
 
-## The Window Instance
+## The WinBox Window Instance
 
-<a name="winbox.id"></a><a name="winbox.max"></a><a name="winbox.min"></a>
+<a name="winbox.id"></a><a name="winbox.max"></a><a name="winbox.min"></a><a name="winbox.full"></a><a name="winbox.hidden"></a><a name="winbox.focused"></a>
 Window States / Information:
 ```js
 var winbox = new WinBox();
@@ -749,6 +779,9 @@ var winbox = new WinBox();
 console.log("Window ID:", winbox.id);
 console.log("Current Maximize State:", winbox.max);
 console.log("Current Minimize State:", winbox.min);
+console.log("Current Fullscreen State:", winbox.full);
+console.log("Current Hidden State:", winbox.hidden);
+console.log("Current Focused State:", winbox.focused);
 ```
 
 <a name="winbox.width"></a><a name="winbox.height"></a>
@@ -787,7 +820,6 @@ winbox.right = 50;
 winbox.bottom = 50;
 winbox.left = 50;
 
-
 console.log("Current Viewport Top:", winbox.top);
 console.log("Current Viewport Right:", winbox.right);
 console.log("Current Viewport Bottom:", winbox.bottom);
@@ -807,16 +839,15 @@ winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
 const root = winbox.body.parentNode;
 const hidden = root.classList.contains("hide");
 const focused = root.classList.contains("focus");
-```
-
-```js
-const root = winbox.body.parentNode;
 root.classList.remove("modal");
 root.classList.add("my-theme");
 ```
 
-When changing classes you can use the WinBox built-in methods:
+Equivalent to the example above (by using the WinBox built-in methods):
+
 ```js
+const hidden = winbox.hasClass("hide");
+const focused = winbox.hasClass("focus");
 winbox.removeClass("modal");
 winbox.addClass("my-theme");
 ```
@@ -831,60 +862,74 @@ var winbox = new WinBox();
 Focus a window (bring up to front):
 ```js
 winbox.focus();
+winbox.focus(true);
+winbox.blur(false);
+```
+
+<a name="winbox.blur"></a>
+Blur a focused window:
+```js
+winbox.blur();
+winbox.blur(true);
+winbox.focus(false);
 ```
 
 <a name="winbox.minimize"></a>
-Toggle the minimized state of a window:
+Set the minimized state of a window:
 ```js
 winbox.minimize();
-```
-
-Explicitly set the minimized state of a window:
-```js
 winbox.minimize(true);
 winbox.minimize(false);
 ```
 
 <a name="winbox.maximize"></a>
-Toggle the maximized state of a window:
+Set the maximized state of a window:
 ```js
 winbox.maximize();
-```
-
-Explicitly set the maximized state of a window:
-```js
 winbox.maximize(true);
 winbox.maximize(false);
 ```
 
 <a name="winbox.fullscreen"></a>
-Toggle the fullscreen state of a window:
+Set the fullscreen state of a window:
 ```js
 winbox.fullscreen();
-```
-
-Explicitly set the fullscreen state of a window:
-```js
 winbox.fullscreen(true);
 winbox.fullscreen(false);
+```
+
+<a name="winbox.restore"></a>
+Restore the state of a window:
+```js
+winbox.restore();
 ```
 
 <a name="winbox.hide"></a>
 Hide a specific window:
 ```js
 winbox.hide();
+winbox.hide(true);
+winbox.show(false);
 ```
 
 <a name="winbox.show"></a>
 Show a specific hidden window:
 ```js
 winbox.show();
+winbox.show(true);
+winbox.hide(false);
 ```
 
 <a name="winbox.close"></a>
 Close and destroy a window:
 ```js
 winbox.close();
+```
+
+<a name="winbox.close"></a>
+Close and destroy a window depending on custom conditional (e.g. by a confirmation status):
+```js
+winbox.close(false || true);
 ```
 
 #### Chaining Methods
@@ -909,6 +954,9 @@ You can assign callbacks via the option payload when creating a window.
 
 ```js
 var winbox = WinBox({
+    oncreate: function(options){
+        options.autosize = true;
+    },
     onfocus: function(){
         this.setBackground("#fff");
     },
@@ -916,8 +964,7 @@ var winbox = WinBox({
         this.setBackground("#999");
     },
     onresize: function(width, height){
-        console.log("width", width);
-        console.log("height", height);
+        console.log("width:", width, "height:", height);
     },
     onfullscreen: function(){
         this.setBackground("#666");
@@ -932,8 +979,7 @@ var winbox = WinBox({
         this.setBackground("#DDD");
     },    
     onmove: function(x, y){
-        console.log("x", x);
-        console.log("y", y);
+        console.log("x:", x, "y:", y);
     },
     onclose: function(force){
         // return "true" to skip the closing
@@ -987,13 +1033,13 @@ winbox.close(true);
 
 WinBox provides you some built-in control classes you can pass when creating a window instance. 
 
-> All control classes from this list could be added or removed during lifetime of the window (after creation). State classes like "max", "min" and "focus" could not be changed manually.
+> All control classes from this list could be added or removed during lifetime of the window (after creation). State classes like `max`, `min`, `full`, `hidden` and `focus` could not be changed manually! For this purpose use the WinBox member methods accordingly e.g. `maximize()`, `minimize()`, `hide()`.
 
 <table>
     <tr></tr>
     <tr>
-        <td>Classname&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td>Description</td>
+        <th>Classname&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th align="left">Description</th>
     </tr>
     <tr>
         <td>no-animation</td>
@@ -1041,37 +1087,12 @@ WinBox provides you some built-in control classes you can pass when creating a w
     </tr>
 </table>
 
-Also, only this two css-only state classes could be toggled programmatically:
-
-<table>
-    <tr></tr>
-    <tr>
-        <td>Classname&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td>Description</td>
-    </tr>
-    <tr>
-        <td>modal</td>
-        <td>Show the window in modal mode</td>
-    </tr>
-    <tr></tr>
-    <tr>
-        <td>hide</td>
-        <td>Hide the window</td>
-    </tr>
-</table>
-
 > Without the header the user isn't able to move the window frame. It may be useful for creating fixed popups.
 
 Pass in classnames when creating the window to apply behaviour:
 ```js
 const winbox = WinBox({
-    class: [
-        "no-min",
-        "no-max",
-        "no-full",
-        "no-resize",
-        "no-move"
-    ]
+    class: [ "no-min", "no-max", "no-full", "no-resize", "no-move" ]
 });
 ```
 
@@ -1143,7 +1164,7 @@ The splitscreen from above will look like this grid:
 ---------------------------------------------
 ```
 
-You can set the values for the viewport dynamically, doing this makes it possible to growth up the grid dynamically and also change the grid schema.
+You can set the values for the viewport dynamically, doing this makes it possible to size the grid dynamically and also change the grid schema.
 
 <a name="customize"></a>
 ## Customize Window
@@ -1343,20 +1364,9 @@ Customize the modal background overlay:
 
 ## Useful Hints
 
-Often you need to hide specific content parts when it was mounted to a window. You can solve this easily by using some css:
+Often you need to hide specific content parts when it was mounted to a window or hiding when NOT inside a window:
 
-```css
-.winbox .wb-hide { display: none }
-```
-
-The same for hiding when NOT inside a window:
-
-```css
-.wb-show { display: none }
-.winbox .wb-show { display: block }
-```
-
-Now you can add this two classes to any element to control visibility between the two states "inside" and "outside" a window:
+Now you can add the two classes `"wb-hide"` and `"wb-show"` to any element to control visibility between the two states "inside" and "outside" a window:
 
 ```html
 <body>
@@ -1370,7 +1380,7 @@ Now you can add this two classes to any element to control visibility between th
 </body>
 ```
 
-The property `display: block` might not fit your needs. That's why this workaround was not added as one of the built-in classes yet. Please change to your desired display-state accordingly.
+The `display` property when using `"wb-show"` might not fit your needs. Please change this css class definition to your desired display-state accordingly.
 
 ```js
 new WinBox({
@@ -1437,5 +1447,5 @@ The final build is located in the `dist/` folder.
 
 ---
 
-Copyright 2021 Nextapps GmbH<br>
+Copyright 2022 Nextapps GmbH<br>
 Released under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0 License</a><br>
