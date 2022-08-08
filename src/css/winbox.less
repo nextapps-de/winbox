@@ -1,9 +1,11 @@
 @import "images.less";
+@winbox-header-height: 35px;
 
 .winbox {
   position: fixed;
   left: 0;
   top: 0;
+  min-height: @winbox-header-height;
   background: #0050ff;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   transition: width .3s, height .3s, transform .3s;
@@ -17,27 +19,12 @@
   touch-action: none;
 }
 
-/* Header height */
-@winbox-header-height: 35px;
-.winbox {
-  min-height: @winbox-header-height;
-}
-.wb-header,
-.wb-icon {
-  height: @winbox-header-height;
-}
-.wb-title {
-  line-height: @winbox-header-height;
-}
-.wb-body {
-  top: @winbox-header-height;
-}
-
 .wb-header {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
+  height: @winbox-header-height;
   color: #fff;
   overflow: hidden;
   z-index: 1;
@@ -45,6 +32,7 @@
 
 .wb-body {
   position: absolute;
+  top: @winbox-header-height;
   left: 0;
   right: 0;
   bottom: 0;
@@ -65,6 +53,7 @@
   font-family : Arial, sans-serif;
   font-size: 14px;
   padding-left: 10px;
+  line-height: @winbox-header-height;
   cursor: move;
   white-space: nowrap;
   overflow: hidden;
@@ -153,6 +142,7 @@
 
 .wb-icon{
   float: right;
+  height: @winbox-header-height;
   max-width: 100%;
   text-align: center;
 }
@@ -170,7 +160,7 @@
 .wb-min {
   background-image: url(@min);
   background-size: 14px auto;
-  background-position: center bottom 11px;
+  background-position: center bottom 12px;
 }
 
 .wb-max {
@@ -187,6 +177,14 @@
   background-image: url(@full);
   background-size: 16px auto;
 }
+
+/*
+.winbox:not(.max) .wb-max {
+  background-image: url(@restore);
+  background-size: 20px auto;
+  background-position: center bottom 5px;
+}
+*/
 
 /*
 .winbox:fullscreen{
@@ -229,11 +227,11 @@
   visibility: hidden;
 }
 
-&.max {
+.winbox.max {
   box-shadow: none;
 }
 
-&.max .wb-body {
+.winbox.max .wb-body {
   margin: 0 !important;
 }
 

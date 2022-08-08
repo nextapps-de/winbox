@@ -21,6 +21,7 @@ const style = process.argv[2] === "--style";
             max: base64Sync('dist/img/max.svg'),
             close: base64Sync('dist/img/close.svg'),
             full: base64Sync('dist/img/full.svg'),
+            restore: base64Sync('dist/img/restore.svg'),
             //exit: base64Sync('dist/img/exit.svg'),
             min: base64Sync('dist/img/min.svg')
         };

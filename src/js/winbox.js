@@ -38,7 +38,7 @@ function WinBox(params, _title){
         return new WinBox(params);
     }
 
-    index || setup();
+    body || setup();
 
     let id,
         root,
@@ -60,6 +60,14 @@ function WinBox(params, _title){
         bottom,
         right,
         modal,
+        background,
+        border,
+        classname,
+        splitscreen,
+        autosize,
+        contentWidth,
+        contentHeight,
+
         onclose,
         onfocus,
         onblur,
@@ -68,17 +76,10 @@ function WinBox(params, _title){
         onfullscreen,
         onmaximize,
         onminimize,
-        onwindowize,
+        onrestore,
         onhide,
         onshow,
-        background,
-        border,
-        classname,
-        splitscreen,
-        autosize,
-        clonedBody,
-        contentWidth,
-        contentHeight;
+        onload;
 
     if(params){
 
@@ -93,6 +94,8 @@ function WinBox(params, _title){
             title = params;
         }
         else{
+
+            params["oncreate"] && params["oncreate"].call(this, params);
 
             if((modal = params["modal"])){
 
@@ -119,6 +122,12 @@ function WinBox(params, _title){
             bottom = params["bottom"];
             right = params["right"];
             index = params["index"] || index;
+            background = params["background"];
+            border = params["border"];
+            classname = params["class"];
+            splitscreen = params["splitscreen"];
+            autosize = params["autosize"];
+
             onclose = params["onclose"];
             onfocus = params["onfocus"];
             onblur = params["onblur"];
@@ -127,26 +136,14 @@ function WinBox(params, _title){
             onfullscreen = params["onfullscreen"];
             onmaximize = params["onmaximize"];
             onminimize = params["onminimize"];
-            onwindowize = params["onwindowize"];
+            onrestore = params["onrestore"];
             onhide = params["onhide"];
             onshow = params["onshow"];
-            background = params["background"];
-            border = params["border"];
-            classname = params["class"];
-            splitscreen = params["splitscreen"];
-            autosize = params["autosize"];
+            onload = params["onload"];
         }
     }
 
-    if(customTemplate){
-
-        this.dom = customTemplate;
-    }
-    else{
-
-        this.dom = template();
-    }
-
+    this.dom = customTemplate || template();
     this.body = getByClass(this.dom, "wb-body");
 
     if(background){
@@ -171,7 +168,7 @@ function WinBox(params, _title){
     }
     else if(url){
 
-        this.setUrl(url);
+        this.setUrl(url, onload);
     }
 
     this.setTitle(title || "");
@@ -187,30 +184,16 @@ function WinBox(params, _title){
     max_width -= left + right;
     max_height -= top + bottom;
 
-    // TODO: finalize autosize feature
     if(autosize && (!width || !height)){
 
-        // clonedBody = this.body.cloneNode(true);
-
-        // setStyle(clonedBody, "contain", "unset");
-        // setStyle(clonedBody, "margin", "");
-        // setStyle(clonedBody, "position", "relative");
-        // setStyle(clonedBody, "visibility", "hidden");
-
-        // if(!hasClass(this.dom, "no-header")){
-        //
-        //     clonedBody.insertAdjacentElement("afterbegin", getByClass(this.dom, "wb-title").cloneNode(true));
-        // }
-
-        if(width) setStyle(this.body, "width", parse(width, max_width) + "px");
-        if(height) setStyle(this.body, "height", parse(width, max_width) + "px");
-
+        setStyle(this.body, "visibility", "hidden");
         (root || body).appendChild(this.body);
 
         contentWidth = Math.min(this.body.clientWidth, max_width);
         contentHeight = Math.min(this.body.clientHeight, max_height);
 
         this.dom.appendChild(this.body);
+        setStyle(this.body, "visibility", "");
     }
 
     width = width ? parse(width, max_width) : contentWidth || (max_width / 2) | 0;
@@ -244,13 +227,15 @@ function WinBox(params, _title){
     this.onfullscreen = onfullscreen;
     this.onmaximize = onmaximize;
     this.onminimize = onminimize;
-    this.onwindowize = onwindowize;
+    this.onrestore = onrestore;
     this.onhide = onhide;
     this.onshow = onshow;
     this.splitscreen = splitscreen;
 
     this.dom.id = this.id = id || ("winbox-" + (++id_counter));
     this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") + (modal ? " modal" : "");
+    this.dom["winbox"] = this;
+    //this.plugins = [];
 
     if(max){
 
@@ -261,21 +246,6 @@ function WinBox(params, _title){
         this.move().resize();
     }
 
-    /*
-    if(mount){
-
-        this.mount(mount);
-    }
-    else if(html){
-
-        this.body.innerHTML = html;
-    }
-    else if(url){
-
-        this.setUrl(url);
-    }
-    */
-
     if(hidden){
       
         this.hide();
@@ -284,8 +254,7 @@ function WinBox(params, _title){
       
         this.focus();
     }
-  
-    this.dom.winbox = this;
+
     register(this);
     (root || body).appendChild(this.dom);
 }
@@ -380,13 +349,14 @@ function register(self){
     addListener(getByClass(self.dom, "wb-min"), "click", function(event){
 
         preventEvent(event);
-        self.minimize();
+        self.min ? self.restore() : self.minimize();
     });
 
     addListener(getByClass(self.dom, "wb-max"), "click", function(event){
 
         preventEvent(event);
-        self.focus().maximize();
+        self.max ? self.restore() : self.maximize();
+        self.focus();
     });
 
     if(prefix_request){
@@ -502,13 +472,13 @@ function addWindowListener(self, dir){
         // prevent the full iteration through the fallback chain of a touch event (touch > mouse > click)
         preventEvent(event, true);
 
-        if(self.min){
+        // if(self.min){
+        //
+        //     self.minimize();
+        // }
+        // else {
 
-            self.minimize();
-        }
-        else {
-
-            if(dir === "title" && !self.hasClass("no-max")){
+            if(dir === "title" /*&& !self.hasClass("no-max")*/){
 
                 const now = Date.now();
                 const diff = now - dblclick_timer;
@@ -517,12 +487,18 @@ function addWindowListener(self, dir){
 
                 if(diff < 250){
 
-                    self.maximize();
+                    self.max ? self.restore() : self.maximize();
+                    return;
+                }
+
+                if(self.min){
+
+                    self.restore();
                     return;
                 }
             }
 
-            if(!self.max){
+            if(!self.max && !self.min){
 
                 addClass(body, "wb-drag");
                 use_raf && loop();
@@ -553,7 +529,7 @@ function addWindowListener(self, dir){
                 //init();
                 self.focus();
             }
-        }
+        //}
     }
 
     function handler_mousemove(event){
@@ -743,9 +719,10 @@ WinBox.prototype.setBackground = function(background){
  * @this WinBox
  */
 
-WinBox.prototype.setUrl = function(url){
+WinBox.prototype.setUrl = function(url, onload){
 
     this.body.innerHTML = '<iframe src="' + url + '"></iframe>';
+    onload && (this.body.firstChild.onload = onload);
     return this;
 };
 
@@ -778,6 +755,7 @@ WinBox.prototype.focus = function(){
  */
 
 WinBox.prototype.hide = function(){
+
     this.onhide && this.onhide();
     return this.addClass("hide");
 };
@@ -787,29 +765,29 @@ WinBox.prototype.hide = function(){
  */
 
 WinBox.prototype.show = function(){
+
     this.onshow && this.onshow();
     return this.removeClass("hide");
 };
 
 /**
  * @this WinBox
- * @param {boolean=} state
  */
 
-WinBox.prototype.minimize = function(state){
+WinBox.prototype.minimize = function(){
 
     if(is_fullscreen){
 
         cancel_fullscreen(this);
     }
 
-    if(!state && this.min){
+    if(this.max){
 
-        remove_min_stack(this);
-        this.resize().move().focus();
-        this.onwindowize && this.onwindowize();
+        this.removeClass("max");
+        this.max = false;
     }
-    else if((state !== false) && !this.min){
+
+    if(!this.min){
 
         stack_min.push(this);
         update_min_stack();
@@ -819,11 +797,32 @@ WinBox.prototype.minimize = function(state){
         this.onminimize && this.onminimize();
     }
 
+    return this;
+};
+
+/**
+ * @this WinBox
+ */
+
+WinBox.prototype.restore = function(){
+
+    if(is_fullscreen){
+
+        cancel_fullscreen(this);
+    }
+
+    if(this.min){
+
+        remove_min_stack(this);
+        this.resize().move().focus();
+        this.onrestore && this.onrestore();
+    }
+
     if(this.max){
 
-        this.removeClass("max");
         this.max = false;
-        this.onminimize && this.onminimize();
+        this.removeClass("max").resize().move().focus();
+        this.onrestore && this.onrestore();
     }
 
     return this;
@@ -831,39 +830,37 @@ WinBox.prototype.minimize = function(state){
 
 /**
  * @this WinBox
- * @param {boolean=} state
  */
 
-WinBox.prototype.maximize = function(state){
+WinBox.prototype.maximize = function(){
 
-    if(typeof state === "undefined" || (state !== this.max)){
+    if(is_fullscreen){
 
-        if(this.min){
+        cancel_fullscreen(this);
+    }
 
-            remove_min_stack(this);
-        }
+    if(this.min){
 
-        if((this.max = !this.max)){
+        remove_min_stack(this);
+    }
 
-            this.addClass("max").resize(
+    if(!this.max){
 
-                root_w - this.left - this.right,
-                root_h - this.top - this.bottom /* - 1 */,
-                true
+        this.addClass("max").resize(
 
-            ).move(
+            root_w - this.left - this.right,
+            root_h - this.top - this.bottom /* - 1 */,
+            true
 
-                this.left,
-                this.top,
-                true
-            );
-            this.onmaximize && this.onmaximize();
-        }
-        else{
+        ).move(
 
-            this.resize().move().removeClass("max");
-            this.onwindowize && this.onwindowize();
-        }
+            this.left,
+            this.top,
+            true
+        );
+
+        this.max = true;
+        this.onmaximize && this.onmaximize();
     }
 
     return this;
@@ -871,33 +868,28 @@ WinBox.prototype.maximize = function(state){
 
 /**
  * @this WinBox
- * @param {boolean=} state
  */
 
-WinBox.prototype.fullscreen = function(state){
+WinBox.prototype.fullscreen = function(){
 
-    if(typeof state === "undefined" || (state !== is_fullscreen)){
+    if(this.min){
 
-        if(this.min){
+        remove_min_stack(this);
+        this.resize().move();
+    }
 
-            this.resize().move();
-            remove_min_stack(this);
-        }
+    // fullscreen could be changed by user manually!
 
-        // fullscreen could be changed by user manually!
+    if(!is_fullscreen || !cancel_fullscreen(this)){
 
-        if(!is_fullscreen || !cancel_fullscreen(this)){
+        // requestFullscreen is executed as async and returns promise.
+        // in this case it is better to set the state to "this.full" after the requestFullscreen was fired,
+        // because it may break when browser does not support fullscreen properly and bypass it silently.
 
-            // requestFullscreen is executed as async and returns promise.
-            // in this case it is better to set the state to "this.full" after the requestFullscreen was fired,
-            // because it may break when browser does not support fullscreen properly and bypass it silently.
-
-            //this.dom[prefix_request]();
-            this.body[prefix_request]();
-            is_fullscreen = true;
-            this.onfullscreen && this.onfullscreen();
-        }
-
+        //this.dom[prefix_request]();
+        this.body[prefix_request]();
+        is_fullscreen = true;
+        this.onfullscreen && this.onfullscreen();
     }
 
     return this;
@@ -956,6 +948,8 @@ WinBox.prototype.close = function(force) {
     if(last_focus === this){
 
         last_focus = null;
+
+        // TODO focus next window
     }
 };
 
@@ -1059,7 +1053,7 @@ WinBox.prototype.hasClass = function(classname){
 /*
 WinBox.prototype.use = function(plugin){
 
-    plugin(this);
+    this.plugins.push(plugin);
     return this;
 };
 */

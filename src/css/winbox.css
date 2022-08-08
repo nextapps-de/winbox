@@ -2,6 +2,7 @@
   position: fixed;
   left: 0;
   top: 0;
+  min-height: 35px;
   background: #0050ff;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   transition: width 0.3s, height 0.3s, transform 0.3s;
@@ -14,31 +15,19 @@
   /* workaround for using passive listeners */
   touch-action: none;
 }
-/* Header height */
-.winbox {
-  min-height: 35px;
-}
-.wb-header,
-.wb-icon {
-  height: 35px;
-}
-.wb-title {
-  line-height: 35px;
-}
-.wb-body {
-  top: 35px;
-}
 .wb-header {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
+  height: 35px;
   color: #fff;
   overflow: hidden;
   z-index: 1;
 }
 .wb-body {
   position: absolute;
+  top: 35px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -56,6 +45,7 @@
   font-family: Arial, sans-serif;
   font-size: 14px;
   padding-left: 10px;
+  line-height: 35px;
   cursor: move;
   white-space: nowrap;
   overflow: hidden;
@@ -135,6 +125,7 @@
 }
 .wb-icon {
   float: right;
+  height: 35px;
   max-width: 100%;
   text-align: center;
 }
@@ -164,6 +155,13 @@
   background-image: url("../img/full.svg");
   background-size: 16px auto;
 }
+/*
+.winbox:not(.max) .wb-max {
+  background-image: url(@restore);
+  background-size: 20px auto;
+  background-position: center bottom 5px;
+}
+*/
 /*
 .winbox:fullscreen{
   transition: none !important;
@@ -197,10 +195,10 @@
   display: none;
   visibility: hidden;
 }
-.max {
+.winbox.max {
   box-shadow: none;
 }
-.max .wb-body {
+.winbox.max .wb-body {
   margin: 0 !important;
 }
 .winbox iframe {

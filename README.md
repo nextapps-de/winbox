@@ -31,8 +31,8 @@ __Get Latest Stable Build (Recommended):__
     </tr>
     <tr>
         <td>winbox.bundle.min.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.0/dist/winbox.bundle.min.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/winbox.bundle.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/winbox.bundle.min.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.2/dist/winbox.bundle.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.2/dist/winbox.bundle.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.2/dist/winbox.bundle.min.js</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -41,14 +41,14 @@ __Get Latest Stable Build (Recommended):__
     </tr>
     <tr>
         <td>winbox.min.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.0/dist/js/winbox.min.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/js/winbox.min.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.2/dist/js/winbox.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.2/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.2/dist/js/winbox.min.js</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.min.css</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.0/dist/css/winbox.min.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/css/winbox.min.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/dist/css/winbox.min.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.2/dist/css/winbox.min.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.2/dist/css/winbox.min.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.2/dist/css/winbox.min.css</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -57,25 +57,25 @@ __Get Latest Stable Build (Recommended):__
     </tr>
     <tr>
         <td>ES6 Modules</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.0/src/js" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.2/src/js" target="_blank">Download</a></td>
         <td>The <i>/src/js</i> folder of this Github repository</td>
     </tr>
     <tr></tr>
     <tr>
         <td>LESS Files (source)</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.0/src/css" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.2/src/css" target="_blank">Download</a></td>
         <td>The <i>/src/css</i> folder of this Github repository</td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.css (compiled)</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.0/src/css/winbox.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/src/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.0/src/css/winbox.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.2/src/css/winbox.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.2/src/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.2/src/css/winbox.css</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>src.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.0/dist" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.2/dist" target="_blank">Download</a></td>
         <td>Download all source files including image original resources.</td>
     </tr>
 </table>
@@ -88,7 +88,7 @@ npm install winbox
 
 __Get Latest Nightly (Do not use for production!):__
 
-Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.2.0__/dist/" into "/winbox/__master__/dist".
+Just exchange the version number from the URLs above with "master", e.g.: "/winbox/__0.2.2__/dist/" into "/winbox/__master__/dist".
 
 
 ### Use Bundled Version
@@ -166,7 +166,7 @@ You can also load modules via CDN, e.g.:
 
 ```html
 <script type="module">
-  import WinBox from "https://unpkg.com/winbox@0.2.0/src/js/winbox.js";
+  import WinBox from "https://unpkg.com/winbox@0.2.2/src/js/winbox.js";
 </script>
 ```
 
@@ -348,7 +348,7 @@ Instance properties:
     </tr>
     <tr></tr>
     <tr>
-        <td>onwindowize</td>
+        <td>onrestore</td>
         <td>function()</td>
         <td>Callback triggered when the window returns to a windowed state from a Fullscreen, Minimized or Maximized state.</td>
     </tr>
@@ -928,7 +928,7 @@ var winbox = WinBox({
     onmaximize: function(){
         this.setBackground("#AAA");
     },
-    onwindowize: function(){
+    onrestore: function(){
         this.setBackground("#DDD");
     },    
     onmove: function(x, y){

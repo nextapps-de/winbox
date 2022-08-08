@@ -2,3 +2,14 @@
 node_modules
 /log
 /tmp
+.idea
+.nyc_output
+.db
+coverage
+perf
+server
+!*.keep
+package-lock.json
+misc
+vorlage
+test
