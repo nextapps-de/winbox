@@ -841,6 +841,7 @@ const hidden = root.classList.contains("hide");
 const focused = root.classList.contains("focus");
 root.classList.remove("modal");
 root.classList.add("my-theme");
+root.classList.toggle("my-toggle");
 ```
 
 Equivalent to the example above (by using the WinBox built-in methods):
@@ -850,6 +851,7 @@ const hidden = winbox.hasClass("hide");
 const focused = winbox.hasClass("focus");
 winbox.removeClass("modal");
 winbox.addClass("my-theme");
+winbox.toggleClass("my-toggle");
 ```
 
 #### Controls
@@ -1118,6 +1120,14 @@ winbox.addClass("no-resize")
 winbox.removeClass("no-resize")
       .removeClass("no-move");
 ```
+```js
+winbox.toggleClass("no-resize")
+      .toggleClass("no-move");
+```
+```js
+const state = winbox.hasClass("no-resize") &&
+              winbox.hasClass("no-move");
+```
 
 ## Custom Splitscreen
 
@@ -1129,8 +1139,7 @@ new WinBox("Split Left", {
 });
 
 new WinBox("Split Right", {
-    x: "50%",
-    left: "100%" // 100% of its own size
+    left: "50%"
 });
 ```
 
