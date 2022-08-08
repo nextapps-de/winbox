@@ -21,7 +21,7 @@ const style = process.argv[2] === "--style";
             max: base64Sync('dist/img/max.svg'),
             close: base64Sync('dist/img/close.svg'),
             full: base64Sync('dist/img/full.svg'),
-            restore: base64Sync('dist/img/restore.svg'),
+            //restore: base64Sync('dist/img/restore.svg'),
             //exit: base64Sync('dist/img/exit.svg'),
             min: base64Sync('dist/img/min.svg')
         };
@@ -37,7 +37,7 @@ const style = process.argv[2] === "--style";
         }
 
         fs.writeFileSync("tmp/images.less", tmp);
-        fs.writeFileSync("tmp/bundle.less", '@import "../src/css/winbox.less"; @import "images.less";');
+        fs.writeFileSync("tmp/bundle.less", '@import "../src/css/winbox.less"; @import "images.less";'); // @import "../src/css/themes/modern.less"; @import "../src/css/themes/white.less";
     }
 
     // ----------------------

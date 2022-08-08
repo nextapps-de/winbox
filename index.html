@@ -6,11 +6,19 @@
     <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/railscasts.min.css">
     <title>WinBox.js &ndash; Modern HTML5 Window Manager</title>
+
+    <!-- Import JS + CSS separately: -->
     <link rel="stylesheet" href="dist/css/winbox.min.css">
+    <script src="dist/js/winbox.min.js"></script>
+
+    <!-- Or import as bundled (All-in-one): -->
+    <!-- <script src="dist/winbox.bundle.min.js"></script> -->
+
+    <!-- Optional standard themes: -->
     <link rel="stylesheet" href="dist/css/themes/modern.min.css">
     <link rel="stylesheet" href="dist/css/themes/white.min.css">
-    <!--<script src="dist/js/winbox.min.js"></script>-->
-    <!--<script src="dist/winbox.bundle.min.js"></script>-->
+
+    <!-- Custom Themes Demo: -->
     <style>
 
         /* WinBox Theme: "custom" */
@@ -610,9 +618,8 @@ new WinBox("Splitscreen (Right)", {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
     <script type="module">
 
-        import WinBox from "./src/js/winbox.js";
-
-        window.WinBox = WinBox;
+        //import WinBox from "./src/js/winbox.js";
+        //window.WinBox = WinBox;
 
         (function(){
 
