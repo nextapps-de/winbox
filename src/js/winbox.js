@@ -42,7 +42,7 @@ function WinBox(params, _title){
 
     let id,
         root,
-        customTemplate,
+        tpl,
         title,
         mount,
         html,
@@ -53,6 +53,7 @@ function WinBox(params, _title){
         minheight,
         x,
         y,
+        min,
         max,
         hidden,
         top,
@@ -105,7 +106,7 @@ function WinBox(params, _title){
 
             id = params["id"];
             root = params["root"];
-            customTemplate = params["template"];
+            tpl = params["template"];
             title = title || params["title"];
             mount = params["mount"];
             html = params["html"];
@@ -116,6 +117,7 @@ function WinBox(params, _title){
             minheight = params["minheight"];
             x = params["x"] || x;
             y = params["y"] || y;
+            min = params["min"];
             max = params["max"];
             hidden = params["hidden"];
             top = params["top"];
@@ -124,7 +126,7 @@ function WinBox(params, _title){
             right = params["right"];
             index = params["index"] || index;
             background = params["background"];
-            border = params["border"];
+            border = params["border"] || 0;
             classname = params["class"];
             splitscreen = params["splitscreen"];
             autosize = params["autosize"];
@@ -144,7 +146,7 @@ function WinBox(params, _title){
         }
     }
 
-    this.dom = customTemplate || template();
+    this.dom = tpl || template();
     this.body = getByClass(this.dom, "wb-body");
 
     if(background){
@@ -174,44 +176,43 @@ function WinBox(params, _title){
 
     this.setTitle(title || "");
 
-    let max_width = root_w;
-    let max_height = root_h;
+    let maxwidth = root_w;
+    let maxheight = root_h;
 
-    top = top ? parse(top, max_height) : 0;
-    bottom = bottom ? parse(bottom, max_height) : 0;
-    left = left ? parse(left, max_width) : 0;
-    right = right ? parse(right, max_width) : 0;
+    top = top ? parse(top, maxheight) : 0;
+    bottom = bottom ? parse(bottom, maxheight) : 0;
+    left = left ? parse(left, maxwidth) : 0;
+    right = right ? parse(right, maxwidth) : 0;
 
-    max_width -= left + right;
-    max_height -= top + bottom;
+    maxwidth -= left + right;
+    maxheight -= top + bottom;
+    minwidth = minwidth ? parse(minwidth, maxwidth) : 150;
+    minheight = minheight ? parse(minheight, maxheight) : 35;
 
-    if(autosize && (!width || !height)){
+    if(autosize /*&& (!width || !height)*/){
 
-        setStyle(this.body, "visibility", "hidden");
         (root || body).appendChild(this.body);
 
-        contentWidth = Math.min(this.body.clientWidth, max_width);
-        contentHeight = Math.min(this.body.clientHeight, max_height);
+        width = Math.max(Math.min(this.body.clientWidth + border * 2, maxwidth), minwidth);
+        height = Math.min(this.body.clientHeight + minheight + border, maxheight);
 
         this.dom.appendChild(this.body);
-        setStyle(this.body, "visibility", "");
+    }
+    else{
+
+        width = width ? parse(width, maxwidth) : (maxwidth / 2) | 0;
+        height = height ? parse(height, maxheight) : (maxheight / 2) | 0;
     }
 
-    width = width ? parse(width, max_width) : contentWidth || (max_width / 2) | 0;
-    height = height ? parse(height, max_height) : contentHeight || (max_height / 2) | 0;
-
-    minwidth = minwidth ? parse(minwidth, max_width) : 0;
-    minheight = minheight ? parse(minheight, max_height) : 0;
-
-    x = x ? parse(x, max_width, width) : left;
-    y = y ? parse(y, max_height, height) : top;
+    x = x ? parse(x, maxwidth, width) : left;
+    y = y ? parse(y, maxheight, height) : top;
 
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    // this.minwidth = minwidth;
-    // this.minheight = minheight;
+    this.minwidth = minwidth;
+    this.minheight = minheight;
     this.top = top;
     this.right = right;
     this.bottom = bottom;
@@ -243,6 +244,10 @@ function WinBox(params, _title){
     if(max){
 
         this.maximize();
+    }
+    else if(min){
+
+        this.minimize();
     }
     else{
 
@@ -590,12 +595,12 @@ function addWindowListener(self, dir){
 
             if(resize_w){
 
-                self.width = Math.max(Math.min(self.width, root_w - self.x - self.right), 150);
+                self.width = Math.max(Math.min(self.width, root_w - self.x - self.right), self.minwidth);
             }
 
             if(resize_h){
 
-                self.height = Math.max(Math.min(self.height, root_h - self.y - self.bottom), 0);
+                self.height = Math.max(Math.min(self.height, root_h - self.y - self.bottom), self.minheight);
             }
 
             use_raf ? raf_resize = true : self.resize();
@@ -734,23 +739,25 @@ WinBox.prototype.setUrl = function(url, onload){
 };
 
 /**
+ * @param {boolean=} state
  * @this WinBox
  */
 
-WinBox.prototype.focus = function(){
+WinBox.prototype.focus = function(state){
+
+    if(state === false){
+
+        return this.blur();
+    }
 
     if(last_focus !== this){
 
+        last_focus && last_focus.blur();
+
         setStyle(this.dom, "z-index", index++);
         this.addClass("focus");
-
-        if(last_focus){
-
-            last_focus.removeClass("focus");
-            last_focus.onblur && last_focus.onblur();
-        }
-
         last_focus = this;
+
         this.onfocus && this.onfocus();
     }
 
@@ -758,10 +765,39 @@ WinBox.prototype.focus = function(){
 };
 
 /**
+ * @param {boolean=} state
  * @this WinBox
  */
 
-WinBox.prototype.hide = function(){
+WinBox.prototype.blur = function(state){
+
+    if(state === false){
+
+        return this.focus();
+    }
+
+    if(last_focus === this){
+
+        this.removeClass("focus");
+        this.onblur && this.onblur();
+        // TODO focus next window
+        last_focus = null;
+    }
+
+    return this;
+};
+
+/**
+ * @param {boolean=} state
+ * @this WinBox
+ */
+
+WinBox.prototype.hide = function(state){
+
+    if(state === false){
+
+        return this.show();
+    }
 
     if(!this.hidden){
 
@@ -772,10 +808,16 @@ WinBox.prototype.hide = function(){
 };
 
 /**
+ * @param {boolean=} state
  * @this WinBox
  */
 
-WinBox.prototype.show = function(){
+WinBox.prototype.show = function(state){
+
+    if(state === false){
+
+        return this.hide();
+    }
 
     if(this.hidden){
 
@@ -998,13 +1040,13 @@ WinBox.prototype.move = function(x, y, _skip_update){
         x = this.x;
         y = this.y;
 
-        if(this.splitscreen){
-
-            if(!x || (x === (root_w - this.width))){
-
-                this.resize(root_w / 2, root_h);
-            }
-        }
+        // if(this.splitscreen){
+        //
+        //     if(!x || (x === (root_w - this.width))){
+        //
+        //         this.resize(root_w / 2, root_h);
+        //     }
+        // }
     }
     else if(!_skip_update){
 
@@ -1037,8 +1079,8 @@ WinBox.prototype.resize = function(w, h, _skip_update){
         this.width = w ? w = parse(w, root_w - this.left - this.right) : 0;
         this.height = h ? h = parse(h, root_h - this.top - this.bottom) : 0;
 
-        // w = Math.max(w, this.minwidth);
-        // h = Math.max(h, this.minheight);
+        w = Math.max(w, this.minwidth);
+        h = Math.max(h, this.minheight);
     }
 
     setStyle(this.dom, "width", w + "px");

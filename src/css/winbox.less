@@ -49,6 +49,13 @@
   //content-visibility: auto;
 }
 
+body > .wb-body{
+  position: relative;
+  display: inline-block;
+  visibility: hidden;
+  contain: none;
+}
+
 .wb-title{
   font-family : Arial, sans-serif;
   font-size: 14px;
@@ -171,6 +178,7 @@
 .wb-close {
   background-image: url(@close);
   background-size: 15px auto;
+  background-position: 4px center;
 }
 
 .wb-full {

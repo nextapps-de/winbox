@@ -7,6 +7,7 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.prototype.resize;
 /** @export */ WinBox.prototype.close;
 /** @export */ WinBox.prototype.focus;
+/** @export */ WinBox.prototype.blur;
 /** @export */ WinBox.prototype.hide;
 /** @export */ WinBox.prototype.show;
 /** @export */ WinBox.prototype.minimize;

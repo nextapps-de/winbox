@@ -41,6 +41,12 @@
   margin-top: 0 !important;
   contain: strict;
 }
+body > .wb-body {
+  position: relative;
+  display: inline-block;
+  visibility: hidden;
+  contain: none;
+}
 .wb-title {
   font-family: Arial, sans-serif;
   font-size: 14px;
@@ -150,6 +156,7 @@
 .wb-close {
   background-image: url("../img/close.svg");
   background-size: 15px auto;
+  background-position: 4px center;
 }
 .wb-full {
   background-image: url("../img/full.svg");
