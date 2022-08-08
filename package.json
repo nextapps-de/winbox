@@ -32,9 +32,9 @@
     "copy": "cpx \"src/img/*.*\" dist/img/",
     "clean": "node task/clean",
     "build:css": "lessc src/css/winbox.less src/css/winbox.css",
-    "build:css:bundle": "node task/bundle --image && lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" tmp/bundle.less dist/css/winbox.min.css && csso dist/css/winbox.min.css --output dist/css/winbox.min.css",
-    "build:css:theme-modern": "lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/modern.less dist/css/themes/modern.min.css && csso dist/css/themes/modern.min.css --output dist/css/themes/modern.min.css",
-    "build:css:theme-white": "lessc --autoprefix=\">=1%\" --csswring=\"--sourcemap --preserve-hacks\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/white.less dist/css/themes/white.min.css && csso dist/css/themes/white.min.css --output dist/css/themes/white.min.css",
+    "build:css:bundle": "node task/bundle --image && lessc --autoprefix=\">=1%\" --clean-css=\"--s1 --advanced --rebase\" tmp/bundle.less dist/css/winbox.min.css && csso dist/css/winbox.min.css --output dist/css/winbox.min.css",
+    "build:css:theme-modern": "lessc --autoprefix=\">=1%\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/modern.less dist/css/themes/modern.min.css && csso dist/css/themes/modern.min.css --output dist/css/themes/modern.min.css",
+    "build:css:theme-white": "lessc --autoprefix=\">=1%\" --clean-css=\"--s1 --advanced --rebase\" src/css/themes/white.less dist/css/themes/white.min.css && csso dist/css/themes/white.min.css --output dist/css/themes/white.min.css",
     "build:js": "node task/build",
     "build:bundle": "node task/build --bundle",
     "build:svg": "node task/svgo",
@@ -54,14 +54,13 @@
   "devDependencies": {
     "base64-img": "^1.0.4",
     "cpx": "^1.5.0",
-    "csso": "^4.2.0",
-    "csso-cli": "^3.0.0",
-    "google-closure-compiler": "^20210406.0.0",
-    "less": "^4.1.1",
+    "csso": "^5.0.4",
+    "csso-cli": "^4.0.1",
+    "google-closure-compiler": "^20220719.0.0",
+    "less": "^4.1.3",
     "less-plugin-autoprefix": "^2.0.0",
     "less-plugin-clean-css": "^1.5.1",
-    "less-plugin-csswring": "git+https://github.com/kodie/less-plugin-csswring#patch-1",
-    "svgo": "^2.3.0",
+    "svgo": "^2.8.0",
     "web-servo": "^0.5.1"
   }
 }

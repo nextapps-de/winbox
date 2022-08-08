@@ -68,12 +68,12 @@ const parameter = (function(opt){
     emit_use_strict: true,
 
     output_manifest: "log/manifest.log",
-    output_module_dependencies: "log/module_dependencies.log",
+    //output_module_dependencies: "log/module_dependencies.log",
     property_renaming_report: "log/renaming_report.log",
     strict_mode_input: true,
     assume_function_wrapper: true,
 
-    transform_amd_modules: true,
+    //transform_amd_modules: true,
     process_common_js_modules: true,
     module_resolution: "BROWSER",
     dependency_mode: "PRUNE_LEGACY",
