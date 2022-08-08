@@ -141,7 +141,7 @@
 .wb-min {
   background-image: url("../img/min.svg");
   background-size: 14px auto;
-  background-position: center bottom 11px;
+  background-position: center bottom 12px;
 }
 .wb-max {
   background-image: url("../img/max.svg");
@@ -187,6 +187,10 @@
 }
 .winbox.min .wb-title {
   cursor: default;
+}
+.winbox.min .wb-body {
+  overflow: hidden;
+  height: 0;
 }
 .winbox.min .wb-body > * {
   display: none;

@@ -68,6 +68,7 @@ function WinBox(params, _title){
         contentWidth,
         contentHeight,
 
+        oncreate,
         onclose,
         onfocus,
         onblur,
@@ -95,7 +96,7 @@ function WinBox(params, _title){
         }
         else{
 
-            params["oncreate"] && params["oncreate"].call(this, params);
+            (oncreate = params["oncreate"]) && oncreate.call(this, params);
 
             if((modal = params["modal"])){
 
@@ -209,8 +210,8 @@ function WinBox(params, _title){
     this.y = y;
     this.width = width;
     this.height = height;
-    this.minwidth = minwidth;
-    this.minheight = minheight;
+    // this.minwidth = minwidth;
+    // this.minheight = minheight;
     this.top = top;
     this.right = right;
     this.bottom = bottom;
@@ -218,6 +219,9 @@ function WinBox(params, _title){
     //this.border = border;
     this.min = false;
     this.max = false;
+    this.full = false;
+    this.hidden = false;
+    this.splitscreen = splitscreen;
 
     this.onclose = onclose;
     this.onfocus = onfocus;
@@ -230,7 +234,6 @@ function WinBox(params, _title){
     this.onrestore = onrestore;
     this.onhide = onhide;
     this.onshow = onshow;
-    this.splitscreen = splitscreen;
 
     this.dom.id = this.id = id || ("winbox-" + (++id_counter));
     this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") + (modal ? " modal" : "");
@@ -654,8 +657,12 @@ function init(){
     // root_w = doc.clientWidth;
     // root_h = doc.clientHeight;
 
-    root_w = body.clientWidth;
-    root_h = body.clientHeight;
+    // root_w = body.clientWidth;
+    // root_h = body.clientHeight;
+
+    const doc = document.documentElement;
+    root_w = doc.clientWidth;
+    root_h = doc.clientHeight;
 }
 
 /**
@@ -756,8 +763,12 @@ WinBox.prototype.focus = function(){
 
 WinBox.prototype.hide = function(){
 
-    this.onhide && this.onhide();
-    return this.addClass("hide");
+    if(!this.hidden){
+
+        this.onhide && this.onhide();
+        this.hidden = true;
+        return this.addClass("hide");
+    }
 };
 
 /**
@@ -766,19 +777,29 @@ WinBox.prototype.hide = function(){
 
 WinBox.prototype.show = function(){
 
-    this.onshow && this.onshow();
-    return this.removeClass("hide");
+    if(this.hidden){
+
+        this.onshow && this.onshow();
+        this.hidden = false;
+        return this.removeClass("hide");
+    }
 };
 
 /**
+ * @param {boolean=} state
  * @this WinBox
  */
 
-WinBox.prototype.minimize = function(){
+WinBox.prototype.minimize = function(state){
+
+    if(state === false){
+
+        return this.restore();
+    }
 
     if(is_fullscreen){
 
-        cancel_fullscreen(this);
+        cancel_fullscreen();
     }
 
     if(this.max){
@@ -808,7 +829,7 @@ WinBox.prototype.restore = function(){
 
     if(is_fullscreen){
 
-        cancel_fullscreen(this);
+        cancel_fullscreen();
     }
 
     if(this.min){
@@ -829,14 +850,20 @@ WinBox.prototype.restore = function(){
 };
 
 /**
+ * @param {boolean=} state
  * @this WinBox
  */
 
-WinBox.prototype.maximize = function(){
+WinBox.prototype.maximize = function(state){
+
+    if(state === false){
+
+        return this.restore();
+    }
 
     if(is_fullscreen){
 
-        cancel_fullscreen(this);
+        cancel_fullscreen();
     }
 
     if(this.min){
@@ -867,10 +894,11 @@ WinBox.prototype.maximize = function(){
 };
 
 /**
+ * @param {boolean=} state
  * @this WinBox
  */
 
-WinBox.prototype.fullscreen = function(){
+WinBox.prototype.fullscreen = function(state){
 
     if(this.min){
 
@@ -880,16 +908,20 @@ WinBox.prototype.fullscreen = function(){
 
     // fullscreen could be changed by user manually!
 
-    if(!is_fullscreen || !cancel_fullscreen(this)){
+    if(!is_fullscreen || !cancel_fullscreen()){
 
         // requestFullscreen is executed as async and returns promise.
         // in this case it is better to set the state to "this.full" after the requestFullscreen was fired,
         // because it may break when browser does not support fullscreen properly and bypass it silently.
 
-        //this.dom[prefix_request]();
         this.body[prefix_request]();
-        is_fullscreen = true;
+        is_fullscreen = this;
+        this.full = true;
         this.onfullscreen && this.onfullscreen();
+    }
+    else if(state === false){
+
+        return this.restore();
     }
 
     return this;
@@ -907,13 +939,12 @@ function has_fullscreen(){
 }
 
 /**
- * @param {WinBox} self
  * @return {boolean|void}
  */
 
-function cancel_fullscreen(self){
+function cancel_fullscreen(){
 
-    is_fullscreen = false;
+    is_fullscreen.full = false;
 
     if(has_fullscreen()){
 
@@ -967,10 +998,10 @@ WinBox.prototype.move = function(x, y, _skip_update){
         x = this.x;
         y = this.y;
 
-        if( this.splitscreen ){
-            if( x === 0 ){
-                this.resize(root_w / 2, root_h);
-            } else if( x === (root_w - this.width) ){
+        if(this.splitscreen){
+
+            if(!x || (x === (root_w - this.width))){
+
                 this.resize(root_w / 2, root_h);
             }
         }
@@ -1005,10 +1036,10 @@ WinBox.prototype.resize = function(w, h, _skip_update){
 
         this.width = w ? w = parse(w, root_w - this.left - this.right) : 0;
         this.height = h ? h = parse(h, root_h - this.top - this.bottom) : 0;
-    }
 
-    w = Math.max(w, this.minwidth);
-    h = Math.max(h, this.minheight);
+        // w = Math.max(w, this.minwidth);
+        // h = Math.max(h, this.minheight);
+    }
 
     setStyle(this.dom, "width", w + "px");
     setStyle(this.dom, "height", h + "px");
@@ -1049,6 +1080,17 @@ WinBox.prototype.hasClass = function(classname){
 
     return hasClass(this.dom, classname);
 };
+
+/**
+ * @param {string} classname
+ * @this WinBox
+ */
+
+WinBox.prototype.toggleClass = function(classname){
+
+    return this.hasClass(classname) ? this.removeClass(classname) : this.addClass(classname);
+};
+
 
 /*
 WinBox.prototype.use = function(plugin){

@@ -17,12 +17,16 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.prototype.setUrl;
 /** @export */ WinBox.prototype.addClass;
 /** @export */ WinBox.prototype.removeClass;
+/** @export */ WinBox.prototype.toggleClass;
 /** @export */ //WinBox.prototype.use;
 
 /** @export */ WinBox.id;
+/** @export */ WinBox.dom;
 /** @export */ WinBox.body;
 /** @export */ WinBox.min;
 /** @export */ WinBox.max;
+/** @export */ WinBox.full;
+/** @export */ WinBox.hidden;
 /** @export */ WinBox.x;
 /** @export */ WinBox.y;
 /** @export */ WinBox.width;
@@ -31,6 +35,9 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.right;
 /** @export */ WinBox.bottom;
 /** @export */ WinBox.left;
+/** @export */ WinBox.splitscreen;
+
+/** @export */ WinBox.oncreate;
 /** @export */ WinBox.onclose;
 /** @export */ WinBox.onfocus;
 /** @export */ WinBox.onblur;
@@ -42,6 +49,5 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.onrestore;
 /** @export */ WinBox.onhide;
 /** @export */ WinBox.onshow;
-/** @export */ WinBox.winbox;
 
 window["WinBox"] = WinBox;

@@ -3,19 +3,15 @@
     touch-action: manipulation;
 }
 html, body{
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    right:0;
-    bottom:0;
-    left:0;
     margin: 0;
     padding: 0;
     border: 0;
+    background: linear-gradient(135deg, #0d1117, #131820);
+}
+body{
     font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, "Open Sans", OpenSans, Roboto, Segoe UI, sans-serif;
     text-align: center;
     color: #fff;
-    background: linear-gradient(135deg, #0d1117, #131820);
 
     -webkit-tap-highlight-color: transparent;
     -webkit-text-size-adjust: 100%;
@@ -25,9 +21,15 @@ html, body{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    /*content-visibility: auto;*/
 }
 .background{
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
@@ -43,18 +45,6 @@ header{
     padding: 15px 0;
     border-bottom: 1px solid #1c2431;
     z-index: 2;
-}
-.scroll{
-    position: absolute;
-    top: 0;
-    right:0;
-    bottom:0;
-    left:0;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-    /*content-visibility: auto;*/
 }
 .wrapper{
     position: relative;

@@ -93,6 +93,8 @@
     <meta name="description" content="WinBox is a modern HTML5 window manager for the web. Lightweight, outstanding performance, no dependencies, fully customizable, free and open source!">
     <meta name="keywords" content="window manager, web window, html5 popup, javascript window, web desktop, html5 windows, web frame, web box">
     <meta name="thumbnail" content="https://nextapps-de.github.io/winbox/demo/favicon.png">
+    <meta name="background-color" content="#0d1116">
+    <meta name="theme-color" content="#0d1116">
     <meta property="og:url" content="https://nextapps-de.github.io/winbox/">
     <meta property="og:site_name" content="WinBox - HTML5 window manager">
     <meta property="og:image" content="https://nextapps-de.github.io/winbox/demo/og-image.png">
@@ -331,7 +333,7 @@ new WinBox("Splitscreen (Right)", {
     x: "center",
     y: "center",
     max: false,
-    splitscreen: true,
+    splitscreen: false,
     top: 50,
     right: 50,
     bottom: 0,
@@ -391,15 +393,15 @@ new WinBox("Splitscreen (Right)", {
 
     minimize: function(){
 
-        winbox.minimize();
+        winbox.minimize(!this.min);
     },
     maximize: function(){
 
-        winbox.maximize();
+        winbox.maximize(!this.max);
     },
     fullscreen: function(){
 
-        winbox.fullscreen();
+        winbox.fullscreen(!this.full);
     },
     move: function(){
 
@@ -423,7 +425,7 @@ new WinBox("Splitscreen (Right)", {
     },
     modal: function(){
 
-        winbox.body.parentNode.classList.toggle("modal");
+        winbox.toggleClass("modal");
     },
     close: function(){
 
@@ -733,7 +735,7 @@ new WinBox("Splitscreen (Right)", {
                         x: "center",
                         y: "center",
                         max: false,
-                        splitscreen: true,
+                        splitscreen: false,
                         top: 50,
                         right: 50,
                         bottom: 0,
@@ -806,15 +808,15 @@ new WinBox("Splitscreen (Right)", {
 
                 minimize: function(){
 
-                    winbox.minimize();
+                    winbox.minimize(!winbox.min);
                 },
                 maximize: function(){
 
-                    winbox.maximize();
+                    winbox.maximize(!winbox.max);
                 },
                 fullscreen: function(){
 
-                    winbox.fullscreen();
+                    winbox.fullscreen(!winbox.full);
                 },
                 center: function(){
 
@@ -842,7 +844,7 @@ new WinBox("Splitscreen (Right)", {
                 },
                 modal: function(){
 
-                    winbox.body.parentNode.classList.toggle("modal");
+                    winbox.toggleClass("modal");
                 },
                 add: function(){
 
