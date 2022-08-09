@@ -16,6 +16,7 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.prototype.restore;
 /** @export */ WinBox.prototype.setBackground;
 /** @export */ WinBox.prototype.setTitle;
+/** @export */ WinBox.prototype.setIcon;
 /** @export */ WinBox.prototype.setUrl;
 /** @export */ WinBox.prototype.addClass;
 /** @export */ WinBox.prototype.removeClass;
@@ -23,7 +24,8 @@ import WinBox from "./winbox.js";
 /** @export */ //WinBox.prototype.use;
 
 /** @export */ WinBox.id;
-/** @export */ WinBox.dom;
+/** @export */ WinBox.window;
+/** @export */ WinBox.index;
 /** @export */ WinBox.body;
 /** @export */ WinBox.min;
 /** @export */ WinBox.max;

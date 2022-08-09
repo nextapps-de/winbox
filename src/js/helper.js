@@ -7,7 +7,7 @@
 
 export function addListener(node, event, fn, opt){
 
-    node.addEventListener(event, fn, opt || (opt === false) ? opt : true);
+    node && node.addEventListener(event, fn, opt || false);
 }
 
 /**
@@ -19,7 +19,7 @@ export function addListener(node, event, fn, opt){
 
 export function removeListener(node, event, fn, opt){
 
-    node.removeEventListener(event, fn, opt || (opt === false) ? opt : true);
+    node && node.removeEventListener(event, fn, opt || false);
 }
 
 /**
@@ -67,7 +67,28 @@ export function setStyle(node, style, value){
     }
 }
 
+export function setAttribute(node, key, value){
+
+    value = "" + value;
+
+    if(node["_a_" + key] !== value){
+
+        node.setAttribute(key, value);
+        node["_a_" + key] = value;
+    }
+}
+
+export function removeAttribute(node, key){
+
+    if(node["_a_" + key] !== null){
+
+        node.removeAttribute(key);
+        node["_a_" + key] = null;
+    }
+}
+
 export function setText(node, value){
 
-    node.firstChild.nodeValue = value;
+    const textnode = node.firstChild;
+    textnode ? textnode.nodeValue = value : node.textContent = value;
 }

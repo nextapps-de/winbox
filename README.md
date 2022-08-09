@@ -182,6 +182,7 @@ Instance member methods:
 - <a href="#winbox.unmount">winbox.**unmount**(dest)</a>
 - <a href="#winbox.setUrl">winbox.**setUrl**(string)</a>
 - <a href="#winbox.setTitle">winbox.**setTitle**(string)</a>
+- <a href="#winbox.setIcon">winbox.**setIcon**(url)</a>
 - <a href="#winbox.move">winbox.**move**(x, y)</a>
 - <a href="#winbox.resize">winbox.**resize**(width, height)</a>
 - <a href="#winbox.close">winbox.**close**(boolean)</a>
@@ -202,6 +203,7 @@ Instance member methods:
 Instance properties (editable):
 
 - <a href="#winbox.id">winbox.**id**</a>
+- <a href="#winbox.window">winbox.**window**</a>
 - <a href="#winbox.body">winbox.**body**</a>
 - <a href="#winbox.x">winbox.**x**</a>
 - <a href="#winbox.y">winbox.**y**</a>
@@ -335,6 +337,12 @@ Callback methods:
         <td>border</td>
         <td>number</td>
         <td>Set the border width of the window (supports all css units, like px, %, em, rem, vh, vmax).</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>icon</td>
+        <td>string</td>
+        <td>Make the titlebar icon visible and set the image source to this url.</td>
     </tr>
     <tr></tr>
     <tr>
@@ -485,6 +493,26 @@ new WinBox({
     border: "0 1em 15px 1em"
 });
 ```
+
+#### Custom Titlebar Icon
+
+> Supports all datatypes which are also supported by the style-attribute "background-image", e.g. URL, base64 encoded data. The default icon size is 20 x 20 pixels.
+
+```js
+new WinBox({
+    title: "Custom Icon",
+    icon: "img/icon.svg"
+});
+```
+
+Alternatively:
+<a name="winbox.setIcon"></a>
+```js
+var winbox = new WinBox("Custom Icon");
+winbox.setIcon("img/icon.svg");
+```
+
+See below in the style section to find out how to customize the titlebar icon style via css.
 
 ####  Custom Viewport
 
@@ -833,10 +861,25 @@ var winbox = new WinBox();
 winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
 ```
 
-> The parent element of the window body `winbox.body.parentNode` points to the window most outer root element which also holds the window control and state classes:
+<a name="winbox.window"></a>
+Get the DOM element from the window outer frame:
+```js
+var winbox = new WinBox();
+var root = winbox.window;
+```
+
+You also can get the window element by DOM id:
+```js
+var winbox = new WinBox();
+var root = document.getElementById(winbox.id);
+```
+
+> The window element points to the window most outer root element which also holds the window control and state classes:
+
+You can access and modify the window DOM element directly:
 
 ```js
-const root = winbox.body.parentNode;
+const root = winbox.window;
 const hidden = root.classList.contains("hide");
 const focused = root.classList.contains("focus");
 root.classList.remove("modal");
@@ -844,7 +887,7 @@ root.classList.add("my-theme");
 root.classList.toggle("my-toggle");
 ```
 
-Equivalent to the example above (by using the WinBox built-in methods):
+Or as an equivalent to the example above by using the WinBox built-in methods respectively:
 
 ```js
 const hidden = winbox.hasClass("hide");
@@ -852,6 +895,15 @@ const focused = winbox.hasClass("focus");
 winbox.removeClass("modal");
 winbox.addClass("my-theme");
 winbox.toggleClass("my-toggle");
+```
+
+You can grab the `winbox` instance from the window outer frame DOM element:
+```js
+var winbox = new WinBox();
+// assume you have a DOM reference to the winbox window:
+var window_element = document.getElementById(winbox.id);
+// grab corresponding instance from window element:
+winbox = window_element.winbox;
 ```
 
 #### Controls
@@ -1175,6 +1227,56 @@ The splitscreen from above will look like this grid:
 
 You can set the values for the viewport dynamically, doing this makes it possible to size the grid dynamically and also change the grid schema.
 
+<a name="template"></a>
+## Custom WinBox Template (Layout + Controls)
+
+You can fully customize the WinBox window layout by providing a custom `template` via the config during creation. This way you can add new controls to you window and re-arrange them.
+
+This example will add a custom control button `.wb-custom` to the window toolbar by using a custom template along some CSS:
+```css
+.wb-custom {
+    background-image: url(img/heart.svg);
+    background-size: 20px auto;
+}
+.wb-custom.active {
+    background-image: url(img/heart-filled.svg);
+}
+```
+
+Create by using a custom template:
+```js
+const template = document.createElement("div");
+template.innerHTML = `
+    <div class=wb-header>
+        <div class=wb-icon>
+            <span class=wb-custom></span>
+            <span class=wb-close></span>
+        </div>
+        <div class=wb-title></div>
+    </div>
+    <div class=wb-body></div>
+`;
+
+const winbox = new WinBox("Custom Template", { template });
+```
+
+Attach click listener to the control:
+```js
+const root = winbox.window;
+const button = root.querySelector(".wb-custom");
+
+button.onclick = function(){
+    // get the window element:
+    const root = this.closest(".winbox");
+    // get the winbox instance:
+    const winbox = root.winbox;
+    // "this" refers to the button which was clicked on:
+    this.classList.toggle("active");
+};
+```
+
+> The `.wb-title` needs to be existing when the user should be able to move the window.
+
 <a name="customize"></a>
 ## Customize Window
 
@@ -1241,6 +1343,14 @@ Modify or disable the window drop shadow:
 Style the header title:
 ```css
 .wb-title { font-size: 12px }
+```
+
+Style the titlebar icon:
+```css
+.wb-image {
+    width: 35px;
+    background-size: 35px 35px;
+}
 ```
 
 Style the window background (frame):

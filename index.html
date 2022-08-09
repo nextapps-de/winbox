@@ -9,7 +9,7 @@
 
     <!-- Import JS + CSS separately: -->
     <link rel="stylesheet" href="dist/css/winbox.min.css">
-    <script src="dist/js/winbox.min.js"></script>
+    <!-- <script src="dist/js/winbox.min.js"></script> -->
 
     <!-- Or import as bundled (All-in-one): -->
     <!-- <script src="dist/winbox.bundle.min.js"></script> -->
@@ -93,6 +93,16 @@
         }
         .winbox.my-theme .wb-icon {
             filter: invert(1);
+        }
+
+        /* WinBox Custom Control */
+
+        .wb-custom {
+            background-image: url(demo/heart.svg);
+            background-size: 20px auto;
+        }
+        .wb-custom.active {
+            background-image: url(demo/heart-filled.svg);
         }
 
     </style>
@@ -199,6 +209,20 @@
 });</code></pre>
             <div class="break"></div>
             <div class="button" onclick="window.examples['color']()">Run Code</div>
+            <br><br>
+
+            <hr>
+            <br>
+            Custom Icon (Titlebar)
+            <br><br>
+            <pre><code class="language-js">new WinBox({
+
+    title: "Custom Icon",
+    icon: "demo/wikipedia.svg",
+    background: "#252b4e"
+});</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['icon']()">Run Code</div>
             <br><br>
 
             <hr>
@@ -486,7 +510,7 @@ new WinBox("Splitscreen (Right)", {
 }</code></pre>
             <div class="break"></div>
 
-            Custom Icons
+            Customize Control Icons
             <br><br>
             <pre><code class="language-css">.wb-icon * {
     opacity: 0.65;
@@ -590,6 +614,51 @@ new WinBox("Splitscreen (Right)", {
             <div class="button" onclick="window.examples['theme-modern']()">Run Code</div>
             <br><br>
 
+            <hr>
+            <br>
+            Custom Template (Layout, Controls)
+            <br><br>
+            <pre><code class="language-css">.wb-custom {
+    background-image: url(demo/heart.svg);
+    background-size: 20px auto;
+}
+.wb-custom.active {
+    background-image: url(demo/heart-filled.svg);
+}</code></pre>
+            <div class="break"></div>
+            <pre><code class="language-js">const template = document.createElement("div");
+template.innerHTML = `
+    &lt;div class=wb-header>
+        &lt;div class=wb-icon>
+            &lt;span class=wb-custom>&lt;/span>
+            &lt;span class=wb-close>&lt;/span>
+        &lt;/div>
+        &lt;div class=wb-title>&lt;/div>
+    &lt;/div>
+    &lt;div class=wb-body>&lt;/div>
+`;
+
+const winbox = new WinBox("Custom Template", { template });</code></pre>
+            <div class="break"></div>
+            <pre><code class="language-js">const root = winbox.window;
+const button = root.querySelector(".wb-custom");
+
+button.onclick = function(){
+
+    // get the window root element:
+    const root = this.closest(".winbox");
+
+    // get the winbox instance:
+    const winbox = root.winbox;
+    console.log(winbox.id);
+
+    // "this" refers to the button which was clicked on:
+    this.classList.toggle("active");
+};</code></pre>
+            <div class="break"></div>
+            <div class="button" onclick="window.examples['custom-template']()">Run Code</div>
+            <br><br>
+
         </div>
     </div>
     <div id="backstore" style="display: none">
@@ -618,8 +687,8 @@ new WinBox("Splitscreen (Right)", {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
     <script type="module">
 
-        //import WinBox from "./src/js/winbox.js";
-        //window.WinBox = WinBox;
+        import WinBox from "./src/js/winbox.js";
+        window.WinBox = WinBox;
 
         (function(){
 
@@ -654,6 +723,17 @@ new WinBox("Splitscreen (Right)", {
                         border: 4
                     });
                 },
+
+                "icon": function(){
+
+                    new WinBox({
+
+                        title: "Custom Icon",
+                        icon: "demo/wikipedia.svg",
+                        background: "#252b4e"
+                    });
+                },
+
                 "viewport": function(){
 
                     new WinBox("Limit Viewport", {
@@ -793,6 +873,37 @@ new WinBox("Splitscreen (Right)", {
                         mount: document.getElementById("content")
                                        .cloneNode(true)
                     });
+                },
+                "custom-template": function(){
+
+                    const template = document.createElement("div");
+                    template.innerHTML = `
+                        <div class=wb-header>
+                            <div class=wb-icon>
+                                <span class=wb-custom></span>
+                                <span class=wb-close></span>
+                            </div>
+                            <div class=wb-title></div>
+                        </div>
+                        <div class=wb-body></div>
+                    `;
+
+                    const winbox = new WinBox("Custom Template", { template, background: "#313646" });
+                    const root = winbox.window;
+                    const button = root.querySelector(".wb-custom");
+
+                    button.onclick = function(){
+
+                        // get the window root element:
+                        const root = this.closest(".winbox");
+
+                        // get the winbox instance:
+                        const winbox = root.winbox;
+                        console.log(winbox.id);
+
+                        // "this" refers to the button which was clicked on:
+                        this.classList.toggle("active");
+                    };
                 },
                 "theme-modern": function(){
 

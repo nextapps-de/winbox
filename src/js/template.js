@@ -10,7 +10,11 @@ template.innerHTML = (
                 '<span class=wb-full></span>' +
                 '<span class=wb-close></span>' +
             '</div>' +
-            '<div class=wb-title> </div>' +
+            // TODO improve
+            '<div class=wb-title>'+
+                '<span class=wb-image></span>' +
+                '<span></span>' +
+            '</div>' +
         '</div>' +
 
         '<div class=wb-body></div>' +

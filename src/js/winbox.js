@@ -12,12 +12,11 @@ import { addListener, removeListener, setStyle, setText, getByClass, addClass, r
 //const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window["MSStream"];
 
 const use_raf = false;
-//const doc = document.documentElement;
 const stack_min = [];
+//const eventOptions = { "capture": true, "passive": false };
 let body;
 let id_counter = 0;
-let dblclick_timer = 0;
-let index;
+let index_counter = 10;
 let is_fullscreen;
 let last_focus;
 let prefix_request;
@@ -44,6 +43,7 @@ function WinBox(params, _title){
         root,
         tpl,
         title,
+        icon,
         mount,
         html,
         url,
@@ -60,6 +60,7 @@ function WinBox(params, _title){
         left,
         bottom,
         right,
+        index,
         modal,
         background,
         border,
@@ -108,6 +109,7 @@ function WinBox(params, _title){
             root = params["root"];
             tpl = params["template"];
             title = title || params["title"];
+            icon = params["icon"];
             mount = params["mount"];
             html = params["html"];
             url = params["url"];
@@ -124,7 +126,7 @@ function WinBox(params, _title){
             left = params["left"];
             bottom = params["bottom"];
             right = params["right"];
-            index = params["index"] || index;
+            index = params["index"];
             background = params["background"];
             border = params["border"] || 0;
             classname = params["class"];
@@ -147,6 +149,11 @@ function WinBox(params, _title){
     }
 
     this.dom = tpl || template();
+    this.dom.id = this.id = id || ("winbox-" + (++id_counter));
+    this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") + (modal ? " modal" : "");
+    this.dom["winbox"] = this;
+    this.window = this.dom;
+    //this.plugins = [];
     this.body = getByClass(this.dom, "wb-body");
 
     if(background){
@@ -159,7 +166,15 @@ function WinBox(params, _title){
         setStyle(this.body, "margin", border + (isNaN(border) ? "" : "px"));
     }
 
-    index = index || 10;
+    if(title){
+
+        this.setTitle(title);
+    }
+
+    if(icon){
+
+        this.setIcon(icon);
+    }
 
     if(mount){
 
@@ -173,8 +188,6 @@ function WinBox(params, _title){
 
         this.setUrl(url, onload);
     }
-
-    this.setTitle(title || "");
 
     let maxwidth = root_w;
     let maxheight = root_h;
@@ -217,13 +230,13 @@ function WinBox(params, _title){
     this.right = right;
     this.bottom = bottom;
     this.left = left;
+    this.index = index;
     //this.border = border;
     this.min = false;
     this.max = false;
     this.full = false;
     this.hidden = false;
     this.focused = false;
-    //this.splitscreen = splitscreen;
 
     this.onclose = onclose;
     this.onfocus = onfocus;
@@ -237,11 +250,6 @@ function WinBox(params, _title){
     this.onhide = onhide;
     this.onshow = onshow;
 
-    this.dom.id = this.id = id || ("winbox-" + (++id_counter));
-    this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") + (modal ? " modal" : "");
-    this.dom["winbox"] = this;
-    //this.plugins = [];
-
     if(max){
 
         this.maximize();
@@ -252,7 +260,7 @@ function WinBox(params, _title){
     }
     else{
 
-        this.move().resize();
+        this.resize().move();
     }
 
     if(hidden){
@@ -260,8 +268,15 @@ function WinBox(params, _title){
         this.hide();
     }
     else{
-      
+
         this.focus();
+
+        if(index || (index === 0)){
+
+            this.index = index;
+            setStyle(this.dom, "z-index", index);
+            if(index > index_counter) index_counter = index;
+        }
     }
 
     register(this);
@@ -358,7 +373,7 @@ function register(self){
     addListener(getByClass(self.dom, "wb-min"), "click", function(event){
 
         preventEvent(event);
-        self.min ? self.restore() : self.minimize();
+        self.min ? self.focus().restore() : self.blur().minimize();
     });
 
     addListener(getByClass(self.dom, "wb-max"), "click", function(event){
@@ -452,16 +467,18 @@ function update_min_stack(){
 function addWindowListener(self, dir){
 
     const node = getByClass(self.dom, "wb-" + dir);
+    if(!node) return;
+
     let touch, x, y;
+    let raf_timer, raf_move, raf_resize;
+    let dblclick_timer = 0;
 
-    addListener(node, "mousedown", mousedown);
-    addListener(node, "touchstart", mousedown, { "passive": false });
-
-    let raf, raf_move, raf_resize;
+    addListener(node, "mousedown", mousedown/*, eventOptions*/);
+    addListener(node, "touchstart", mousedown/*, eventOptions*/);
 
     function loop(){
 
-        raf = requestAnimationFrame(loop);
+        raf_timer = requestAnimationFrame(loop);
 
         if(raf_resize){
 
@@ -479,66 +496,59 @@ function addWindowListener(self, dir){
     function mousedown(event){
 
         // prevent the full iteration through the fallback chain of a touch event (touch > mouse > click)
-        preventEvent(event, true);
+        preventEvent(event);
+        self.focus();
 
-        // if(self.min){
-        //
-        //     self.minimize();
-        // }
-        // else {
+        if(dir === "title"){
 
-            if(dir === "title" /*&& !self.hasClass("no-max")*/){
+            if(self.min){
 
-                const now = Date.now();
-                const diff = now - dblclick_timer;
-
-                dblclick_timer = now;
-
-                if(diff < 250){
-
-                    self.max ? self.restore() : self.maximize();
-                    return;
-                }
-
-                if(self.min){
-
-                    self.restore();
-                    return;
-                }
+                self.restore();
+                return;
             }
 
-            if(!self.max && !self.min){
+            const now = Date.now();
+            const diff = now - dblclick_timer;
 
-                addClass(body, "wb-drag");
-                use_raf && loop();
+            dblclick_timer = now;
 
-                if((touch = event.touches) && (touch = touch[0])){
+            if(diff < 300){
 
-                    event = touch;
-
-                    // TODO: fix when touch events bubbles up to the document body
-                    //addListener(self.dom, "touchmove", preventEvent);
-                    addListener(window, "touchmove", handler_mousemove);
-                    addListener(window, "touchend", handler_mouseup);
-                }
-                else{
-
-                    //addListener(this, "mouseleave", handler_mouseup);
-                    addListener(window, "mousemove", handler_mousemove);
-                    addListener(window, "mouseup", handler_mouseup);
-                }
-
-                x = event.pageX;
-                y = event.pageY;
-
-                // appearing scrollbars on the root element does not trigger "window.onresize",
-                // force refresh window size via init(), also force layout recalculation (layout trashing)
-                // it is probably very rare that the body overflow changes between window open and close
-
-                //init();
-                self.focus();
+                self.max ? self.restore() : self.maximize();
+                return;
             }
-        //}
+        }
+
+        if(!self.max && !self.min){
+
+            addClass(body, "wb-drag");
+            use_raf && loop();
+
+            if((touch = event.touches) && (touch = touch[0])){
+
+                event = touch;
+
+                // TODO: fix when touch events bubbles up to the document body
+                //addListener(self.dom, "touchmove", preventEvent);
+                addListener(window, "touchmove", handler_mousemove/*, eventOptions*/);
+                addListener(window, "touchend", handler_mouseup/*, eventOptions*/);
+            }
+            else{
+
+                //addListener(this, "mouseleave", handler_mouseup);
+                addListener(window, "mousemove", handler_mousemove/*, eventOptions*/);
+                addListener(window, "mouseup", handler_mouseup/*, eventOptions*/);
+            }
+
+            x = event.pageX;
+            y = event.pageY;
+
+            // appearing scrollbars on the root element does not trigger "window.onresize",
+            // force refresh window size via init(), also force layout recalculation (layout trashing)
+            // it is probably very rare that the body overflow changes between window open and close
+
+            //init();
+        }
     }
 
     function handler_mousemove(event){
@@ -630,19 +640,19 @@ function addWindowListener(self, dir){
 
         preventEvent(event);
         removeClass(body, "wb-drag");
-        use_raf && cancelAnimationFrame(raf);
+        use_raf && cancelAnimationFrame(raf_timer);
 
         if(touch){
 
             //removeListener(self.dom, "touchmove", preventEvent);
-            removeListener(window, "touchmove", handler_mousemove);
-            removeListener(window, "touchend", handler_mouseup);
+            removeListener(window, "touchmove", handler_mousemove/*, eventOptions*/);
+            removeListener(window, "touchend", handler_mouseup/*, eventOptions*/);
         }
         else{
 
             //removeListener(this, "mouseleave", handler_mouseup);
-            removeListener(window, "mousemove", handler_mousemove);
-            removeListener(window, "mouseup", handler_mouseup);
+            removeListener(window, "mousemove", handler_mousemove/*, eventOptions*/);
+            removeListener(window, "mouseup", handler_mouseup/*, eventOptions*/);
         }
     }
 }
@@ -714,7 +724,21 @@ WinBox.prototype.unmount = function(dest){
 
 WinBox.prototype.setTitle = function(title){
 
-    setText(getByClass(this.dom, "wb-title"), this.title = title);
+    const node = getByClass(this.dom, "wb-title");
+    setText(node.lastChild || node, this.title = title);
+    return this;
+};
+
+/**
+ * @this WinBox
+ */
+
+WinBox.prototype.setIcon = function(src){
+
+    const img = getByClass(this.dom, "wb-image");
+    setStyle(img, "background-image", "url(" + src + ")");
+    setStyle(img, "display", "inline-block");
+
     return this;
 };
 
@@ -755,7 +779,8 @@ WinBox.prototype.focus = function(state){
 
         last_focus && last_focus.blur();
 
-        setStyle(this.dom, "z-index", index++);
+        setStyle(this.dom, "z-index", ++index_counter);
+        this.index = index_counter;
         this.addClass("focus");
         last_focus = this;
 
@@ -881,14 +906,14 @@ WinBox.prototype.restore = function(){
     if(this.min){
 
         remove_min_stack(this);
-        this.resize().move().focus();
+        this.resize().move();
         this.onrestore && this.onrestore();
     }
 
     if(this.max){
 
         this.max = false;
-        this.removeClass("max").resize().move().focus();
+        this.removeClass("max").resize().move();
         this.onrestore && this.onrestore();
     }
 
@@ -1021,6 +1046,10 @@ WinBox.prototype.close = function(force) {
 
     this.unmount();
     this.dom.parentNode.removeChild(this.dom);
+    this.dom.textContent = "";
+    this.dom["winbox"] = null;
+    this.body = null;
+    this.dom = null;
 
     if(last_focus === this){
 

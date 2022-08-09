@@ -50,12 +50,23 @@ body > .wb-body {
 .wb-title {
   font-family: Arial, sans-serif;
   font-size: 14px;
-  padding-left: 10px;
   line-height: 35px;
+  height: 100%;
+  padding-left: 10px;
   cursor: move;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.wb-image {
+  display: none;
+  width: 20px;
+  height: 100%;
+  margin: 0 8px 0 -2px;
+  float: left;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
 }
 .wb-n {
   position: absolute;
@@ -156,7 +167,7 @@ body > .wb-body {
 .wb-close {
   background-image: url("../img/close.svg");
   background-size: 15px auto;
-  background-position: 4px center;
+  background-position: 5px center;
 }
 .wb-full {
   background-image: url("../img/full.svg");
