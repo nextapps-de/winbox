@@ -208,7 +208,6 @@ body > .wb-body {
 }
 .winbox.min .wb-body {
   overflow: hidden;
-  height: 0;
 }
 .winbox.min .wb-body > * {
   display: none;
