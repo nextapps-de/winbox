@@ -10,10 +10,9 @@ template.innerHTML = (
                 '<span class=wb-full></span>' +
                 '<span class=wb-close></span>' +
             '</div>' +
-            // TODO improve
-            '<div class=wb-title>'+
-                '<span class=wb-image></span>' +
-                '<span></span>' +
+            '<div class=wb-drag>'+
+                '<div class=wb-image></div>' +
+                '<div class=wb-title></div>' +
             '</div>' +
         '</div>' +
 
@@ -31,7 +30,7 @@ template.innerHTML = (
     //'</div>'
 );
 
-export default function(){
+export default function(tpl){
 
-    return template.cloneNode(true);
+    return (tpl || template).cloneNode(true);
 }

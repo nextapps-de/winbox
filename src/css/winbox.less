@@ -5,11 +5,13 @@
   position: fixed;
   left: 0;
   top: 0;
-  min-height: @winbox-header-height;
+  //min-height: @winbox-header-height;
   background: #0050ff;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transition: width .3s, height .3s, transform .3s;
+  //transition: width .3s, height .3s, transform .3s;
+  transition: width .3s, height .3s, left .3s, top .3s;
   transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
+  //transform-origin: bottom center;
   will-change: transform, width, height;
   /* contain "strict" does not make overflow contents selectable */
   contain: layout size;
@@ -25,6 +27,7 @@
   top: 0;
   width: 100%;
   height: @winbox-header-height;
+  line-height: @winbox-header-height;
   color: #fff;
   overflow: hidden;
   z-index: 1;
@@ -47,6 +50,7 @@
   margin-top: 0 !important;
   contain: strict;
   //content-visibility: auto;
+  z-index: 0;
 }
 
 body > .wb-body{
@@ -56,13 +60,15 @@ body > .wb-body{
   contain: none;
 }
 
-.wb-title{
-  font-family : Arial, sans-serif;
-  font-size: 14px;
-  line-height: @winbox-header-height;
+.wb-drag{
   height: 100%;
   padding-left: 10px;
   cursor: move;
+}
+
+.wb-title{
+  font-family : Arial, sans-serif;
+  font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -72,7 +78,7 @@ body > .wb-body{
   display: none;
   width: 20px;
   height: 100%;
-  margin: 0 8px 0 -2px;
+  margin: -1px 8px 0 -3px;
   float: left;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -161,7 +167,7 @@ body > .wb-body{
 
 .wb-icon{
   float: right;
-  height: @winbox-header-height;
+  height: 100%;
   max-width: 100%;
   text-align: center;
 }
@@ -179,7 +185,7 @@ body > .wb-body{
 .wb-min {
   background-image: url(@min);
   background-size: 14px auto;
-  background-position: center bottom 12px;
+  background-position: center calc(50% + 6px);
 }
 
 .wb-max {
@@ -218,14 +224,12 @@ body > .wb-body{
 */
 
 .winbox.modal .wb-body ~ div,
-.winbox.modal .wb-title,
+.winbox.modal .wb-drag,
 .winbox.min .wb-body ~ div,
-//.winbox.min .wb-title,
-//.winbox.max .wb-title,
 .winbox.max .wb-body ~ div {
   pointer-events: none;
 }
-.winbox.max .wb-title{
+.winbox.max .wb-drag{
   cursor: default;
 }
 
@@ -234,12 +238,11 @@ body > .wb-body{
   .wb-min {
     display: none;
   }
-  .wb-title {
+  .wb-drag {
     cursor: default;
   }
   .wb-body{
     overflow: hidden;
-    //height: 0;
   }
   .wb-body > *{
     display: none;
@@ -266,10 +269,10 @@ body > .wb-body{
   border: 0;
 }
 
-body.wb-drag .winbox{
+body.wb-lock .winbox{
   transition: none;
 }
-body.wb-drag iframe {
+body.wb-lock iframe {
   pointer-events: none;
 }
 

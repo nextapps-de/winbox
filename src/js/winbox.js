@@ -1,6 +1,6 @@
 /**
  * WinBox.js
- * Copyright 2021 Nextapps GmbH
+ * Copyright 2022 Nextapps GmbH
  * Author: Thomas Wilkerling
  * Licence: Apache-2.0
  * https://github.com/nextapps-de/winbox
@@ -40,6 +40,7 @@ function WinBox(params, _title){
     body || setup();
 
     let id,
+        index,
         root,
         tpl,
         title,
@@ -47,28 +48,32 @@ function WinBox(params, _title){
         mount,
         html,
         url,
+
         width,
         height,
         minwidth,
         minheight,
+        maxwidth,
+        maxheight,
+        autosize,
+
         x,
         y,
-        min,
-        max,
-        hidden,
+
         top,
         left,
         bottom,
         right,
-        index,
+
+        min,
+        max,
+        hidden,
         modal,
+
         background,
         border,
+        header,
         classname,
-        // splitscreen,
-        autosize,
-        // contentWidth,
-        // contentHeight,
 
         oncreate,
         onclose,
@@ -100,12 +105,8 @@ function WinBox(params, _title){
 
             (oncreate = params["oncreate"]) && oncreate.call(this, params);
 
-            if((modal = params["modal"])){
-
-                x = y = "center";
-            }
-
             id = params["id"];
+            index = params["index"];
             root = params["root"];
             tpl = params["template"];
             title = title || params["title"];
@@ -113,25 +114,34 @@ function WinBox(params, _title){
             mount = params["mount"];
             html = params["html"];
             url = params["url"];
+
             width = params["width"];
             height = params["height"];
             minwidth = params["minwidth"];
             minheight = params["minheight"];
-            x = params["x"] || x;
-            y = params["y"] || y;
+            maxwidth = params["maxwidth"];
+            maxheight = params["maxheight"];
+            autosize = params["autosize"];
+
             min = params["min"];
             max = params["max"];
             hidden = params["hidden"];
+            modal = params["modal"];
+
+            if(modal) x = y = "center";
+
+            x = params["x"] || x;
+            y = params["y"] || y;
+
             top = params["top"];
             left = params["left"];
             bottom = params["bottom"];
             right = params["right"];
-            index = params["index"];
+
             background = params["background"];
-            border = params["border"] || 0;
+            border = params["border"];
+            header = params["header"];
             classname = params["class"];
-            //splitscreen = params["splitscreen"];
-            autosize = params["autosize"];
 
             onclose = params["onclose"];
             onfocus = params["onfocus"];
@@ -148,13 +158,14 @@ function WinBox(params, _title){
         }
     }
 
-    this.dom = tpl || template();
+    this.dom = template(tpl);
     this.dom.id = this.id = id || ("winbox-" + (++id_counter));
     this.dom.className = "winbox" + (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") + (modal ? " modal" : "");
     this.dom["winbox"] = this;
     this.window = this.dom;
-    //this.plugins = [];
     this.body = getByClass(this.dom, "wb-body");
+    this.header = header || 35;
+    //this.plugins = [];
 
     if(background){
 
@@ -164,6 +175,18 @@ function WinBox(params, _title){
     if(border){
 
         setStyle(this.body, "margin", border + (isNaN(border) ? "" : "px"));
+    }
+    else{
+
+        border = 0;
+    }
+
+    if(header){
+
+        const node = getByClass(this.dom, "wb-header");
+        setStyle(node, "height", header + "px");
+        setStyle(node, "line-height", header + "px");
+        setStyle(this.body, "top", header + "px");
     }
 
     if(title){
@@ -189,36 +212,36 @@ function WinBox(params, _title){
         this.setUrl(url, onload);
     }
 
-    let maxwidth = root_w;
-    let maxheight = root_h;
+    top = top ? parse(top, root_h) : 0;
+    bottom = bottom ? parse(bottom, root_h) : 0;
+    left = left ? parse(left, root_w) : 0;
+    right = right ? parse(right, root_w) : 0;
 
-    top = top ? parse(top, maxheight) : 0;
-    bottom = bottom ? parse(bottom, maxheight) : 0;
-    left = left ? parse(left, maxwidth) : 0;
-    right = right ? parse(right, maxwidth) : 0;
+    const viewport_w = root_w - left - right;
+    const viewport_h = root_h - top - bottom;
 
-    maxwidth -= left + right;
-    maxheight -= top + bottom;
+    maxwidth = maxwidth ? parse(maxwidth, viewport_w) : viewport_w;
+    maxheight = maxheight ? parse(maxheight, viewport_h) : viewport_h;
     minwidth = minwidth ? parse(minwidth, maxwidth) : 150;
-    minheight = minheight ? parse(minheight, maxheight) : 35;
+    minheight = minheight ? parse(minheight, maxheight) : this.header;
 
-    if(autosize /*&& (!width || !height)*/){
+    if(autosize){
 
         (root || body).appendChild(this.body);
 
-        width = Math.max(Math.min(this.body.clientWidth + border * 2, maxwidth), minwidth);
-        height = Math.min(this.body.clientHeight + minheight + border, maxheight);
+        width = Math.max(Math.min(this.body.clientWidth + border * 2 + 1, maxwidth), minwidth);
+        height = Math.max(Math.min(this.body.clientHeight + this.header + border + 1, maxheight), minheight);
 
         this.dom.appendChild(this.body);
     }
     else{
 
-        width = width ? parse(width, maxwidth) : (maxwidth / 2) | 0;
-        height = height ? parse(height, maxheight) : (maxheight / 2) | 0;
+        width = width ? parse(width, maxwidth) : Math.max(maxwidth / 2, minwidth) | 0;
+        height = height ? parse(height, maxheight) : Math.max(maxheight / 2, minheight) | 0;
     }
 
-    x = x ? parse(x, maxwidth, width) : left;
-    y = y ? parse(y, maxheight, height) : top;
+    x = x ? parse(x, viewport_w, width) : left;
+    y = y ? parse(y, viewport_h, height) : top;
 
     this.x = x;
     this.y = y;
@@ -226,6 +249,8 @@ function WinBox(params, _title){
     this.height = height;
     this.minwidth = minwidth;
     this.minheight = minheight;
+    this.maxwidth = maxwidth;
+    this.maxheight = maxheight;
     this.top = top;
     this.right = right;
     this.bottom = bottom;
@@ -360,7 +385,7 @@ function setup(){
 
 function register(self){
 
-    addWindowListener(self, "title");
+    addWindowListener(self, "drag");
     addWindowListener(self, "n");
     addWindowListener(self, "s");
     addWindowListener(self, "w");
@@ -378,17 +403,14 @@ function register(self){
 
     addListener(getByClass(self.dom, "wb-max"), "click", function(event){
 
-        preventEvent(event);
         self.max ? self.restore() : self.maximize();
-        self.focus();
     });
 
     if(prefix_request){
 
         addListener(getByClass(self.dom, "wb-full"), "click", function(event){
 
-            preventEvent(event);
-            self.focus().fullscreen();
+            self.fullscreen();
         });
     }
     else{
@@ -407,8 +429,7 @@ function register(self){
         // stop propagation would disable global listeners used inside window contents
         // use event bubbling for this listener to skip this handler by the other click listeners
         self.focus();
-
-    }, false);
+    });
 }
 
 /**
@@ -426,36 +447,35 @@ function remove_min_stack(self){
 
 function update_min_stack(){
 
-    const len = stack_min.length;
-    const tile_index = {};
-    const tile_len = {};
+    const length = stack_min.length;
+    const splitscreen_index = {};
+    const splitscreen_length = {};
 
-    for(let i = 0, self, key; i < len; i++){
+    for(let i = 0, self, key; i < length; i++){
 
         self = stack_min[i];
-        key = self.left + ":" + self.top;
+        key = (self.left || self.right) + ":" + (self.top || self.bottom);
 
-        if(tile_len[key]){
+        if(splitscreen_length[key]){
 
-            tile_len[key]++;
+            splitscreen_length[key]++;
         }
         else{
 
-            tile_len[key] = 1;
+            splitscreen_index[key] = 0;
+            splitscreen_length[key] = 1;
         }
     }
 
-    for(let i = 0, self, key, width, header, headerHeight; i < len; i++){
+    for(let i = 0, self, key, width; i < length; i++){
 
         self = stack_min[i]
-        key = self.left + ":" + self.top;
-        width = Math.min((root_w - self.left - self.right) / tile_len[key], 250);
-        header = getByClass(self.dom, "wb-title");
-        headerHeight = header.clientHeight;
-        tile_index[key] || (tile_index[key] = 0);
-        self.resize((width + 1) | 0, 0, true)
-            .move((self.left + tile_index[key] * width) | 0, root_h - self.bottom - headerHeight, true);
-        tile_index[key]++;
+        key = (self.left || self.right) + ":" + (self.top || self.bottom);
+        width = Math.min((root_w - self.left - self.right) / splitscreen_length[key], 250);
+        //splitscreen_index[key] || (splitscreen_index[key] = 0);
+        self.resize((width + 1) | 0, self.header, true)
+            .move((self.left + splitscreen_index[key] * width) | 0, root_h - self.bottom - self.header, true);
+        splitscreen_index[key]++;
     }
 }
 
@@ -499,7 +519,7 @@ function addWindowListener(self, dir){
         preventEvent(event);
         self.focus();
 
-        if(dir === "title"){
+        if(dir === "drag"){
 
             if(self.min){
 
@@ -521,7 +541,7 @@ function addWindowListener(self, dir){
 
         if(!self.max && !self.min){
 
-            addClass(body, "wb-drag");
+            addClass(body, "wb-lock");
             use_raf && loop();
 
             if((touch = event.touches) && (touch = touch[0])){
@@ -565,9 +585,14 @@ function addWindowListener(self, dir){
         const offsetX = pageX - x;
         const offsetY = pageY - y;
 
+        const old_w = self.width;
+        const old_h = self.height;
+        const old_x = self.x;
+        const old_y = self.y;
+
         let resize_w, resize_h, move_x, move_y;
 
-        if(dir === "title"){
+        if(dir === "drag"){
 
             self.x += offsetX;
             self.y += offsetY;
@@ -602,44 +627,55 @@ function addWindowListener(self, dir){
             }
         }
 
+        if(resize_w){
+
+            self.width = Math.max(Math.min(self.width, self.maxwidth, root_w - self.x - self.right), self.minwidth);
+            resize_w = self.width !== old_w;
+        }
+
+        if(resize_h){
+
+            self.height = Math.max(Math.min(self.height, self.maxheight, root_h - self.y - self.bottom), self.minheight);
+            resize_h = self.height !== old_h;
+        }
+
         if(resize_w || resize_h){
-
-            if(resize_w){
-
-                self.width = Math.max(Math.min(self.width, root_w - self.x - self.right), self.minwidth);
-            }
-
-            if(resize_h){
-
-                self.height = Math.max(Math.min(self.height, root_h - self.y - self.bottom), self.minheight);
-            }
 
             use_raf ? raf_resize = true : self.resize();
         }
 
+        if(move_x){
+
+            self.x = Math.max(Math.min(self.x, root_w - self.width - self.right), self.left);
+            move_x = self.x !== old_x;
+        }
+
+        if(move_y){
+
+            self.y = Math.max(Math.min(self.y, root_h - self.height - self.bottom), self.top);
+            move_y = self.y !== old_y;
+        }
+
         if(move_x || move_y){
-
-            if(move_x){
-
-                self.x = Math.max(Math.min(self.x, root_w - self.width - self.right), self.left);
-            }
-
-            if(move_y){
-
-                self.y = Math.max(Math.min(self.y, root_h - self.height - self.bottom), self.top);
-            }
 
             use_raf ? raf_move = true : self.move();
         }
 
-        x = pageX;
-        y = pageY;
+        if(resize_w || move_x){
+
+            x = pageX;
+        }
+
+        if(resize_h || move_y){
+
+            y = pageY;
+        }
     }
 
     function handler_mouseup(event){
 
         preventEvent(event);
-        removeClass(body, "wb-drag");
+        removeClass(body, "wb-lock");
         use_raf && cancelAnimationFrame(raf_timer);
 
         if(touch){
@@ -725,7 +761,7 @@ WinBox.prototype.unmount = function(dest){
 WinBox.prototype.setTitle = function(title){
 
     const node = getByClass(this.dom, "wb-title");
-    setText(node.lastChild || node, this.title = title);
+    setText(node, this.title = title);
     return this;
 };
 
@@ -775,7 +811,7 @@ WinBox.prototype.focus = function(state){
         return this.blur();
     }
 
-    if(last_focus !== this){
+    if(last_focus !== this && this.dom){
 
         last_focus && last_focus.blur();
 
@@ -1045,7 +1081,7 @@ WinBox.prototype.close = function(force) {
     }
 
     this.unmount();
-    this.dom.parentNode.removeChild(this.dom);
+    this.dom.remove();
     this.dom.textContent = "";
     this.dom["winbox"] = null;
     this.body = null;
@@ -1072,14 +1108,6 @@ WinBox.prototype.move = function(x, y, _skip_update){
 
         x = this.x;
         y = this.y;
-
-        // if(this.splitscreen){
-        //
-        //     if(!x || (x === (root_w - this.width))){
-        //
-        //         this.resize(root_w / 2, root_h);
-        //     }
-        // }
     }
     else if(!_skip_update){
 
@@ -1087,7 +1115,9 @@ WinBox.prototype.move = function(x, y, _skip_update){
         this.y = y ? y = parse(y, root_h - this.top - this.bottom, this.height) : 0;
     }
 
-    setStyle(this.dom, "transform", "translate(" + x + "px," + y + "px)");
+    //setStyle(this.dom, "transform", "translate(" + x + "px," + y + "px)");
+    setStyle(this.dom, "left", x + "px");
+    setStyle(this.dom, "top", y + "px");
 
     this.onmove && this.onmove(x, y);
     return this;
@@ -1109,8 +1139,8 @@ WinBox.prototype.resize = function(w, h, _skip_update){
     }
     else if(!_skip_update){
 
-        this.width = w ? w = parse(w, root_w - this.left - this.right) : 0;
-        this.height = h ? h = parse(h, root_h - this.top - this.bottom) : 0;
+        this.width = w ? w = parse(w, this.maxwidth /*- this.left - this.right*/) : 0;
+        this.height = h ? h = parse(h, this.maxheight /*- this.top - this.bottom*/) : 0;
 
         w = Math.max(w, this.minwidth);
         h = Math.max(h, this.minheight);
@@ -1120,6 +1150,42 @@ WinBox.prototype.resize = function(w, h, _skip_update){
     setStyle(this.dom, "height", h + "px");
 
     this.onresize && this.onresize(w, h);
+    return this;
+};
+
+/**
+ * @param {{ class:string?, image:string?, click:Function?, index:number? }} control
+ * @this WinBox
+ */
+
+WinBox.prototype.addControl = function(control){
+
+    const classname = control["class"];
+    const image = control.image;
+    const click = control.click;
+    const index = control.index;
+    const node = document.createElement("span");
+    const icons = getByClass(this.dom, "wb-icon");
+    const self = this;
+
+    if(classname) node.className = classname;
+    if(image) setStyle(node, "background-image", "url(" + image + ")");
+    if(click) node.onclick = function(event){ click.call(this, event, self) };
+
+    icons.insertBefore(node, icons.childNodes[index || 0]);
+
+    return this;
+};
+
+/**
+ * @param {string} control
+ * @this WinBox
+ */
+
+WinBox.prototype.removeControl = function(control){
+
+    control = getByClass(this.dom, control);
+    control && control.remove();
     return this;
 };
 

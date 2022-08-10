@@ -1,85 +1,86 @@
 .winbox.modern {
+  & {
+    background: linear-gradient(90deg, #ff00f0, #0050ff);
+    border-radius: 12px 12px 0 0;
+    animation: popup 0.3s cubic-bezier(0.3, 1, 0.3, 1) backwards;
+  }
+
+  //&.min:not(:hover),
+  &:not(.min,.focus) {
+    background: #666;
+  }
+
+  // hover fix for mobile devices which keeps the :hover state when touched
+
+  @media (hover: hover) {
+    &.min:not(:hover) {
+      background: #666;
+    }
+
+    .wb-icon * {
+      opacity: 0.65;
+    }
+
+    .wb-icon *:hover {
+      opacity: 1;
+    }
+  }
+
+  @media (hover: none) {
+    &.min {
+      background: #666;
+    }
+  }
+
+  //&.min,
+  &.max {
+    border-radius: 0;
+  }
+
+  .wb-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .wb-body {
+
     & {
-        background: linear-gradient(90deg, #ff00f0, #0050ff);
-        border-radius: 12px 12px 0 0;
-        animation: popup 0.3s cubic-bezier(0.3, 1, 0.3, 1) backwards;
+      /* width of window border: */
+      margin: 4px;
+      color: #fff;
+      background: #131820;
     }
 
-    //&.min:not(:hover),
-    &:not(.min):not(.focus) {
-        background: #666;
+    &::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
     }
 
-    // hover fix for mobile devices which keeps the :hover state when touched
-
-    @media (hover: hover) {
-        &.min:not(:hover) {
-            background: #666;
-        }
-
-        .wb-icon * {
-            opacity: 0.65;
-        }
-        .wb-icon *:hover {
-            opacity: 1;
-        }
+    &::-webkit-scrollbar-track {
+      background: transparent;
     }
 
-    @media (hover: none) {
-        &.min {
-            background: #666;
-        }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: #263040;
     }
 
-    //&.min,
-    &.max {
-        border-radius: 0;
+    &::-webkit-scrollbar-thumb:window-inactive {
+      background: #181f2a;
     }
 
-    .wb-title {
-        font-size: 13px;
-        text-transform: uppercase;
-        font-weight: 600;
+    &::-webkit-scrollbar-corner {
+      background: transparent;
     }
-
-    .wb-body {
-
-        & {
-            /* width of window border: */
-            margin: 4px;
-            color: #fff;
-            background: #131820;
-        }
-
-        &::-webkit-scrollbar {
-            width: 12px;
-            height: 12px;
-        }
-
-        &::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background: #263040;
-        }
-
-        &::-webkit-scrollbar-thumb:window-inactive {
-            background: #181f2a;
-        }
-
-        &::-webkit-scrollbar-corner {
-            background: transparent;
-        }
-    }
+  }
 }
 
 @keyframes popup {
-    0%{
-        transform: scale(0.8);
-    }
-    100%{
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

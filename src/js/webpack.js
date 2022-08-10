@@ -18,6 +18,8 @@ import WinBox from "./winbox.js";
 /** @export */ WinBox.prototype.setTitle;
 /** @export */ WinBox.prototype.setIcon;
 /** @export */ WinBox.prototype.setUrl;
+/** @export */ WinBox.prototype.addControl;
+/** @export */ WinBox.prototype.removeControl;
 /** @export */ WinBox.prototype.addClass;
 /** @export */ WinBox.prototype.removeClass;
 /** @export */ WinBox.prototype.toggleClass;

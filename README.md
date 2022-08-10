@@ -1230,16 +1230,19 @@ You can set the values for the viewport dynamically, doing this makes it possibl
 <a name="template"></a>
 ## Custom WinBox Template (Layout + Controls)
 
-You can fully customize the WinBox window layout by providing a custom `template` via the config during creation. This way you can add new controls to you window and re-arrange them.
+You can fully customize the WinBox window layout by providing a custom `template` via the config during creation. This way you can add new controls to the window or re-arrange them.
 
-This example will add a custom control button `.wb-custom` to the window toolbar by using a custom template along some CSS:
+This example will add two custom control buttons `.wb-like` and `.wb-custom` to the window toolbar by using a custom template along some CSS:
 ```css
 .wb-custom {
-    background-image: url(img/heart.svg);
+    background-image: url(demo/icon-github.svg);
+    background-size: 17px auto;
+}
+.wb-like {
     background-size: 20px auto;
 }
-.wb-custom.active {
-    background-image: url(img/heart-filled.svg);
+.wb-like.active {
+    background-image: url(demo/heart-filled.svg) !important;
 }
 ```
 
@@ -1252,7 +1255,9 @@ template.innerHTML = `
             <span class=wb-custom></span>
             <span class=wb-close></span>
         </div>
-        <div class=wb-title></div>
+        <div class=wb-drag>
+            <div class=wb-title></div>
+        </div>
     </div>
     <div class=wb-body></div>
 `;
@@ -1260,19 +1265,23 @@ template.innerHTML = `
 const winbox = new WinBox("Custom Template", { template });
 ```
 
-Attach click listener to the control:
+Attach control to the window:
 ```js
-const root = winbox.window;
-const button = root.querySelector(".wb-custom");
-
-button.onclick = function(){
-    // get the window element:
-    const root = this.closest(".winbox");
-    // get the winbox instance:
-    const winbox = root.winbox;
-    // "this" refers to the button which was clicked on:
-    this.classList.toggle("active");
-};
+winbox.addControl({
+    // the position index
+    index: 1,
+    // classname to apply styling
+    class: "wb-like",
+    // icon url when not specified via classname
+    image: "demo/heart.svg",
+    // click listener
+    click: function(event, winbox){
+        // the winbox instance will be passed as 2nd parameter
+        console.log(winbox.id);
+        // "this" refers to the button which was clicked:
+        this.classList.toggle("active");
+    }
+});
 ```
 
 > The `.wb-title` needs to be existing when the user should be able to move the window.
