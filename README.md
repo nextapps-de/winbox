@@ -86,18 +86,32 @@ __Get Latest (NPM):__
 npm install winbox
 ```
 
-### Use Bundled Version
+### Use Bundled Version (Recommended)
 
-The bundled version includes all assets like js, css, html and icon images as base64.
+> The bundled version includes all assets like js, css, html and icon images as base64.
+
+A best practice is to load the library as async and use some modern preloading mechanism:
 
 ```html
 <html>
 <head>
-    <script src="winbox.bundle.min.js"></script>
+    <link rel="preload" href="winbox.bundle.min.js" as="script">
 </head>
-<body></body>
+<body>
+    <!--
+    
+    HTML CONTENT
+    
+    -->
+    <!-- BOTTOM OF BODY -->
+    <script src="winbox.bundle.min.js" async></script>
+    <!-- YOUR SCRIPT -->
+    <script src="my-script.js" defer></script>
+</body>
 </html>
 ```
+
+When you get troubles with unavailable references then remove the `async` or `defer` from this example and invest some minutes later to find out how you can properly load js assets asynchronously today.
 
 ### Use Non-Bundled Version
 
@@ -113,35 +127,11 @@ The non-bundled version needs to load js and css separately (css already include
 </html>
 ```
 
-### Preload Library / Async Load (Recommended)
-
-Just add a link tag to the header sections which indicated to preload the script. Right before the body is closing add your site scripts. Depending on your code you may need to load them in the right order.
-
-```html
-<html>
-<head>
-    <title></title>
-    <link rel="preload" href="winbox.bundle.min.js" as="script">
-</head>
-<body>
-    <!--
-    
-    HTML CONTENT
-    
-    -->
-    <!-- BOTTOM OF BODY -->
-    <script src="winbox.bundle.min.js" defer></script>
-    <!-- YOUR SCRIPT -->
-    <script src="my-script.js" defer></script>
-</body>
-</html>
-```
-
 You can also load the non-bundled version in the same way.
 
 ### ES6 Modules
 
-The ES6 modules are located in `src/js/`. But you need to load the stylesheet file explicitly since this is just automatically loaded by the bundle version.
+The ES6 modules are located in `src/js/`. But you need to load the stylesheet file explicitly since this is just automatically loaded by the bundled version.
 
 ```html
 <head>
@@ -199,12 +189,18 @@ Instance member methods:
 - <a href="#winbox.removeClass">winbox.**removeClass**(name)</a>
 - <a href="#winbox.hasClass">winbox.**hasClass**(name)</a>
 - <a href="#winbox.toggleClass">winbox.**toggleClass**(name)</a>
+- <a href="#winbox.addControl">winbox.**addControl**(options)</a>
+- <a href="#winbox.removeControl">winbox.**removeControl**(name)</a>
 
-Instance properties (editable):
+Instance properties (readonly):
 
 - <a href="#winbox.id">winbox.**id**</a>
+- <a href="#winbox.index">winbox.**index**</a>
 - <a href="#winbox.window">winbox.**window**</a>
 - <a href="#winbox.body">winbox.**body**</a>
+
+Instance properties (writable):
+
 - <a href="#winbox.x">winbox.**x**</a>
 - <a href="#winbox.y">winbox.**y**</a>
 - <a href="#winbox.width">winbox.**width**</a>
@@ -215,8 +211,10 @@ Instance properties (editable):
 - <a href="#winbox.left">winbox.**left**</a>
 - <a href="#winbox.minwidth">winbox.**minwidth**</a>
 - <a href="#winbox.minheight">winbox.**minheight**</a>
+- <a href="#winbox.maxwidth">winbox.**maxwidth**</a>
+- <a href="#winbox.maxheight">winbox.**maxheight**</a>
 
-Instance state boolean properties (non-editable):
+Instance state boolean properties (readonly):
 
 - <a href="#winbox.min">winbox.**min**</a>
 - <a href="#winbox.max">winbox.**max**</a>
@@ -298,9 +296,15 @@ Callback methods:
     </tr>
     <tr></tr>
     <tr>
+        <td>maxwidth<br>maxheight</td>
+        <td>number | string</td>
+        <td>Set the maximum width/height of the window (supports units "px" and "%").</td>
+    </tr>
+    <tr></tr>
+    <tr>
         <td>autosize</td>
         <td>boolean</td>
-        <td>Automatically size the window to fit the window content.</td>
+        <td>Automatically size the window to fit the window contents.</td>
     </tr>
     <tr></tr>
     <tr>
@@ -322,6 +326,18 @@ Callback methods:
     </tr>
     <tr></tr>
     <tr>
+        <td>hidden</td>
+        <td>boolean</td>
+        <td>Automatically toggles the window into hidden state when created.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>modal</td>
+        <td>boolean</td>
+        <td>Shows the window as modal.</td>
+    </tr>
+    <tr></tr>
+    <tr>
         <td>top<br>right<br>bottom<br>left</td>
         <td>number | string</td>
         <td>Set or limit the viewport of the window's available area (supports units "px" and "%"). Also used for custom splitscreen configurations.</td>
@@ -336,7 +352,7 @@ Callback methods:
     <tr>
         <td>border</td>
         <td>number</td>
-        <td>Set the border width of the window (supports all css units, like px, %, em, rem, vh, vmax).</td>
+        <td>Set the border width of the window (supports all the browsers css units).</td>
     </tr>
     <tr></tr>
     <tr>
@@ -352,21 +368,21 @@ Callback methods:
     </tr>
     <tr></tr>
     <tr>
-        <td>modal</td>
-        <td>boolean</td>
-        <td>Shows the window as modal.</td>
+        <td>oncreate</td>
+        <td>function(options)</td>
+        <td>Callback triggered when the winbox element is being created. You can modify all these winbox options from this table passed as first parameter.</td>
     </tr>
     <tr></tr>
     <tr>
         <td>onmove</td>
         <td>function(x, y)</td>
-        <td>Callback triggered when the window moves. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
+        <td>Callback triggered when the window moves.</td>
     </tr>
     <tr></tr>
     <tr>
         <td>onresize</td>
         <td>function(width,&nbsp;height)</td>
-        <td>Callback triggered when the window resizes. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
+        <td>Callback triggered when the window resizes.</td>
     </tr>
     <tr></tr>
     <tr>
@@ -412,9 +428,15 @@ Callback methods:
     </tr>
     <tr></tr>
     <tr>
-        <td>onfocus<br>onblur</td>
+        <td>onfocus</td>
         <td>function()</td>
-        <td>Callbacks to several events. The keyword <code>this</code> inside the callback function refers to the corresponding WinBox instance.</td>
+        <td>Callback triggered when a window goes into focused state.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>onblur</td>
+        <td>function()</td>
+        <td>Callback triggered when a window lost the focused state.</td>
     </tr>
 </table>
 
@@ -436,9 +458,7 @@ WinBox.new("Window Title");
 
 Alternatively:
 ```js
-new WinBox({ 
-    title: "Window Title" 
-});
+new WinBox({ title: "Window Title" });
 ```
 
 Alternatively:
@@ -512,7 +532,7 @@ var winbox = new WinBox("Custom Icon");
 winbox.setIcon("img/icon.svg");
 ```
 
-See below in the style section to find out how to customize the titlebar icon style via css.
+See below in the style section to find out how to easily customize the titlebar icon style via css.
 
 ####  Custom Viewport
 
@@ -527,7 +547,7 @@ new WinBox("Custom Viewport", {
 });
 ```
 
-Alternatively (just support numbers!):
+Alternatively (but just support numbers!):
 ```js
 var winbox = new WinBox("Custom Viewport");
 
@@ -581,6 +601,8 @@ winbox.y = 100;
 winbox.move();
 ```
 
+> In some cases you need to execute `.resize()` before `.move()` to properly apply relative positions which is taking the windows size into account.
+
 #### Modal Window
 
 ```js
@@ -607,7 +629,7 @@ Load the corresponding css files (or use a bundler), e.g.:
 </head>
 ```
 
-Just add the name of the theme as a class:
+Just add the name of the theme via `class`:
 
 ```js
 var winbox = new WinBox({
@@ -646,7 +668,7 @@ winbox.body.innerHTML = "<h1>Lorem Ipsum</h1>";
 <a name="winbox.mount"></a>
 #### Mount DOM (Cloned)
 
-> By cloning you can easily create multiple window instances of the same content in parallel.
+> When cloning you can easily create multiple window instances of the same content in parallel.
 
 ```html
 <div id="content">
@@ -696,7 +718,7 @@ new WinBox("Mount DOM", {
 });
 ```
 
-> Auto-Unmount is a great feature which automatically moves back the fragment to the backstore source when closing the window.
+> Auto-Unmount is a helpful feature which automatically moves back the fragment to the backstore source when closing the window.
 
 Alternatively:
 ```js
@@ -759,7 +781,7 @@ new WinBox("Mount DOM", {
 });
 ```
 
-#### Manual Mount
+#### Manual Mount Contents
 
 Feel free to use the `winbox.body` directly:
 ```js
@@ -805,6 +827,7 @@ Window States / Information:
 var winbox = new WinBox();
 
 console.log("Window ID:", winbox.id);
+console.log("Window Index:", winbox.index);
 console.log("Current Maximize State:", winbox.max);
 console.log("Current Minimize State:", winbox.min);
 console.log("Current Fullscreen State:", winbox.full);
@@ -812,7 +835,7 @@ console.log("Current Hidden State:", winbox.hidden);
 console.log("Current Focused State:", winbox.focused);
 ```
 
-<a name="winbox.width"></a><a name="winbox.height"></a>
+<a name="winbox.width"></a><a name="winbox.height"></a><a name="winbox.resize"></a>
 Window Size:
 ```js
 var winbox = new WinBox();
@@ -825,7 +848,7 @@ console.log("Current Width:", winbox.width);
 console.log("Current Height:", winbox.height);
 ```
 
-<a name="winbox.x"></a><a name="winbox.y"></a>
+<a name="winbox.x"></a><a name="winbox.y"></a><a name="winbox.move"></a>
 Window Position:
 ```js
 var winbox = new WinBox();
@@ -847,6 +870,9 @@ winbox.top = 50;
 winbox.right = 50;
 winbox.bottom = 50;
 winbox.left = 50;
+
+// update window if needed:
+winbox.resize().move();
 
 console.log("Current Viewport Top:", winbox.top);
 console.log("Current Viewport Right:", winbox.right);
@@ -998,7 +1024,7 @@ winbox.setTitle("Title")
       .mount(document.getElementById("content"));
 ```
 
-> When using "center" as position you need to call `resize()` before `move()`.
+> When using "center" as position you need to call `.resize()` before `.move()`.
 
 #### Callbacks
 
@@ -1227,17 +1253,11 @@ The splitscreen from above will look like this grid:
 
 You can set the values for the viewport dynamically, doing this makes it possible to size the grid dynamically and also change the grid schema.
 
-<a name="template"></a>
-## Custom WinBox Template (Layout + Controls)
+<a name="winbox.addControl"></a>
+## Custom Controls
 
-You can fully customize the WinBox window layout by providing a custom `template` via the config during creation. This way you can add new controls to the window or re-arrange them.
-
-This example will add two custom control buttons `.wb-like` and `.wb-custom` to the window toolbar by using a custom template along some CSS:
+This example will add a custom control button `.wb-like` to the window heading toolbar along some CSS for icon styling:
 ```css
-.wb-custom {
-    background-image: url(demo/icon-github.svg);
-    background-size: 17px auto;
-}
 .wb-like {
     background-size: 20px auto;
 }
@@ -1246,26 +1266,7 @@ This example will add two custom control buttons `.wb-like` and `.wb-custom` to 
 }
 ```
 
-Create by using a custom template:
-```js
-const template = document.createElement("div");
-template.innerHTML = `
-    <div class=wb-header>
-        <div class=wb-icon>
-            <span class=wb-custom></span>
-            <span class=wb-close></span>
-        </div>
-        <div class=wb-drag>
-            <div class=wb-title></div>
-        </div>
-    </div>
-    <div class=wb-body></div>
-`;
-
-const winbox = new WinBox("Custom Template", { template });
-```
-
-Attach control to the window:
+Attach a control to the window toolbar:
 ```js
 winbox.addControl({
     // the position index
@@ -1284,7 +1285,44 @@ winbox.addControl({
 });
 ```
 
-> The `.wb-title` needs to be existing when the user should be able to move the window.
+<a name="winbox.removeControl"></a>
+Remove a control from the window toolbar:
+```js
+winbox.removeControl("wb-like")
+      .removeControl("wb-min");
+```
+
+<a name="template"></a>
+## Custom Template (Layout)
+
+You can fully customize the WinBox window layout by providing a custom `template` via the config during creation. This way you can add new controls to the window or re-arrange them.
+
+This example will add two custom control buttons `.wb-like` and `.wb-custom` to the window toolbar by using a custom template along some CSS:
+```css
+.wb-custom {
+    background-image: url(demo/icon-github.svg);
+    background-size: 17px auto;
+}
+```
+
+Create by using a custom template:
+```js
+const template = document.createElement("div");
+template.innerHTML = `
+    <div class=wb-header>
+        <div class=wb-icon>
+            <span class=wb-custom></span>
+            <span class=wb-close></span>
+        </div>
+        <div class=wb-drag></div>
+    </div>
+    <div class=wb-body></div>
+`;
+
+new WinBox("Custom Template", { template });
+```
+
+> The `.wb-drag` element needs to be existing when the user should be able to move the window by dragging the heading toolbar.
 
 <a name="customize"></a>
 ## Customize Window

@@ -189,7 +189,7 @@
         Custom Root
         <br><br>
         <pre><code class="language-js">new WinBox("Custom Root", {
-    root: document.body
+    root: document.querySelector("main")
 });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['root']()">Run Code</div>
@@ -746,7 +746,7 @@ new WinBox("Custom Template", { template });</code></pre>
 
                 new WinBox("Custom Root", {
 
-                    root: document.body
+                    root: document.querySelector("main")
                 });
             },
             "border": function(){
