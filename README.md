@@ -16,7 +16,10 @@
 <a name="addon"></a>
 ### Plugins / Add-ons / Extensions
 Vue 2 and 3 (a wrapper component that adds the ability to mount Vue components in WinBox.js):<br>
-<a href="https://github.com/wobsoriano/vue-winbox">https://github.com/wobsoriano/vue-winbox </a><br>
+<a href="https://github.com/wobsoriano/vue-winbox">https://github.com/wobsoriano/vue-winbox</a>
+
+A React controlled component for WinBox.js, with full Reactful props and state.:<br>
+<a href="https://github.com/rickonono3/react-winbox">https://github.com/rickonono3/react-winbox</a>
 
 <a name="started"></a>
 ## Getting Started
@@ -1596,6 +1599,13 @@ export class AppComponent {
 https://github.com/wobsoriano/vue-winbox
 
 It uses the native [teleport](https://v3.vuejs.org/api/built-in-components.html#teleport) component in Vue 3 and recommends https://github.com/LinusBorg/vue-simple-portal for Vue 2 users.
+
+
+## WinBox on React application
+
+https://github.com/rickonono3/react-winbox
+
+A React controlled component for WinBox.js, with full Reactful props and state. Includes all configurations of WinBox.js by using React component props.
 
 ## Custom Builds
 
