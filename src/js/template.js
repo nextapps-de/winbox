@@ -4,14 +4,14 @@ template.innerHTML = (
     //'<div class=winbox>' +
 
         '<div class=wb-header>' +
-            '<div class=wb-icon>' +
+            '<div class=wb-control>' +
                 '<span class=wb-min></span>' +
                 '<span class=wb-max></span>' +
                 '<span class=wb-full></span>' +
                 '<span class=wb-close></span>' +
             '</div>' +
             '<div class=wb-drag>'+
-                '<div class=wb-image></div>' +
+                '<div class=wb-icon></div>' +
                 '<div class=wb-title></div>' +
             '</div>' +
         '</div>' +

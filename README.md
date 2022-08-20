@@ -31,8 +31,8 @@ __Get Latest Stable Build (Recommended):__
     </tr>
     <tr>
         <td>winbox.bundle.min.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.4/dist/winbox.bundle.min.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.4/dist/winbox.bundle.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.4/dist/winbox.bundle.min.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.5/dist/winbox.bundle.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.5/dist/winbox.bundle.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.5/dist/winbox.bundle.min.js</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -41,14 +41,14 @@ __Get Latest Stable Build (Recommended):__
     </tr>
     <tr>
         <td>winbox.min.js</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.4/dist/js/winbox.min.js" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.4/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.4/dist/js/winbox.min.js</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.5/dist/js/winbox.min.js" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.5/dist/js/winbox.min.js" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.5/dist/js/winbox.min.js</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.min.css</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.4/dist/css/winbox.min.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.4/dist/css/winbox.min.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.4/dist/css/winbox.min.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.5/dist/css/winbox.min.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.5/dist/css/winbox.min.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.5/dist/css/winbox.min.css</a></td>
     </tr>
     <tr>
         <td colspan=3">
@@ -57,25 +57,25 @@ __Get Latest Stable Build (Recommended):__
     </tr>
     <tr>
         <td>ES6 Modules</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.4/src/js" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.5/src/js" target="_blank">Download</a></td>
         <td>The <i>/src/js</i> folder of this Github repository</td>
     </tr>
     <tr></tr>
     <tr>
         <td>LESS Files (source)</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.4/src/css" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.5/src/css" target="_blank">Download</a></td>
         <td>The <i>/src/css</i> folder of this Github repository</td>
     </tr>
     <tr></tr>
     <tr>
         <td>winbox.css (compiled)</td>
-        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.4/src/css/winbox.css" target="_blank">Download</a></td>
-        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.4/src/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.4/src/css/winbox.css</a></td>
+        <td><a href="https://github.com/nextapps-de/winbox/raw/0.2.5/src/css/winbox.css" target="_blank">Download</a></td>
+        <td><a href="https://rawcdn.githack.com/nextapps-de/winbox/0.2.5/src/css/winbox.css" target="_blank">https://rawcdn.githack.com/nextapps-de/winbox/0.2.5/src/css/winbox.css</a></td>
     </tr>
     <tr></tr>
     <tr>
         <td>src.zip</td>
-        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.4/dist" target="_blank">Download</a></td>
+        <td><a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/nextapps-de/winbox/tree/0.2.5/dist" target="_blank">Download</a></td>
         <td>Download all source files including image original resources.</td>
     </tr>
 </table>
@@ -149,7 +149,7 @@ You can also load modules via CDN, e.g.:
 
 ```html
 <script type="module">
-  import WinBox from "https://unpkg.com/winbox@0.2.4/src/js/winbox.js";
+  import WinBox from "https://unpkg.com/winbox@0.2.5/src/js/winbox.js";
 </script>
 ```
 
@@ -1295,9 +1295,9 @@ winbox.removeControl("wb-like")
 <a name="template"></a>
 ## Custom Template (Layout)
 
-You can fully customize the WinBox window layout by providing a custom `template` via the config during creation. This way you can add new controls to the window or re-arrange them.
+You can fully customize the WinBox window layout by providing a custom `template` via the config during creation. This way you can add new elements to the window or re-arrange them.
 
-This example will add two custom control buttons `.wb-like` and `.wb-custom` to the window toolbar by using a custom template along some CSS:
+This example will add a control button `.wb-custom` to the window toolbar by using a custom template along some CSS:
 ```css
 .wb-custom {
     background-image: url(demo/icon-github.svg);
@@ -1310,7 +1310,7 @@ Create by using a custom template:
 const template = document.createElement("div");
 template.innerHTML = `
     <div class=wb-header>
-        <div class=wb-icon>
+        <div class=wb-control>
             <span class=wb-custom></span>
             <span class=wb-close></span>
         </div>
@@ -1352,7 +1352,7 @@ Modify a specific icon:
 
 Use black standard icons (useful for bright backgrounds):
 ```css
-.wb-icon { filter: invert(1) }
+.wb-control { filter: invert(1) }
 ```
 
 Modify or disable resizing areas on the window borders:
@@ -1394,7 +1394,7 @@ Style the header title:
 
 Style the titlebar icon:
 ```css
-.wb-image {
+.wb-icon {
     width: 35px;
     background-size: 35px 35px;
 }
@@ -1475,10 +1475,10 @@ Apply styles when window is in "focus" state:
 .winbox.focus {
     background: #0050ff; 
 }
-.winbox .wb-icon {
+.winbox .wb-control {
     display: none;
 }
-.winbox.focus .wb-icon {
+.winbox.focus .wb-control {
     display: block;
 }
 ```
@@ -1488,7 +1488,7 @@ Apply styles when window is NOT in "focus" state (the same logic from example ab
 .winbox:not(.focus) {
     background: #999;
 }
-.winbox:not(.focus) .wb-icon {
+.winbox:not(.focus) .wb-control {
     display: none;
 }
 ```

@@ -51,10 +51,10 @@
             text-transform: uppercase;
             font-weight: 600;
         }
-        .winbox.custom .wb-icon * {
+        .winbox.custom .wb-control * {
             opacity: 0.65;
         }
-        .winbox.custom .wb-icon *:hover {
+        .winbox.custom .wb-control *:hover {
             opacity: 1;
         }
         .winbox.custom .wb-max {
@@ -99,7 +99,7 @@
         .winbox.my-theme .wb-title {
             color: #000;
         }
-        .winbox.my-theme .wb-icon {
+        .winbox.my-theme .wb-control {
             filter: invert(1);
         }
 
@@ -546,11 +546,11 @@ new WinBox("Splitscreen (Right)", {
 
         Customize Control Icons
         <br><br>
-        <pre><code class="language-css">.wb-icon * {
+        <pre><code class="language-css">.wb-control * {
     opacity: 0.65;
 }
 
-.wb-icon *:hover {
+.wb-control *:hover {
     opacity: 1;
 }
 
@@ -613,7 +613,7 @@ new WinBox("Splitscreen (Right)", {
 .winbox.my-theme .wb-title {
     color: #000;
 }
-.winbox.my-theme .wb-icon {
+.winbox.my-theme .wb-control {
     filter: invert(1);
 }</code></pre>
         <div class="break"></div>
@@ -685,7 +685,7 @@ winbox.addControl({
         <pre><code class="language-js">const template = document.createElement("div");
 template.innerHTML = `
     &lt;div class=wb-header>
-        &lt;div class=wb-icon>
+        &lt;div class=wb-control>
             &lt;span class=wb-custom>&lt;/span>
             &lt;span class=wb-close>&lt;/span>
         &lt;/div>
@@ -982,7 +982,7 @@ new WinBox("Custom Template", { template });</code></pre>
                 const template = document.createElement("div");
                 template.innerHTML = `
                     <div class=wb-header>
-                        <div class=wb-icon>
+                        <div class=wb-control>
                             <span class=wb-custom></span>
                             <span class=wb-close></span>
                         </div>

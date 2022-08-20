@@ -5,14 +5,13 @@
   position: fixed;
   left: 0;
   top: 0;
-  //min-height: @winbox-header-height;
   background: #0050ff;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  /* using transform make contents blur when applied and requires more gpu memory */
   //transition: width .3s, height .3s, transform .3s;
   transition: width .3s, height .3s, left .3s, top .3s;
   transition-timing-function: cubic-bezier(0.3, 1, 0.3, 1);
   //transform-origin: bottom center;
-  will-change: transform, width, height;
   /* contain "strict" does not make overflow contents selectable */
   contain: layout size;
   /* explicitly set text align to left fixes an issue with iframes alignment when centered */
@@ -74,7 +73,7 @@ body > .wb-body{
   text-overflow: ellipsis;
 }
 
-.wb-image {
+.wb-icon {
   display: none;
   width: 20px;
   height: 100%;
@@ -165,21 +164,21 @@ body > .wb-body{
   z-index: 2;
 }
 
-.wb-icon{
+.wb-control{
   float: right;
   height: 100%;
   max-width: 100%;
   text-align: center;
 }
 
-.wb-icon * {
+.wb-control * {
   display: inline-block;
   width: 30px;
   height: 100%;
+  max-width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-  max-width: 100%;
 }
 
 .wb-min {
@@ -241,9 +240,6 @@ body > .wb-body{
   .wb-drag {
     cursor: default;
   }
-  .wb-body{
-    overflow: hidden;
-  }
   .wb-body > *{
     display: none;
   }
@@ -251,7 +247,7 @@ body > .wb-body{
 
 .winbox.hide {
   display: none;
-  visibility: hidden;
+  //visibility: hidden;
 }
 
 .winbox.max {
@@ -270,6 +266,7 @@ body > .wb-body{
 }
 
 body.wb-lock .winbox{
+  will-change: left, top, width, height;
   transition: none;
 }
 body.wb-lock iframe {
@@ -290,10 +287,10 @@ body.wb-lock iframe {
   &:after{
     content: '';
     position: absolute;
-    top: -100vh;
-    left: -100vw;
-    right: -100vw;
-    bottom: -100vh;
+    top: -50vh;
+    left: -50vw;
+    right: -50vw;
+    bottom: -50vh;
     background: #0d1117;
     animation: wb-fade-in 0.2s ease-out forwards;
     z-index: -1;

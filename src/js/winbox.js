@@ -103,8 +103,6 @@ function WinBox(params, _title){
         }
         else{
 
-            (oncreate = params["oncreate"]) && oncreate.call(this, params);
-
             id = params["id"];
             index = params["index"];
             root = params["root"];
@@ -306,6 +304,7 @@ function WinBox(params, _title){
 
     register(this);
     (root || body).appendChild(this.dom);
+    (oncreate = params["oncreate"]) && oncreate.call(this, params);
 }
 
 WinBox["new"] = function(params){
@@ -771,7 +770,7 @@ WinBox.prototype.setTitle = function(title){
 
 WinBox.prototype.setIcon = function(src){
 
-    const img = getByClass(this.dom, "wb-image");
+    const img = getByClass(this.dom, "wb-icon");
     setStyle(img, "background-image", "url(" + src + ")");
     setStyle(img, "display", "inline-block");
 
@@ -794,8 +793,18 @@ WinBox.prototype.setBackground = function(background){
 
 WinBox.prototype.setUrl = function(url, onload){
 
-    this.body.innerHTML = '<iframe src="' + url + '"></iframe>';
-    onload && (this.body.firstChild.onload = onload);
+    const node = this.body.firstChild;
+
+    if(node && (node.tagName.toLowerCase() === "iframe")){
+
+        node.src = url;
+    }
+    else{
+
+        this.body.innerHTML = '<iframe src="' + url + '"></iframe>';
+        onload && (this.body.firstChild.onload = onload);
+    }
+
     return this;
 };
 
@@ -1165,7 +1174,7 @@ WinBox.prototype.addControl = function(control){
     const click = control.click;
     const index = control.index;
     const node = document.createElement("span");
-    const icons = getByClass(this.dom, "wb-icon");
+    const icons = getByClass(this.dom, "wb-control");
     const self = this;
 
     if(classname) node.className = classname;
