@@ -13,7 +13,8 @@ import { addListener, removeListener, setStyle, setText, getByClass, addClass, r
 
 const use_raf = false;
 const stack_min = [];
-//const eventOptions = { "capture": true, "passive": false };
+// use passive for touch and mouse wheel
+const eventOptions = { "capture": true, "passive": true };
 let body;
 let id_counter = 0;
 let index_counter = 10;
@@ -126,10 +127,8 @@ function WinBox(params, _title){
             hidden = params["hidden"];
             modal = params["modal"];
 
-            if(modal) x = y = "center";
-
-            x = params["x"] || x;
-            y = params["y"] || y;
+            x = params["x"] || (modal ? "center" : 0);
+            y = params["y"] || (modal ? "center" : 0);
 
             top = params["top"];
             left = params["left"];
@@ -492,8 +491,8 @@ function addWindowListener(self, dir){
     let raf_timer, raf_move, raf_resize;
     let dblclick_timer = 0;
 
-    addListener(node, "mousedown", mousedown/*, eventOptions*/);
-    addListener(node, "touchstart", mousedown/*, eventOptions*/);
+    addListener(node, "mousedown", mousedown);
+    addListener(node, "touchstart", mousedown, eventOptions);
 
     function loop(){
 
@@ -549,14 +548,14 @@ function addWindowListener(self, dir){
 
                 // TODO: fix when touch events bubbles up to the document body
                 //addListener(self.dom, "touchmove", preventEvent);
-                addListener(window, "touchmove", handler_mousemove/*, eventOptions*/);
-                addListener(window, "touchend", handler_mouseup/*, eventOptions*/);
+                addListener(window, "touchmove", handler_mousemove, eventOptions);
+                addListener(window, "touchend", handler_mouseup, eventOptions);
             }
             else{
 
                 //addListener(this, "mouseleave", handler_mouseup);
-                addListener(window, "mousemove", handler_mousemove/*, eventOptions*/);
-                addListener(window, "mouseup", handler_mouseup/*, eventOptions*/);
+                addListener(window, "mousemove", handler_mousemove);
+                addListener(window, "mouseup", handler_mouseup);
             }
 
             x = event.pageX;
@@ -680,14 +679,14 @@ function addWindowListener(self, dir){
         if(touch){
 
             //removeListener(self.dom, "touchmove", preventEvent);
-            removeListener(window, "touchmove", handler_mousemove/*, eventOptions*/);
-            removeListener(window, "touchend", handler_mouseup/*, eventOptions*/);
+            removeListener(window, "touchmove", handler_mousemove, eventOptions);
+            removeListener(window, "touchend", handler_mouseup, eventOptions);
         }
         else{
 
             //removeListener(this, "mouseleave", handler_mouseup);
-            removeListener(window, "mousemove", handler_mousemove/*, eventOptions*/);
-            removeListener(window, "mouseup", handler_mouseup/*, eventOptions*/);
+            removeListener(window, "mousemove", handler_mousemove);
+            removeListener(window, "mouseup", handler_mouseup);
         }
     }
 }
