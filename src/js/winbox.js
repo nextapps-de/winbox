@@ -582,7 +582,7 @@ function addWindowListener(self, dir){
 
     function handler_mousemove(event){
 
-        preventEvent(event);
+        preventEvent(event, !touch);
 
         if(touch){
 

@@ -30,7 +30,7 @@ export function removeListener(node, event, fn, opt){
 export function preventEvent(event, prevent){
 
     event.stopPropagation();
-    /*prevent &&*/ event.cancelable && event.preventDefault();
+    prevent && /*event.cancelable &&*/ event.preventDefault();
 
     //event.stopImmediatePropagation();
     //event.returnValue = false;
