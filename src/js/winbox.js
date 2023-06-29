@@ -13,13 +13,13 @@ import { addListener, removeListener, setStyle, setText, getByClass, addClass, r
 
 const use_raf = false;
 const stack_min = [];
+const stack_win = [];
 // use passive for touch and mouse wheel
 const eventOptions = { "capture": true, "passive": true };
 let body;
 let id_counter = 0;
 let index_counter = 10;
 let is_fullscreen;
-let last_focus;
 let prefix_request;
 let prefix_exit;
 let root_w, root_h;
@@ -57,6 +57,7 @@ function WinBox(params, _title){
         maxwidth,
         maxheight,
         autosize,
+        overflow,
 
         x,
         y,
@@ -121,6 +122,7 @@ function WinBox(params, _title){
             maxwidth = params["maxwidth"];
             maxheight = params["maxheight"];
             autosize = params["autosize"];
+            overflow = params["overflow"];
 
             min = params["min"];
             max = params["max"];
@@ -140,6 +142,7 @@ function WinBox(params, _title){
             header = params["header"];
             classname = params["class"];
 
+            oncreate = params["oncreate"];
             onclose = params["onclose"];
             onfocus = params["onfocus"];
             onblur = params["onblur"];
@@ -163,6 +166,8 @@ function WinBox(params, _title){
     this.body = getByClass(this.dom, "wb-body");
     this.header = header || 35;
     //this.plugins = [];
+
+    stack_win.push(this);
 
     if(background){
 
@@ -253,6 +258,7 @@ function WinBox(params, _title){
     this.bottom = bottom;
     this.left = left;
     this.index = index;
+    this.overflow = overflow;
     //this.border = border;
     this.min = false;
     this.max = false;
@@ -303,12 +309,17 @@ function WinBox(params, _title){
 
     register(this);
     (root || body).appendChild(this.dom);
-    (oncreate = params["oncreate"]) && oncreate.call(this, params);
+    oncreate && oncreate.call(this, params);
 }
 
 WinBox["new"] = function(params){
 
     return new WinBox(params);
+};
+
+WinBox["stack"] = function(){
+
+    return stack_win;
 };
 
 export default WinBox;
@@ -396,12 +407,12 @@ function register(self){
     addListener(getByClass(self.dom, "wb-min"), "click", function(event){
 
         preventEvent(event);
-        self.min ? self.focus().restore() : self.blur().minimize();
+        self.min ? self.restore().focus() : self.minimize();
     });
 
     addListener(getByClass(self.dom, "wb-max"), "click", function(event){
 
-        self.max ? self.restore() : self.maximize();
+        self.max ? self.restore().focus() : self.maximize().focus();
     });
 
     if(prefix_request){
@@ -537,7 +548,7 @@ function addWindowListener(self, dir){
             }
         }
 
-        if(!self.max && !self.min){
+        if(/*!self.max &&*/ !self.min){
 
             addClass(body, "wb-lock");
             use_raf && loop();
@@ -644,17 +655,44 @@ function addWindowListener(self, dir){
 
         if(move_x){
 
-            self.x = Math.max(Math.min(self.x, root_w - self.width - self.right), self.left);
+            if(self.max){
+
+                self.x = (
+
+                    pageX < root_w / 3 ?
+
+                        self.left
+                    :
+                        pageX > root_w / 3 * 2 ?
+
+                            root_w - self.width - self.right
+                        :
+                            root_w / 2 - self.width / 2
+
+                ) + offsetX;
+            }
+
+            self.x = Math.max(Math.min(self.x, self.overflow ? root_w - 30 : root_w - self.width - self.right), self.overflow ? 30 - self.width : self.left);
             move_x = self.x !== old_x;
         }
 
         if(move_y){
 
-            self.y = Math.max(Math.min(self.y, root_h - self.height - self.bottom), self.top);
+            if(self.max){
+
+                self.y = self.top + offsetY;
+            }
+
+            self.y = Math.max(Math.min(self.y, self.overflow ? root_h - self.header : root_h - self.height - self.bottom), self.top);
             move_y = self.y !== old_y;
         }
 
         if(move_x || move_y){
+
+            if(self.max){
+
+                self.restore();
+            }
 
             use_raf ? raf_move = true : self.move();
         }
@@ -819,15 +857,19 @@ WinBox.prototype.focus = function(state){
         return this.blur();
     }
 
-    if(last_focus !== this && this.dom){
+    if(!this.focused){
 
-        last_focus && last_focus.blur();
+        const last_focus = stack_win[stack_win.length - 1];
+
+        if(last_focus !== this){
+
+            last_focus.blur();
+            stack_win.push(stack_win.splice(stack_win.indexOf(this), 1)[0]);
+        }
 
         setStyle(this.dom, "z-index", ++index_counter);
         this.index = index_counter;
         this.addClass("focus");
-        last_focus = this;
-
         this.focused = true;
         this.onfocus && this.onfocus();
     }
@@ -847,14 +889,13 @@ WinBox.prototype.blur = function(state){
         return this.focus();
     }
 
+    const last_focus = stack_win[stack_win.length - 1];
+
     if(last_focus === this){
 
         this.removeClass("focus");
         this.focused = false;
         this.onblur && this.onblur();
-
-        // TODO focus next window
-        last_focus = null;
     }
 
     return this;
@@ -930,6 +971,25 @@ WinBox.prototype.minimize = function(state){
         this.dom.title = this.title;
         this.addClass("min");
         this.min = true;
+
+        const stack_win_length = stack_win.length;
+
+        if(stack_win_length > 1){
+
+            let last_focus = stack_win[stack_win_length - 1];
+
+            if(last_focus === this){
+
+                last_focus = stack_win[stack_win_length - 2];
+            }
+
+            last_focus.focus();
+        }
+        else{
+
+            this.blur();
+        }
+
         this.onminimize && this.onminimize();
     }
 
@@ -1088,19 +1148,14 @@ WinBox.prototype.close = function(force) {
         remove_min_stack(this);
     }
 
+    stack_win.splice(stack_win.indexOf(this), 1);
+
     this.unmount();
     this.dom.remove();
     this.dom.textContent = "";
     this.dom["winbox"] = null;
     this.body = null;
     this.dom = null;
-
-    if(last_focus === this){
-
-        last_focus = null;
-
-        // TODO focus next window
-    }
 };
 
 /**

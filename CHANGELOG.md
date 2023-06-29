@@ -1,3 +1,9 @@
+## v0.2.7
+
+- support option "overflow" to allow the window moving outside the viewports border
+- add static function `WinBox.stack()` which returns an Array containing every window instance ordered by focus history
+- support drag move from maximized state
+
 ## v0.2.5
 
 - support custom toolbar icon

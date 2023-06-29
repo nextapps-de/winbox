@@ -168,6 +168,7 @@ Constructor:
 Global methods:
 
 - <a href="#winbox.new">WinBox.**new**(title, options\<key: value\>)</a> : winbox
+- <a href="#winbox.stack">WinBox.**stack**()</a> : Array\<winbox\>
 
 Instance member methods:
 
@@ -308,6 +309,12 @@ Callback methods:
         <td>autosize</td>
         <td>boolean</td>
         <td>Automatically size the window to fit the window contents.</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td>overflow</td>
+        <td>boolean</td>
+        <td>Allow the window to move outside the viewport.</td>
     </tr>
     <tr></tr>
     <tr>
@@ -606,6 +613,19 @@ winbox.move();
 
 > In some cases you need to execute `.resize()` before `.move()` to properly apply relative positions which is taking the windows size into account.
 
+<a name="winbox.overflow"></a>
+#### Overflow Window
+
+Allow the window to move outside the viewport borders on left, right and bottom (default is "false").
+
+```js
+new WinBox({
+    title: "Overflow Window",
+    overflow: true
+});
+```
+
+<a name="winbox.modal"></a>
 #### Modal Window
 
 ```js
@@ -613,6 +633,21 @@ new WinBox({
     title: "Modal Window",
     modal: true
 });
+```
+
+<a name="winbox.stack"></a>
+#### Window Stack
+
+The window stack gets you an ordered list of every created window which wasn't already closed. The last focused windows is placed as last entry in the Array.
+
+```js
+const a = new WinBox("A"); // window A gets focused
+const b = new WinBox("B"); // window B gets focused
+const c = new WinBox("C"); // window C gets focused
+a.focus(); // window A gets focused
+
+// get window stack ordered by focus history
+const stack = WinBox.stack(); // [B, C, A]
 ```
 
 <a name="themes"></a>
