@@ -1,6 +1,7 @@
 import WinBox from "./winbox.js";
 
 /** @export */ WinBox.new;
+/** @export */ WinBox.stack;
 /** @export */ WinBox.prototype.mount;
 /** @export */ WinBox.prototype.unmount;
 /** @export */ WinBox.prototype.move;

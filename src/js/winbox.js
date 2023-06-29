@@ -859,12 +859,22 @@ WinBox.prototype.focus = function(state){
 
     if(!this.focused){
 
-        const last_focus = stack_win[stack_win.length - 1];
+        const stack_length = stack_win.length;
 
-        if(last_focus !== this){
+        if(stack_length > 1){
 
-            last_focus.blur();
-            stack_win.push(stack_win.splice(stack_win.indexOf(this), 1)[0]);
+            for(let i = 1; i <= stack_length; i++){
+
+                const last_focus = stack_win[stack_length - i];
+
+                if(last_focus.focused /*&& last_focus !== this*/){
+
+                    last_focus.blur();
+                    stack_win.push(stack_win.splice(stack_win.indexOf(this), 1)[0]);
+
+                    break;
+                }
+            }
         }
 
         setStyle(this.dom, "z-index", ++index_counter);
@@ -889,9 +899,7 @@ WinBox.prototype.blur = function(state){
         return this.focus();
     }
 
-    const last_focus = stack_win[stack_win.length - 1];
-
-    if(last_focus === this){
+    if(this.focused){
 
         this.removeClass("focus");
         this.focused = false;
@@ -972,18 +980,20 @@ WinBox.prototype.minimize = function(state){
         this.addClass("min");
         this.min = true;
 
-        const stack_win_length = stack_win.length;
+        const stack_length = stack_win.length;
 
-        if(stack_win_length > 1){
+        if(stack_length > 1){
 
-            let last_focus = stack_win[stack_win_length - 1];
+            for(let i = 1; i <= stack_length; i++){
 
-            if(last_focus === this){
+                const last_focus = stack_win[stack_length - i];
 
-                last_focus = stack_win[stack_win_length - 2];
+                if(!last_focus.min /*&& last_focus !== this*/){
+
+                    last_focus.focus();
+                    break;
+                }
             }
-
-            last_focus.focus();
         }
         else{
 
