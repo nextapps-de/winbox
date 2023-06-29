@@ -3,6 +3,7 @@
 - support option "overflow" to allow the window moving outside the viewports border
 - add static function `WinBox.stack()` which returns an Array containing every window instance ordered by focus history
 - support drag move from maximized state
+- automatically focus previous focused window on minimize window
 
 ## v0.2.5
 
