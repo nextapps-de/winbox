@@ -978,6 +978,7 @@ WinBox.prototype.minimize = function(state){
         update_min_stack();
         this.dom.title = this.title;
         this.addClass("min");
+        this.blur();
         this.min = true;
 
         const stack_length = stack_win.length;
@@ -994,10 +995,6 @@ WinBox.prototype.minimize = function(state){
                     break;
                 }
             }
-        }
-        else{
-
-            this.blur();
         }
 
         this.onminimize && this.onminimize();
