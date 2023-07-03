@@ -13,18 +13,18 @@
 
 <a href="https://nextapps-de.github.io/winbox/">https://nextapps-de.github.io/winbox/ </a>
 
-### Support this Project
+## Support this Project
 
-Hello my name is Thomas, also known as ts-thomas. This is a personal project which I fully made in my free time. It hosted by the Github account from the company Nextapps where I work to give it more exposure.
-I have never received any financial support for this project from the company Nextapps as some of you might have guessed, since it is a free open source project.
-I'm glad to see that WinBox.js gets so much positive feedback and also feature requests. Please feel free to make a financial support which is needed to keep this project alive and also to making all the contribution to keep WinBox.js on a profession top-end level.
-
-Thanks a lot,
-Thomas (ts-thomas)
+Hello my name is Thomas, also known as ts-thomas. This is a personal project which I fully made in my free time. It is hosted by the Github account from the company Nextapps where I work to give it more exposure.
+I have never received any financial support for this project from the company Nextapps as some of you might have guessed, since it is a free and open source project.
+I'm really happy that WinBox.js is getting so much positive feedback and also feature requests. Please feel free to make a financial support by a donation which helps me a lot to keep this project alive and also to providing all the contribution to keep WinBox.js on a professional top-end level.
 
 <a href="https://opencollective.com/winboxjs/donate" target="_blank">
     <img src="https://opencollective.com/webpack/donate/button@2x.png?color=blue" height="48" alt="Donate to our Collective">
 </a>
+<br><br>
+Thanks a lot,
+Thomas (ts-thomas)
 
 <a name="addon"></a>
 ### Plugins / Add-ons / Extensions
@@ -1671,5 +1671,5 @@ The final build is located in the `dist/` folder.
 
 ---
 
-Copyright 2022 Nextapps GmbH<br>
+Copyright 2021-2023 Thomas Wilkerling, Hosted by Nextapps GmbH<br>
 Released under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0 License</a><br>

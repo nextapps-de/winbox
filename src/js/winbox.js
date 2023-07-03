@@ -1,8 +1,8 @@
 /**
  * WinBox.js
- * Copyright 2022 Nextapps GmbH
- * Author: Thomas Wilkerling
+ * Author and Copyright: Thomas Wilkerling
  * Licence: Apache-2.0
+ * Hosted by Nextapps GmbH
  * https://github.com/nextapps-de/winbox
  */
 
