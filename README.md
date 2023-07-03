@@ -19,13 +19,16 @@ Hello my name is Thomas, also known as ts-thomas. This is a personal project whi
 I have never received any financial support for this project from the company Nextapps as some of you might have guessed, since it is a free and open source project.
 I'm really happy that WinBox.js is getting so much positive feedback and also feature requests. Please feel free to make a financial support by a donation which helps me a lot to keep this project alive and also to providing all the contribution to keep WinBox.js on a professional top-end level.
 
-<a href="https://opencollective.com/winboxjs/donate" target="_blank" style="float: left; margin-right: 15px">
+<a href="https://opencollective.com/winboxjs/donate" target="_blank" style="margin-right: 10px">
     <img src="https://opencollective.com/webpack/donate/button@2x.png?color=blue" height="32" alt="Donate using Open Collective">
 </a>
-<a href="https://liberapay.com/ts-thomas/donate" target="_blank" style="float: left">
+<a href="https://liberapay.com/ts-thomas/donate" target="_blank" style="margin-right: 10px">
     <img src="https://liberapay.com/assets/widgets/donate.svg" height="32" alt="Donate using Liberapay">
 </a>
-<br style="clear: both"><br>
+<a href="https://salt.bountysource.com/teams/ts-thomas" target="_blank">
+    <img src="https://d2bbtvgnhux6eq.cloudfront.net/assets/logos/alternate-7868987b01474c95f47678727f6657882f6565a36396eb4b637ea53cc5944ff8.svg" height="32" alt="Donate using Bountysource">
+</a>
+<br><br>
 Thanks a lot,
 Thomas (ts-thomas)
 
