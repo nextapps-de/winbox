@@ -22,20 +22,16 @@ I'm really happy that WinBox.js is getting so much positive feedback and also fe
 <a href="https://opencollective.com/winboxjs/donate" target="_blank" style="margin-right: 10px">
     <img src="https://opencollective.com/webpack/donate/button@2x.png?color=blue" height="32" alt="Donate using Open Collective">
 </a>
-<!--
 <a href="https://github.com/sponsors/ts-thomas/" target="_blank" style="margin-right: 10px">
-    <img src="" height="32" alt="Donate using Bountysource">
+    <img src="https://camo.githubusercontent.com/b932f45963b659dfeb86b77ff29a9eaebe25a734d63a17a176aa82bf34845cf2/68747470733a2f2f696d672e736869656c64732e696f2f7374617469632f76313f6c6162656c3d53706f6e736f72266d6573736167653d254532253944254134266c6f676f3d47697448756226636f6c6f723d253233666538653836" height="32" alt="Donate using Github Sponsors">
 </a>
--->
 <a href="https://liberapay.com/ts-thomas/donate" target="_blank" style="margin-right: 10px">
     <img src="https://liberapay.com/assets/widgets/donate.svg" height="32" alt="Donate using Liberapay">
 </a>
 <a href="https://salt.bountysource.com/teams/ts-thomas" target="_blank">
     <img src="https://d2bbtvgnhux6eq.cloudfront.net/assets/logos/alternate-7868987b01474c95f47678727f6657882f6565a36396eb4b637ea53cc5944ff8.svg" height="32" alt="Donate using Bountysource">
 </a>
-
-[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/ts-thomas/)
-
+<!-- [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/ts-thomas/) -->
 <br><br>
 Thanks a lot,
 Thomas (ts-thomas)
