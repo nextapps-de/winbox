@@ -28,6 +28,9 @@ I'm really happy that WinBox.js is getting so much positive feedback and also fe
 <a href="https://liberapay.com/ts-thomas/donate" target="_blank" style="margin-right: 10px">
     <img src="https://liberapay.com/assets/widgets/donate.svg" height="32" alt="Donate using Liberapay">
 </a>
+<a href="https://www.patreon.com/user?u=96245532" target="_blank" style="margin-right: 10px">
+    <img src="https://s3-us-west-1.amazonaws.com/widget-images/become-patron-widget-medium%402x.png" height="32" alt="Donate using Patreon">
+</a>
 <a href="https://www.paypal.com/donate/?hosted_button_id=GEVR88FC9BWRW" target="_blank" style="margin-right: 10px">
     <img src="https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-200px.png" height="32" alt="Donate using PayPal">
 </a>
