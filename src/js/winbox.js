@@ -980,28 +980,31 @@ WinBox.prototype.minimize = function(state){
         this.addClass("min");
         this.blur();
         this.min = true;
-
-        const stack_length = stack_win.length;
-
-        if(stack_length > 1){
-
-            for(let i = 1; i <= stack_length; i++){
-
-                const last_focus = stack_win[stack_length - i];
-
-                if(!last_focus.min /*&& last_focus !== this*/){
-
-                    last_focus.focus();
-                    break;
-                }
-            }
-        }
-
+        focus_next();
         this.onminimize && this.onminimize();
     }
 
     return this;
 };
+
+function focus_next(){
+
+    const stack_length = stack_win.length;
+
+    if(stack_length){
+
+        for(let i = stack_length - 1; i >= 0; i--){
+
+            const last_focus = stack_win[i];
+
+            if(!last_focus.min /*&& last_focus !== this*/){
+
+                last_focus.focus();
+                break;
+            }
+        }
+    }
+}
 
 /**
  * @this WinBox
@@ -1163,6 +1166,7 @@ WinBox.prototype.close = function(force) {
     this.dom["winbox"] = null;
     this.body = null;
     this.dom = null;
+    focus_next();
 };
 
 /**

@@ -31,11 +31,11 @@ I'm really happy that WinBox.js is getting so much positive feedback and also fe
 <a href="https://www.patreon.com/user?u=96245532" target="_blank" style="margin-right: 10px">
     <img src="https://s3-us-west-1.amazonaws.com/widget-images/become-patron-widget-medium%402x.png" height="32" alt="Donate using Patreon">
 </a>
-<a href="https://www.paypal.com/donate/?hosted_button_id=GEVR88FC9BWRW" target="_blank" style="margin-right: 10px">
-    <img src="https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-200px.png" height="32" alt="Donate using PayPal">
-</a>
-<a href="https://salt.bountysource.com/teams/ts-thomas" target="_blank">
+<a href="https://salt.bountysource.com/teams/ts-thomas" target="_blank" style="margin-right: 10px">
     <img src="https://d2bbtvgnhux6eq.cloudfront.net/assets/logos/alternate-7868987b01474c95f47678727f6657882f6565a36396eb4b637ea53cc5944ff8.svg" height="32" alt="Donate using Bountysource">
+</a>
+<a href="https://www.paypal.com/donate/?hosted_button_id=GEVR88FC9BWRW" target="_blank">
+    <img src="https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-200px.png" height="32" alt="Donate using PayPal">
 </a>
 <!-- [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/ts-thomas/) -->
 <br><br>
