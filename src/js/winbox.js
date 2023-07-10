@@ -6,6 +6,8 @@
  * https://github.com/nextapps-de/winbox
  */
 
+// TODO: rename control amd state classes (min, max, modal, focus, ...) #62
+
 import template from "./template.js";
 import { addListener, removeListener, setStyle, setText, getByClass, addClass, removeClass, hasClass, preventEvent } from "./helper.js";
 
@@ -385,6 +387,13 @@ function setup(){
 
         init();
         update_min_stack();
+
+        // TODO adjust window sizes #151
+
+        // for(let i = 0; i < stack_win.length; i++){
+        //
+        //     stack_win[i].resize().move();
+        // }
     });
 
     addListener(body, "mousedown", function(event){
