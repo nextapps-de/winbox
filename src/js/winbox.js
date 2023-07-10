@@ -571,15 +571,18 @@ function addWindowListener(self, dir){
                 return;
             }
 
-            const now = Date.now();
-            const diff = now - dblclick_timer;
+            if(!self.hasClass("no-max")){
 
-            dblclick_timer = now;
+                const now = Date.now();
+                const diff = now - dblclick_timer;
 
-            if(diff < 300){
+                dblclick_timer = now;
 
-                self.max ? self.restore() : self.maximize();
-                return;
+                if(diff < 300){
+
+                    self.max ? self.restore() : self.maximize();
+                    return;
+                }
             }
         }
 
@@ -637,6 +640,8 @@ function addWindowListener(self, dir){
         let resize_w, resize_h, move_x, move_y;
 
         if(dir === "drag"){
+
+            if(self.hasClass("no-move")) return;
 
             self.x += offsetX;
             self.y += offsetY;
