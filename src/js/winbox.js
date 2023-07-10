@@ -278,6 +278,22 @@ function WinBox(params, _title){
     this.onhide = onhide;
     this.onshow = onshow;
 
+    if(hidden){
+      
+        this.hide();
+    }
+    else{
+
+        this.focus();
+    }
+
+    if(index || (index === 0)){
+
+        this.index = index;
+        setStyle(this.dom, "z-index", index);
+        if(index > index_counter) index_counter = index;
+    }
+
     if(max){
 
         this.maximize();
@@ -289,22 +305,6 @@ function WinBox(params, _title){
     else{
 
         this.resize().move();
-    }
-
-    if(hidden){
-      
-        this.hide();
-    }
-    else{
-
-        this.focus();
-
-        if(index || (index === 0)){
-
-            this.index = index;
-            setStyle(this.dom, "z-index", index);
-            if(index > index_counter) index_counter = index;
-        }
     }
 
     register(this);
