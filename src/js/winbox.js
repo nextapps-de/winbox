@@ -341,7 +341,7 @@ function parse(num, base, center){
 
         if(num === "center"){
 
-            num = ((base - center) / 2) | 0;
+            num = ((base - center) / 2 + 0.5) | 0;
         }
         else if(num === "right" || num === "bottom"){
 
@@ -354,7 +354,7 @@ function parse(num, base, center){
 
             if(unit === "%"){
 
-                num = (base / 100 * value) | 0;
+                num = (base / 100 * value + 0.5) | 0;
             }
             else{
 
@@ -506,7 +506,7 @@ function update_min_stack(){
     for(let i = 0, self, key; i < length; i++){
 
         self = stack_min[i];
-        key = (self.left || self.right) + ":" + (self.top || self.bottom);
+        key = self.left + ":" + self.top;
 
         if(splitscreen_length[key]){
 
@@ -522,9 +522,8 @@ function update_min_stack(){
     for(let i = 0, self, key, width; i < length; i++){
 
         self = stack_min[i]
-        key = (self.left || self.right) + ":" + (self.top || self.bottom);
+        key = self.left + ":" + self.top;
         width = Math.min((root_w - self.left - self.right) / splitscreen_length[key], 250);
-        //splitscreen_index[key] || (splitscreen_index[key] = 0);
         self.resize((width + 1) | 0, self.header, true)
             .move((self.left + splitscreen_index[key] * width) | 0, root_h - self.bottom - self.header, true);
         splitscreen_index[key]++;
