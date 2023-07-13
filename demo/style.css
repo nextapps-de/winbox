@@ -177,7 +177,7 @@ pre code.hljs{
 .wb-body {
     color: #000;
 }
-.wb-body > *{
+.wb-body > *:not(iframe){
     padding: 1.2em;
 }
 .winbox.iframe .wb-body > *{

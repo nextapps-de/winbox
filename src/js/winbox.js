@@ -402,7 +402,7 @@ function setup(){
 
     }, true);
 
-    addListener(body, "mouseup", function(event){
+    addListener(body, "mousedown", function(event){
 
         if(!window_clicked){
 
@@ -443,13 +443,13 @@ function register(self){
     addWindowListener(self, "se");
     addWindowListener(self, "sw");
 
-    addListener(getByClass(self.dom, "wb-min"), "mouseup", function(event){
+    addListener(getByClass(self.dom, "wb-min"), "click", function(event){
 
         preventEvent(event);
         self.min ? self.restore().focus() : self.minimize();
     });
 
-    addListener(getByClass(self.dom, "wb-max"), "mouseup", function(event){
+    addListener(getByClass(self.dom, "wb-max"), "click", function(event){
 
         preventEvent(event);
         self.max ? self.restore().focus() : self.maximize().focus();
@@ -457,10 +457,10 @@ function register(self){
 
     if(prefix_request){
 
-        addListener(getByClass(self.dom, "wb-full"), "mouseup", function(event){
+        addListener(getByClass(self.dom, "wb-full"), "click", function(event){
 
             preventEvent(event);
-            self.fullscreen();
+            self.fullscreen().focus();
         });
     }
     else{
@@ -468,20 +468,25 @@ function register(self){
         self.addClass("no-full");
     }
 
-    addListener(getByClass(self.dom, "wb-close"), "mouseup", function(event){
+    addListener(getByClass(self.dom, "wb-close"), "click", function(event){
 
         preventEvent(event);
         self.close() || (self = null);
     });
 
-    addListener(self.dom, "mouseup", function(event){
+    addListener(self.dom, "mousedown", function(event){
 
         window_clicked = true;
+
+    }, true);
+
+    addListener(self.body, "mousedown", function(event){
 
         // stop propagation would disable global listeners used inside window contents
         // use event bubbling for this listener to skip this handler by the other click listeners
         self.focus();
-    });
+
+    }, true);
 }
 
 /**
@@ -568,7 +573,7 @@ function addWindowListener(self, dir){
 
         // prevent the full iteration through the fallback chain of a touch event (touch > mouse > click)
         preventEvent(event, true);
-        window_clicked = true;
+        //window_clicked = true;
         self.focus();
 
         if(dir === "drag"){

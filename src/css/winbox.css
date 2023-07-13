@@ -42,12 +42,14 @@
   contain: strict;
   z-index: 0;
 }
-body > .wb-body {
+/*
+body > .wb-body{
   position: relative;
   display: inline-block;
   visibility: hidden;
   contain: none;
 }
+*/
 .wb-drag {
   height: 100%;
   padding-left: 10px;
