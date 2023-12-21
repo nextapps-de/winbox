@@ -1,5 +1,8 @@
-const template = document.createElement("div");
-template.innerHTML = (
+/**
+  @type null|HTMLDivElement
+ */
+let template = null;
+const templateHTML = (
 
     //'<div class=winbox>' +
 
@@ -31,6 +34,10 @@ template.innerHTML = (
 );
 
 export default function(tpl){
+    if (!template) {
+        template = document.createElement('div');
+        template.innerHTML = templateHTML;
+    }
 
     return (tpl || template).cloneNode(true);
 }
