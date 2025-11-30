@@ -29,6 +29,14 @@
     <!-- Custom Themes Demo: -->
     <style>
 
+        .winbox-viewport {
+            position: fixed;
+            border: 1px solid red;
+            top: 70px;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+        }
         /* WinBox Theme: "custom" */
 
         .winbox.custom {
@@ -136,6 +144,7 @@
     <link rel="icon" sizes="512x512 1024x1024" type="image/png" href="https://nextapps-de.github.io/winbox/demo/og-image.png">
 </head>
 <body>
+    <div id="viewport"></div>
 <main>
     <header>
         <a href="https://github.com/nextapps-de/winbox">Goto Github</a>
@@ -726,6 +735,31 @@ template.innerHTML = `
 new WinBox("Custom Template", { template });</code></pre>
         <div class="break"></div>
         <div class="button" onclick="window.examples['custom-template']()">Run Code</div>
+        <br><br>
+
+        <hr>
+        <br>
+        Custom Global Viewport
+        <br><br>
+        If you want to limit the viewport for all windows, create a static DOM element with the class `winbox-viewport`. This element will be used instead of `window` when calculating boundary limits.
+        <br><br>
+        <pre><code class="language-html">    &lt;div class="winbox-viewport">
+    &lt;/div></code></pre>
+        <div class="break"></div>
+        <pre>
+            <code class="language-css">        .winbox-viewport {
+            position: fixed;
+            border: 1px solid red;
+            top: 70px;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+        }</code>
+        </pre>
+        
+        <div class="break"></div>
+        <div class="button" onclick="document.getElementById('viewport').classList.add('winbox-viewport');alert('This feature requires the element to be defined statically in the HTML markup. To test its behavior, please resize the window or open/close the browser’s developer tools sidebar.')">Set Global Viewport</div>
+        <div class="button" onclick="document.getElementById('viewport').classList.remove('winbox-viewport');">Remove Global Viewport</div>
         <br><br>
 
     </div>

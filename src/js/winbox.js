@@ -25,7 +25,7 @@ let index_counter = 10;
 let is_fullscreen;
 let prefix_request;
 let prefix_exit;
-let root_w, root_h;
+let viewport = {};
 let window_clicked;
 
 /**
@@ -218,13 +218,13 @@ function WinBox(params, _title){
         this.setUrl(url, onload);
     }
 
-    top = top ? parse(top, root_h) : 0;
-    bottom = bottom ? parse(bottom, root_h) : 0;
-    left = left ? parse(left, root_w) : 0;
-    right = right ? parse(right, root_w) : 0;
+    top = top ? parse(top, viewport.height) : 0;
+    bottom = bottom ? parse(bottom, viewport.height) : 0;
+    left = left ? parse(left, viewport.width) : 0;
+    right = right ? parse(right, viewport.width) : 0;
 
-    const viewport_w = root_w - left - right;
-    const viewport_h = root_h - top - bottom;
+    const viewport_w = viewport.width - left - right;
+    const viewport_h = viewport.height - top - bottom;
 
     maxwidth = maxwidth ? parse(maxwidth, viewport_w) : viewport_w;
     maxheight = maxheight ? parse(maxheight, viewport_h) : viewport_h;
@@ -246,8 +246,8 @@ function WinBox(params, _title){
         height = height ? parse(height, maxheight) : Math.max(maxheight / 2, minheight) | 0;
     }
 
-    x = x ? parse(x, viewport_w, width) : left;
-    y = y ? parse(y, viewport_h, height) : top;
+    x = x ? parse(viewport.left + x, viewport_w, width) : viewport.left + left;
+    y = y ? parse(viewport.top + y, viewport_h, height) : viewport.top + top;
 
     this.x = x;
     this.y = y;
@@ -528,9 +528,9 @@ function update_min_stack(){
 
         self = stack_min[i]
         key = self.left + ":" + self.top;
-        width = Math.min((root_w - self.left - self.right) / splitscreen_length[key], 250);
+        width = Math.min((viewport.width - self.left - self.right) / splitscreen_length[key], 250);
         self.resize((width + 1) | 0, self.header, true)
-            .move((self.left + splitscreen_index[key] * width) | 0, root_h - self.bottom - self.header, true);
+            .move((self.left + splitscreen_index[key] * width) | 0, viewport.height - self.bottom - self.header, true);
         splitscreen_index[key]++;
     }
 }
@@ -691,13 +691,13 @@ function addWindowListener(self, dir){
 
         if(resize_w){
 
-            self.width = Math.max(Math.min(self.width, self.maxwidth, root_w - self.x - self.right), self.minwidth);
+            self.width = Math.max(Math.min(self.width, self.maxwidth, viewport.width - self.x - self.right), self.minwidth);
             resize_w = self.width !== old_w;
         }
 
         if(resize_h){
 
-            self.height = Math.max(Math.min(self.height, self.maxheight, root_h - self.y - self.bottom), self.minheight);
+            self.height = Math.max(Math.min(self.height, self.maxheight, viewport.height - self.y - self.bottom), self.minheight);
             resize_h = self.height !== old_h;
         }
 
@@ -712,20 +712,20 @@ function addWindowListener(self, dir){
 
                 self.x = (
 
-                    pageX < root_w / 3 ?
+                    pageX < viewport.width / 3 ?
 
                         self.left
                     :
-                        pageX > root_w / 3 * 2 ?
+                        pageX > viewport.width / 3 * 2 ?
 
-                            root_w - self.width - self.right
+                            viewport.width - self.width - self.right
                         :
-                            root_w / 2 - self.width / 2
+                            viewport.width / 2 - self.width / 2
 
                 ) + offsetX;
             }
 
-            self.x = Math.max(Math.min(self.x, self.overflow ? root_w - 30 : root_w - self.width - self.right), self.overflow ? 30 - self.width : self.left);
+            self.x = Math.max(Math.min(self.x, self.overflow ? viewport.width - 30 : viewport.left + viewport.width - self.width - self.right), self.overflow ? 30 - self.width : viewport.left + self.left);
             move_x = self.x !== old_x;
         }
 
@@ -736,7 +736,7 @@ function addWindowListener(self, dir){
                 self.y = self.top + offsetY;
             }
 
-            self.y = Math.max(Math.min(self.y, self.overflow ? root_h - self.header : root_h - self.height - self.bottom), self.top);
+            self.y = Math.max(Math.min(self.y, self.overflow ? viewport.height - self.header : viewport.top + viewport.height - self.height - self.bottom), viewport.top + self.top);
             move_y = self.y !== old_y;
         }
 
@@ -800,10 +800,30 @@ function init(){
 
     // root_w = body.clientWidth;
     // root_h = body.clientHeight;
+    const getCSSValue = (px_value) => parseInt(px_value, 10) || 0;
 
     const doc = document.documentElement;
-    root_w = doc.clientWidth;
-    root_h = doc.clientHeight;
+    const viewport_el = document.querySelector(".winbox-viewport");
+
+    if(viewport_el) {
+        const clientRect = viewport_el.getBoundingClientRect();
+        const currentStyle = getComputedStyle(viewport_el);
+        viewport = {
+            left:   clientRect.left   + getCSSValue(currentStyle.borderLeftWidth)   + getCSSValue(currentStyle.paddingLeft),
+            width:  clientRect.width  - getCSSValue(currentStyle.borderLeftWidth)   - getCSSValue(currentStyle.paddingLeft)
+                                      - getCSSValue(currentStyle.borderRightWidth)  - getCSSValue(currentStyle.paddingRight),
+            top:    clientRect.top    + getCSSValue(currentStyle.borderTopWidth)    + getCSSValue(currentStyle.paddingTop),
+            height: clientRect.height - getCSSValue(currentStyle.borderTopWidth)    - getCSSValue(currentStyle.paddingTop)
+                                      - getCSSValue(currentStyle.borderBottomWidth) - getCSSValue(currentStyle.paddingBottom)
+        };
+    } else {
+        viewport = {
+            left: 0,
+            top: 0,
+            width: doc.clientWidth,
+            height: doc.clientHeight
+        };
+    }
 }
 
 /**
@@ -1118,8 +1138,8 @@ WinBox.prototype.maximize = function(state){
 
         this.addClass("max").resize(
 
-            root_w - this.left - this.right,
-            root_h - this.top - this.bottom /* - 1 */,
+            viewport.width - this.left - this.right,
+            viewport.height - this.top - this.bottom /* - 1 */,
             true
 
         ).move(
@@ -1243,8 +1263,8 @@ WinBox.prototype.move = function(x, y, _skip_update){
     }
     else if(!_skip_update){
 
-        this.x = x ? x = parse(x, root_w - this.left - this.right, this.width) : 0;
-        this.y = y ? y = parse(y, root_h - this.top - this.bottom, this.height) : 0;
+        this.x = x ? x = parse(x, viewport.width - this.left - this.right, this.width) : 0;
+        this.y = y ? y = parse(y, viewport.height - this.top - this.bottom, this.height) : 0;
     }
 
     //setStyle(this.dom, "transform", "translate(" + x + "px," + y + "px)");
